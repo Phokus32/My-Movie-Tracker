@@ -1,15 +1,9 @@
-# Blackwood Movie Log V5.1
+# Blackwood Movie Log V5.2 — Cinematic Environments
 
-Builds on V5.0.1, including the explicit Rewatch badge fix.
+Built from V5.1. Adds 50 bundled SVG backgrounds across Horror, Classic, Retro, Sci-Fi, Christmas and Minimal categories. Includes both simple outline patterns and detailed illustrated scenes, a searchable-by-category/style gallery, live preview, dimming, favorites and random favorite selection. The background can be paired with any of the existing ten color themes. Existing movie features and the compact mobile layout are preserved.
 
-## Changes
-- Ten immersive illustrated themes (six existing plus Gothic Theater, Midnight Drive-In, Deep Blue Cinema, Cosmic Odyssey). Theme art is bundled as offline-friendly SVG assets.
-- Mobile **List** view uses tighter movie rows by default to show more movies per screen. A **Tight mobile list** checkbox on Movie Log toggles this per device. Poster and Text Only modes remain unchanged.
-- All existing V5.0 features, records and Supabase configuration retained.
-- New service-worker cache version for updates.
+## Installation
+Export a JSON backup from the running app. Copy **index.html**, **sw.js**, **manifest.webmanifest**, **supabase-schema.sql**, and the complete **themes/** and **backgrounds/** directories to your existing GitHub Pages repository root. Preserve the folder structure. No Supabase schema changes required. On iPhone, reopen the Home Screen app to check for updates. Do not clear site data or delete the installed app unless you have verified cloud sync and backup.
 
-## Install
-Export a JSON backup from the current app first. Extract and upload **all files and the themes folder** into the existing GitHub Pages repository root. Do not upload the outer version-named folder. Do not clear browser data or log out.
-
-## Verification
-Static JS syntax and ZIP integrity checks only. Not yet tested in a live browser or with Supabase.
+## Technical notes
+Background selection, favorites and dimming are stored in localStorage on each device. No credentials or cloud records are cleared. Background SVGs are bundled; images are cached as requested by the service worker. This build was syntax-checked but has not been live-tested on your phone or against your Supabase account.
