@@ -1,7 +1,7 @@
 {
   "name": "Blackwood Movie Log",
   "short_name": "Blackwood Log",
-  "description": "Your personal film archive",
+  "description": "Personal movie archive",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#101217",

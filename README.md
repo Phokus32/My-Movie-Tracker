@@ -1,20 +1,16 @@
-# Blackwood Movie Log V4.0
+# Blackwood Movie Log V4.2
 
-This release builds on the existing movie tracker and keeps the same localStorage keys, Supabase table and authentication. **Do not run the SQL schema again.**
+## Features
+- Click BLACKWOOD logo to return to Movie Log.
+- Cloud-first startup and automatic cloud pull on focus, tab visibility and once per minute while open. Existing local/cloud divergence requires conflict resolution instead of overwriting. Cloud writes check the last fetched baseline first. Supabase stores one JSON row, so concurrent writes still carry a small race risk; keep JSON backups.
+- Watchlist Add/Edit includes TMDB search with selectable results, poster, community rating, runtime, genres, synopsis, director and cast. Manual entry remains available.
+- All-time Top 10 ranked favorites with badges in the log, watchlist and detail page.
+- Annual and all-time statistics: hours, averages per day/week, Beth viewing stats, unique films, genre/decade/director, rewatches and heatmap.
+- Seasonal decorative lights and Halloween ornaments, with Classic/Decorative/Off choices.
+- Existing viewing data, Supabase configuration, TMDB token storage, backups and V4.1 metadata refresh retained.
 
-## Changes
-- Blackwood Movie Log branding with a stylized gold BLACKWOOD wordmark, B icon and visible Version 4.0 label.
-- Movie log rows redesigned to match the supplied mockup with poster, seasonal badge, status, personal score, TMDB score, runtime and edit/detail actions.
-- Settings toggle to show/hide poster thumbnails, plus small, medium and large sizes. Missing posters use a placeholder.
-- Removed the manual Status dropdown from the viewing editor. A finish date means Completed, a start without finish means In Progress and an Abandoned checkbox means Did Not Finish. Date changes update the visible status automatically.
-- Existing viewing history, favorites, TMDB lookup, Supabase sync, dashboard, seasonal statistics, calendar, watchlist and JSON backups retained from V3.6.
-
-## Install safely
-1. Export a JSON backup from the currently working app.
-2. Keep your existing GitHub repository and Supabase project.
-3. Upload `index.html`, `manifest.webmanifest` and `sw.js` to the same GitHub Pages repository root, replacing those files.
-4. Commit and wait for GitHub Pages to deploy.
-5. Hard-refresh the browser if the version label is not 4.0. Test existing records, editing, TMDB lookup and cloud sync on both devices.
+## Install
+Export JSON backup first. Replace index.html, sw.js and manifest.webmanifest in your existing GitHub Pages repository. Do not run SQL or replace Supabase. Hard refresh the app if a previous version remains cached. Verify on both devices.
 
 ## Notes
-The version has passed a JavaScript syntax check but has not been tested against your live Supabase project. Do not overwrite or reset your database. TMDB token settings remain per browser. New settings are stored with the cloud JSON library.
+This build was syntax-checked but not tested against your live Supabase/TMDB projects. Average viewing hours assume full runtime for each completed viewing. Annual new/repeat counts use recorded viewing history. Watched with Beth uses the existing watchedWithWife=yes field.
