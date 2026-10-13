@@ -1,0 +1,10 @@
+{
+  "name": "My Movie Tracker",
+  "short_name": "Movie Tracker",
+  "description": "A private personal movie log",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#101217",
+  "theme_color": "#101217",
+  "icons": []
+}
