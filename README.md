@@ -1,9 +1,14 @@
-# Blackwood Movie Log V5.2 — Cinematic Environments
+# Blackwood Movie Log V5.3 — Final Cut
 
-Built from V5.1. Adds 50 bundled SVG backgrounds across Horror, Classic, Retro, Sci-Fi, Christmas and Minimal categories. Includes both simple outline patterns and detailed illustrated scenes, a searchable-by-category/style gallery, live preview, dimming, favorites and random favorite selection. The background can be paired with any of the existing ten color themes. Existing movie features and the compact mobile layout are preserved.
+Includes all V5.2 features plus:
+- NEW WATCH / REWATCH badges shown for unfinished as well as completed viewings; explicit Rewatch selection takes precedence.
+- Four additional detailed illustrated SVG scenes in the Background Gallery (54 backgrounds total).
+- Denser mobile movie log layout.
+- Cast and director section on Movie Details. TMDB credits are fetched when configured, cached locally for 30 days; stored cast names provide a fallback.
+- Recently opened movies on Movie Log, backup export date reminder, and full-screen background preview.
 
-## Installation
-Export a JSON backup from the running app. Copy **index.html**, **sw.js**, **manifest.webmanifest**, **supabase-schema.sql**, and the complete **themes/** and **backgrounds/** directories to your existing GitHub Pages repository root. Preserve the folder structure. No Supabase schema changes required. On iPhone, reopen the Home Screen app to check for updates. Do not clear site data or delete the installed app unless you have verified cloud sync and backup.
+## Install
+Back up your data first. Upload the **contents** of this folder to your existing GitHub Pages repository root, including the complete `backgrounds` and `themes` folders. No Supabase schema change is required.
 
-## Technical notes
-Background selection, favorites and dimming are stored in localStorage on each device. No credentials or cloud records are cleared. Background SVGs are bundled; images are cached as requested by the service worker. This build was syntax-checked but has not been live-tested on your phone or against your Supabase account.
+## Validation
+JavaScript syntax and ZIP integrity checked. Not verified against your actual iPhone or Supabase account.
