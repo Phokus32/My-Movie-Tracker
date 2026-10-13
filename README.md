@@ -1,12 +1,15 @@
-# Blackwood Movie Log V5.0
+# Blackwood Movie Log V5.1
 
-Major upgrade from V4.3. Includes immersive themes, interactive statistics, collections, awards, achievements, year in review, timeline, data health and update manager.
+Builds on V5.0.1, including the explicit Rewatch badge fix.
+
+## Changes
+- Ten immersive illustrated themes (six existing plus Gothic Theater, Midnight Drive-In, Deep Blue Cinema, Cosmic Odyssey). Theme art is bundled as offline-friendly SVG assets.
+- Mobile **List** view uses tighter movie rows by default to show more movies per screen. A **Tight mobile list** checkbox on Movie Log toggles this per device. Poster and Text Only modes remain unchanged.
+- All existing V5.0 features, records and Supabase configuration retained.
+- New service-worker cache version for updates.
 
 ## Install
-Upload the contents of this folder (index.html, sw.js, manifest.webmanifest, supabase-schema.sql) to the root of your existing GitHub Pages repository. Do not create a nested folder. Keep the same GitHub Pages URL. Allow the service worker to update, then fully close and reopen your iPhone Home Screen app.
+Export a JSON backup from the current app first. Extract and upload **all files and the themes folder** into the existing GitHub Pages repository root. Do not upload the outer version-named folder. Do not clear browser data or log out.
 
-## Safety
-Export a JSON backup in Settings before upgrading. This release preserves existing localStorage keys, Supabase configuration and auth sessions. Collections and award winners are included in the synced JSON state. No database schema change is needed.
-
-## Caveats
-The current cloud model stores one JSON library row. Concurrent editing on multiple devices requires care. Update Now only appears after the next service worker version has downloaded. The current V4.3 app cannot use the V5 update manager until it has loaded V5. Live iPhone and Supabase sync tests have not been performed.
+## Verification
+Static JS syntax and ZIP integrity checks only. Not yet tested in a live browser or with Supabase.
