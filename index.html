@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#101217"><meta name="description" content="Blackwood Movie Log: a private personal film archive with cloud sync."><link rel="manifest" href="manifest.webmanifest"><title>Blackwood Movie Log | V4.2</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#101217"><meta name="description" content="Blackwood Movie Log: a private personal film archive with cloud sync."><link rel="manifest" href="manifest.webmanifest"><title>Blackwood Movie Log | V4.3</title>
 <style>
 :root{color-scheme:dark;--bg:#101217;--panel:#191c23;--panel2:#20242d;--text:#f4f5f7;--muted:#9da5b3;--line:#303541;--accent:#e6b45d;--accent2:#f2cc83;--good:#75c6a0;--warn:#e6b45d;--bad:#ed8989;--shadow:0 10px 35px #0003}*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}body.light{color-scheme:light;--bg:#f4f5f7;--panel:#fff;--panel2:#eef0f4;--text:#1c2028;--muted:#656d7b;--line:#d9dde5;--accent:#95621a;--accent2:#74480d;--good:#237e58;--warn:#95621a;--bad:#b33e3e;--shadow:0 10px 35px #1d263015}button,input,select,textarea{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.app{max-width:1240px;margin:auto;padding:0 20px 40px}.topbar{display:flex;align-items:center;gap:14px;padding:22px 0 18px;border-bottom:1px solid var(--line);position:sticky;top:0;background:color-mix(in srgb,var(--bg) 93%,transparent);backdrop-filter:blur(16px);z-index:5}.brandmark{width:38px;height:38px;border-radius:12px;background:var(--accent);color:#181511;display:grid;place-items:center;font-weight:900;font-size:20px}.brand{font-size:14px;letter-spacing:.13em;font-weight:800}.brand small{display:block;color:var(--muted);font-size:11px;letter-spacing:.08em;font-weight:500;margin-top:3px}.top-spacer{flex:1}.status{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:7px}.dot{width:7px;height:7px;border-radius:50%;background:var(--good)}.iconbtn,.btn,.navbtn{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:10px;padding:10px 13px}.iconbtn{width:42px;height:42px;padding:0;font-size:18px}.btn.primary{background:var(--accent);border-color:var(--accent);color:#17140e;font-weight:750}.btn.ghost{background:transparent}.btn.danger{color:var(--bad)}.btn.small{padding:7px 10px;font-size:12px}.layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:28px;padding-top:25px}.sidebar{position:sticky;top:100px;align-self:start}.side-label{font-size:10px;letter-spacing:.16em;color:var(--muted);font-weight:800;padding:10px 12px}.navlist{display:grid;gap:5px}.navbtn{border:0;background:transparent;text-align:left;display:flex;gap:12px;align-items:center;color:var(--muted);padding:12px;border-radius:10px;width:100%}.navbtn.active{background:var(--panel2);color:var(--text)}.navbtn.active .navicon{color:var(--accent)}.navicon{width:20px;text-align:center;font-size:16px}.sidebar-note{margin-top:28px;padding:15px;background:var(--panel);border:1px solid var(--line);border-radius:14px;font-size:12px;line-height:1.6;color:var(--muted)}.main{min-width:0}.pagehead{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin:5px 0 23px}.eyebrow{font-size:10px;letter-spacing:.16em;color:var(--accent);font-weight:800;text-transform:uppercase;margin-bottom:8px}.pagehead h1{font-size:30px;letter-spacing:-.04em;margin:0 0 7px}.pagehead p{margin:0;color:var(--muted);font-size:14px}.actions{display:flex;gap:8px;flex-wrap:wrap}.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:15px}.searchwrap{position:relative;flex:1;min-width:200px}.searchwrap span{position:absolute;left:13px;top:10px;color:var(--muted)}input,select,textarea{background:var(--panel);border:1px solid var(--line);border-radius:10px;color:var(--text);padding:11px 12px;width:100%;min-width:0}input::placeholder,textarea::placeholder{color:var(--muted)}.searchwrap input{padding-left:37px}.toolbar select{width:auto;min-width:125px}.filter-panel{display:none;background:var(--panel);border:1px solid var(--line);padding:14px;border-radius:12px;margin-bottom:15px;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.filter-panel.open{display:grid}.field label{display:block;font-size:11px;color:var(--muted);margin:0 0 6px 2px}.list-head{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:12px;margin:12px 2px}.movie-list{display:grid;gap:8px}.movie-row{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:14px 15px;display:grid;grid-template-columns:minmax(0,1.65fr) minmax(115px,.85fr) minmax(100px,.65fr) auto;gap:14px;align-items:center;transition:border-color .15s}.movie-row:hover{border-color:color-mix(in srgb,var(--accent) 55%,var(--line))}.mov-title{font-weight:750;font-size:14px;line-height:1.35}.mov-sub{color:var(--muted);font-size:11px;margin-top:5px}.pill{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;padding:4px 8px;font-size:10px;color:var(--muted);white-space:nowrap}.pill.good{color:var(--good);border-color:color-mix(in srgb,var(--good) 35%,var(--line))}.pill.warn{color:var(--warn);border-color:color-mix(in srgb,var(--warn) 35%,var(--line))}.pill.bad{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 35%,var(--line))}.rating{font-size:16px;font-weight:800;white-space:nowrap}.rating em{font-style:normal;color:var(--muted);font-size:10px;font-weight:500}.row-actions{display:flex;gap:6px}.row-actions button{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:7px 8px}.empty{border:1px dashed var(--line);border-radius:16px;padding:46px 20px;text-align:center;color:var(--muted)}.empty strong{display:block;color:var(--text);font-size:16px;margin-bottom:7px}.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin-bottom:20px}.stat{padding:17px;border:1px solid var(--line);background:var(--panel);border-radius:14px}.stat label{font-size:11px;color:var(--muted)}.stat strong{display:block;font-size:28px;letter-spacing:-.04em;margin:8px 0 3px}.stat small{font-size:11px;color:var(--muted)}.dashboard-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:14px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:18px;min-width:0}.panel h3{font-size:14px;margin:0 0 15px}.panel .subhead{font-size:11px;color:var(--muted);margin-top:-9px;margin-bottom:15px}.chart{height:170px;display:flex;align-items:end;gap:9px;padding:10px 3px 0;border-bottom:1px solid var(--line)}.barcol{height:100%;flex:1;display:flex;flex-direction:column;justify-content:end;align-items:center;gap:8px;min-width:0}.bar{width:min(28px,72%);min-height:3px;border-radius:5px 5px 0 0;background:var(--accent);opacity:.9}.barlabel{font-size:10px;color:var(--muted)}.ranklist{display:grid;gap:8px}.rankrow{display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}.rankrow:last-child{border-bottom:0}.ranknum{color:var(--muted);width:20px;font-size:11px}.rankname{flex:1;font-size:12px;font-weight:650}.rankyear{font-size:10px;color:var(--muted);margin-top:3px}.rankrating{font-size:13px;font-weight:800}.year-control{display:flex;gap:6px;align-items:center}.year-control select{width:100px}.watch-priority{min-width:78px;text-align:center}.detail-card{display:grid;grid-template-columns:140px minmax(0,1fr);gap:22px}.poster-placeholder{aspect-ratio:2/3;border-radius:12px;background:linear-gradient(145deg,var(--panel2),var(--bg));border:1px solid var(--line);display:grid;place-items:center;text-align:center;padding:12px;color:var(--muted);font-size:12px}.detail-title{font-size:27px;letter-spacing:-.04em;margin:0 0 5px}.detail-meta{color:var(--muted);font-size:12px;margin-bottom:16px}.detail-buttons{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}.detail-info{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:17px 0}.detail-info div{padding:11px;background:var(--panel2);border-radius:9px}.detail-info label{display:block;color:var(--muted);font-size:10px;margin-bottom:5px}.detail-info strong{font-size:13px}.section-title{font-size:14px;margin:23px 0 10px}.viewing-card{border:1px solid var(--line);border-radius:11px;padding:13px;margin-bottom:8px}.viewing-top{display:flex;justify-content:space-between;gap:10px;font-size:12px;font-weight:700}.viewing-notes{font-size:12px;color:var(--muted);margin-top:8px;white-space:pre-wrap}.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.formgrid .wide{grid-column:1/-1}.checkline{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--muted)}.checkline input{width:auto}.modal-backdrop{position:fixed;inset:0;background:#0009;z-index:20;display:none;align-items:center;justify-content:center;padding:15px}.modal-backdrop.open{display:flex}.modal{width:min(680px,100%);max-height:92vh;overflow:auto;background:var(--bg);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:22px}.modalhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}.modalhead h2{font-size:20px;margin:0}.modalfoot{display:flex;justify-content:flex-end;gap:8px;margin-top:20px;flex-wrap:wrap}.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:var(--text);color:var(--bg);padding:12px 16px;border-radius:11px;z-index:50;font-size:13px;box-shadow:var(--shadow);transition:.2s;max-width:90vw}.toast.show{opacity:1;transform:translate(-50%,0)}.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.tmdb-results{display:grid;gap:8px;margin-top:10px}.tmdb-result{display:grid;grid-template-columns:52px 1fr;gap:10px;padding:9px;border:1px solid var(--line);background:var(--panel);border-radius:10px;text-align:left;color:var(--text);width:100%}.tmdb-result img{width:52px;aspect-ratio:2/3;object-fit:cover;border-radius:5px;background:var(--panel2)}.tmdb-result small{display:block;color:var(--muted);line-height:1.4;margin-top:4px}.cloud-tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.setting-item{border:1px solid var(--line);background:var(--panel);border-radius:13px;padding:16px}.setting-item h3{font-size:14px;margin:0 0 7px}.setting-item p{font-size:12px;line-height:1.5;color:var(--muted);margin:0 0 13px}.footer-note{font-size:11px;line-height:1.6;color:var(--muted);margin-top:18px}.mobile-nav{display:none}.hide{display:none!important}
 @media(max-width:850px){.layout{grid-template-columns:1fr}.sidebar{display:none}.mobile-nav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:10;background:color-mix(in srgb,var(--bg) 95%,transparent);backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:7px 10px calc(7px + env(safe-area-inset-bottom));justify-content:space-around}.mobile-nav .navbtn{display:grid;justify-items:center;gap:4px;padding:7px 12px;font-size:10px}.mobile-nav .navicon{font-size:17px}.app{padding:0 14px 90px}.topbar{padding-top:15px}.status{display:none}.pagehead h1{font-size:26px}.movie-row{grid-template-columns:minmax(0,1fr) auto;gap:8px 12px;padding:13px}.movie-row .row-mid{grid-column:1;grid-row:2}.movie-row .row-right{grid-column:2;grid-row:1;align-self:start;text-align:right}.movie-row .row-actions{grid-column:2;grid-row:2;justify-content:end}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.dashboard-grid{grid-template-columns:1fr}.filter-panel{grid-template-columns:repeat(2,minmax(0,1fr))}.detail-card{grid-template-columns:95px minmax(0,1fr);gap:14px}.detail-title{font-size:22px}.detail-info{grid-template-columns:repeat(2,minmax(0,1fr))}.settings-grid{grid-template-columns:1fr}}
@@ -68,9 +68,27 @@
 .movie-row.v36-horror.bw42-festive{border:2px solid #8b1b24!important;position:relative;box-shadow:inset 0 0 0 1px #45151a}.movie-row.v36-horror.bw42-festive:before{content:'🎃  🩸  🎃  🩸  🎃  🩸  🎃';position:absolute;top:-12px;left:9px;right:9px;font-size:13px;letter-spacing:5px;white-space:nowrap;overflow:hidden;pointer-events:none}
 .movie-row.bw42-no-season{border-color:var(--line)!important;box-shadow:none!important}.movie-row.bw42-no-season:before{display:none!important}
 @media(max-width:620px){.bw42-toprow{gap:5px}.bw42-toprow .btn{padding:5px}.bw42-watchrow{grid-template-columns:minmax(0,1fr) auto!important}.bw42-watchposter{width:44px;height:66px}.bw42-heatgrid{grid-template-rows:repeat(7,9px);grid-auto-columns:9px}}
+
+/* V4.3 */
+.bw43-watchtype{display:inline-block;margin-left:7px;color:#d8ac64;font-size:10px;letter-spacing:.05em;font-weight:750}
+.bw43-textonly{display:flex;flex-direction:column;gap:3px}
+.bw43-textonly .bw43-compact-row{display:flex!important;align-items:center;min-height:38px!important;padding:5px 10px!important;gap:10px!important;border-radius:5px!important}
+.bw43-compact-info{display:grid;grid-template-columns:minmax(100px,1fr) 115px 100px 55px;align-items:center;gap:10px;flex:1;min-width:0;font-size:12px}
+.bw43-compact-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700}
+.bw43-compact-date,.bw43-compact-status,.bw43-compact-rating{white-space:nowrap;color:var(--muted)}
+.bw43-textonly .row-actions{display:flex!important;flex-direction:row!important;gap:3px!important;grid-column:auto!important;grid-row:auto!important}
+.bw43-textonly .row-actions button{padding:4px!important;font-size:11px!important}
+.bw43-goal-line{display:flex;justify-content:space-between;gap:12px;margin:10px 0}
+.bw43-goal progress,.bw43-century-grid+progress,.v36-panel>progress{width:100%;height:14px;accent-color:#d6a45b}
+.bw43-century-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(65px,1fr));gap:6px;margin:16px 0}
+.bw43-century-year{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:10px 3px;color:var(--text);cursor:pointer;font-weight:700}
+.bw43-century-year small{display:block;margin-top:5px}
+.bw43-century-year.done{background:#24583b;color:#fff;border-color:#469364}
+.bw43-century-year.ahead{background:#644823;color:#fff;border-color:#b18a4b}
+@media(max-width:650px){.bw43-compact-info{grid-template-columns:minmax(75px,1fr) 80px 65px;gap:5px;font-size:10px}.bw43-compact-status{display:none}.bw43-textonly .row-actions button{font-size:10px!important;padding:3px!important}}
 </style></head>
 <body><div class="app">
-<header class="topbar"><button class="bw-home" id="bwHome" type="button" title="Go to Movie Log" aria-label="Blackwood Movie Log home"><div class="brandmark">B</div><div class="brand"><span class="bw-wordmark">BLACKWOOD</span><span class="bw-submark">MOVIE LOG</span><small>YOUR PERSONAL FILM ARCHIVE <span class="bw-version">Version 4.2</span></small></div></button><div class="top-spacer"></div><div class="status"><span class="dot"></span><span id="saveStatus">Saved on this device</span></div><button class="iconbtn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☼</button><button class="iconbtn" id="menuBtn" aria-label="Open navigation" title="Navigation">☰</button></header>
+<header class="topbar"><button class="bw-home" id="bwHome" type="button" title="Go to Movie Log" aria-label="Blackwood Movie Log home"><div class="brandmark">B</div><div class="brand"><span class="bw-wordmark">BLACKWOOD</span><span class="bw-submark">MOVIE LOG</span><small>YOUR PERSONAL FILM ARCHIVE <span class="bw-version">Version 4.3</span></small></div></button><div class="top-spacer"></div><div class="status"><span class="dot"></span><span id="saveStatus">Saved on this device</span></div><button class="iconbtn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☼</button><button class="iconbtn" id="menuBtn" aria-label="Open navigation" title="Navigation">☰</button></header>
 <div class="layout"><aside class="sidebar"><div class="side-label">LIBRARY</div><nav class="navlist" id="sideNav"></nav><div class="sidebar-note"><strong style="color:var(--text)">Private by design</strong><br>This first build saves your records in this browser on this device. Cloud sync is not connected yet.</div></aside><main class="main" id="main"></main></div>
 <nav class="mobile-nav" id="mobileNav"></nav></div>
 <div class="modal-backdrop" id="modalBackdrop"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modalhead"><h2 id="modalTitle">Add movie</h2><button class="iconbtn" id="modalClose" aria-label="Close">×</button></div><div id="modalBody"></div><div class="modalfoot" id="modalFoot"></div></section></div><div class="toast" id="toast"></div>
@@ -294,7 +312,7 @@ renderSettings=function(){
  v36OldSettings();
  const grid=document.querySelector('.settings-grid');if(!grid)return;
  const p=v36Prefs();const el=document.createElement('section');el.className='setting-item';
- el.innerHTML=`<h3>Movie log display · V4.2</h3><p>These settings sync through your existing cloud library.</p><label class="checkline"><input id="v36ShowPosters" type="checkbox" ${p.posters?'checked':''}> Show poster thumbnails in the movie log</label><div class="field"><label>Poster size</label><select id="v36PosterSize"><option value="small">Small</option><option value="medium">Medium</option><option value="large">Large</option></select></div><label class="checkline"><input id="v36ShowTmdb" type="checkbox" ${p.tmdbScores?'checked':''}> Show TMDB community ratings beside my scores</label><div class="field"><label>Seasonal decorations</label><select id="v36Seasonal"><option value="automatic">Automatic (October horror / December Christmas)</option><option value="always">Always show for classified movies</option><option value="off">Off</option></select></div><p class="footer-note">TMDB ratings are saved when you select a movie using TMDB search. Older records may need a metadata refresh to show a score.</p>`;
+ el.innerHTML=`<h3>Movie log display · V4.3</h3><p>These settings sync through your existing cloud library.</p><label class="checkline"><input id="v36ShowPosters" type="checkbox" ${p.posters?'checked':''}> Show poster thumbnails in the movie log</label><div class="field"><label>Poster size</label><select id="v36PosterSize"><option value="small">Small</option><option value="medium">Medium</option><option value="large">Large</option></select></div><label class="checkline"><input id="v36ShowTmdb" type="checkbox" ${p.tmdbScores?'checked':''}> Show TMDB community ratings beside my scores</label><div class="field"><label>Seasonal decorations</label><select id="v36Seasonal"><option value="automatic">Automatic (October horror / December Christmas)</option><option value="always">Always show for classified movies</option><option value="off">Off</option></select></div><p class="footer-note">TMDB ratings are saved when you select a movie using TMDB search. Older records may need a metadata refresh to show a score.</p>`;
  grid.prepend(el);
  $('v36PosterSize').value=p.posterSize;$('v36Seasonal').value=p.seasonal;
  $('v36ShowPosters').onchange=e=>v36Set('posters',e.target.checked);
@@ -303,7 +321,7 @@ renderSettings=function(){
  $('v36Seasonal').onchange=e=>v36Set('seasonal',e.target.value);
 };
 
-// V4.2: missing-metadata batch updater. The tool modifies only TMDB-owned movie fields.
+// V4.3: missing-metadata batch updater. The tool modifies only TMDB-owned movie fields.
 // Personal data, viewing events, favorites, tags and notes are deliberately never assigned.
 let bw41Job=null;
 const bw41Fields=['tmdbRating','tmdbVotes','director','cast','posterPath','runtime','genres','synopsis'];
@@ -372,8 +390,8 @@ async function bw41Run(){
  if(bw41Job?.running)return;
  if(!tmdbKey){bw41Status('Save your TMDB Read Access Token in Settings first.');return;}
  if(cloudConflict){bw41Status('Resolve your cloud-sync conflict before refreshing metadata.');return;}
- if(!confirm('Refresh missing TMDB metadata for your library? Personal ratings, viewing dates, notes and favorites will not be changed. Export a JSON backup first.'))return;
- const list=state.movies.filter(bw41Missing).map(m=>m.id);
+ if(!confirm('Refresh missing TMDB metadata for '+bw43RefreshMovies().filter(bw41Missing).length+' logged movies? Watchlist-only and unreferenced movie records are excluded. Export a JSON backup first.'))return;
+ const list=bw43RefreshMovies().filter(bw41Missing).map(m=>m.id);
  bw41Job={running:true,cancel:false,total:list.length,processed:0,updated:0,skipped:0,failed:0,review:[],errors:[]};
  $('bw41Start').disabled=true;$('bw41Stop').disabled=false;$('bw41Review').innerHTML='';
  bw41UpdateProgress();
@@ -433,10 +451,10 @@ renderSettings=function(){
  bw41OldSettings();
  const grid=document.querySelector('.settings-grid');if(!grid)return;
  const section=document.createElement('section');section.className='setting-item';section.style.gridColumn='1/-1';
- section.innerHTML='<h3>Bulk TMDB metadata refresh · V4.2</h3><p>Fill only missing TMDB ratings, vote counts, director, cast, poster, runtime, genres and synopsis. Existing values and all personal data are preserved.</p><p id="bw41Count"></p><div class="v36-extra"><button class="btn primary" id="bw41Start">Refresh missing metadata</button><button class="btn" id="bw41Stop" disabled>Stop</button></div><progress id="bw41Progress" max="1" value="0" style="width:100%"></progress><p id="bw41Status" aria-live="polite">Ready.</p><p id="bw41Summary"></p><div id="bw41Review"></div><p id="bw41Errors" class="footer-note"></p><p class="footer-note">Titles without a TMDB ID are matched by title and release year. Uncertain results require your approval. Rate limits and temporary server errors are retried. Export a JSON backup first.</p>';
+ section.innerHTML='<h3>Bulk TMDB metadata refresh · V4.3</h3><p>Fill only missing TMDB ratings, vote counts, director, cast, poster, runtime, genres and synopsis. Existing values and all personal data are preserved.</p><p id="bw41Count"></p><div class="v36-extra"><button class="btn primary" id="bw41Start">Refresh missing metadata</button><button class="btn" id="bw41Stop" disabled>Stop</button></div><progress id="bw41Progress" max="1" value="0" style="width:100%"></progress><p id="bw41Status" aria-live="polite">Ready.</p><p id="bw41Summary"></p><div id="bw41Review"></div><p id="bw41Errors" class="footer-note"></p><p class="footer-note">Titles without a TMDB ID are matched by title and release year. Uncertain results require your approval. Rate limits and temporary server errors are retried. Export a JSON backup first.</p>';
  grid.prepend(section);
- $('bw41Count').textContent=state.movies.filter(bw41Missing).length+' of '+state.movies.length+' movies currently have missing metadata.';
- $('bw41Start').onclick=bw41Run;
+ $('bw41Count').textContent=bw43RefreshMovies().filter(bw41Missing).length+' of '+bw43RefreshMovies().length+' logged movies have missing metadata (watchlist-only and unreferenced records excluded).';
+ $('bw41Start').onclick=bw41Run;bw43RefreshPreview();
  $('bw41Stop').onclick=()=>{if(bw41Job)bw41Job.cancel=true;};
  if(bw41Job){bw41UpdateProgress();bw41RenderReview();$('bw41Start').disabled=!!bw41Job.running;$('bw41Stop').disabled=!bw41Job.running;}
 };
@@ -530,9 +548,104 @@ async function bw42PullCloud(){if(!cloudUser||!cloudReady||cloudConflict||bw42Ch
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)bw42PullCloud()});
 window.addEventListener('focus',()=>bw42PullCloud());
 setInterval(()=>{if(!document.hidden)bw42PullCloud()},60000);
-/* Version 4.2 is displayed directly in the permanent header. */
+/* Version 4.3 is displayed directly in the permanent header. */
 
 render();
 if(cloudConfig)initCloudClient();
+
+// V4.3 additions: log-only metadata scope, new/rewatch, compact view, annual goal, century challenge.
+function bw43RefreshMovies(){
+ const logged=new Set(state.viewings.map(v=>v.movieId));
+ return state.movies.filter(m=>logged.has(m.id));
+}
+function bw43RefreshPreview(){
+ const panel=$('bw41Count');if(!panel)return;
+ const logged=bw43RefreshMovies(),all=state.movies.length,orphans=state.movies.filter(m=>!state.viewings.some(v=>v.movieId===m.id)&&!state.watchlist.some(w=>w.movieId===m.id));
+ const extra=document.createElement('div');extra.className='mov-sub';
+ extra.textContent=`${all} stored movie records · ${logged.length} in your viewing log · ${all-logged.length} not in your viewing log · ${orphans.length} unreferenced records. Unreferenced records are left untouched, not deleted.`;
+ panel.after(extra);
+ const preview=document.createElement('details');preview.innerHTML='<summary>Preview titles included in refresh</summary><div id="bw43RefreshTitles" class="mov-sub"></div>';
+ extra.after(preview);
+ $('bw43RefreshTitles').textContent=logged.filter(bw41Missing).map(m=>m.title+(m.year?' ('+m.year+')':'')).join(' · ')||'No logged movies need refreshing.';
+}
+function bw43WatchLabel(v){
+ if(v.status!=='completed')return '';
+ const earlier=state.viewings.some(x=>x.movieId===v.movieId&&x.id!==v.id&&x.status==='completed'&&((x.finishDate||x.startDate||'')<(v.finishDate||v.startDate||'')||((x.finishDate||x.startDate||'')===(v.finishDate||v.startDate||'')&&String(x.id)<String(v.id))));
+ return earlier?'↻ REWATCH':'✦ NEW WATCH';
+}
+function bw43DecorateRows(){
+ const root=$('movieList');if(!root)return;
+ root.classList.toggle('bw43-textonly',state.uiSettings?.bw43LogView==='text');
+ root.querySelectorAll('.movie-row').forEach(row=>{
+  const id=row.querySelector('[data-editview]')?.dataset.editview,v=state.viewings.find(x=>x.id===id);
+  if(!v)return;
+  const label=bw43WatchLabel(v);
+  if(label&&!row.querySelector('.bw43-watchtype')){
+   const badge=document.createElement('span');badge.className='bw43-watchtype';badge.textContent=label;
+   (row.querySelector('.bw-title-text .mov-title')||row.querySelector('.mov-title'))?.appendChild(badge);
+  }
+  if(root.classList.contains('bw43-textonly')){
+   const m=movie(v.movieId);if(!m)return;
+   row.classList.add('bw43-compact-row');
+   const text=document.createElement('div');text.className='bw43-compact-info';
+   text.innerHTML='<span class="bw43-compact-title">'+esc(m.title)+' ('+esc(m.year||'—')+')</span><span class="bw43-compact-date">'+esc(v.finishDate||v.startDate||'—')+'</span><span class="bw43-compact-status">'+esc(label||statusName(v))+'</span><span class="bw43-compact-rating">'+(v.rating==null?'—':esc(v.rating)+'/10')+'</span>';
+   row.querySelector('.bw-title-block')?.replaceWith(text);
+   row.querySelector('.row-mid')?.remove();row.querySelector('.row-right')?.remove();
+  }
+ });
+}
+const bw43OldDecor=v36DecorateLog;
+v36DecorateLog=function(){bw43OldDecor();bw43DecorateRows()};
+const bw43OldLog=renderLog;
+renderLog=function(){
+ bw43OldLog();
+ const toolbar=$('main')?.querySelector('.toolbar');
+ if(!toolbar)return;
+ const select=document.createElement('select');select.id='bw43ViewMode';select.setAttribute('aria-label','Movie log display mode');
+ select.innerHTML='<option value="list">List view</option><option value="posters">Poster view</option><option value="text">Text only</option>';
+ select.value=state.uiSettings?.bw43LogView||((state.uiSettings?.grid)?'posters':'list');
+ select.onchange=()=>{
+  state.uiSettings={...state.uiSettings,bw43LogView:select.value,grid:select.value==='posters'};
+  save();renderLog();
+ };
+ toolbar.appendChild(select);
+};
+function bw43Goal(year){const goals=state.uiSettings?.bw43Goals||{};return Math.max(1,Number(goals[year])||100)}
+function bw43GoalCard(year){
+ const watched=bw42Completed().filter(v=>yearOf(bw42Date(v))===year).length;
+ const goal=bw43Goal(year),pct=Math.round(watched/goal*100);
+ return `<section class="v36-panel bw43-goal"><h3>${year} Movie Goal</h3><div class="bw43-goal-line"><strong>${watched} / ${goal} completed viewings</strong><strong>${pct}%</strong></div><progress value="${Math.min(100,pct)}" max="100"></progress><p class="mov-sub">${Math.max(0,goal-watched)} more completed viewings to reach your goal. Rewatches count.</p><label for="bw43GoalInput">Annual goal</label> <input type="number" id="bw43GoalInput" min="1" max="10000" value="${goal}" style="width:100px"> <button class="btn small" id="bw43SaveGoal">Save goal</button></section>`;
+}
+const bw43OldDashboard=renderDashboard;
+renderDashboard=function(){
+ bw43OldDashboard();
+ const year=Number(prefs.year)||new Date().getFullYear();
+ $('main')?.insertAdjacentHTML('afterbegin',bw43GoalCard(year));
+ $('bw43SaveGoal').onclick=()=>{
+  const n=Number($('bw43GoalInput').value);if(!Number.isInteger(n)||n<1||n>10000){toast('Enter a goal from 1 to 10,000.');return}
+  state.uiSettings.bw43Goals={...(state.uiSettings.bw43Goals||{}),[year]:n};save();renderDashboard();toast('Annual goal saved');
+ };
+};
+function bw43Cinema(){
+ const start=1926,end=2026;
+ const all=bw42Completed(),years=new Map();
+ for(const v of all){const m=movie(v.movieId),y=Number(m?.year);if(y>=start&&y<=end&&Number.isInteger(y)){if(!years.has(y))years.set(y,[]);years.get(y).push({m,v})}}
+ let next=start;while(next<=end&&years.has(next))next++;
+ const completed=next-start,total=end-start+1,allYears=Array.from({length:total},(_,i)=>start+i);
+ const pct=(completed/total*100).toFixed(1);
+ $('main').innerHTML=pageHead('THE CENTURY CHALLENGE','100 Years of Cinema','Watch at least one movie released in each year from 1926 through 2026. Movies from future challenge years count once you reach them.')+
+ `<section class="v36-panel"><div class="bw43-goal-line"><strong>${completed} / ${total} consecutive release years</strong><strong>${pct}%</strong></div><progress value="${completed}" max="${total}"></progress><h3>${next<=end?'Next required release year: '+next:'Challenge complete!'}</h3><p class="mov-sub">${years.size} different release years represented in your completed movie log. Watched-ahead years remain credited.</p><div class="bw43-century-grid">${allYears.map(y=>`<button class="bw43-century-year ${y<next?'done':years.has(y)?'ahead':''}" data-bw43-year="${y}" title="${y}: ${years.get(y)?.length||0} completed viewings">${y}<small>${y<next?'✓':years.has(y)?'●':'○'}</small></button>`).join('')}</div><div class="v36-panel" id="bw43CinemaDetail">Select a year to see the films you have completed from that release year.</div></section>`;
+ document.querySelectorAll('[data-bw43-year]').forEach(b=>b.onclick=()=>{
+  const y=Number(b.dataset.bw43Year),items=years.get(y)||[];
+  $('bw43CinemaDetail').innerHTML=`<h3>${y} · ${items.length} completed viewing${items.length===1?'':'s'}</h3>`+(items.length?items.map(({m,v})=>`<div class="mov-sub">${esc(m.title)} · ${esc(bw42Date(v))}</div>`).join(''):'<p class="mov-sub">No completed movies from this release year yet.</p>')+
+  `<button class="btn small" id="bw43SearchYear">Find ${y} movies on TMDB</button>`;
+  $('bw43SearchYear').onclick=()=>window.open('https://www.themoviedb.org/discover/movie?primary_release_year='+y,'_blank','noopener,noreferrer');
+ });
+}
+const bw43OldNav=navItems;
+navItems=function(){const a=bw43OldNav();const at=a.findIndex(x=>x[0]==='settings');a.splice(at<0?a.length:at,0,['cinema','▦','100 Years of Cinema']);return a};
+const bw43OldRender=render;
+render=function(){if(page==='cinema'){document.body.classList.toggle('light',prefs.theme==='light');renderNav();bw43Cinema();const home=$('bwHome');if(home)home.onclick=()=>go('log')}else bw43OldRender()};
+
 })();
 </script></body></html>

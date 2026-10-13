@@ -1,16 +1,19 @@
-# Blackwood Movie Log V4.2
+# Blackwood Movie Log V4.3
 
-## Features
-- Click BLACKWOOD logo to return to Movie Log.
-- Cloud-first startup and automatic cloud pull on focus, tab visibility and once per minute while open. Existing local/cloud divergence requires conflict resolution instead of overwriting. Cloud writes check the last fetched baseline first. Supabase stores one JSON row, so concurrent writes still carry a small race risk; keep JSON backups.
-- Watchlist Add/Edit includes TMDB search with selectable results, poster, community rating, runtime, genres, synopsis, director and cast. Manual entry remains available.
-- All-time Top 10 ranked favorites with badges in the log, watchlist and detail page.
-- Annual and all-time statistics: hours, averages per day/week, Beth viewing stats, unique films, genre/decade/director, rewatches and heatmap.
-- Seasonal decorative lights and Halloween ornaments, with Classic/Decorative/Off choices.
-- Existing viewing data, Supabase configuration, TMDB token storage, backups and V4.1 metadata refresh retained.
+## New
+- Bulk TMDB refresh now processes only movies referenced by viewing-log entries. Watchlist-only and orphaned/deleted-viewing movie records are excluded. A preview lists the titles and shows stored, logged and unreferenced record counts. No automatic deletion or database migration.
+- New Watch and Rewatch labels derived from completed viewing history.
+- Third Text Only log display: compact, single-line rows with no posters.
+- Annual movie goal: editable target with percentage and progress bar, synced in the existing UI settings.
+- 100 Years of Cinema tab: 1926–2026 inclusive (101 release years), completed viewings from existing history credited, with sequential progress and watched-ahead tracking; click a year for matching completed films and a TMDB discovery link.
 
 ## Install
-Export JSON backup first. Replace index.html, sw.js and manifest.webmanifest in your existing GitHub Pages repository. Do not run SQL or replace Supabase. Hard refresh the app if a previous version remains cached. Verify on both devices.
+1. Export a JSON backup of the currently working library.
+2. Replace index.html, manifest.webmanifest and sw.js in the existing GitHub Pages repo.
+3. Commit and reload the page, confirm V4.3.
+4. Test cloud sync, bulk-refresh preview and existing movie records before a full metadata refresh.
+
+No Supabase schema changes. Do not run SQL again.
 
 ## Notes
-This build was syntax-checked but not tested against your live Supabase/TMDB projects. Average viewing hours assume full runtime for each completed viewing. Annual new/repeat counts use recorded viewing history. Watched with Beth uses the existing watchedWithWife=yes field.
+Movie records without viewing-log or watchlist references are not deleted; they are simply excluded from bulk refresh. The app's original delete-viewing behavior retains the underlying movie record, which explains why counts can differ. Live browser/Supabase integration is not covered by JavaScript syntax validation.
