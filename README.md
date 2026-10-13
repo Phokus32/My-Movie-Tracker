@@ -1,24 +1,20 @@
-# My Movie Tracker V3.6
+# Blackwood Movie Log V4.0
 
-Upgrade to the existing My Movie Tracker GitHub Pages app. No database schema changes.
+This release builds on the existing movie tracker and keeps the same localStorage keys, Supabase table and authentication. **Do not run the SQL schema again.**
 
-## New features
-- Visible version number on the main page
-- Seasonal Horrorfest and Christmas frames (automatic, always, off)
-- Optional poster thumbnails and sizes, plus poster-grid layout
-- TMDB community scores beside personal ratings for movies selected via TMDB search
-- Quick rewatch button that creates a separate viewing
-- Movie diary calendar and random watchlist picker with genre filters
-- Seasonal dashboards, yearly horror statistics, viewing hours, average and maximum runtime, and personal awards
-- Optional director, cast, collections and horror/Christmas classification
-- Display settings synced via the existing Supabase JSON payload
+## Changes
+- Blackwood Movie Log branding with a stylized gold BLACKWOOD wordmark, B icon and visible Version 4.0 label.
+- Movie log rows redesigned to match the supplied mockup with poster, seasonal badge, status, personal score, TMDB score, runtime and edit/detail actions.
+- Settings toggle to show/hide poster thumbnails, plus small, medium and large sizes. Missing posters use a placeholder.
+- Removed the manual Status dropdown from the viewing editor. A finish date means Completed, a start without finish means In Progress and an Abandoned checkbox means Did Not Finish. Date changes update the visible status automatically.
+- Existing viewing history, favorites, TMDB lookup, Supabase sync, dashboard, seasonal statistics, calendar, watchlist and JSON backups retained from V3.6.
 
-## Upgrade safely
+## Install safely
 1. Export a JSON backup from the currently working app.
-2. Keep the same GitHub repository and Supabase project.
-3. Replace index.html, manifest.webmanifest and sw.js in the GitHub Pages repository root.
-4. Do not run supabase-schema.sql again.
-5. Reload the app, verify existing records and cloud sync, then test on your phone.
+2. Keep your existing GitHub repository and Supabase project.
+3. Upload `index.html`, `manifest.webmanifest` and `sw.js` to the same GitHub Pages repository root, replacing those files.
+4. Commit and wait for GitHub Pages to deploy.
+5. Hard-refresh the browser if the version label is not 4.0. Test existing records, editing, TMDB lookup and cloud sync on both devices.
 
 ## Notes
-TMDB scores are saved for new or refreshed movie lookups. Existing movies without saved TMDB scores will not show an invented score. TMDB API tokens remain device-specific. The calendar and awards use your existing viewing records.
+The version has passed a JavaScript syntax check but has not been tested against your live Supabase project. Do not overwrite or reset your database. TMDB token settings remain per browser. New settings are stored with the cloud JSON library.

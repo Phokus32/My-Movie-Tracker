@@ -1,7 +1,7 @@
 {
-  "name": "My Movie Tracker",
-  "short_name": "Movie Tracker",
-  "description": "A private personal movie log with movie metadata lookup",
+  "name": "Blackwood Movie Log",
+  "short_name": "Blackwood Log",
+  "description": "Your personal film archive",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#101217",
