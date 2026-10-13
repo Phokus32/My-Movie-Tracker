@@ -1,18 +1,24 @@
-# My Movie Tracker V3.5
+# My Movie Tracker V3.6
 
-## Before upgrading
-Export a JSON backup in the currently working app (Settings > Export JSON). Keep the same GitHub repository and Supabase project. **Do not run the included SQL file again.**
+Upgrade to the existing My Movie Tracker GitHub Pages app. No database schema changes.
 
-## What is new
-- TMDB director and top eight cast members populated during movie lookup
-- Manual director, cast, collection tags, horror and Christmas classifications
-- October Horrorfest frames for horror viewings and December Christmas frames for Christmas viewings
-- Yearly Horrorfest, Christmas, all-horror and all-time horror statistics, including separate rewatches
-- Toggle between list and poster-grid views in Movie Log
-- Movie details display director, cast and collections
+## New features
+- Visible version number on the main page
+- Seasonal Horrorfest and Christmas frames (automatic, always, off)
+- Optional poster thumbnails and sizes, plus poster-grid layout
+- TMDB community scores beside personal ratings for movies selected via TMDB search
+- Quick rewatch button that creates a separate viewing
+- Movie diary calendar and random watchlist picker with genre filters
+- Seasonal dashboards, yearly horror statistics, viewing hours, average and maximum runtime, and personal awards
+- Optional director, cast, collections and horror/Christmas classification
+- Display settings synced via the existing Supabase JSON payload
 
-## Deployment
-Upload `index.html`, `manifest.webmanifest` and `sw.js` to the root of the existing GitHub Pages repository, replacing the existing files. Commit to your current publishing branch. Reload the site after Pages publishes. Keep your existing Supabase credentials and log in normally. TMDB tokens are browser-specific and may need to be entered on each device.
+## Upgrade safely
+1. Export a JSON backup from the currently working app.
+2. Keep the same GitHub repository and Supabase project.
+3. Replace index.html, manifest.webmanifest and sw.js in the GitHub Pages repository root.
+4. Do not run supabase-schema.sql again.
+5. Reload the app, verify existing records and cloud sync, then test on your phone.
 
-## Data compatibility
-This release keeps the existing single-record Supabase cloud data format, movie IDs, viewing IDs, JSON backup format and existing functionality. New movie properties are optional and are saved only when a viewing is edited or created. Existing movie and viewing records are not erased. The `supabase-schema.sql` file is included for reference only.
+## Notes
+TMDB scores are saved for new or refreshed movie lookups. Existing movies without saved TMDB scores will not show an invented score. TMDB API tokens remain device-specific. The calendar and awards use your existing viewing records.
