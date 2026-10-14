@@ -962,9 +962,8 @@ const bw7OldStats=bw5Stats;bw5Stats=function(){bw7OldStats();bw7TopBottom()};
 const bw7OldDetail=renderDetail;renderDetail=function(){bw7OldDetail();const m=movie(activeMovie);if(!m)return;const actions=document.querySelector('.detail-buttons');if(actions){const b=document.createElement('button');b.className='btn';b.textContent='Share Movie Memory';b.onclick=()=>bw7Memory(m);actions.append(b)}if(bw7Return){const back=$('backLog');if(back)back.onclick=()=>{const p=bw7Return;bw7Return=null;go(p)}}};
 const bw7OldSettings=renderSettings;renderSettings=function(){bw7OldSettings();const select=$('bw60Frame');if(select){const box=document.createElement('div');box.className='bw7-frame-preview';box.textContent='Seasonal frame preview — selected style will appear on October horror or December Christmas viewing rows.';select.parentElement.append(box);const preview=()=>{box.className='bw7-frame-preview '+(select.value==='none'?'':'bw7-frame-'+(select.value==='auto'?'pumpkins':select.value))};select.addEventListener('change',preview);preview()}};
 
-})();
-// ===== V7.1: consolidated navigation, goals, and original poster interaction =====
-const BW71_VERSION='7.1';
+// ===== V7.2: corrected consolidated navigation, goals, and original poster interaction =====
+const BW71_VERSION='7.2';
 const bw71PriorNav=navItems;
 navItems=function(){
  const hidden=new Set(['calendar7','franchise7','goals7','achievements5','timeline5','cinema']);
@@ -981,7 +980,7 @@ function bw71CenturyStats(){
 }
 function bw71Goals(){
  state.uiSettings.bw71Goals??={};
- const y=bw7Year(),stats=bw7StatsFor(y),store=state.uiSettings.bw71Goals;
+ const y=Number(state.uiSettings.bw72GoalYear||bw7Year()),stats=bw7StatsFor(y),store=state.uiSettings.bw71Goals;
  const prior=Number(state.uiSettings.bw71Goals?.[y+'_all']||state.uiSettings.bw43Goals?.[y]||state.uiSettings.bw7Goals?.[y]||300);
  const defs=[
   ['all','Total movies watched',stats.all.length,prior],
@@ -993,20 +992,27 @@ function bw71Goals(){
  ];
  const century=bw71CenturyStats();
  $('main').innerHTML=pageHead('YOUR MOVIE MILESTONES','Goals & Achievements','Annual goals, collectible milestones and your 100 Years of Cinema challenge.')+
- '<section class="bw7-section bw7-panel"><h3>'+y+' Viewing Goals</h3><p class="bw5-muted">New watches are first-time viewings across your entire recorded history. Set a separate target for each category.</p><div class="bw71-goal-grid">'+defs.map(([key,label,n,def])=>{const target=Math.max(1,Number(store[y+'_'+key]||def));return '<article class="bw71-goal"><h3>'+esc(label)+'</h3><strong>'+n+' / '+target+'</strong><div class="bw60-progress"><div style="width:'+Math.min(100,100*n/target)+'%"></div></div><small>'+Math.round(100*n/target)+'% complete</small><label>Annual target <input type="number" min="1" max="10000" data-bw71-goal="'+key+'" value="'+target+'"></label></article>'}).join('')+'</div><button class="btn primary" id="bw71SaveGoals">Save all goals</button></section>'+
- '<section class="bw7-section bw7-panel"><h3>100 Years of Cinema</h3><p>Track your progress through release years 1926–2026.</p><button class="btn bw71-century" id="bw71Cinema"><strong>Open 100 Years of Cinema</strong><span>'+century.consecutive+' / '+century.total+' consecutive years</span><span class="bw60-progress"><span class="bw71-progress-fill" style="width:'+(100*century.consecutive/century.total).toFixed(1)+'%"></span></span></button></section>'+
+ '<section class="bw7-section bw7-panel"><h3>'+y+' Viewing Goals</h3><label>Goal year <select id="bw72GoalYear">'+[...new Set([y,...bw5Years()])].sort((a,b)=>b-a).map(yr=>'<option value="'+yr+'" '+(yr===y?'selected':'')+'>'+yr+'</option>').join('')+'</select></label><p class="bw5-muted">New watches are first-time viewings across your entire recorded history. Set a separate target for each category.</p><div class="bw71-goal-grid">'+defs.map(([key,label,n,def])=>{const target=Math.max(1,Number(store[y+'_'+key]||def));return '<article class="bw71-goal"><h3>'+esc(label)+'</h3><strong>'+n+' / '+target+'</strong><div class="bw60-progress"><div style="width:'+Math.min(100,100*n/target)+'%"></div></div><small>'+Math.round(100*n/target)+'% complete</small><label>Annual target <input type="number" min="1" max="10000" data-bw71-goal="'+key+'" value="'+target+'"></label></article>'}).join('')+'</div><button class="btn primary" id="bw71SaveGoals">Save all goals</button></section>'+
+ '<section class="bw7-section bw7-panel"><h3>100 Years of Cinema</h3><p>Track your progress through release years 1926–2026.</p><button class="btn bw71-century" id="bw71Cinema"><strong>Open 100 Years of Cinema</strong><span>'+century.consecutive+' / '+century.total+' consecutive years</span><span class="bw60-progress"><span class="bw71-progress-fill" style="width:'+(100*century.represented/century.total).toFixed(1)+'%"></span></span></button></section>'+
  '<section class="bw7-section bw7-panel"><h3>Achievements & Milestones</h3><div id="bw71Achievements"></div></section>';
  $('bw71SaveGoals').onclick=()=>{document.querySelectorAll('[data-bw71-goal]').forEach(input=>{store[y+'_'+input.dataset.bw71Goal]=Math.max(1,Math.round(Number(input.value)||1))});save();bw71Goals();toast('Goals saved')};
+ $('bw72GoalYear').onchange=e=>{state.uiSettings.bw72GoalYear=Number(e.target.value);bw71Goals()};
  $('bw71Cinema').onclick=()=>go('cinema');
- // Render the existing achievement content in a temporary container, then restore the combined page.
- const main=$('main'),saved=main.innerHTML;
- bw60Achievements();const ach=main.querySelector('.bw60-achievement-summary')?.outerHTML||'';
- const filter=main.querySelector('.bw5-fields')?.outerHTML||'';
- const cards=main.querySelector('.bw60-achievements')?.outerHTML||'';
- main.innerHTML=saved;
- $('bw71Achievements').innerHTML=ach+filter+cards;
+ // Render achievements in an isolated temporary host, then transfer the actual nodes and wire controls.
+ const main=$('main'),goalMarkup=main.innerHTML;
+ bw60Achievements();
+ const achievementMarkup=main.innerHTML;
+ main.innerHTML=goalMarkup;
+ const achievements=$('bw71Achievements');
+ const temp=document.createElement('div');temp.innerHTML=achievementMarkup;
+ const summary=temp.querySelector('.bw60-achievement-summary');
+ const fields=temp.querySelector('.bw5-fields');
+ const cards=temp.querySelector('.bw60-achievements');
+ for(const node of [summary,fields,cards])if(node)achievements.appendChild(node);
+ if(!achievements.children.length)achievements.innerHTML='<p>Achievement cards are unavailable. Please reload the page.</p>';
  const f=$('bw60AchievementFilter');if(f)f.onchange=e=>{state.uiSettings.bw60AchievementFilter=e.target.value;save();bw71Goals()};
  $('bw71SaveGoals').onclick=()=>{document.querySelectorAll('[data-bw71-goal]').forEach(input=>{store[y+'_'+input.dataset.bw71Goal]=Math.max(1,Math.round(Number(input.value)||1))});save();bw71Goals();toast('Goals saved')};
+ $('bw72GoalYear').onchange=e=>{state.uiSettings.bw72GoalYear=Number(e.target.value);bw71Goals()};
  $('bw71Cinema').onclick=()=>go('cinema');
 }
 function bw71DashboardCalendar(){
@@ -1039,4 +1045,5 @@ const bw71Decor=v36DecorateLog;
 v36DecorateLog=function(){bw71Decor();bw7FixLog()};
 
 
+})();
 </script></body></html>

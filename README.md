@@ -1,15 +1,12 @@
-# Blackwood Movie Log V7.1
+# Blackwood Movie Log V7.2
 
-Hotfix and navigation consolidation built from V7.0.
-
-- Original poster is clickable; no duplicate thumbnails in Movie Log.
-- Goals & Achievements combined with six annual goal types.
-- 100 Years of Cinema progress button in Goals & Achievements.
-- Viewing Calendar and Heatmap on Dashboard.
-- Franchise Tracker accessed from Collections.
-- Movie Timeline accessed from Statistics Center.
-- Sample Data button removed from Settings and empty library.
-- Service worker cache bumped to V7.1.
+Hotfix for V7.1 navigation and Goals & Achievements. The V7.1 patch was accidentally appended outside the application JavaScript closure, so its changes were not executed. V7.2 moves the patch into the application scope and updates the PWA cache key.
 
 ## Installation
-Export a JSON backup first. Upload extracted files into your existing GitHub Pages repository, replacing existing app files. Do not re-import your historical data.
+
+1. Export your current library as JSON before updating.
+2. Upload all website files from this folder to your existing GitHub Pages repository (do not upload historical CSVs).
+3. Wait for deployment, then refresh the site. Check Version 7.2.
+4. Check Goals & Achievements, Dashboard calendar/heatmap, Collections franchise link, Statistics timeline link and movie posters.
+
+This build has static JavaScript and package checks but has not been tested with your live library or Supabase account.
