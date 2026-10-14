@@ -1,17 +1,17 @@
-# Blackwood Movie Log V5.4 — Import & Sync
+# Blackwood Movie Log V5.5
 
-## Install
-Upload index.html, sw.js, manifest.webmanifest, themes/ and backgrounds/ to your EXISTING GitHub Pages repository. Do not delete your Supabase project or change your sign-in. On iPhone reopen the Home Screen app after deployment and allow the service worker to update.
+## Historical import
+1. Export a JSON backup of your existing library in Settings.
+2. Deploy this version to your existing GitHub Pages repository, keeping all folders.
+3. Open Settings and upload `blackwood-historical-review-v5.5.csv` (2,141 entries).
+4. Review the dry-run preview. Records with no valid start date are held, not silently assigned a date.
+5. Import using **merge only**. Imported movies are marked **TMDB UNVERIFIED**, even if the CSV supplied a TMDB ID.
+6. In Movie Log, open Filters → TMDB verification → Unverified only. Open a movie and choose **Find TMDB Match**, then select the correct film to verify.
 
-## Import without replacing your library
-1. In the current app Settings, EXPORT JSON backup. Keep the file.
-2. Deploy V5.4 and confirm the version label. Sign in to the same Supabase account on both devices.
-3. On desktop go to Settings > V5.4 Historical import & TMDB matcher. Upload blackwood-historical-import-v5.4.csv from this ZIP.
-4. In Settings > Movie metadata enter your TMDB Read Access Token on your PRIVATE device. Never commit the token to GitHub.
-5. Click Find high-confidence TMDB IDs. The matcher requires an exact normalized title and exact release year with only one such candidate in the first 20 search results. This is a conservative heuristic, NOT a statistically calibrated 95% probability. Review before importing.
-6. Click Download review CSV. Open in Excel. Correct any wrong or blank IDs. Save as CSV UTF-8, then re-upload that review CSV.
-7. Review the dry-run preview and duplicates. Click Import only after verifying backup and preview. The import merges into existing movies/viewings and does NOT delete existing entries.
-8. Wait for cloud sync; on phone reopen the app, tap Sync Now in Settings.
-
-## Safety limitations
-This app currently uses a single JSON payload per Supabase account. Concurrent edits on two devices can still conflict; resolve conflicts and ensure sync completes before switching devices. Do not use 'Upload local copy' to resolve conflicts unless you intend to overwrite cloud data. Duplicates are detected by movie identity + start/finish dates and may need manual review. The CSV contains personal movie history, so keep it private. Unfinished rows with a start date can be imported as in-progress; rows without valid start dates are held.
+## Notes
+- TMDB IDs in the CSV are supplied matches, not guaranteed correct; they are intentionally not marked verified.
+- An import is a substantial change. Keep an offline JSON backup and try a small test batch first.
+- Rows are protected from repeat import using source year and source row.
+- This release accepts ISO and US M/D/YYYY dates.
+- Cloud sync uses the existing single Supabase JSON record; concurrent edits may still conflict. Wait for sync before changing devices.
+- Do not publish your TMDB token in GitHub.
