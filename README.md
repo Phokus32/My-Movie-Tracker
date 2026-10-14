@@ -1,17 +1,22 @@
-# Blackwood Movie Log V5.5
+# Blackwood Movie Log V6.0
 
-## Historical import
-1. Export a JSON backup of your existing library in Settings.
-2. Deploy this version to your existing GitHub Pages repository, keeping all folders.
-3. Open Settings and upload `blackwood-historical-review-v5.5.csv` (2,141 entries).
-4. Review the dry-run preview. Records with no valid start date are held, not silently assigned a date.
-5. Import using **merge only**. Imported movies are marked **TMDB UNVERIFIED**, even if the CSV supplied a TMDB ID.
-6. In Movie Log, open Filters → TMDB verification → Unverified only. Open a movie and choose **Find TMDB Match**, then select the correct film to verify.
+Upgrade your EXISTING GitHub Pages repository. Upload all files and both asset folders. Do not create a new Supabase project or import your historical CSV again if you have already imported it.
+
+## New in V6.0
+- 40 achievement paths, 8 levels each, unique category monogram medallions, responsive progress and filters.
+- Dedicated Horrorfest and Christmas Fest navigation, annual/all-time statistics, poster galleries and top rated films. Eligibility uses viewing START date and seasonal tags/classification.
+- Seasonal movie frame options under Settings.
+- Year in Review deduplicates highest-rated movies within each year, shows posters and opens Movie Details.
+- TMDB UNVERIFIED badge only when the numeric TMDB ID is missing or invalid.
+- Data Health missing TMDB ID summary.
+- Header and offline service worker cache updated to V6.0.
+
+## Safeguards
+1. Export JSON backup from Settings before deploying.
+2. Upload extracted files into your current GitHub Pages repository. Keep `themes/` and `backgrounds/` directories.
+3. Wait for GitHub Pages Actions deployment, then reload and confirm Version 6.0.
+4. Verify Supabase is connected. 'Saved on this device' means cloud sync has not been confirmed.
+5. Do not repeat historical CSV import if it already succeeded.
 
 ## Notes
-- TMDB IDs in the CSV are supplied matches, not guaranteed correct; they are intentionally not marked verified.
-- An import is a substantial change. Keep an offline JSON backup and try a small test batch first.
-- Rows are protected from repeat import using source year and source row.
-- This release accepts ISO and US M/D/YYYY dates.
-- Cloud sync uses the existing single Supabase JSON record; concurrent edits may still conflict. Wait for sync before changing devices.
-- Do not publish your TMDB token in GitHub.
+Achievements calculate from completed viewings; counts rely on available genres and seasonal tags. Individual achievement medallions use unique initials per category; more elaborate bespoke illustrations can be added in a future release. Frame decorations are CSS border designs. Browser/Supabase live testing is still needed.

@@ -1,4 +1,4 @@
-const CACHE='blackwood-v5-5-shell-1';const SHELL=['./index.html','./manifest.webmanifest','./themes/classic.svg','./themes/vhs.svg','./themes/horror.svg','./themes/scifi.svg','./themes/noir.svg','./themes/christmas.svg','./themes/gothic.svg','./themes/drivein.svg','./themes/ocean.svg','./themes/cosmic.svg'];
+const CACHE='blackwood-v6-0-shell-1';const SHELL=['./index.html','./manifest.webmanifest','./themes/classic.svg','./themes/vhs.svg','./themes/horror.svg','./themes/scifi.svg','./themes/noir.svg','./themes/christmas.svg','./themes/gothic.svg','./themes/drivein.svg','./themes/ocean.svg','./themes/cosmic.svg'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(SHELL)));});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('blackwood-')||k.startsWith('my-movie-tracker-shell-')).filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
 self.addEventListener('message',e=>{if(e.data?.type==='SKIP_WAITING')self.skipWaiting()});
