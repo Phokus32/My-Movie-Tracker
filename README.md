@@ -1,17 +1,15 @@
-# Blackwood Movie Log V7.0
+# Blackwood Movie Log V7.1
 
-Upgrade from V6.0. Replace the files in your existing GitHub Pages repository with the contents of this ZIP. Keep your current browser data; do not reimport your CSV. Export a JSON backup from Settings before deployment.
+Hotfix and navigation consolidation built from V7.0.
 
-## New in V7.0
+- Original poster is clickable; no duplicate thumbnails in Movie Log.
+- Goals & Achievements combined with six annual goal types.
+- 100 Years of Cinema progress button in Goals & Achievements.
+- Viewing Calendar and Heatmap on Dashboard.
+- Franchise Tracker accessed from Collections.
+- Movie Timeline accessed from Statistics Center.
+- Sample Data button removed from Settings and empty library.
+- Service worker cache bumped to V7.1.
 
-Clickable movie-list posters, dashboard cards, chronological festival lists, clickable Data Health entries, seasonal frame previews and stronger frame visibility, Top/Bottom 50 poster lists, viewing calendar and heatmap, year comparison, smart lists, movie goals, movie battles, title-based franchise tracker, shareable printable Report Studio and Movie Memory cards.
-
-## Important limitations
-
-- Report Studio provides screenshot mode and Print/Save PDF. Direct PNG export is not implemented in this build.
-- Franchise tracker is title-based, not a complete external franchise catalog.
-- Existing cloud synchronization remains governed by your Supabase connection; this build does not guarantee cloud sync is configured.
-- Do not reimport historical records. Back up your library JSON before deploying.
-- The new features have been syntax checked, but require live browser testing on your device.
-
-Historical CSV data is intentionally excluded from the public deployment ZIP for privacy.
+## Installation
+Export a JSON backup first. Upload extracted files into your existing GitHub Pages repository, replacing existing app files. Do not re-import your historical data.
