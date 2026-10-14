@@ -1,14 +1,17 @@
-# Blackwood Movie Log V5.3 — Final Cut
-
-Includes all V5.2 features plus:
-- NEW WATCH / REWATCH badges shown for unfinished as well as completed viewings; explicit Rewatch selection takes precedence.
-- Four additional detailed illustrated SVG scenes in the Background Gallery (54 backgrounds total).
-- Denser mobile movie log layout.
-- Cast and director section on Movie Details. TMDB credits are fetched when configured, cached locally for 30 days; stored cast names provide a fallback.
-- Recently opened movies on Movie Log, backup export date reminder, and full-screen background preview.
+# Blackwood Movie Log V5.4 — Import & Sync
 
 ## Install
-Back up your data first. Upload the **contents** of this folder to your existing GitHub Pages repository root, including the complete `backgrounds` and `themes` folders. No Supabase schema change is required.
+Upload index.html, sw.js, manifest.webmanifest, themes/ and backgrounds/ to your EXISTING GitHub Pages repository. Do not delete your Supabase project or change your sign-in. On iPhone reopen the Home Screen app after deployment and allow the service worker to update.
 
-## Validation
-JavaScript syntax and ZIP integrity checked. Not verified against your actual iPhone or Supabase account.
+## Import without replacing your library
+1. In the current app Settings, EXPORT JSON backup. Keep the file.
+2. Deploy V5.4 and confirm the version label. Sign in to the same Supabase account on both devices.
+3. On desktop go to Settings > V5.4 Historical import & TMDB matcher. Upload blackwood-historical-import-v5.4.csv from this ZIP.
+4. In Settings > Movie metadata enter your TMDB Read Access Token on your PRIVATE device. Never commit the token to GitHub.
+5. Click Find high-confidence TMDB IDs. The matcher requires an exact normalized title and exact release year with only one such candidate in the first 20 search results. This is a conservative heuristic, NOT a statistically calibrated 95% probability. Review before importing.
+6. Click Download review CSV. Open in Excel. Correct any wrong or blank IDs. Save as CSV UTF-8, then re-upload that review CSV.
+7. Review the dry-run preview and duplicates. Click Import only after verifying backup and preview. The import merges into existing movies/viewings and does NOT delete existing entries.
+8. Wait for cloud sync; on phone reopen the app, tap Sync Now in Settings.
+
+## Safety limitations
+This app currently uses a single JSON payload per Supabase account. Concurrent edits on two devices can still conflict; resolve conflicts and ensure sync completes before switching devices. Do not use 'Upload local copy' to resolve conflicts unless you intend to overwrite cloud data. Duplicates are detected by movie identity + start/finish dates and may need manual review. The CSV contains personal movie history, so keep it private. Unfinished rows with a start date can be imported as in-progress; rows without valid start dates are held.
