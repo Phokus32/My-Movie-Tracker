@@ -1,17 +1,15 @@
-Blackwood Movie Log V7.3.3
+Blackwood Movie Log V7.3.4
 
-Desktop Movie Log:
-- Runtime follows release year in the title line.
-- HORRORFEST / REWATCH / Completed badges grouped below title.
-- Keep one original Started/Finished date line, no duplicate Watched line.
-- Remove "With wife", "Solo" and "Companion unknown" text from cards.
-- Star/Edit at upper right; conditional Beth heart/Details below.
-- Existing compact mobile layout remains supported.
+Mobile Movie Log:
+- Align both Tight Mobile List and regular mobile movie cards to the approved compact layout.
+- Single poster; title and runtime; Horrorfest/Rewatch/one status badge; one short date-and-ratings line.
+- Two-by-two actions: star and Details above Edit and conditional Beth heart.
+- Hide duplicate dates, ratings, status and extra mobile rows.
+- Preserve approved V7.3.3 desktop movie cards and Add/Edit form.
 
-Add/Edit Viewing:
-- Top Save Viewing button inserted into the modal header and linked to original save handler.
-- TMDB ID, viewing type, companion, dates, rating, status, then metadata and notes.
-- Bottom Save retained.
+TMDB Unverified filter:
+- Reapply the selected verification filter by viewing/movie identity after list redraws, regardless of compact setting.
+- Hide nonmatching records in both layouts; keep displayed count updated.
 
-Export a JSON backup before uploading. Replace GitHub Pages files with ZIP contents.
-JavaScript syntax and ZIP integrity checked. Live device/browser behavior has not been verified.
+Export JSON backup before deployment. Replace GitHub Pages files with ZIP contents.
+Syntax and archive checks passed; live iPhone and cloud-sync testing still required.
