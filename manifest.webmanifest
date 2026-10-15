@@ -1,10 +1,23 @@
 {
   "name": "Blackwood Movie Log",
-  "short_name": "Blackwood Log",
-  "description": "Personal movie archive",
+  "short_name": "Blackwood",
   "start_url": "./",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#101217",
-  "theme_color": "#101217",
-  "icons": []
+  "background_color": "#160b08",
+  "theme_color": "#20100c",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
 }

@@ -1,13 +1,5 @@
-Blackwood Movie Log V7.3.5
+Blackwood Movie Log V7.4.0
 
-- Exactly two Movie Log modes: List and Posters.
-- Removes Text View and Tight Mobile List controls.
-- Automatically converts old Text View preference to List View without changing records.
-- Mobile Poster View: two-column poster grid, compact information, seasonal badges and quick actions.
-- Tap a poster to open the movie details.
-- Larger movie posters on My All-Time Top 10 (desktop and mobile).
-- Keeps approved V7.3.4 regular mobile List View and approved desktop List View.
-- Existing search, sort, TMDB verification filtering and cloud sync mechanisms retained.
+Official approved metallic B film-reel logo and iPhone app icons. Restored Data Health navigation. Replaced Quick Rate with slider, exact rating entry, clear and save. Removed light/dark control. List/Poster view choice in hamburger menu. Tightened mobile poster grid. Larger cinematic poster on movie detail, preserving edit and viewing history.
 
-Before deployment export a JSON backup. Replace GitHub Pages files with ZIP contents.
-Static JS syntax and ZIP checks completed; live browser and Supabase tests not completed.
+Export JSON backup before deploying. Replace GitHub Pages files with all ZIP contents. Static checks only; live iPhone and Supabase testing still required.
