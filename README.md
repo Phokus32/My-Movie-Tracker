@@ -12,3 +12,5 @@ Complete 7.4 release plus 7.5 features:
 
 IMPORTANT: Back up JSON data before installing. Deploy all ZIP contents, not just index.html.
 Testing: JavaScript syntax and ZIP integrity checked. Live iPhone, TMDB and Supabase integration still require testing.
+
+V7.5.1 navigation: Movie History Timeline and Data Health now live in Statistics & Reports. Movie Awards and My Top 10 are accessed from Goals & Achievements. Existing functionality preserved.
