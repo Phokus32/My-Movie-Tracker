@@ -1,5 +1,14 @@
-Blackwood Movie Log V7.4.0
+Blackwood Movie Log V7.5.0
 
-Official approved metallic B film-reel logo and iPhone app icons. Restored Data Health navigation. Replaced Quick Rate with slider, exact rating entry, clear and save. Removed light/dark control. List/Poster view choice in hamburger menu. Tightened mobile poster grid. Larger cinematic poster on movie detail, preserving edit and viewing history.
+Complete 7.4 release plus 7.5 features:
+- Movie Awards 2.0: larger poster winner tiles, searchable eligible watched-in-year films.
+- Smart Movie Suggester: TMDB discovery, genre/decade/runtime/score filters, limited natural-language parsing, exact TMDB ID and title search. Not a generative AI assistant.
+- One-tap add recommendations to watchlist without creating viewings.
+- Movie History Timeline: chronological poster cards with each completed viewing, rewatch, date and rating; year and title filters.
+- Personal Movie Theater: Now Showing, Up Next, Recently Finished, shortcut to TMDB discovery. No media playback integration.
+- Main viewing and watchlist TMDB search now accepts numeric IDs or titles.
+- Clear All Filters reset with sort and view preserved.
+- Original cloud storage schema, features, assets and official Blackwood logo preserved.
 
-Export JSON backup before deploying. Replace GitHub Pages files with all ZIP contents. Static checks only; live iPhone and Supabase testing still required.
+IMPORTANT: Back up JSON data before installing. Deploy all ZIP contents, not just index.html.
+Testing: JavaScript syntax and ZIP integrity checked. Live iPhone, TMDB and Supabase integration still require testing.
