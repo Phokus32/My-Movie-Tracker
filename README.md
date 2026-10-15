@@ -1,9 +1,7 @@
-# Blackwood Movie Log V7.3 — test build
+Blackwood Movie Log V7.3.1
 
-Install: back up your library as JSON, then replace your GitHub Pages repository files with the contents of this archive. Keep your Supabase and TMDB settings private.
+Hotfix for the user-approved ultra-compact mobile card layout, quick rating star and watched-with-Beth heart indicator. The Add/Edit Viewing form prioritizes common input fields and offers a top Save button.
 
-Implemented: Holiday Fest navigation hub; Statistics & Reports hub; mobile compact movie ratings and condensed card styling; modal scroll reset; TMDB-wide Top 10 search without creating viewing events; browser-side PNG export with mobile share-sheet support where available; preserved existing features.
+Before updating GitHub Pages, export a JSON backup. Replace existing site files with the extracted contents. No historical reimport required.
 
-IMPORTANT: Read-only public share links are NOT active. They require a secure Supabase public-reports table, row-level security and explicit deployment; the app will not publish a private report without that setup. PNG capture uses html2canvas loaded from CDN; external TMDB poster CORS restrictions may prevent some images from appearing in the export.
-
-This is a code-checked test build, not a verified live-browser release. Confirm filtering and card appearance on iPhone before treating it as production-ready.
+Testing: JavaScript syntax and ZIP integrity checked; live iPhone/Supabase testing still required.

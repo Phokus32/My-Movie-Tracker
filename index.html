@@ -176,6 +176,41 @@ body.bw51-mobile-compact .topbar{padding:8px 0!important}body.bw51-mobile-compac
 @media(max-width:700px){body.bw51-mobile-compact #movieList:not(.v36-grid):not(.bw43-textonly) .movie-row.bw-row{display:grid!important;grid-template-columns:minmax(0,1fr) 28px!important;grid-template-rows:auto!important;min-height:78px!important;max-width:100%!important;padding:6px 7px!important;gap:3px!important;align-items:center!important}body.bw51-mobile-compact #movieList:not(.v36-grid):not(.bw43-textonly) .bw-cover{width:43px!important;height:65px!important}body.bw51-mobile-compact #movieList:not(.v36-grid):not(.bw43-textonly) .row-mid{display:none!important}body.bw51-mobile-compact #movieList:not(.v36-grid):not(.bw43-textonly) .row-right{display:none!important}body.bw51-mobile-compact #movieList:not(.v36-grid):not(.bw43-textonly) .row-actions{grid-column:2!important;grid-row:1!important;display:flex!important;flex-direction:column!important;gap:7px!important}body.bw51-mobile-compact .bw73-meta{display:flex;gap:7px;flex-wrap:wrap;align-items:center;font-size:10px;color:var(--muted);margin-top:3px}body.bw51-mobile-compact .bw73-ratings{font-size:10px;white-space:nowrap;color:var(--text);margin-top:2px}body.bw51-mobile-compact .bw73-hide{display:none!important}body.bw51-mobile-compact .bw-title-text{min-width:0!important}body.bw51-mobile-compact .bw-title-text .mov-title{overflow-wrap:anywhere;font-size:12px!important}body.bw51-mobile-compact .bw73-inline{display:block!important}}
 .bw73-inline{display:none}.bw73-hub{display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:14px;margin:18px 0}.bw73-tile{display:block;text-align:left;padding:24px;border:1px solid var(--border);background:var(--panel);border-radius:16px;color:var(--text);cursor:pointer;min-height:125px}.bw73-tile strong{display:block;font-size:19px;margin-bottom:9px}.bw73-tile small{color:var(--muted)}.bw73-holiday .bw73-tile{min-height:220px;background:linear-gradient(135deg,#361111,#130d12)}.bw73-holiday .bw73-tile:nth-child(2){background:linear-gradient(135deg,#153a2b,#20131b)}.bw73-tools{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.bw73-report-image{width:100%;max-width:720px}.bw73-result{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:8px;background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:8px;margin:5px 0}.bw73-result img{width:36px;height:54px;object-fit:cover}.bw73-top-results{max-height:280px;overflow:auto}.bw73-readonly{max-width:780px;margin:20px auto;padding:16px}.bw73-back{margin-bottom:16px}
 
+
+/* V7.3.1 compact mobile cards, matching the approved reference */
+@media(max-width:700px){
+body.bw51-mobile-compact #movieList:not(.v36-grid):not(.bw43-textonly) .movie-row.bw-row.bw731-card{
+  display:grid!important;grid-template-columns:minmax(0,1fr) 67px!important;
+  grid-template-rows:auto!important;min-height:0!important;
+  padding:5px 7px!important;gap:3px!important;align-items:center!important;
+}
+body.bw51-mobile-compact #movieList .bw731-card .bw-title-block{display:flex!important;align-items:center!important;gap:7px!important;min-width:0!important}
+body.bw51-mobile-compact #movieList .bw731-card .bw-cover{width:38px!important;height:57px!important;flex:0 0 38px!important;object-fit:cover!important}
+body.bw51-mobile-compact #movieList .bw731-card .bw-title-text{min-width:0!important;flex:1!important}
+body.bw51-mobile-compact #movieList .bw731-card .mov-title{font-size:11px!important;line-height:1.2!important;display:block!important;margin:0 0 3px!important}
+body.bw51-mobile-compact #movieList .bw731-card .mov-title button{font-size:inherit!important}
+body.bw51-mobile-compact #movieList .bw731-card .v36-tag,
+body.bw51-mobile-compact #movieList .bw731-card .bw43-watchtype{font-size:8px!important;padding:1px 3px!important;margin:0 3px 0 0!important;vertical-align:middle!important}
+body.bw51-mobile-compact #movieList .bw731-card .bw731-status{display:inline-block!important;font-size:8px!important;line-height:1.2!important;padding:2px 4px!important;border-radius:10px!important;background:#153725;color:#59d98b;font-weight:700}
+body.bw51-mobile-compact #movieList .bw731-card .bw731-status.inprogress{background:#45351b;color:#f3c66e}
+body.bw51-mobile-compact #movieList .bw731-card .bw731-status.dnf{background:#48212b;color:#ff9e9e}
+body.bw51-mobile-compact #movieList .bw731-card .bw731-bottom{display:flex!important;flex-wrap:wrap!important;gap:2px 9px!important;align-items:center!important;font-size:9px!important;line-height:1.25!important;margin-top:4px!important}
+body.bw51-mobile-compact #movieList .bw731-card .bw73-inline,
+body.bw51-mobile-compact #movieList .bw731-card .row-mid,
+body.bw51-mobile-compact #movieList .bw731-card .row-right,
+body.bw51-mobile-compact #movieList .bw731-card .bw-title-text>.mov-sub{display:none!important}
+body.bw51-mobile-compact #movieList .bw731-card .row-actions{display:grid!important;grid-column:2!important;grid-row:1!important;grid-template-columns:repeat(2,30px)!important;grid-template-rows:repeat(2,26px)!important;gap:2px 3px!important;align-self:center!important;align-items:center!important;justify-items:center!important}
+body.bw51-mobile-compact #movieList .bw731-card .row-actions button{width:28px!important;height:25px!important;min-width:0!important;min-height:0!important;padding:1px!important;font-size:17px!important;background:transparent!important;border:0!important}
+body.bw51-mobile-compact #movieList .bw731-card .row-actions .bw731-star{color:#edbe5e!important;grid-column:1;grid-row:1}
+body.bw51-mobile-compact #movieList .bw731-card .row-actions [data-editview]{grid-column:2;grid-row:1}
+body.bw51-mobile-compact #movieList .bw731-card .row-actions .bw731-heart{color:#f1456b!important;grid-column:1;grid-row:2;font-size:22px!important;pointer-events:none}
+body.bw51-mobile-compact #movieList .bw731-card .row-actions [data-more]{grid-column:2;grid-row:2}
+body.bw51-mobile-compact #movieList .bw731-card .row-actions>button:not(.bw731-star):not([data-editview]):not([data-more]),
+body.bw51-mobile-compact #movieList .bw731-card .row-actions>.bw73-hide{display:none!important}
+body.bw51-mobile-compact #movieList .bw731-card .bw731-badges{display:flex;flex-wrap:wrap;gap:3px;align-items:center}
+body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .v36-tag,
+body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{display:inline-block!important}
+}
 </style></head>
 <body><div class="app">
 <header class="topbar"><button class="bw-home" id="bwHome" type="button" title="Go to Movie Log" aria-label="Blackwood Movie Log home"><div class="brandmark">B</div><div class="brand"><span class="bw-wordmark">BLACKWOOD</span><span class="bw-submark">MOVIE LOG</span><small>YOUR PERSONAL FILM ARCHIVE <span class="bw-version">Version 6.0</span></small></div></button><div class="top-spacer"></div><div class="status"><span class="dot"></span><span id="saveStatus">Saved on this device</span></div><button class="iconbtn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☼</button><button class="iconbtn" id="menuBtn" aria-label="Open navigation" title="Navigation">☰</button></header>
@@ -1062,7 +1097,7 @@ const bw73OldNav=navItems;
 navItems=function(){const remove=new Set(['horrorfest60','christmasfest60','review5','compare7','reports7','stats5','statistics5','health5']);const a=bw73OldNav().filter(x=>!remove.has(x[0]));const at=a.findIndex(x=>x[0]==='settings');a.splice(at<0?a.length:at,0,['holiday73','✦','Holiday Fest'],['insights73','▤','Statistics & Reports']);return a};
 function bw73Holiday(){$('main').innerHTML=pageHead('SEASONAL CINEMA','Holiday Fest','Two traditions. Every movie remembered.')+'<div class="bw73-hub bw73-holiday"><button class="bw73-tile" id="bw73Horror"><strong>🎃 Horrorfest</strong><small>October viewings, milestones and annual statistics</small></button><button class="bw73-tile" id="bw73Christmas"><strong>❄ Christmas Fest</strong><small>December viewings, favorites and annual statistics</small></button></div>';$('bw73Horror').onclick=()=>go('horrorfest60');$('bw73Christmas').onclick=()=>go('christmasfest60')}
 function bw73Insights(){$('main').innerHTML=pageHead('YOUR MOVIE STORY','Statistics & Reports','Explore your viewing history and share what matters.')+'<div class="bw73-hub">'+[['stats5','Statistics Center','Rankings, ratings and trends'],['review5','Year in Review','Your annual cinema retrospective'],['compare7','Year vs. Year','Compare your movie years'],['reports7','Report Studio','Create, export and share reports']].map(([id,title,desc])=>'<button class="bw73-tile" data-bw73-page="'+id+'"><strong>'+title+'</strong><small>'+desc+'</small></button>').join('')+'</div>';document.querySelectorAll('[data-bw73-page]').forEach(b=>b.onclick=()=>go(b.dataset.bw73Page))}
-const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.3';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
+const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.3.1';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
 // Always reset modal's internal scroll position, not the underlying page.
 const bw73OpenModal=openModal;openModal=function(...args){bw73OpenModal(...args);requestAnimationFrame(()=>{for(const el of [$('modalBody'),document.querySelector('.modal'),document.querySelector('.modal-backdrop.open')])if(el)el.scrollTop=0})};
 // Decorate only the actual filtered rows, after every list redraw.
@@ -1077,6 +1112,95 @@ const bw73Movie=movie;movie=function(id){return bw73Movie(id)||state.uiSettings?
 // Add mobile export controls to the existing report studio.
 const bw73Report=bw7Report;bw7Report=function(){bw73Report();const controls=document.querySelector('.bw7-controls');if(!controls)return;const btn=document.createElement('button');btn.className='btn primary';btn.textContent='Save report as image';controls.appendChild(btn);btn.onclick=async()=>{const report=$('bw7Report');if(!report)return;btn.disabled=true;btn.textContent='Preparing image…';try{if(!window.html2canvas){await new Promise((resolve,reject)=>{const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';s.onload=resolve;s.onerror=reject;document.head.appendChild(s)})}const canvas=await window.html2canvas(report,{backgroundColor:'#141016',scale:Math.min(2,window.devicePixelRatio||2),useCORS:true,scrollY:0,windowWidth:Math.max(report.scrollWidth,700)});const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));if(!blob)throw Error('Could not create image');const file=new File([blob],'blackwood-movie-report.png',{type:'image/png'});if(navigator.canShare?.({files:[file]}))await navigator.share({files:[file],title:'Blackwood Movie Log report'});else{const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=file.name;a.click();setTimeout(()=>URL.revokeObjectURL(url),30000)}}catch(e){toast('Image export unavailable: '+e.message)}finally{btn.disabled=false;btn.textContent='Save report as image'}};
 const share=document.createElement('button');share.className='btn';share.textContent='Share read-only report';controls.appendChild(share);share.onclick=async()=>{if(!cloudClient||!cloudUser){toast('Sign in to cloud sync to publish a shareable report.');return}toast('Public report sharing requires a dedicated Supabase table and policies; not configured yet.')};};
+
+
+// V7.3.1: compact card content and quick rating, applied to the already-filtered rows.
+function bw731ShortDate(d){
+ if(!d)return '—';
+ const s=String(d).slice(0,10).split('-');
+ return s.length===3?s[1]+'/'+s[2]+'/'+s[0].slice(-2):String(d);
+}
+function bw731QuickRate(viewId){
+ const v=state.viewings.find(x=>x.id===viewId);if(!v)return;
+ const m=movie(v.movieId);if(!m)return;
+ const current=v.rating===null||v.rating===undefined||v.rating===''?'':Number(v.rating).toFixed(1);
+ openModal('Quick Rate · '+m.title,
+  '<div class="field"><label for="bw731Rating">Your rating (1.0–10.0)</label><input id="bw731Rating" type="number" min="1" max="10" step="0.1" inputmode="decimal" placeholder="Enter rating" value="'+esc(current)+'"></div><p class="footer-note">Updates only this viewing. Leave blank to remove its rating.</p>',
+  '<button class="btn" id="bw731Cancel">Cancel</button><button class="btn primary" id="bw731Save">Save rating</button>');
+ $('bw731Cancel').onclick=closeModal;
+ $('bw731Save').onclick=()=>{
+  const raw=$('bw731Rating').value.trim(),n=Number(raw);
+  if(raw!==''&&(!Number.isFinite(n)||n<1||n>10||!Number.isInteger(n*10+1e-8))){
+   toast('Enter a rating from 1.0 to 10.0, using one decimal place.');return;
+  }
+  v.rating=raw===''?null:n;
+  save();closeModal();render();toast('Personal rating saved.');
+ };
+}
+function bw731Decorate(){
+ const root=$('movieList');if(!root)return;
+ root.querySelectorAll('.movie-row.bw-row').forEach(row=>{
+  const viewId=row.querySelector('[data-editview]')?.dataset.editview;
+  const v=state.viewings.find(x=>x.id===viewId);if(!v)return;
+  const m=movie(v.movieId);if(!m)return;
+  row.classList.add('bw731-card');
+  const text=row.querySelector('.bw-title-text');
+  const actions=row.querySelector('.row-actions');
+  if(!text||!actions)return;
+  // Move existing festival and watch-type badges into a compact line.
+  let badges=text.querySelector('.bw731-badges');
+  if(!badges){badges=document.createElement('div');badges.className='bw731-badges';text.querySelector('.mov-title')?.after(badges)}
+  for(const badge of [...text.querySelectorAll('.v36-tag,.bw43-watchtype')]){
+    if(!badges.contains(badge))badges.appendChild(badge);
+  }
+  let status=badges.querySelector('.bw731-status');
+  if(!status){status=document.createElement('span');status.className='bw731-status';badges.appendChild(status)}
+  status.textContent=statusName(v).toUpperCase();
+  status.className='bw731-status '+(v.status==='completed'?'':v.status==='dnf'?'dnf':'inprogress');
+  let bottom=text.querySelector('.bw731-bottom');
+  if(!bottom){bottom=document.createElement('div');bottom.className='bw731-bottom';text.appendChild(bottom)}
+  const mine=v.rating==null||v.rating===''?'—':Number(v.rating).toFixed(1);
+  const tmdb=m.voteAverage??m.tmdbRating??m.tmdbVoteAverage??m.tmdbScore;
+  const other=tmdb==null||tmdb===''?'—':Number(tmdb).toFixed(1);
+  bottom.textContent='Watched: '+bw731ShortDate(v.startDate)+' – '+bw731ShortDate(v.finishDate)+'   Mine: '+mine+' · TMDB: '+other;
+  let star=actions.querySelector('.bw731-star');
+  if(!star){star=document.createElement('button');star.type='button';star.className='bw731-star';star.textContent='☆';star.title='Quick rate this viewing';star.setAttribute('aria-label','Quick rate '+m.title);actions.prepend(star)}
+  star.onclick=e=>{e.stopPropagation();bw731QuickRate(viewId)};
+  let heart=actions.querySelector('.bw731-heart');
+  if(v.watchedWithWife==='yes'){
+    if(!heart){heart=document.createElement('span');heart.className='bw731-heart';heart.textContent='♡';heart.setAttribute('aria-label','Watched with Beth');heart.title='Watched with Beth';actions.appendChild(heart)}
+  }else heart?.remove();
+ });
+}
+// Integrate with existing decoration chain, including search/filter redraws.
+const bw731OldDecor=v36DecorateLog;
+v36DecorateLog=function(){bw731OldDecor();bw731Decorate()};
+const bw731OldCompact=bw73CompactRows;
+bw73CompactRows=function(){bw731OldCompact();bw731Decorate()};
+// Prioritize frequently edited inputs in Add/Edit form, leaving metadata and notes below.
+const bw731OldViewingForm=openViewingForm;
+openViewingForm=function(...args){
+ bw731OldViewingForm(...args);
+ const form=$('viewForm'),grid=form?.querySelector('.formgrid');
+ if(!grid)return;
+ const field=id=>$(id)?.closest('.field');
+ const title=field('vTitle');
+ const important=['vStart','vFinish','vRating','vWife','vRewatch','vAbandoned'];
+ let anchor=title;
+ for(const id of important){
+   const el=field(id);
+   if(el&&el.parentElement===grid&&el!==anchor){anchor.after(el);anchor=el}
+ }
+ // Keep Save readily accessible without removing the existing bottom action.
+ const saveButton=[...document.querySelectorAll('#modalFoot button')].find(b=>/save|add movie/i.test(b.textContent||''));
+ if(saveButton&&!$('bw731TopSave')){
+   const btn=saveButton.cloneNode(true);btn.id='bw731TopSave';btn.type='button';btn.classList.add('primary');
+   btn.style.cssText='width:100%;margin:8px 0 14px';
+   btn.onclick=()=>saveButton.click();
+   const wrap=document.createElement('div');wrap.className='field wide';wrap.appendChild(btn);
+   anchor.after(wrap);
+ }
+};
 
 })();
 </script></body></html>
