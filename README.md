@@ -1,7 +1,12 @@
-Blackwood Movie Log V7.3.1
+# Blackwood Movie Log V7.3.2
 
-Hotfix for the user-approved ultra-compact mobile card layout, quick rating star and watched-with-Beth heart indicator. The Add/Edit Viewing form prioritizes common input fields and offers a top Save button.
+Refines the desktop movie cards and Add/Edit Viewing form following the approved mockups.
 
-Before updating GitHub Pages, export a JSON backup. Replace existing site files with the extracted contents. No historical reimport required.
+- Desktop cards: remove duplicate 'Watched' line while retaining original Started/Finished dates and ratings.
+- Add/Edit form: movie title/search, TMDB ID + viewing type + Beth, start + finish + rating, status, then all remaining metadata and notes in a continuous layout.
+- Save Viewing button near top, wired to the original save handler; original footer Save remains.
+- Existing mobile compact card and quick rating preserved.
 
-Testing: JavaScript syntax and ZIP integrity checked; live iPhone/Supabase testing still required.
+**Before uploading:** export a JSON backup. Replace GitHub Pages files with this ZIP's contents. No reimport needed.
+
+Source and ZIP checks performed; live device/Supabase testing remains necessary.

@@ -211,6 +211,39 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges{display:flex;flex-
 body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .v36-tag,
 body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{display:inline-block!important}
 }
+
+/* V7.3.2: desktop movie cards keep their existing dates and ratings, no duplicate watched line. */
+@media(min-width:701px){
+  #movieList .bw731-card .bw731-bottom{display:none!important}
+  #movieList .bw731-card .bw731-badges .bw731-status{display:none!important}
+  #movieList .bw731-card .bw731-badges{display:contents}
+  #movieList .bw731-card .bw731-star{color:#e7b950}
+  #movieList .bw731-card .bw731-heart{color:#f14b6b;font-size:23px}
+}
+/* Form: 3-column workflow rows, with remaining metadata immediately following. */
+#modalBackdrop #viewForm>.formgrid{align-content:start!important;align-items:start!important}
+#viewForm .bw732-input-row{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:start}
+#viewForm .bw732-input-row .field{min-width:0;width:100%;margin:0}
+#viewForm .bw732-input-row .field.wide{grid-column:1/-1}
+#viewForm .bw732-more{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:2px;align-content:start}
+#viewForm .bw732-more h3{grid-column:1/-1;margin:8px 0 0;font-size:15px}
+#viewForm .bw732-more>.field{min-width:0;width:100%;margin:0}
+#viewForm .bw732-more>.field.wide,#viewForm .bw732-more>.checkline{grid-column:1/-1}
+#viewForm .bw732-metadata-help{display:none!important}
+#modalTitle{padding-right:190px}
+#bw732FormSave{position:absolute;top:16px;right:75px;z-index:5;min-width:170px}
+@media(max-width:700px){
+  #viewForm .bw732-input-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  #viewForm .bw732-input-row:first-of-type .field:first-child{grid-column:1/-1}
+  #viewForm .bw732-more{grid-template-columns:1fr}
+  #viewForm .bw732-more>.field{grid-column:1/-1}
+  #modalTitle{padding-right:0}
+  #bw732FormSave{position:static;display:block;margin:8px 0 10px;width:100%}
+}
+/* Hide duplicate original date only in the compact mobile design. */
+@media(max-width:700px){
+  body.bw51-mobile-compact #movieList .bw731-card .bw731-bottom{font-size:9px!important}
+}
 </style></head>
 <body><div class="app">
 <header class="topbar"><button class="bw-home" id="bwHome" type="button" title="Go to Movie Log" aria-label="Blackwood Movie Log home"><div class="brandmark">B</div><div class="brand"><span class="bw-wordmark">BLACKWOOD</span><span class="bw-submark">MOVIE LOG</span><small>YOUR PERSONAL FILM ARCHIVE <span class="bw-version">Version 6.0</span></small></div></button><div class="top-spacer"></div><div class="status"><span class="dot"></span><span id="saveStatus">Saved on this device</span></div><button class="iconbtn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☼</button><button class="iconbtn" id="menuBtn" aria-label="Open navigation" title="Navigation">☰</button></header>
@@ -1097,7 +1130,7 @@ const bw73OldNav=navItems;
 navItems=function(){const remove=new Set(['horrorfest60','christmasfest60','review5','compare7','reports7','stats5','statistics5','health5']);const a=bw73OldNav().filter(x=>!remove.has(x[0]));const at=a.findIndex(x=>x[0]==='settings');a.splice(at<0?a.length:at,0,['holiday73','✦','Holiday Fest'],['insights73','▤','Statistics & Reports']);return a};
 function bw73Holiday(){$('main').innerHTML=pageHead('SEASONAL CINEMA','Holiday Fest','Two traditions. Every movie remembered.')+'<div class="bw73-hub bw73-holiday"><button class="bw73-tile" id="bw73Horror"><strong>🎃 Horrorfest</strong><small>October viewings, milestones and annual statistics</small></button><button class="bw73-tile" id="bw73Christmas"><strong>❄ Christmas Fest</strong><small>December viewings, favorites and annual statistics</small></button></div>';$('bw73Horror').onclick=()=>go('horrorfest60');$('bw73Christmas').onclick=()=>go('christmasfest60')}
 function bw73Insights(){$('main').innerHTML=pageHead('YOUR MOVIE STORY','Statistics & Reports','Explore your viewing history and share what matters.')+'<div class="bw73-hub">'+[['stats5','Statistics Center','Rankings, ratings and trends'],['review5','Year in Review','Your annual cinema retrospective'],['compare7','Year vs. Year','Compare your movie years'],['reports7','Report Studio','Create, export and share reports']].map(([id,title,desc])=>'<button class="bw73-tile" data-bw73-page="'+id+'"><strong>'+title+'</strong><small>'+desc+'</small></button>').join('')+'</div>';document.querySelectorAll('[data-bw73-page]').forEach(b=>b.onclick=()=>go(b.dataset.bw73Page))}
-const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.3.1';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
+const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.3.2';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
 // Always reset modal's internal scroll position, not the underlying page.
 const bw73OpenModal=openModal;openModal=function(...args){bw73OpenModal(...args);requestAnimationFrame(()=>{for(const el of [$('modalBody'),document.querySelector('.modal'),document.querySelector('.modal-backdrop.open')])if(el)el.scrollTop=0})};
 // Decorate only the actual filtered rows, after every list redraw.
@@ -1177,29 +1210,65 @@ const bw731OldDecor=v36DecorateLog;
 v36DecorateLog=function(){bw731OldDecor();bw731Decorate()};
 const bw731OldCompact=bw73CompactRows;
 bw73CompactRows=function(){bw731OldCompact();bw731Decorate()};
-// Prioritize frequently edited inputs in Add/Edit form, leaving metadata and notes below.
-const bw731OldViewingForm=openViewingForm;
+
+// V7.3.2: group the original functional form controls in the approved workflow order.
+const bw732OriginalViewingForm=openViewingForm;
 openViewingForm=function(...args){
- bw731OldViewingForm(...args);
- const form=$('viewForm'),grid=form?.querySelector('.formgrid');
- if(!grid)return;
- const field=id=>$(id)?.closest('.field');
- const title=field('vTitle');
- const important=['vStart','vFinish','vRating','vWife','vRewatch','vAbandoned'];
- let anchor=title;
- for(const id of important){
-   const el=field(id);
-   if(el&&el.parentElement===grid&&el!==anchor){anchor.after(el);anchor=el}
- }
- // Keep Save readily accessible without removing the existing bottom action.
- const saveButton=[...document.querySelectorAll('#modalFoot button')].find(b=>/save|add movie/i.test(b.textContent||''));
- if(saveButton&&!$('bw731TopSave')){
-   const btn=saveButton.cloneNode(true);btn.id='bw731TopSave';btn.type='button';btn.classList.add('primary');
-   btn.style.cssText='width:100%;margin:8px 0 14px';
-   btn.onclick=()=>saveButton.click();
-   const wrap=document.createElement('div');wrap.className='field wide';wrap.appendChild(btn);
-   anchor.after(wrap);
- }
+  bw732OriginalViewingForm(...args);
+  const form=$('viewForm'),grid=form?.querySelector('.formgrid');
+  if(!grid)return;
+  // Preserve all original inputs, values, TMDB lookup handlers and validation.
+  const field=id=>$(id)?.closest('.field');
+  const title=field('vTitle');
+  const tmdbField=field('vTmdbIdVisible');
+  if(tmdbField&&title&&title.contains(tmdbField))tmdbField.remove();
+  const ordered=[
+    ['vTmdbIdVisible','vRewatch','vWife'],
+    ['vStart','vFinish','vRating'],
+    ['vAbandoned']
+  ];
+  const groups=[];
+  for(const ids of ordered){
+    const section=document.createElement('div');
+    section.className='bw732-input-row';
+    for(const id of ids){
+      const el=field(id);
+      if(el){section.appendChild(el)}
+    }
+    if(section.children.length)groups.push(section);
+  }
+  let position=title;
+  for(const group of groups){position.after(group);position=group}
+  // Remove help text from the title section, keep TMDB lookup/results functional.
+  const tips=[...title.querySelectorAll('.footer-note')];
+  tips.forEach(t=>t.classList.add('bw732-metadata-help'));
+  // Move the remaining metadata fields into one continuous section after main controls.
+  const more=document.createElement('div');
+  more.className='bw732-more';
+  const heading=document.createElement('h3');heading.textContent='Additional Movie Information';
+  more.appendChild(heading);
+  const metadata=['vYear','vRuntime','vOriginal','vGenres','vTags','vSynopsis','vMovieNotes','vNotes','vFavorite'];
+  for(const id of metadata){
+    const el=field(id)||$(id)?.closest('.checkline');
+    if(el)more.appendChild(el);
+  }
+  position.after(more);
+  // A top save button uses the original Save handler, so validation and sync are unchanged.
+  const saveButton=$('saveView');
+  if(saveButton){
+    let header=$('bw732FormSave');
+    if(!header){
+      header=document.createElement('button');header.id='bw732FormSave';
+      header.type='button';header.className='btn primary bw732-top-save';
+      header.textContent='Save viewing';
+      header.onclick=()=>saveButton.click();
+      $('modalTitle')?.after(header);
+    }
+  }
+  const scrollArea=$('modalBody');
+  if(scrollArea)scrollArea.scrollTop=0;
+  const backdrop=$('modalBackdrop');
+  if(backdrop)backdrop.scrollTop=0;
 };
 
 })();
