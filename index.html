@@ -212,7 +212,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .v36-tag,
 body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{display:inline-block!important}
 }
 
-/* V7.3.2: desktop movie cards keep their existing dates and ratings, no duplicate watched line. */
+/* V7.3.3: desktop movie cards keep their existing dates and ratings, no duplicate watched line. */
 @media(min-width:701px){
   #movieList .bw731-card .bw731-bottom{display:none!important}
   #movieList .bw731-card .bw731-badges .bw731-status{display:none!important}
@@ -243,6 +243,54 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 /* Hide duplicate original date only in the compact mobile design. */
 @media(max-width:700px){
   body.bw51-mobile-compact #movieList .bw731-card .bw731-bottom{font-size:9px!important}
+}
+
+/* V7.3.3 desktop: approved layout, preserve original start/finish line */
+@media(min-width:761px){
+ #movieList:not(.v36-grid):not(.bw43-textonly) .bw731-card{
+  display:grid!important;grid-template-columns:minmax(0,1fr) 160px 112px!important;
+  gap:12px!important;align-items:center!important;min-height:0!important;
+ }
+ #movieList:not(.v36-grid):not(.bw43-textonly) .bw731-card .bw-title-block{grid-column:1!important;min-width:0}
+ #movieList:not(.v36-grid):not(.bw43-textonly) .bw731-card .row-mid{display:none!important}
+ #movieList:not(.v36-grid):not(.bw43-textonly) .bw731-card .row-right{grid-column:2!important;grid-row:1!important}
+ #movieList:not(.v36-grid):not(.bw43-textonly) .bw731-card .row-actions{
+  grid-column:3!important;grid-row:1!important;display:grid!important;
+  grid-template-columns:repeat(2,48px)!important;grid-template-rows:repeat(2,48px)!important;
+  gap:5px!important;justify-content:end!important;align-items:center!important
+ }
+ #movieList:not(.v36-grid):not(.bw43-textonly) .bw731-card .row-actions button{
+  width:46px!important;height:46px!important;min-width:0!important;
+  padding:4px!important;font-size:22px!important
+ }
+ #movieList:not(.v36-grid):not(.bw43-textonly) .bw731-card .row-actions .bw733-star{grid-column:1;grid-row:1;color:#efbf52}
+ #movieList:not(.v36-grid):not(.bw43-textonly) .bw731-card .row-actions .bw733-edit{grid-column:2;grid-row:1}
+ #movieList:not(.v36-grid):not(.bw43-textonly) .bw731-card .row-actions .bw733-heart{
+  grid-column:1;grid-row:2;justify-self:center;color:#f64d70;font-size:27px
+ }
+ #movieList:not(.v36-grid):not(.bw43-textonly) .bw731-card .row-actions .bw733-more{grid-column:2;grid-row:2}
+ #movieList:not(.v36-grid):not(.bw43-textonly) .bw731-card .row-actions>button:not(.bw733-star):not(.bw733-edit):not(.bw733-more){display:none!important}
+ #movieList:not(.v36-grid):not(.bw43-textonly) .bw731-card .bw731-badges{
+  display:flex!important;gap:4px!important;flex-wrap:wrap!important;align-items:center!important;margin:5px 0!important
+ }
+ #movieList:not(.v36-grid):not(.bw43-textonly) .bw731-card .bw731-badges .pill{display:inline-flex!important}
+ #movieList:not(.v36-grid):not(.bw43-textonly) .bw731-card .bw731-bottom{display:none!important}
+ #movieList:not(.v36-grid):not(.bw43-textonly) .bw731-card .bw733-runtime{
+  color:var(--muted);font-weight:400;font-size:12px;white-space:nowrap
+ }
+}
+/* Ensure Save Viewing is visible at the very top of Add/Edit modal. */
+.modalhead{display:flex!important;align-items:center!important;gap:12px!important}
+.modalhead #modalTitle{flex:1;min-width:0;padding-right:0!important}
+.modalhead #bw732FormSave{
+ position:static!important;display:inline-flex!important;align-items:center!important;
+ justify-content:center!important;min-width:160px!important;flex:0 0 auto!important;
+ margin:0 6px 0 0!important;z-index:2
+}
+@media(max-width:600px){
+ .modalhead{flex-wrap:wrap!important}
+ .modalhead #modalTitle{flex:1 1 auto}
+ .modalhead #bw732FormSave{order:3;flex:1 1 100%!important;width:100%!important;margin:4px 0!important}
 }
 </style></head>
 <body><div class="app">
@@ -1130,7 +1178,7 @@ const bw73OldNav=navItems;
 navItems=function(){const remove=new Set(['horrorfest60','christmasfest60','review5','compare7','reports7','stats5','statistics5','health5']);const a=bw73OldNav().filter(x=>!remove.has(x[0]));const at=a.findIndex(x=>x[0]==='settings');a.splice(at<0?a.length:at,0,['holiday73','✦','Holiday Fest'],['insights73','▤','Statistics & Reports']);return a};
 function bw73Holiday(){$('main').innerHTML=pageHead('SEASONAL CINEMA','Holiday Fest','Two traditions. Every movie remembered.')+'<div class="bw73-hub bw73-holiday"><button class="bw73-tile" id="bw73Horror"><strong>🎃 Horrorfest</strong><small>October viewings, milestones and annual statistics</small></button><button class="bw73-tile" id="bw73Christmas"><strong>❄ Christmas Fest</strong><small>December viewings, favorites and annual statistics</small></button></div>';$('bw73Horror').onclick=()=>go('horrorfest60');$('bw73Christmas').onclick=()=>go('christmasfest60')}
 function bw73Insights(){$('main').innerHTML=pageHead('YOUR MOVIE STORY','Statistics & Reports','Explore your viewing history and share what matters.')+'<div class="bw73-hub">'+[['stats5','Statistics Center','Rankings, ratings and trends'],['review5','Year in Review','Your annual cinema retrospective'],['compare7','Year vs. Year','Compare your movie years'],['reports7','Report Studio','Create, export and share reports']].map(([id,title,desc])=>'<button class="bw73-tile" data-bw73-page="'+id+'"><strong>'+title+'</strong><small>'+desc+'</small></button>').join('')+'</div>';document.querySelectorAll('[data-bw73-page]').forEach(b=>b.onclick=()=>go(b.dataset.bw73Page))}
-const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.3.2';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
+const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.3.3';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
 // Always reset modal's internal scroll position, not the underlying page.
 const bw73OpenModal=openModal;openModal=function(...args){bw73OpenModal(...args);requestAnimationFrame(()=>{for(const el of [$('modalBody'),document.querySelector('.modal'),document.querySelector('.modal-backdrop.open')])if(el)el.scrollTop=0})};
 // Decorate only the actual filtered rows, after every list redraw.
@@ -1205,13 +1253,54 @@ function bw731Decorate(){
   }else heart?.remove();
  });
 }
+
+// V7.3.3: desktop card information hierarchy and action positions.
+function bw733DesktopCards(){
+ const root=$('movieList');if(!root)return;
+ root.querySelectorAll('.bw731-card').forEach(row=>{
+  const id=row.querySelector('[data-editview]')?.dataset.editview;
+  const v=state.viewings.find(x=>x.id===id);if(!v)return;
+  const m=movie(v.movieId);if(!m)return;
+  const text=row.querySelector('.bw-title-text');
+  if(!text)return;
+  // Remove companion labels from the card; Beth is represented by the heart only.
+  row.querySelectorAll('.row-mid .mov-sub').forEach(el=>{
+   if(/with wife|solo|companion unknown/i.test(el.textContent||''))el.remove();
+  });
+  // Runtime is directly after the release year rather than below the ratings.
+  const title=text.querySelector('.mov-title');
+  if(title&&!title.querySelector('.bw733-runtime')&&m.runtime){
+   const runtime=document.createElement('span');
+   runtime.className='bw733-runtime';
+   runtime.textContent=' '+m.runtime+' min';
+   title.appendChild(runtime);
+  }
+  // Original status badge is kept, positioned beside Horrorfest/Rewatch.
+  const status=row.querySelector('.row-mid .pill');
+  const badges=text.querySelector('.bw731-badges');
+  if(status&&badges&&!badges.contains(status))badges.appendChild(status);
+  const right=row.querySelector('.row-right');
+  if(right)right.querySelectorAll(':scope > .mov-sub').forEach(el=>el.remove());
+  const actions=row.querySelector('.row-actions');
+  if(actions){
+   const edit=actions.querySelector('[data-editview]');
+   const more=actions.querySelector('[data-more]');
+   const star=actions.querySelector('.bw731-star');
+   const heart=actions.querySelector('.bw731-heart');
+   if(star)star.classList.add('bw733-star');
+   if(edit)edit.classList.add('bw733-edit');
+   if(more)more.classList.add('bw733-more');
+   if(heart)heart.classList.add('bw733-heart');
+  }
+ });
+}
 // Integrate with existing decoration chain, including search/filter redraws.
 const bw731OldDecor=v36DecorateLog;
-v36DecorateLog=function(){bw731OldDecor();bw731Decorate()};
+v36DecorateLog=function(){bw731OldDecor();bw731Decorate();bw733DesktopCards()};
 const bw731OldCompact=bw73CompactRows;
-bw73CompactRows=function(){bw731OldCompact();bw731Decorate()};
+bw73CompactRows=function(){bw731OldCompact();bw731Decorate();bw733DesktopCards()};
 
-// V7.3.2: group the original functional form controls in the approved workflow order.
+// V7.3.3: group the original functional form controls in the approved workflow order.
 const bw732OriginalViewingForm=openViewingForm;
 openViewingForm=function(...args){
   bw732OriginalViewingForm(...args);
@@ -1221,7 +1310,7 @@ openViewingForm=function(...args){
   const field=id=>$(id)?.closest('.field');
   const title=field('vTitle');
   const tmdbField=field('vTmdbIdVisible');
-  if(tmdbField&&title&&title.contains(tmdbField))tmdbField.remove();
+  // TMDB field is nested in the title field; detach and reuse it below.
   const ordered=[
     ['vTmdbIdVisible','vRewatch','vWife'],
     ['vStart','vFinish','vRating'],
@@ -1262,7 +1351,7 @@ openViewingForm=function(...args){
       header.type='button';header.className='btn primary bw732-top-save';
       header.textContent='Save viewing';
       header.onclick=()=>saveButton.click();
-      $('modalTitle')?.after(header);
+      document.querySelector('.modalhead')?.insertBefore(header,$('modalClose'));
     }
   }
   const scrollArea=$('modalBody');
