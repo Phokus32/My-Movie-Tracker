@@ -31,3 +31,6 @@ V7.7.1: Adds Settings bulk TMDB backdrop image download to Cache Storage (with p
 - Added a final canonical mobile viewing form layout: ID/type, wife/rating, full-width dates.
 - Retained Settings backdrop manager with actual image Cache Storage downloads, progress, stop and clear.
 - Bumped service worker cache and visible version.
+
+
+V7.7.3: artwork manager with poster/backdrop cache downloads, image loader timeout/retry and improved mobile viewing layout.

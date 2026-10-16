@@ -527,9 +527,18 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 #viewForm #tmdbResults .pill{white-space:normal;max-width:100%;overflow-wrap:anywhere}
 #viewForm .bw732-input-row:empty,#viewForm .bw77-primary:empty,#viewForm .bw771-controls:empty{display:none!important}
 @media(max-width:700px){#viewForm .bw772-primary{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+
+/* V7.7.3: compact viewing editor at first open; never let old field layout win. */
+#viewForm .bw772-primary{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:10px!important;grid-column:1/-1!important}
+#viewForm .bw772-primary>.field{grid-column:auto!important;min-width:0!important;max-width:100%!important}
+#viewForm .bw772-primary>.bw772-full{grid-column:1/-1!important}
+#viewForm .bw772-title-row{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,112px)!important;gap:8px!important}
+#viewForm .bw772-title-row>*{min-width:0!important;max-width:100%!important}
+#viewForm .formgrid,#viewForm .field,#modalBody{min-width:0;max-width:100%;box-sizing:border-box}
+#viewForm #tmdbResults{max-width:100%;overflow-wrap:anywhere}
 </style></head>
 <body><div class="app">
-<header class="topbar"><button class="bw-home" id="bwHome" type="button" title="Go to Movie Log" aria-label="Blackwood Movie Log home"><div class="brandmark">B</div><div class="brand"><span class="bw-wordmark">BLACKWOOD</span><span class="bw-submark">MOVIE LOG</span><small>YOUR PERSONAL FILM ARCHIVE <span class="bw-version">Version 7.7.2</span></small></div></button><div class="top-spacer"></div><div class="status"><span class="dot"></span><span id="saveStatus">Saved on this device</span></div><button class="iconbtn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☼</button><button class="iconbtn" id="menuBtn" aria-label="Open navigation" title="Navigation">☰</button></header>
+<header class="topbar"><button class="bw-home" id="bwHome" type="button" title="Go to Movie Log" aria-label="Blackwood Movie Log home"><div class="brandmark">B</div><div class="brand"><span class="bw-wordmark">BLACKWOOD</span><span class="bw-submark">MOVIE LOG</span><small>YOUR PERSONAL FILM ARCHIVE <span class="bw-version">Version 7.7.3</span></small></div></button><div class="top-spacer"></div><div class="status"><span class="dot"></span><span id="saveStatus">Saved on this device</span></div><button class="iconbtn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☼</button><button class="iconbtn" id="menuBtn" aria-label="Open navigation" title="Navigation">☰</button></header>
 <div class="layout"><aside class="sidebar"><div class="side-label">LIBRARY</div><nav class="navlist" id="sideNav"></nav><div class="sidebar-note"><strong style="color:var(--text)">Private by design</strong><br>This first build saves your records in this browser on this device. Cloud sync is not connected yet.</div></aside><main class="main" id="main"></main></div>
 <nav class="mobile-nav" id="mobileNav"></nav></div>
 <div class="modal-backdrop" id="modalBackdrop"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modalhead"><h2 id="modalTitle">Add movie</h2><button class="iconbtn" id="modalClose" aria-label="Close">×</button></div><div id="modalBody"></div><div class="modalfoot" id="modalFoot"></div></section></div><div class="toast" id="toast"></div>
@@ -621,7 +630,7 @@ function renderDashboard(){const y=Number(prefs.year)||new Date().getFullYear();
 function rankHtml(list){return list.length?`<div class="ranklist">${list.map((r,i)=>`<div class="rankrow"><span class="ranknum">${String(i+1).padStart(2,'0')}</span><div class="rankname">${esc(titleOf(r.m))}<div class="rankyear">${esc(r.m.year||'Year unknown')}</div></div><span class="rankrating">${r.score.toFixed(1)}</span></div>`).join('')}</div>`:'<div class="empty">No rated completed movies yet.</div>'}function showRankings(kind,y){let year=kind.endsWith('year')?y:null;let bottom=kind.startsWith('bottom');let list=state.movies.map(m=>{let vs=state.viewings.filter(v=>v.movieId===m.id&&v.status==='completed'&&v.rating!==null&&v.rating!==undefined&&(!year||yearOf(v.startDate)===year)).sort((a,b)=>(b.startDate||'').localeCompare(a.startDate||''));if(!vs.length)return null;return{m,score:year?Number(vs[0].rating):vs.reduce((s,v)=>s+Number(v.rating),0)/vs.length}}).filter(Boolean).sort((a,b)=>bottom?a.score-b.score||a.m.title.localeCompare(b.m.title):b.score-a.score||a.m.title.localeCompare(b.m.title)).slice(0,50);openModal((bottom?'Bottom':'Top')+' 50 · '+(year||'All time'),`<div class="ranklist">${list.length?list.map((r,i)=>`<div class="rankrow"><span class="ranknum">${i+1}</span><button data-rankdetail="${r.m.id}" class="rankname" style="border:0;background:none;text-align:left;color:var(--text)">${esc(titleOf(r.m))}<div class="rankyear">${esc(r.m.year||'')}</div></button><span class="rankrating">${r.score.toFixed(1)}</span></div>`).join(''):'<div class="empty">No ranked movies yet.</div>'}</div>`,`<button class="btn" id="closeRank">Close</button>`);$('closeRank').onclick=closeModal;document.querySelectorAll('[data-rankdetail]').forEach(b=>b.onclick=()=>{closeModal();openDetail(b.dataset.rankdetail)})}
 function showAllTimeDashboard(){const y=Number(prefs.year);const all=state.viewings.filter(v=>v.status==='completed');const rated=all.filter(v=>v.rating!==null&&v.rating!==undefined);const avg=rated.length?(rated.reduce((s,v)=>s+Number(v.rating),0)/rated.length).toFixed(1):'—';const mcount=new Set(all.map(v=>v.movieId)).size;$('main').innerHTML=pageHead('YOUR HISTORY','All-time Dashboard','Your complete viewing record.',`<button class="btn" id="backYear">← Yearly view</button>`)+`<div class="cards"><div class="stat"><label>Unique movies</label><strong>${mcount}</strong></div><div class="stat"><label>Viewing events</label><strong>${all.length}</strong></div><div class="stat"><label>Rated viewings</label><strong>${rated.length}</strong></div><div class="stat"><label>Average rating</label><strong>${avg}</strong></div></div><div class="dashboard-grid"><section class="panel"><h3>All-time top 50</h3>${rankHtml(allRank(false).slice(0,10))}<button class="btn small" id="allTop">View top 50</button></section><section class="panel"><h3>All-time bottom 50</h3>${rankHtml(allRank(true).slice(0,10))}<button class="btn small" id="allBottom">View bottom 50</button></section></div>`;$('backYear').onclick=()=>renderDashboard();$('allTop').onclick=()=>showRankings('top-all',null);$('allBottom').onclick=()=>showRankings('bottom-all',null)}function allRank(bottom){return state.movies.map(m=>{let vs=viewsFor(m.id).filter(v=>v.status==='completed'&&v.rating!==null&&v.rating!==undefined);return vs.length?{m,score:vs.reduce((s,v)=>s+Number(v.rating),0)/vs.length}:null}).filter(Boolean).sort((a,b)=>bottom?a.score-b.score||a.m.title.localeCompare(b.m.title):b.score-a.score||a.m.title.localeCompare(b.m.title))}
 function calcStreak(vs){let days=[...new Set(vs.flatMap(v=>[v.startDate,v.finishDate]).filter(Boolean))].sort();let best=0,run=0,prev=null;for(let d of days){let dt=new Date(d+'T12:00:00');if(prev&&((dt-prev)/86400000)===1)run++;else run=1;best=Math.max(best,run);prev=dt}return best}
-function renderSettings(){$('main').innerHTML=pageHead('PREFERENCES','Settings','Manage appearance and your movie data.')+`<div class="settings-grid"><section class="setting-item"><h3>Appearance</h3><p>Choose a theme for this device. Your preference is saved locally.</p><button class="btn" id="settingTheme">Switch to ${prefs.theme==='dark'?'light':'dark'} theme</button></section><section class="setting-item"><h3>Movie title display</h3><p>Choose which title appears in the main log. Search still checks both.</p><select id="titlePref"><option value="preferred">English / preferred title</option><option value="original">Original title when available</option></select></section><section class="setting-item"><h3>Export your data</h3><p>Download a complete JSON backup or spreadsheet-friendly CSV files. Keep exports somewhere safe.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn primary" id="exportJson">Export JSON</button><button class="btn" id="exportCsv">Export CSV</button></div></section><section class="setting-item"><h3>Import data</h3><p>Import a JSON backup exported by this app. Review the file before replacing your current data.</p><input type="file" id="importFile" accept=".json,application/json" style="margin-bottom:10px"><button class="btn" id="importBtn">Import JSON backup</button></section><section class="setting-item"><h3>Local storage</h3><p id="storageInfo">Checking storage…</p><button class="btn" id="storageRefresh">Refresh status</button></section><section class="setting-item" style="grid-column:1/-1"><h3>Movie metadata lookup</h3><p>Search The Movie Database (TMDB) while adding a viewing to fill in release year, runtime, original title, genres, synopsis and poster. Manual entry remains available if lookup is not configured.</p><div class="field"><label for="tmdbKeyInput">TMDB API Read Access Token</label><input id="tmdbKeyInput" type="password" autocomplete="off" placeholder="Paste your TMDB API Read Access Token"></div><div class="cloud-tools"><button class="btn primary" id="saveTmdbKey">Save metadata key</button><a class="btn" href="https://www.themoviedb.org/settings/api" target="_blank" rel="noopener">Get a TMDB API key</a></div><p class="footer-note">TMDB is free for qualifying non-commercial personal use, subject to its terms and attribution rules. The token is saved only in this browser, so enter it on each device where you want movie search. This product uses the TMDB API but is not endorsed or certified by TMDB.</p></section><section class="setting-item" style="grid-column:1/-1"><h3>Cloud account and sync</h3><p>Connect a Supabase project to sync your library between devices. Only the project URL and public publishable/anon key belong here. Never enter a service-role or secret key. Your local data stays available if cloud sync is disconnected.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-bottom:12px"><div><label for="cloudUrl">Supabase project URL</label><input id="cloudUrl" type="url" placeholder="https://your-project.supabase.co" autocomplete="off"></div><div><label for="cloudKey">Publishable / anon key</label><input id="cloudKey" type="password" placeholder="Paste the public key" autocomplete="off"></div></div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><button class="btn primary" id="cloudSetup">Save cloud settings</button><button class="btn" id="cloudRetry">Test / retry connection</button><button class="btn danger" id="cloudSignOut" style="display:none">Sign out</button></div><div id="cloudAuthArea" style="border-top:1px solid var(--line);padding-top:14px"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:10px"><div><label for="cloudEmail">Email</label><input id="cloudEmail" type="email" placeholder="you@example.com" autocomplete="username"></div><div><label for="cloudPassword">Password</label><input id="cloudPassword" type="password" placeholder="At least 8 characters" autocomplete="current-password"></div></div><div id="cloudAuthButtons" style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn primary" id="cloudSignIn">Sign in</button><button class="btn" id="cloudSignUp">Create account</button></div></div><div style="margin-top:14px;display:flex;gap:9px;align-items:center;flex-wrap:wrap"><span class="pill warn" id="cloudStatusPill">Not configured</span><span id="cloudStatusText" style="font-size:12px;color:var(--muted)">Enter your Supabase project URL and publishable/anon key.</span></div><div id="cloudResolveButtons" class="hide" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px"><button class="btn primary" id="cloudUseCopy">Use cloud copy on this device</button><button class="btn danger" id="cloudUploadCopy">Replace cloud with this device</button></div><p style="margin-top:14px">This build uses a single cloud JSON record protected by row-level security. It does not yet provide automatic daily/90-day backups. Keep exporting JSON backups until a separate backup system is implemented.</p></section><section class="setting-item"><h3>Clear local data</h3><p>Remove all movies, viewings and watchlist items stored by this app in this browser. Export a backup first.</p><button class="btn danger" id="clearData">Clear all local data</button></section></div><p class="footer-note">Privacy note: local data stays in this browser. When cloud sync is connected, the library is also stored in your private Supabase row. Export JSON backups regularly; cloud sync is not a substitute for backups.</p>`;$('titlePref').value=prefs.language;$('titlePref').onchange=e=>{prefs.language=e.target.value;save();render()};$('settingTheme').onclick=toggleTheme;$('tmdbKeyInput').value=tmdbKey;$('saveTmdbKey').onclick=saveTmdbKey;
+function renderSettings(){$('main').innerHTML=pageHead('PREFERENCES','Settings','Manage appearance and your movie data.')+`<div class="settings-grid"><section class="setting-item"><h3>Appearance</h3><p>Choose a theme for this device. Your preference is saved locally.</p><button class="btn" id="settingTheme">Switch to ${prefs.theme==='dark'?'light':'dark'} theme</button></section><section class="setting-item"><h3>Movie title display</h3><p>Choose which title appears in the main log. Search still checks both.</p><select id="titlePref"><option value="preferred">English / preferred title</option><option value="original">Original title when available</option></select></section><section class="setting-item"><h3>Export your data</h3><p>Download a complete JSON backup or spreadsheet-friendly CSV files. Keep exports somewhere safe.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn primary" id="exportJson">Export JSON</button><button class="btn" id="exportCsv">Export CSV</button></div></section><section class="setting-item"><h3>Import data</h3><p>Import a JSON backup exported by this app. Review the file before replacing your current data.</p><input type="file" id="importFile" accept=".json,application/json" style="margin-bottom:10px"><button class="btn" id="importBtn">Import JSON backup</button></section><section class="setting-item"><h3>Local storage</h3><p id="storageInfo">Checking storage…</p><button class="btn" id="storageRefresh">Refresh status</button></section><section class="setting-item" style="grid-column:1/-1"><h3>Movie metadata lookup</h3><p>Search The Movie Database (TMDB) while adding a viewing to fill in release year, runtime, original title, genres, synopsis and poster. Manual entry remains available if lookup is not configured.</p><div class="field"><label for="tmdbKeyInput">TMDB API Read Access Token</label><input id="tmdbKeyInput" type="password" autocomplete="off" placeholder="Paste your TMDB API Read Access Token"></div><div class="cloud-tools"><button class="btn primary" id="saveTmdbKey">Save metadata key</button><a class="btn" href="https://www.themoviedb.org/settings/api" target="_blank" rel="noopener">Get a TMDB API key</a></div><p class="footer-note">TMDB is free for qualifying non-commercial personal use, subject to its terms and attribution rules. The token is saved only in this browser, so enter it on each device where you want movie search. This product uses the TMDB API but is not endorsed or certified by TMDB.</p></section><section class="setting-item" style="grid-column:1/-1"><h3>Cloud account and sync</h3><p>Connect a Supabase project to sync your library between devices. Only the project URL and public publishable/anon key belong here. Never enter a service-role or secret key. Your local data stays available if cloud sync is disconnected.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-bottom:12px"><div><label for="cloudUrl">Supabase project URL</label><input id="cloudUrl" type="url" placeholder="https://your-project.supabase.co" autocomplete="off"></div><div><label for="cloudKey">Publishable / anon key</label><input id="cloudKey" type="password" placeholder="Paste the public key" autocomplete="off"></div></div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><button class="btn primary" id="cloudSetup">Save cloud settings</button><button class="btn" id="cloudRetry">Test / retry connection</button><button class="btn danger" id="cloudSignOut" style="display:none">Sign out</button></div><div id="cloudAuthArea" style="border-top:1px solid var(--line);padding-top:14px"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:10px"><div><label for="cloudEmail">Email</label><input id="cloudEmail" type="email" placeholder="you@example.com" autocomplete="username"></div><div><label for="cloudPassword">Password</label><input id="cloudPassword" type="password" placeholder="At least 8 characters" autocomplete="current-password"></div></div><div id="cloudAuthButtons" style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn primary" id="cloudSignIn">Sign in</button><button class="btn" id="cloudSignUp">Create account</button></div></div><div style="margin-top:14px;display:flex;gap:9px;align-items:center;flex-wrap:wrap"><span class="pill warn" id="cloudStatusPill">Not configured</span><span id="cloudStatusText" style="font-size:12px;color:var(--muted)">Enter your Supabase project URL and publishable/anon key.</span></div><div id="cloudResolveButtons" class="hide" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px"><button class="btn primary" id="cloudUseCopy">Use cloud copy on this device</button><button class="btn danger" id="cloudUploadCopy">Replace cloud with this device</button></div><p style="margin-top:14px">This build uses a single cloud JSON record protected by row-level security. It does not yet provide automatic daily/90-day backups. Keep exporting JSON backups until a separate backup system is implemented.</p></section><section class="setting-item"><h3>Clear local data</h3><p>Remove all movies, viewings and watchlist items stored by this app in this browser. Export a backup first.</p><button class="btn danger" id="clearData">Clear all local data</button></section></div><p class="footer-note">Privacy note: local data stays in this browser. When cloud sync is connected, the library is also stored in your private Supabase row. Export JSON backups regularly; cloud sync is not a substitute for backups.</p>`;$('titlePref').value=prefs.language;$('titlePref').onchange=e=>{prefs.language=e.target.value;save();render()};$('settingTheme').onclick=toggleTheme;$('tmdbKeyInput').value=tmdbKey;$('saveTmdbKey').onclick=saveTmdbKey;bw771SettingsPanel();
 if(cloudConfig){$('cloudUrl').value=cloudConfig.url||'';$('cloudKey').value=cloudConfig.key||''} $('cloudSetup').onclick=saveCloudConfig;$('cloudRetry').onclick=retryCloudConnection;$('cloudSignIn').onclick=()=>cloudSignIn(false);$('cloudSignUp').onclick=()=>cloudSignIn(true);$('cloudSignOut').onclick=cloudSignOut;$('cloudUseCopy').onclick=useCloudCopy;$('cloudUploadCopy').onclick=uploadLocalCopy;renderCloudControls();$('exportJson').onclick=exportJson;$('exportCsv').onclick=exportCsv;$('importBtn').onclick=importJson;$('storageRefresh').onclick=storageInfo;$('clearData').onclick=()=>{if(confirm('Delete ALL locally stored movie data from this browser? Export a backup first.')){state=normalizeState({movies:[],viewings:[],watchlist:[],tags:[],uiSettings:{},topTen:[],awards:{},collectionsV5:[],awardsV5:{}});save();renderSettings();toast('Local data cleared')}};storageInfo()}
 function storageInfo(){let bytes=0;try{bytes=new Blob([localStorage.getItem(KEY)||'']).size}catch(e){}$('storageInfo').textContent=`Approx. ${(bytes/1024).toFixed(1)} KB used for movie data in this browser. Browser storage limits vary.`}
 function toggleTheme(){prefs.theme=prefs.theme==='dark'?'light':'dark';save();render()}$('themeToggle').onclick=toggleTheme;$('menuBtn').onclick=()=>{const opts=navItems().map(([id,ic,label],i)=>`${i+1}. ${label}`).join('\n');openModal('Navigate',`<div class="navlist">${navItems().map(([id,ic,label])=>`<button class="navbtn" data-modalpage="${id}"><span class="navicon">${ic}</span>${label}</button>`).join('')}</div>`,`<button class="btn" id="closeNav">Close</button>`);$('closeNav').onclick=closeModal;document.querySelectorAll('[data-modalpage]').forEach(b=>b.onclick=()=>{closeModal();go(b.dataset.modalpage)})};
@@ -1413,7 +1422,7 @@ const bw73OldNav=navItems;
 navItems=function(){const remove=new Set(['horrorfest60','christmasfest60','review5','compare7','reports7','stats5','statistics5','health5']);const a=bw73OldNav().filter(x=>!remove.has(x[0]));const at=a.findIndex(x=>x[0]==='settings');a.splice(at<0?a.length:at,0,['holiday73','✦','Holiday Fest'],['insights73','▤','Statistics & Reports']);return a};
 function bw73Holiday(){$('main').innerHTML=pageHead('SEASONAL CINEMA','Holiday Fest','Two traditions. Every movie remembered.')+'<div class="bw73-hub bw73-holiday"><button class="bw73-tile" id="bw73Horror"><strong>🎃 Horrorfest</strong><small>October viewings, milestones and annual statistics</small></button><button class="bw73-tile" id="bw73Christmas"><strong>❄ Christmas Fest</strong><small>December viewings, favorites and annual statistics</small></button></div>';$('bw73Horror').onclick=()=>go('horrorfest60');$('bw73Christmas').onclick=()=>go('christmasfest60')}
 function bw73Insights(){$('main').innerHTML=pageHead('YOUR MOVIE STORY','Statistics & Reports','Explore your viewing history and share what matters.')+'<div class="bw73-hub">'+[['stats5','Statistics Center','Rankings, ratings and trends'],['review5','Year in Review','Your annual cinema retrospective'],['compare7','Year vs. Year','Compare your movie years'],['reports7','Report Studio','Create, export and share reports']].map(([id,title,desc])=>'<button class="bw73-tile" data-bw73-page="'+id+'"><strong>'+title+'</strong><small>'+desc+'</small></button>').join('')+'</div>';document.querySelectorAll('[data-bw73-page]').forEach(b=>b.onclick=()=>go(b.dataset.bw73Page))}
-const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.7.2';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
+const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.7.3';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
 // Always reset modal's internal scroll position, not the underlying page.
 const bw73OpenModal=openModal;openModal=function(...args){bw73OpenModal(...args);requestAnimationFrame(()=>{for(const el of [$('modalBody'),document.querySelector('.modal'),document.querySelector('.modal-backdrop.open')])if(el)el.scrollTop=0})};
 // Decorate only the actual filtered rows, after every list redraw.
@@ -1790,37 +1799,40 @@ renderDetail=function(){
  const m=movie(activeMovie),hero=$('main')?.querySelector('.bw74-hero');
  if(!m||!hero)return;
  const id=String(m.tmdbId||'').trim();
- const show=path=>{
-  if(page!=='detail'||activeMovie!==m.id||!hero.isConnected)return;
-  if(!path||!/^\/[a-zA-Z0-9_./-]+$/.test(path))return;
-  hero.innerHTML='';
-  const img=document.createElement('img');img.className='bw77-backdrop';img.alt='Cinematic backdrop for '+m.title;
-  img.loading='eager';img.src='https://image.tmdb.org/t/p/w780'+path;
-  img.onerror=()=>{if(hero.isConnected){hero.innerHTML='<div class="bw77-fallback">Backdrop unavailable · '+esc(m.title)+'</div>'}};
-  hero.appendChild(img);
+ const stillHere=()=>hero.isConnected&&activeMovie===m.id&&page==='detail';
+ const status=(message,retry=false)=>{
+  if(!stillHere())return;
+  hero.replaceChildren();
+  const wrap=document.createElement('div');wrap.className='bw77-fallback';
+  const label=document.createElement('span');label.textContent=message;wrap.appendChild(label);
+  if(retry){const button=document.createElement('button');button.className='btn';button.type='button';button.textContent='Retry backdrop';button.style.marginTop='12px';button.onclick=()=>{delete bw77BackdropCache[id];renderDetail()};wrap.appendChild(button)}
+  hero.appendChild(wrap);
  };
- const fallback=()=>{
-  if(!hero.isConnected)return;
-  hero.innerHTML='<div class="bw77-fallback">'+esc(m.title)+'</div>';
+ const display=path=>{
+  if(!stillHere())return;
+  if(!path||!/^\/[a-zA-Z0-9_./-]+$/.test(path)){status('No cinematic backdrop available for this movie.',true);return}
+  const img=document.createElement('img');img.className='bw77-backdrop';img.alt='Backdrop for '+m.title;
+  img.loading='eager';img.decoding='async';
+  img.onload=()=>{if(stillHere())hero.replaceChildren(img)};
+  img.onerror=()=>status('The backdrop image could not be displayed.',true);
+  img.src='https://image.tmdb.org/t/p/w780'+path;
  };
- if(!id||!/^\d+$/.test(id)){fallback();return;}
- if(Object.prototype.hasOwnProperty.call(bw77BackdropCache,id)){
-  if(bw77BackdropCache[id])show(bw77BackdropCache[id]);else fallback();
-  return;
- }
- // Avoid showing a portrait poster in a landscape area while the backdrop loads.
- hero.innerHTML='<div class="bw77-fallback">Loading cinematic backdrop…</div>';
- if(!tmdbKey){fallback();return;}
+ if(!/^\d+$/.test(id)){status('This movie needs a valid TMDB ID to find a backdrop.');return}
+ if(!tmdbKey){status('Set your TMDB Read Access Token in Settings to load backdrops.',true);return}
+ const cached=bw77BackdropCache[id];
+ if(typeof cached==='string'&&cached.startsWith('/')){display(cached);return}
+ status('Loading cinematic backdrop…');
+ const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),12000);
  fetch('https://api.themoviedb.org/3/movie/'+encodeURIComponent(id)+'?language=en-US',{
-  headers:{Authorization:'Bearer '+tmdbKey,Accept:'application/json'}
- }).then(r=>{if(!r.ok)throw Error('TMDB backdrop unavailable');return r.json()}).then(data=>{
+  headers:{Authorization:'Bearer '+tmdbKey,Accept:'application/json'},signal:controller.signal
+ }).then(async response=>{if(!response.ok)throw Error('TMDB returned HTTP '+response.status);return response.json()})
+ .then(data=>{
   const path=typeof data.backdrop_path==='string'?data.backdrop_path:'';
-  bw77BackdropCache[id]=path;
-  try{localStorage.setItem(BW77_BACKDROP_CACHE,JSON.stringify(bw77BackdropCache))}catch(e){}
-  if(path)show(path);else fallback();
- }).catch(e=>{if(hero.isConnected){hero.innerHTML='<div class="bw77-fallback">Backdrop could not load. Check your TMDB token in Settings.</div>'}});
+  if(path){bw77BackdropCache[id]=path;try{localStorage.setItem(BW77_BACKDROP_CACHE,JSON.stringify(bw77BackdropCache))}catch(e){}display(path)}
+  else status('TMDB has no landscape backdrop for this movie.',true);
+ }).catch(error=>status('Could not retrieve the backdrop ('+(error.name==='AbortError'?'request timed out':error.message)+').',true))
+ .finally(()=>clearTimeout(timer));
 };
-
 
 // V7.7.2: rebuild the primary field layout after every legacy form decorator.
 // Keep the original controls (and their event handlers) rather than cloning HTML.
@@ -1848,66 +1860,66 @@ openViewingForm=function(...args){
 // Download actual TMDB backdrop image responses into Cache Storage on this device.
 // No movie/viewing records are modified; URLs are cached separately in localStorage.
 const BW771_IMAGE_CACHE='bw-backdrops-images-v771';
+const BW773_POSTER_CACHE='bw-posters-images-v773';
 let bw771Job=null;
 function bw771SettingsPanel(){
  const grid=document.querySelector('#main .settings-grid');if(!grid||document.getElementById('bw771BackdropPanel'))return;
- const panel=document.createElement('section');panel.className='setting-item';panel.id='bw771BackdropPanel';
- panel.style.gridColumn='1/-1';
- panel.innerHTML='<h3>TMDB Backdrop Downloads</h3><p>Download landscape movie backdrops for your library onto this device. Each phone or computer has its own cache. Movie records and ratings are not changed.</p><div style="display:flex;flex-wrap:wrap;gap:8px"><button type="button" class="btn primary" id="bw771Download">Download All Backdrops</button><button type="button" class="btn" id="bw771Cancel" disabled>Stop</button><button type="button" class="btn" id="bw771Clear">Clear downloaded backdrops</button></div><div class="bw771-progress" id="bw771Progress" aria-live="polite">Ready. A TMDB Read Access Token is required.</div>';
+ const panel=document.createElement('section');panel.className='setting-item';panel.id='bw771BackdropPanel';panel.style.gridColumn='1/-1';
+ panel.innerHTML='<h3>TMDB Artwork Manager</h3><p>Download actual poster and landscape backdrop images for offline use on this device. Artwork is stored in browser Cache Storage, not your movie records.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn primary" id="bw771Download">Download All Backdrops</button><button type="button" class="btn primary" id="bw773Posters">Download All Posters</button><button type="button" class="btn" id="bw771Cancel" disabled>Stop</button><button type="button" class="btn" id="bw771Clear">Clear downloaded artwork</button></div><div class="bw771-progress" id="bw771Progress" aria-live="polite">Ready. Artwork downloads require a TMDB Read Access Token.</div>';
  grid.prepend(panel);
- document.getElementById('bw771Download').onclick=bw771Start;
+ document.getElementById('bw771Download').onclick=()=>bw773Start('backdrop');
+ document.getElementById('bw773Posters').onclick=()=>bw773Start('poster');
  document.getElementById('bw771Cancel').onclick=()=>{if(bw771Job)bw771Job.cancelled=true};
  document.getElementById('bw771Clear').onclick=async()=>{
   if(bw771Job)return;
-  if(!confirm('Remove locally downloaded backdrop images and reset backdrop lookups on this device? Your movie history will not change.'))return;
-  try{await caches.delete(BW771_IMAGE_CACHE);localStorage.removeItem(BW77_BACKDROP_CACHE);bw77BackdropCache={};bw771Status('Downloaded backdrops cleared on this device.')}catch(e){bw771Status('Could not clear cached images: '+e.message)}
+  if(!confirm('Clear downloaded TMDB artwork from this device? Movie history and ratings will not be changed.'))return;
+  try{await Promise.all([caches.delete(BW771_IMAGE_CACHE),caches.delete(BW773_POSTER_CACHE)]);localStorage.removeItem(BW77_BACKDROP_CACHE);bw77BackdropCache={};bw771Status('Local artwork caches cleared.')}catch(e){bw771Status('Could not clear artwork: '+e.message)}
  };
 }
 function bw771Status(message,completed,total){const el=document.getElementById('bw771Progress');if(!el)return;el.textContent=message;if(Number.isFinite(total)&&total>0){const p=document.createElement('progress');p.max=total;p.value=completed;el.appendChild(p)}}
-async function bw771Start(){
+async function bw773Start(kind){
  if(bw771Job)return;
- if(!tmdbKey){bw771Status('Please save your TMDB API Read Access Token in Settings first.');return}
- if(!('caches' in window)){bw771Status('This browser does not support the Cache Storage API.');return}
+ if(!tmdbKey){bw771Status('Save your TMDB Read Access Token in Settings first.');return}
+ if(!('caches' in window)){bw771Status('Cache Storage is not available in this browser.');return}
  const movies=[...new Map(state.movies.filter(m=>/^\d+$/.test(String(m.tmdbId||''))).map(m=>[String(m.tmdbId),m])).values()];
  if(!movies.length){bw771Status('No movies with valid TMDB IDs were found.');return}
  const job={cancelled:false};bw771Job=job;
- const go=document.getElementById('bw771Download'),stop=document.getElementById('bw771Cancel');go.disabled=true;stop.disabled=false;
+ const controls=['bw771Download','bw773Posters','bw771Clear'].map(id=>document.getElementById(id));
+ controls.forEach(x=>{if(x)x.disabled=true});const stop=document.getElementById('bw771Cancel');if(stop)stop.disabled=false;
  let done=0,downloaded=0,existing=0,missing=0,failed=0;
+ const field=kind==='poster'?'poster_path':'backdrop_path';
  try{
-  const cache=await caches.open(BW771_IMAGE_CACHE);
+  const cache=await caches.open(kind==='poster'?BW773_POSTER_CACHE:BW771_IMAGE_CACHE);
   for(const m of movies){
    if(job.cancelled)break;
-   const id=String(m.tmdbId);let path=bw77BackdropCache[id];
+   const id=String(m.tmdbId);let path=kind==='poster'?m.posterPath:bw77BackdropCache[id];
    try{
     if(!path){
      const response=await fetch('https://api.themoviedb.org/3/movie/'+encodeURIComponent(id)+'?language=en-US',{headers:{Authorization:'Bearer '+tmdbKey,Accept:'application/json'}});
-     if(response.status===429){throw Error('TMDB rate limit reached. Stop and try again later')}
+     if(response.status===429)throw Error('TMDB rate limit reached');
      if(!response.ok)throw Error('TMDB HTTP '+response.status);
-     const data=await response.json();path=data.backdrop_path||'';
-     bw77BackdropCache[id]=path;
+     const data=await response.json();path=data[field]||'';
+     if(kind==='backdrop'&&path)bw77BackdropCache[id]=path;
     }
-    if(!path||!/^\/[a-zA-Z0-9_./-]+$/.test(path)){missing++}
+    if(!path||!/^\/[a-zA-Z0-9_./-]+$/.test(path))missing++;
     else{
-     const url='https://image.tmdb.org/t/p/w780'+path;
-     if(await cache.match(url)){existing++}
+     const url='https://image.tmdb.org/t/p/'+(kind==='poster'?'w342':'w780')+path;
+     if(await cache.match(url))existing++;
      else{
-      const img=await fetch(url,{mode:'cors'});
-      if(!img.ok)throw Error('Image HTTP '+img.status);
-      await cache.put(url,img);
-      downloaded++;
+      const img=await fetch(url,{mode:'cors'});if(!img.ok)throw Error('Image HTTP '+img.status);
+      await cache.put(url,img.clone());downloaded++;
      }
     }
-   }catch(e){failed++;if(/rate limit/.test(e.message)){job.cancelled=true;bw771Status(e.message)}}
+   }catch(error){failed++;if(/rate limit/.test(error.message)){job.cancelled=true}}
    done++;
-   if(done%5===0){try{localStorage.setItem(BW77_BACKDROP_CACHE,JSON.stringify(bw77BackdropCache))}catch(e){}}
-   bw771Status(`${done} of ${movies.length} checked · ${downloaded} downloaded · ${existing} already cached · ${missing} unavailable · ${failed} errors${job.cancelled?' · stopping':''}`,done,movies.length);
-   // Yield between requests to keep the settings page responsive.
-   await new Promise(resolve=>setTimeout(resolve,100));
+   if(done%10===0){try{localStorage.setItem(BW77_BACKDROP_CACHE,JSON.stringify(bw77BackdropCache))}catch(e){}}
+   bw771Status(`${kind==='poster'?'Posters':'Backdrops'}: ${done}/${movies.length} checked · ${downloaded} downloaded · ${existing} already cached · ${missing} unavailable · ${failed} errors${job.cancelled?' · stopped':''}`,done,movies.length);
+   await new Promise(resolve=>setTimeout(resolve,125));
   }
   try{localStorage.setItem(BW77_BACKDROP_CACHE,JSON.stringify(bw77BackdropCache))}catch(e){}
-  bw771Status(`${job.cancelled?'Stopped':'Finished'}: ${done}/${movies.length} checked · ${downloaded} downloaded · ${existing} already cached · ${missing} no backdrop · ${failed} errors. Images are stored only on this device; iOS may evict cached data if storage is low.`,done,movies.length);
- }catch(e){bw771Status('Download could not continue: '+e.message)}
- finally{bw771Job=null;if(go)go.disabled=false;if(stop)stop.disabled=true}
+  bw771Status(`${job.cancelled?'Stopped':'Finished'} ${kind==='poster'?'posters':'backdrops'}: ${done}/${movies.length} checked · ${downloaded} downloaded · ${existing} cached · ${missing} unavailable · ${failed} errors.`,done,movies.length);
+ }catch(e){bw771Status('Download failed: '+e.message)}
+ finally{bw771Job=null;controls.forEach(x=>{if(x)x.disabled=false});if(stop)stop.disabled=true}
 }
 const bw771OldSettings=renderSettings;
 renderSettings=function(){bw771OldSettings();bw771SettingsPanel()};
@@ -1936,7 +1948,7 @@ openViewingForm=function(...args){
 };
 // Show a release marker in Settings to verify that this actual build has loaded.
 const bw772SettingsBefore=renderSettings;
-renderSettings=function(){bw772SettingsBefore();const grid=document.querySelector('#main .settings-grid');if(!grid)return;const panel=document.getElementById('bw771BackdropPanel');if(panel){panel.querySelector('h3').textContent='TMDB Backdrop Manager';panel.querySelector('p').insertAdjacentHTML('afterend','<p class="footer-note">V7.7.2 · This device downloads and stores actual backdrop images. Open Movie Details to view them.</p>')} };
+renderSettings=function(){bw772SettingsBefore();const grid=document.querySelector('#main .settings-grid');if(!grid)return;const panel=document.getElementById('bw771BackdropPanel');if(panel){panel.querySelector('h3').textContent='TMDB Artwork Manager';panel.querySelector('p').insertAdjacentHTML('afterend','<p class="footer-note">V7.7.3 · This device downloads and stores actual backdrop images. Open Movie Details to view them.</p>')} };
 
 // First render must run after all wrappers, not midway through application initialization.
 render();
