@@ -34,3 +34,6 @@ V7.7.1: Adds Settings bulk TMDB backdrop image download to Cache Storage (with p
 
 
 V7.7.3: artwork manager with poster/backdrop cache downloads, image loader timeout/retry and improved mobile viewing layout.
+
+
+V7.7.4: Capture-phase Artwork Manager button handlers, immediate visible progress and errors, robust downloader, updated backdrop loader.
