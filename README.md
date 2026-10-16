@@ -21,3 +21,6 @@ V7.6: Fix mobile viewing-form date field overlap, sort same-day viewings by newe
 
 
 V7.7: Initial render deferred until all feature overrides load, preventing legacy V6 card layout and header on launch. Mobile Add/Edit form uses stable two-column field grouping and full-width dates, with search overflow correction. Movie detail hero uses TMDB landscape backdrop fetched on demand, cached locally, with title fallback. No Emby integration (reserved for V8.0).
+
+
+V7.7.1: Adds Settings bulk TMDB backdrop image download to Cache Storage (with progress, stop, clear), and forces the compact mobile Add/Edit Viewing layout after legacy form decorators. Offline cache is device-specific and subject to browser eviction. Emby integration remains planned for V8.0.

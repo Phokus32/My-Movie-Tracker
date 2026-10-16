@@ -498,9 +498,24 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 .bw74-hero{position:relative;aspect-ratio:16/9;max-height:520px;overflow:hidden;display:flex;align-items:center;justify-content:center}
 .bw74-hero img.bw77-backdrop{width:100%;height:100%;max-height:none;object-fit:cover;display:block}
 .bw74-hero .bw77-fallback{width:100%;height:100%;display:grid;place-items:center;text-align:center;padding:18px;background:linear-gradient(115deg,#271510,#0e0b0a);color:var(--text)}
+
+/* V7.7.1: enforce compact mobile viewing form even when earlier wrappers set inline grids. */
+#viewForm .bw771-controls{grid-column:1/-1!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;min-width:0!important;align-items:start}
+#viewForm .bw771-controls>.field{grid-column:auto!important;min-width:0!important;width:100%!important;max-width:100%!important;margin:0!important}
+#viewForm .bw771-controls>.bw771-wide{grid-column:1/-1!important}
+#viewForm .bw771-controls input,#viewForm .bw771-controls select{width:100%!important;min-width:0!important;max-width:100%!important;box-sizing:border-box!important}
+#viewForm .bw771-controls .footer-note{display:none!important}
+#viewForm .bw771-controls .bw-status-field{grid-column:1/-1!important}
+#viewForm .bw771-title{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(100px,auto)!important;gap:8px!important;min-width:0!important}
+#viewForm .bw771-title input{width:100%!important;min-width:0!important}
+#viewForm .bw771-title button{white-space:normal!important;max-width:120px!important}
+#viewForm .bw771-title-field{min-width:0!important;overflow-wrap:anywhere!important}
+@media(max-width:700px){#viewForm .bw771-controls{grid-template-columns:repeat(2,minmax(0,1fr))!important}#viewForm .bw771-title button{max-width:108px!important}}
+.bw771-progress{font-size:13px;line-height:1.5;margin-top:10px;overflow-wrap:anywhere}
+.bw771-progress progress{display:block;width:100%;margin:9px 0;accent-color:var(--accent)}
 </style></head>
 <body><div class="app">
-<header class="topbar"><button class="bw-home" id="bwHome" type="button" title="Go to Movie Log" aria-label="Blackwood Movie Log home"><div class="brandmark">B</div><div class="brand"><span class="bw-wordmark">BLACKWOOD</span><span class="bw-submark">MOVIE LOG</span><small>YOUR PERSONAL FILM ARCHIVE <span class="bw-version">Version 7.7</span></small></div></button><div class="top-spacer"></div><div class="status"><span class="dot"></span><span id="saveStatus">Saved on this device</span></div><button class="iconbtn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☼</button><button class="iconbtn" id="menuBtn" aria-label="Open navigation" title="Navigation">☰</button></header>
+<header class="topbar"><button class="bw-home" id="bwHome" type="button" title="Go to Movie Log" aria-label="Blackwood Movie Log home"><div class="brandmark">B</div><div class="brand"><span class="bw-wordmark">BLACKWOOD</span><span class="bw-submark">MOVIE LOG</span><small>YOUR PERSONAL FILM ARCHIVE <span class="bw-version">Version 7.7.1</span></small></div></button><div class="top-spacer"></div><div class="status"><span class="dot"></span><span id="saveStatus">Saved on this device</span></div><button class="iconbtn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☼</button><button class="iconbtn" id="menuBtn" aria-label="Open navigation" title="Navigation">☰</button></header>
 <div class="layout"><aside class="sidebar"><div class="side-label">LIBRARY</div><nav class="navlist" id="sideNav"></nav><div class="sidebar-note"><strong style="color:var(--text)">Private by design</strong><br>This first build saves your records in this browser on this device. Cloud sync is not connected yet.</div></aside><main class="main" id="main"></main></div>
 <nav class="mobile-nav" id="mobileNav"></nav></div>
 <div class="modal-backdrop" id="modalBackdrop"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modalhead"><h2 id="modalTitle">Add movie</h2><button class="iconbtn" id="modalClose" aria-label="Close">×</button></div><div id="modalBody"></div><div class="modalfoot" id="modalFoot"></div></section></div><div class="toast" id="toast"></div>
@@ -964,7 +979,7 @@ setInterval(()=>{if(!document.hidden)bw42PullCloud()},60000);
 /* Version 5.0 is displayed directly in the permanent header. */
 
 // Initial render is deferred until the final version's render functions are installed.
-// Cloud initialization is deferred until all V7.7 render overrides are installed.
+// Cloud initialization is deferred until all V7.7.1 render overrides are installed.
 
 // V4.3 additions: log-only metadata scope, new/rewatch, compact view, annual goal, century challenge.
 function bw43RefreshMovies(){
@@ -1384,7 +1399,7 @@ const bw73OldNav=navItems;
 navItems=function(){const remove=new Set(['horrorfest60','christmasfest60','review5','compare7','reports7','stats5','statistics5','health5']);const a=bw73OldNav().filter(x=>!remove.has(x[0]));const at=a.findIndex(x=>x[0]==='settings');a.splice(at<0?a.length:at,0,['holiday73','✦','Holiday Fest'],['insights73','▤','Statistics & Reports']);return a};
 function bw73Holiday(){$('main').innerHTML=pageHead('SEASONAL CINEMA','Holiday Fest','Two traditions. Every movie remembered.')+'<div class="bw73-hub bw73-holiday"><button class="bw73-tile" id="bw73Horror"><strong>🎃 Horrorfest</strong><small>October viewings, milestones and annual statistics</small></button><button class="bw73-tile" id="bw73Christmas"><strong>❄ Christmas Fest</strong><small>December viewings, favorites and annual statistics</small></button></div>';$('bw73Horror').onclick=()=>go('horrorfest60');$('bw73Christmas').onclick=()=>go('christmasfest60')}
 function bw73Insights(){$('main').innerHTML=pageHead('YOUR MOVIE STORY','Statistics & Reports','Explore your viewing history and share what matters.')+'<div class="bw73-hub">'+[['stats5','Statistics Center','Rankings, ratings and trends'],['review5','Year in Review','Your annual cinema retrospective'],['compare7','Year vs. Year','Compare your movie years'],['reports7','Report Studio','Create, export and share reports']].map(([id,title,desc])=>'<button class="bw73-tile" data-bw73-page="'+id+'"><strong>'+title+'</strong><small>'+desc+'</small></button>').join('')+'</div>';document.querySelectorAll('[data-bw73-page]').forEach(b=>b.onclick=()=>go(b.dataset.bw73Page))}
-const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.7';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
+const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.7.1';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
 // Always reset modal's internal scroll position, not the underlying page.
 const bw73OpenModal=openModal;openModal=function(...args){bw73OpenModal(...args);requestAnimationFrame(()=>{for(const el of [$('modalBody'),document.querySelector('.modal'),document.querySelector('.modal-backdrop.open')])if(el)el.scrollTop=0})};
 // Decorate only the actual filtered rows, after every list redraw.
@@ -1766,7 +1781,7 @@ renderDetail=function(){
   if(!path||!/^\/[a-zA-Z0-9_./-]+$/.test(path))return;
   hero.innerHTML='';
   const img=document.createElement('img');img.className='bw77-backdrop';img.alt='Cinematic backdrop for '+m.title;
-  img.loading='eager';img.src='https://image.tmdb.org/t/p/w1280'+path;
+  img.loading='eager';img.src='https://image.tmdb.org/t/p/w780'+path;
   img.onerror=()=>{if(hero.isConnected){hero.innerHTML='<div class="bw77-fallback">Backdrop unavailable · '+esc(m.title)+'</div>'}};
   hero.appendChild(img);
  };
@@ -1791,6 +1806,97 @@ renderDetail=function(){
   if(path)show(path);else fallback();
  }).catch(fallback);
 };
+
+
+// V7.7.1: rebuild the primary field layout after every legacy form decorator.
+// Keep the original controls (and their event handlers) rather than cloning HTML.
+const bw771PriorViewingForm=openViewingForm;
+openViewingForm=function(...args){
+ bw771PriorViewingForm(...args);
+ const form=document.getElementById('viewForm');if(!form)return;
+ const grid=form.querySelector('.formgrid');if(!grid)return;
+ const field=id=>document.getElementById(id)?.closest('.field');
+ const title=field('vTitle');if(!title)return;
+ title.classList.add('bw771-title-field');
+ const titleRow=document.getElementById('vTitle')?.parentElement;
+ if(titleRow){titleRow.classList.add('bw771-title');titleRow.style.display='grid';titleRow.style.gridTemplateColumns='minmax(0,1fr) auto';}
+ let primary=form.querySelector('.bw771-controls');
+ if(!primary){primary=document.createElement('div');primary.className='bw771-controls';title.after(primary)}
+ // The ID field starts nested inside the title; detach it before reordering.
+ const ordered=['vTmdbIdVisible','vRewatch','vWife','vRating','vStart','vFinish','vAbandoned'];
+ for(const id of ordered){const el=field(id);if(!el)continue;el.classList.toggle('bw771-wide',['vStart','vFinish','vAbandoned'].includes(id));el.style.gridColumn='';el.style.width='';el.style.margin='';primary.appendChild(el)}
+ const other=form.querySelector('.bw732-input-row');
+ form.querySelectorAll('.bw732-input-row:empty,.bw77-primary:empty').forEach(el=>el.remove());
+ // Restore preferred reading order, regardless of how previous wrappers grouped fields.
+ const help=title.querySelectorAll('.footer-note');help.forEach(el=>el.style.display='none');
+};
+
+// Download actual TMDB backdrop image responses into Cache Storage on this device.
+// No movie/viewing records are modified; URLs are cached separately in localStorage.
+const BW771_IMAGE_CACHE='bw-backdrops-images-v771';
+let bw771Job=null;
+function bw771SettingsPanel(){
+ const grid=document.querySelector('#main .settings-grid');if(!grid||document.getElementById('bw771BackdropPanel'))return;
+ const panel=document.createElement('section');panel.className='setting-item';panel.id='bw771BackdropPanel';
+ panel.style.gridColumn='1/-1';
+ panel.innerHTML='<h3>TMDB Backdrop Downloads</h3><p>Download landscape movie backdrops for your library onto this device. Each phone or computer has its own cache. Movie records and ratings are not changed.</p><div style="display:flex;flex-wrap:wrap;gap:8px"><button type="button" class="btn primary" id="bw771Download">Download All Backdrops</button><button type="button" class="btn" id="bw771Cancel" disabled>Stop</button><button type="button" class="btn" id="bw771Clear">Clear downloaded backdrops</button></div><div class="bw771-progress" id="bw771Progress" aria-live="polite">Ready. A TMDB Read Access Token is required.</div>';
+ grid.prepend(panel);
+ document.getElementById('bw771Download').onclick=bw771Start;
+ document.getElementById('bw771Cancel').onclick=()=>{if(bw771Job)bw771Job.cancelled=true};
+ document.getElementById('bw771Clear').onclick=async()=>{
+  if(bw771Job)return;
+  if(!confirm('Remove locally downloaded backdrop images and reset backdrop lookups on this device? Your movie history will not change.'))return;
+  try{await caches.delete(BW771_IMAGE_CACHE);localStorage.removeItem(BW77_BACKDROP_CACHE);bw77BackdropCache={};bw771Status('Downloaded backdrops cleared on this device.')}catch(e){bw771Status('Could not clear cached images: '+e.message)}
+ };
+}
+function bw771Status(message,completed,total){const el=document.getElementById('bw771Progress');if(!el)return;el.textContent=message;if(Number.isFinite(total)&&total>0){const p=document.createElement('progress');p.max=total;p.value=completed;el.appendChild(p)}}
+async function bw771Start(){
+ if(bw771Job)return;
+ if(!tmdbKey){bw771Status('Please save your TMDB API Read Access Token in Settings first.');return}
+ if(!('caches' in window)){bw771Status('This browser does not support the Cache Storage API.');return}
+ const movies=[...new Map(state.movies.filter(m=>/^\d+$/.test(String(m.tmdbId||''))).map(m=>[String(m.tmdbId),m])).values()];
+ if(!movies.length){bw771Status('No movies with valid TMDB IDs were found.');return}
+ const job={cancelled:false};bw771Job=job;
+ const go=document.getElementById('bw771Download'),stop=document.getElementById('bw771Cancel');go.disabled=true;stop.disabled=false;
+ let done=0,downloaded=0,existing=0,missing=0,failed=0;
+ try{
+  const cache=await caches.open(BW771_IMAGE_CACHE);
+  for(const m of movies){
+   if(job.cancelled)break;
+   const id=String(m.tmdbId);let path=bw77BackdropCache[id];
+   try{
+    if(!path){
+     const response=await fetch('https://api.themoviedb.org/3/movie/'+encodeURIComponent(id)+'?language=en-US',{headers:{Authorization:'Bearer '+tmdbKey,Accept:'application/json'}});
+     if(response.status===429){throw Error('TMDB rate limit reached. Stop and try again later')}
+     if(!response.ok)throw Error('TMDB HTTP '+response.status);
+     const data=await response.json();path=data.backdrop_path||'';
+     bw77BackdropCache[id]=path;
+    }
+    if(!path||!/^\/[a-zA-Z0-9_./-]+$/.test(path)){missing++}
+    else{
+     const url='https://image.tmdb.org/t/p/w780'+path;
+     if(await cache.match(url)){existing++}
+     else{
+      const img=await fetch(url,{mode:'cors'});
+      if(!img.ok)throw Error('Image HTTP '+img.status);
+      await cache.put(url,img);
+      downloaded++;
+     }
+    }
+   }catch(e){failed++;if(/rate limit/.test(e.message)){job.cancelled=true;bw771Status(e.message)}}
+   done++;
+   if(done%5===0){try{localStorage.setItem(BW77_BACKDROP_CACHE,JSON.stringify(bw77BackdropCache))}catch(e){}}
+   bw771Status(`${done} of ${movies.length} checked · ${downloaded} downloaded · ${existing} already cached · ${missing} unavailable · ${failed} errors${job.cancelled?' · stopping':''}`,done,movies.length);
+   // Yield between requests to keep the settings page responsive.
+   await new Promise(resolve=>setTimeout(resolve,100));
+  }
+  try{localStorage.setItem(BW77_BACKDROP_CACHE,JSON.stringify(bw77BackdropCache))}catch(e){}
+  bw771Status(`${job.cancelled?'Stopped':'Finished'}: ${done}/${movies.length} checked · ${downloaded} downloaded · ${existing} already cached · ${missing} no backdrop · ${failed} errors. Images are stored only on this device; iOS may evict cached data if storage is low.`,done,movies.length);
+ }catch(e){bw771Status('Download could not continue: '+e.message)}
+ finally{bw771Job=null;if(go)go.disabled=false;if(stop)stop.disabled=true}
+}
+const bw771OldSettings=renderSettings;
+renderSettings=function(){bw771OldSettings();bw771SettingsPanel()};
 
 // First render must run after all wrappers, not midway through application initialization.
 render();
