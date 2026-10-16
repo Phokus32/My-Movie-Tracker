@@ -24,3 +24,10 @@ V7.7: Initial render deferred until all feature overrides load, preventing legac
 
 
 V7.7.1: Adds Settings bulk TMDB backdrop image download to Cache Storage (with progress, stop, clear), and forces the compact mobile Add/Edit Viewing layout after legacy form decorators. Offline cache is device-specific and subject to browser eviction. Emby integration remains planned for V8.0.
+
+
+## V7.7.2 corrective update
+- Removed portrait poster from the landscape movie-details hero at its original creation point. The existing TMDB backdrop loader supplies the image.
+- Added a final canonical mobile viewing form layout: ID/type, wife/rating, full-width dates.
+- Retained Settings backdrop manager with actual image Cache Storage downloads, progress, stop and clear.
+- Bumped service worker cache and visible version.

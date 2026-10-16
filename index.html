@@ -499,7 +499,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 .bw74-hero img.bw77-backdrop{width:100%;height:100%;max-height:none;object-fit:cover;display:block}
 .bw74-hero .bw77-fallback{width:100%;height:100%;display:grid;place-items:center;text-align:center;padding:18px;background:linear-gradient(115deg,#271510,#0e0b0a);color:var(--text)}
 
-/* V7.7.1: enforce compact mobile viewing form even when earlier wrappers set inline grids. */
+/* V7.7.2: enforce compact mobile viewing form even when earlier wrappers set inline grids. */
 #viewForm .bw771-controls{grid-column:1/-1!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;min-width:0!important;align-items:start}
 #viewForm .bw771-controls>.field{grid-column:auto!important;min-width:0!important;width:100%!important;max-width:100%!important;margin:0!important}
 #viewForm .bw771-controls>.bw771-wide{grid-column:1/-1!important}
@@ -513,9 +513,23 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 @media(max-width:700px){#viewForm .bw771-controls{grid-template-columns:repeat(2,minmax(0,1fr))!important}#viewForm .bw771-title button{max-width:108px!important}}
 .bw771-progress{font-size:13px;line-height:1.5;margin-top:10px;overflow-wrap:anywhere}
 .bw771-progress progress{display:block;width:100%;margin:9px 0;accent-color:var(--accent)}
+
+/* V7.7.2: canonical mobile viewing form, no inherited row wrappers or inline grids. */
+#viewForm .bw772-primary{grid-column:1/-1!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;min-width:0!important;width:100%!important}
+#viewForm .bw772-primary>.field{grid-column:auto!important;min-width:0!important;width:100%!important;margin:0!important}
+#viewForm .bw772-primary>.bw772-full{grid-column:1/-1!important}
+#viewForm .bw772-primary input,#viewForm .bw772-primary select{display:block;width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important}
+#viewForm .bw772-primary .footer-note{display:none!important}
+#viewForm .bw772-primary input[type=date]{-webkit-appearance:none;appearance:none}
+#viewForm .bw772-title-row{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,110px)!important;gap:8px!important;min-width:0!important;width:100%!important}
+#viewForm .bw772-title-row #vTitle{width:100%!important;min-width:0!important}
+#viewForm .bw772-title-row #tmdbSearchBtn{width:100%!important;min-width:0!important;white-space:normal!important;max-width:none!important;padding:8px 5px!important;font-size:12px!important}
+#viewForm #tmdbResults .pill{white-space:normal;max-width:100%;overflow-wrap:anywhere}
+#viewForm .bw732-input-row:empty,#viewForm .bw77-primary:empty,#viewForm .bw771-controls:empty{display:none!important}
+@media(max-width:700px){#viewForm .bw772-primary{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 </style></head>
 <body><div class="app">
-<header class="topbar"><button class="bw-home" id="bwHome" type="button" title="Go to Movie Log" aria-label="Blackwood Movie Log home"><div class="brandmark">B</div><div class="brand"><span class="bw-wordmark">BLACKWOOD</span><span class="bw-submark">MOVIE LOG</span><small>YOUR PERSONAL FILM ARCHIVE <span class="bw-version">Version 7.7.1</span></small></div></button><div class="top-spacer"></div><div class="status"><span class="dot"></span><span id="saveStatus">Saved on this device</span></div><button class="iconbtn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☼</button><button class="iconbtn" id="menuBtn" aria-label="Open navigation" title="Navigation">☰</button></header>
+<header class="topbar"><button class="bw-home" id="bwHome" type="button" title="Go to Movie Log" aria-label="Blackwood Movie Log home"><div class="brandmark">B</div><div class="brand"><span class="bw-wordmark">BLACKWOOD</span><span class="bw-submark">MOVIE LOG</span><small>YOUR PERSONAL FILM ARCHIVE <span class="bw-version">Version 7.7.2</span></small></div></button><div class="top-spacer"></div><div class="status"><span class="dot"></span><span id="saveStatus">Saved on this device</span></div><button class="iconbtn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☼</button><button class="iconbtn" id="menuBtn" aria-label="Open navigation" title="Navigation">☰</button></header>
 <div class="layout"><aside class="sidebar"><div class="side-label">LIBRARY</div><nav class="navlist" id="sideNav"></nav><div class="sidebar-note"><strong style="color:var(--text)">Private by design</strong><br>This first build saves your records in this browser on this device. Cloud sync is not connected yet.</div></aside><main class="main" id="main"></main></div>
 <nav class="mobile-nav" id="mobileNav"></nav></div>
 <div class="modal-backdrop" id="modalBackdrop"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modalhead"><h2 id="modalTitle">Add movie</h2><button class="iconbtn" id="modalClose" aria-label="Close">×</button></div><div id="modalBody"></div><div class="modalfoot" id="modalFoot"></div></section></div><div class="toast" id="toast"></div>
@@ -979,7 +993,7 @@ setInterval(()=>{if(!document.hidden)bw42PullCloud()},60000);
 /* Version 5.0 is displayed directly in the permanent header. */
 
 // Initial render is deferred until the final version's render functions are installed.
-// Cloud initialization is deferred until all V7.7.1 render overrides are installed.
+// Cloud initialization is deferred until all V7.7.2 render overrides are installed.
 
 // V4.3 additions: log-only metadata scope, new/rewatch, compact view, annual goal, century challenge.
 function bw43RefreshMovies(){
@@ -1399,7 +1413,7 @@ const bw73OldNav=navItems;
 navItems=function(){const remove=new Set(['horrorfest60','christmasfest60','review5','compare7','reports7','stats5','statistics5','health5']);const a=bw73OldNav().filter(x=>!remove.has(x[0]));const at=a.findIndex(x=>x[0]==='settings');a.splice(at<0?a.length:at,0,['holiday73','✦','Holiday Fest'],['insights73','▤','Statistics & Reports']);return a};
 function bw73Holiday(){$('main').innerHTML=pageHead('SEASONAL CINEMA','Holiday Fest','Two traditions. Every movie remembered.')+'<div class="bw73-hub bw73-holiday"><button class="bw73-tile" id="bw73Horror"><strong>🎃 Horrorfest</strong><small>October viewings, milestones and annual statistics</small></button><button class="bw73-tile" id="bw73Christmas"><strong>❄ Christmas Fest</strong><small>December viewings, favorites and annual statistics</small></button></div>';$('bw73Horror').onclick=()=>go('horrorfest60');$('bw73Christmas').onclick=()=>go('christmasfest60')}
 function bw73Insights(){$('main').innerHTML=pageHead('YOUR MOVIE STORY','Statistics & Reports','Explore your viewing history and share what matters.')+'<div class="bw73-hub">'+[['stats5','Statistics Center','Rankings, ratings and trends'],['review5','Year in Review','Your annual cinema retrospective'],['compare7','Year vs. Year','Compare your movie years'],['reports7','Report Studio','Create, export and share reports']].map(([id,title,desc])=>'<button class="bw73-tile" data-bw73-page="'+id+'"><strong>'+title+'</strong><small>'+desc+'</small></button>').join('')+'</div>';document.querySelectorAll('[data-bw73-page]').forEach(b=>b.onclick=()=>go(b.dataset.bw73Page))}
-const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.7.1';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
+const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.7.2';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
 // Always reset modal's internal scroll position, not the underlying page.
 const bw73OpenModal=openModal;openModal=function(...args){bw73OpenModal(...args);requestAnimationFrame(()=>{for(const el of [$('modalBody'),document.querySelector('.modal'),document.querySelector('.modal-backdrop.open')])if(el)el.scrollTop=0})};
 // Decorate only the actual filtered rows, after every list redraw.
@@ -1663,7 +1677,7 @@ const slider=$('bw74Slider'),exact=$('bw74Exact'),label=$('bw74Value');slider.on
 // Two views only; move selection to navigation menu.
 const bw74Menu=$('menuBtn');if(bw74Menu)bw74Menu.onclick=()=>{const current=state.uiSettings?.bw43LogView||'list';openModal('Navigation',`<div class="navlist">${navItems().map(([id,ic,label])=>`<button class="navbtn" data-modalpage="${id}"><span class="navicon">${ic}</span>${label}</button>`).join('')}</div><div style="margin-top:12px;padding:10px;border-top:1px solid var(--line)"><div class="side-label">MOVIE LOG VIEW</div><div style="display:flex;gap:8px"><button class="btn ${current==='list'?'primary':''}" data-bw74-view="list">List View</button><button class="btn ${current==='posters'?'primary':''}" data-bw74-view="posters">Poster View</button></div></div>`, '<button class="btn" id="closeNav">Close</button>');$('closeNav').onclick=closeModal;document.querySelectorAll('[data-modalpage]').forEach(b=>b.onclick=()=>{closeModal();go(b.dataset.modalpage)});document.querySelectorAll('[data-bw74-view]').forEach(b=>b.onclick=()=>{state.uiSettings??={};state.uiSettings.bw43LogView=b.dataset.bw74View;state.uiSettings.grid=b.dataset.bw74View==='posters';save();closeModal();go('log')})};
 // Larger poster and compact details, preserving existing functional detail controls.
-const bw74Detail=renderDetail;renderDetail=function(){bw74Detail();const m=movie(activeMovie);if(!m)return;const panel=$('main')?.querySelector('.panel'),old=panel?.querySelector('.detail-card');if(!old)return;const hero=document.createElement('div');hero.className='bw74-hero';if(m.posterPath){const img=document.createElement('img');img.src='https://image.tmdb.org/t/p/w780'+m.posterPath;img.alt='Poster for '+m.title;hero.appendChild(img)}else hero.innerHTML='<div class="poster-placeholder" style="min-height:180px">'+esc(m.title)+'</div>';panel.insertBefore(hero,old);old.querySelector('.poster-placeholder')?.remove();old.style.display='block'};
+const bw74Detail=renderDetail;renderDetail=function(){bw74Detail();const m=movie(activeMovie);if(!m)return;const panel=$('main')?.querySelector('.panel'),old=panel?.querySelector('.detail-card');if(!old)return;const hero=document.createElement('div');hero.className='bw74-hero';hero.innerHTML='<div class="bw77-fallback">Loading cinematic backdrop…</div>';panel.insertBefore(hero,old);old.querySelector('.poster-placeholder')?.remove();old.style.display='block'};
 if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 
 
@@ -1804,11 +1818,11 @@ renderDetail=function(){
   bw77BackdropCache[id]=path;
   try{localStorage.setItem(BW77_BACKDROP_CACHE,JSON.stringify(bw77BackdropCache))}catch(e){}
   if(path)show(path);else fallback();
- }).catch(fallback);
+ }).catch(e=>{if(hero.isConnected){hero.innerHTML='<div class="bw77-fallback">Backdrop could not load. Check your TMDB token in Settings.</div>'}});
 };
 
 
-// V7.7.1: rebuild the primary field layout after every legacy form decorator.
+// V7.7.2: rebuild the primary field layout after every legacy form decorator.
 // Keep the original controls (and their event handlers) rather than cloning HTML.
 const bw771PriorViewingForm=openViewingForm;
 openViewingForm=function(...args){
@@ -1897,6 +1911,32 @@ async function bw771Start(){
 }
 const bw771OldSettings=renderSettings;
 renderSettings=function(){bw771OldSettings();bw771SettingsPanel()};
+
+
+// V7.7.2 canonical layout: place original live controls in a single known grid.
+// This runs synchronously before the modal is displayed to the user.
+const bw772PriorForm=openViewingForm;
+openViewingForm=function(...args){
+ bw772PriorForm(...args);
+ const form=document.getElementById('viewForm');if(!form)return;
+ const field=id=>document.getElementById(id)?.closest('.field');
+ const title=field('vTitle');if(!title)return;
+ const titleRow=document.getElementById('vTitle')?.parentElement;
+ if(titleRow){titleRow.classList.add('bw772-title-row');titleRow.style.removeProperty('grid-template-columns');titleRow.style.removeProperty('display')}
+ let primary=form.querySelector('.bw772-primary');
+ if(!primary){primary=document.createElement('div');primary.className='bw772-primary';title.after(primary)}
+ for(const id of ['vTmdbIdVisible','vRewatch','vWife','vRating','vStart','vFinish','vAbandoned']){
+  const el=field(id);if(!el)continue;
+  el.classList.toggle('bw772-full',['vStart','vFinish','vAbandoned'].includes(id));
+  el.style.removeProperty('grid-column');el.style.removeProperty('width');el.style.removeProperty('margin');
+  primary.appendChild(el);
+ }
+ title.querySelectorAll('.footer-note').forEach(el=>el.hidden=true);
+ form.querySelectorAll('.bw732-input-row:empty,.bw77-primary:empty,.bw771-controls:empty').forEach(el=>el.remove());
+};
+// Show a release marker in Settings to verify that this actual build has loaded.
+const bw772SettingsBefore=renderSettings;
+renderSettings=function(){bw772SettingsBefore();const grid=document.querySelector('#main .settings-grid');if(!grid)return;const panel=document.getElementById('bw771BackdropPanel');if(panel){panel.querySelector('h3').textContent='TMDB Backdrop Manager';panel.querySelector('p').insertAdjacentHTML('afterend','<p class="footer-note">V7.7.2 · This device downloads and stores actual backdrop images. Open Movie Details to view them.</p>')} };
 
 // First render must run after all wrappers, not midway through application initialization.
 render();
