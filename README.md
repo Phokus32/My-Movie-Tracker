@@ -39,4 +39,11 @@ V7.7.3: artwork manager with poster/backdrop cache downloads, image loader timeo
 V7.7.4: Capture-phase Artwork Manager button handlers, immediate visible progress and errors, robust downloader, updated backdrop loader.
 
 
-V7.7.5: Corrected JavaScript scope: V7.6+ functions now remain inside application closure (fixes renderLog undefined, artwork downloader state and backdrop loading). Retry cloud client initialization if Supabase script is initially unavailable. Service worker now preserves downloaded poster/backdrop caches when upgrading.
+V7.7.6: Corrected JavaScript scope: V7.6+ functions now remain inside application closure (fixes renderLog undefined, artwork downloader state and backdrop loading). Retry cloud client initialization if Supabase script is initially unavailable. Service worker now preserves downloaded poster/backdrop caches when upgrading.
+
+
+## V7.7.6 changes
+- Saving a viewing returns to the originating screen and restores its scroll position.
+- Opening Movie Details resets scroll to the top.
+- Movie Log defaults to the current viewing year, with an always-visible year selector and All Years option.
+- Movie Log renders 75 cards initially and loads more as the user scrolls or clicks Show next. Full history and statistics remain intact.
