@@ -18,3 +18,6 @@ V7.5.1 navigation: Movie History Timeline and Data Health now live in Statistics
 V7.5.2: Movie Battles and Smart Lists removed from navigation.
 
 V7.6: Fix mobile viewing-form date field overlap, sort same-day viewings by newest entry first, and reconcile mobile log layout on initial paint. Emby integration deferred to V8.0.
+
+
+V7.7: Initial render deferred until all feature overrides load, preventing legacy V6 card layout and header on launch. Mobile Add/Edit form uses stable two-column field grouping and full-width dates, with search overflow correction. Movie detail hero uses TMDB landscape backdrop fetched on demand, cached locally, with title fallback. No Emby integration (reserved for V8.0).

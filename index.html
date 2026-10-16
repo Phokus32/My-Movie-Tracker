@@ -476,9 +476,31 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
  #viewForm .bw732-input-row:has(#vStart)>.field{grid-column:1/-1!important}
  #viewForm .bw732-input-row:has(#vStart) input{min-width:0;max-width:100%}
 }
+
+/* V7.7 mobile add/edit form: stable two-column composition from first paint. */
+#viewForm,#viewForm .formgrid,#viewForm .field,#viewForm input,#viewForm select,#viewForm textarea{min-width:0;max-width:100%;box-sizing:border-box}
+#viewForm .bw77-title-search{display:grid!important;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:stretch;min-width:0}
+#viewForm .bw77-title-search #vTitle{width:100%;min-width:0}
+#viewForm .bw77-title-search #tmdbSearchBtn{white-space:normal!important;max-width:125px;line-height:1.15}
+#viewForm #tmdbResults{min-width:0;max-width:100%;overflow-wrap:anywhere}
+#viewForm .bw77-primary{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:start;min-width:0}
+#viewForm .bw77-primary>.field{min-width:0;width:100%;margin:0;grid-column:auto!important}
+#viewForm .bw77-primary>.bw77-full{grid-column:1/-1!important}
+#viewForm .bw77-primary input[type=date]{width:100%;min-width:0;max-width:100%;-webkit-appearance:none;appearance:none}
+#viewForm .bw77-primary .footer-note{display:none!important}
+@media(max-width:700px){
+ #viewForm .bw77-primary{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+ #viewForm .bw77-primary>.bw77-full{grid-column:1/-1!important}
+ #viewForm .bw77-title-search #tmdbSearchBtn{max-width:110px;font-size:12px;padding:8px}
+ #viewForm .bw732-input-row:empty{display:none!important}
+}
+/* V7.7: cinematic 16:9 TMDB backdrops, not portrait posters, in the detail hero. */
+.bw74-hero{position:relative;aspect-ratio:16/9;max-height:520px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.bw74-hero img.bw77-backdrop{width:100%;height:100%;max-height:none;object-fit:cover;display:block}
+.bw74-hero .bw77-fallback{width:100%;height:100%;display:grid;place-items:center;text-align:center;padding:18px;background:linear-gradient(115deg,#271510,#0e0b0a);color:var(--text)}
 </style></head>
 <body><div class="app">
-<header class="topbar"><button class="bw-home" id="bwHome" type="button" title="Go to Movie Log" aria-label="Blackwood Movie Log home"><div class="brandmark">B</div><div class="brand"><span class="bw-wordmark">BLACKWOOD</span><span class="bw-submark">MOVIE LOG</span><small>YOUR PERSONAL FILM ARCHIVE <span class="bw-version">Version 6.0</span></small></div></button><div class="top-spacer"></div><div class="status"><span class="dot"></span><span id="saveStatus">Saved on this device</span></div><button class="iconbtn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☼</button><button class="iconbtn" id="menuBtn" aria-label="Open navigation" title="Navigation">☰</button></header>
+<header class="topbar"><button class="bw-home" id="bwHome" type="button" title="Go to Movie Log" aria-label="Blackwood Movie Log home"><div class="brandmark">B</div><div class="brand"><span class="bw-wordmark">BLACKWOOD</span><span class="bw-submark">MOVIE LOG</span><small>YOUR PERSONAL FILM ARCHIVE <span class="bw-version">Version 7.7</span></small></div></button><div class="top-spacer"></div><div class="status"><span class="dot"></span><span id="saveStatus">Saved on this device</span></div><button class="iconbtn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☼</button><button class="iconbtn" id="menuBtn" aria-label="Open navigation" title="Navigation">☰</button></header>
 <div class="layout"><aside class="sidebar"><div class="side-label">LIBRARY</div><nav class="navlist" id="sideNav"></nav><div class="sidebar-note"><strong style="color:var(--text)">Private by design</strong><br>This first build saves your records in this browser on this device. Cloud sync is not connected yet.</div></aside><main class="main" id="main"></main></div>
 <nav class="mobile-nav" id="mobileNav"></nav></div>
 <div class="modal-backdrop" id="modalBackdrop"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modalhead"><h2 id="modalTitle">Add movie</h2><button class="iconbtn" id="modalClose" aria-label="Close">×</button></div><div id="modalBody"></div><div class="modalfoot" id="modalFoot"></div></section></div><div class="toast" id="toast"></div>
@@ -941,8 +963,8 @@ window.addEventListener('focus',()=>bw42PullCloud());
 setInterval(()=>{if(!document.hidden)bw42PullCloud()},60000);
 /* Version 5.0 is displayed directly in the permanent header. */
 
-render();
-if(cloudConfig)initCloudClient();
+// Initial render is deferred until the final version's render functions are installed.
+// Cloud initialization is deferred until all V7.7 render overrides are installed.
 
 // V4.3 additions: log-only metadata scope, new/rewatch, compact view, annual goal, century challenge.
 function bw43RefreshMovies(){
@@ -1362,7 +1384,7 @@ const bw73OldNav=navItems;
 navItems=function(){const remove=new Set(['horrorfest60','christmasfest60','review5','compare7','reports7','stats5','statistics5','health5']);const a=bw73OldNav().filter(x=>!remove.has(x[0]));const at=a.findIndex(x=>x[0]==='settings');a.splice(at<0?a.length:at,0,['holiday73','✦','Holiday Fest'],['insights73','▤','Statistics & Reports']);return a};
 function bw73Holiday(){$('main').innerHTML=pageHead('SEASONAL CINEMA','Holiday Fest','Two traditions. Every movie remembered.')+'<div class="bw73-hub bw73-holiday"><button class="bw73-tile" id="bw73Horror"><strong>🎃 Horrorfest</strong><small>October viewings, milestones and annual statistics</small></button><button class="bw73-tile" id="bw73Christmas"><strong>❄ Christmas Fest</strong><small>December viewings, favorites and annual statistics</small></button></div>';$('bw73Horror').onclick=()=>go('horrorfest60');$('bw73Christmas').onclick=()=>go('christmasfest60')}
 function bw73Insights(){$('main').innerHTML=pageHead('YOUR MOVIE STORY','Statistics & Reports','Explore your viewing history and share what matters.')+'<div class="bw73-hub">'+[['stats5','Statistics Center','Rankings, ratings and trends'],['review5','Year in Review','Your annual cinema retrospective'],['compare7','Year vs. Year','Compare your movie years'],['reports7','Report Studio','Create, export and share reports']].map(([id,title,desc])=>'<button class="bw73-tile" data-bw73-page="'+id+'"><strong>'+title+'</strong><small>'+desc+'</small></button>').join('')+'</div>';document.querySelectorAll('[data-bw73-page]').forEach(b=>b.onclick=()=>go(b.dataset.bw73Page))}
-const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.6';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
+const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.7';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
 // Always reset modal's internal scroll position, not the underlying page.
 const bw73OpenModal=openModal;openModal=function(...args){bw73OpenModal(...args);requestAnimationFrame(()=>{for(const el of [$('modalBody'),document.querySelector('.modal'),document.querySelector('.modal-backdrop.open')])if(el)el.scrollTop=0})};
 // Decorate only the actual filtered rows, after every list redraw.
@@ -1699,5 +1721,79 @@ renderLog=function(){
  };
  requestAnimationFrame(()=>{reconcile();requestAnimationFrame(reconcile)});
 };
+
+
+// V7.7: finish installing all overrides before the first render or cloud callback.
+// This corrects the V6.0 initial DOM/expanded cards and the V7.6 navigation-to-fix symptom.
+const bw77PreviousForm=openViewingForm;
+openViewingForm=function(...args){
+ bw77PreviousForm(...args);
+ const form=$('viewForm'),grid=form?.querySelector('.formgrid');
+ if(!grid)return;
+ const title=$('vTitle');
+ const search=$('tmdbSearchBtn');
+ if(title&&search){
+  const row=title.parentElement;
+  row?.classList.add('bw77-title-search');
+  if(row){row.style.display='';row.style.gap='';row.style.alignItems='';}
+ }
+ const field=id=>$(id)?.closest('.field');
+ const tmdb=field('vTmdbIdVisible'),rewatch=field('vRewatch'),wife=field('vWife'),rating=field('vRating'),start=field('vStart'),finish=field('vFinish'),abandoned=$('vAbandoned')?.closest('.field');
+ const primary=document.createElement('div');primary.className='bw77-primary';
+ for(const el of [tmdb,rewatch,wife,rating,start,finish,abandoned]){
+  if(!el)continue;
+  if(el===start||el===finish||el===abandoned)el.classList.add('bw77-full');
+  primary.appendChild(el);
+ }
+ const titleField=field('vTitle');
+ if(titleField)titleField.after(primary);
+ // Original save handlers, values and event listeners stay attached to the moved controls.
+ const help=tmdb?.querySelector('.footer-note');if(help)help.hidden=true;
+};
+
+// TMDB image cache is separate from the user's movie journal; no changes to viewing data.
+const BW77_BACKDROP_CACHE='blackwood.tmdb.backdrops.v77';
+let bw77BackdropCache={};
+try{bw77BackdropCache=JSON.parse(localStorage.getItem(BW77_BACKDROP_CACHE)||'{}')||{}}catch(e){}
+const bw77PriorDetail=renderDetail;
+renderDetail=function(){
+ bw77PriorDetail();
+ const m=movie(activeMovie),hero=$('main')?.querySelector('.bw74-hero');
+ if(!m||!hero)return;
+ const id=String(m.tmdbId||'').trim();
+ const show=path=>{
+  if(page!=='detail'||activeMovie!==m.id||!hero.isConnected)return;
+  if(!path||!/^\/[a-zA-Z0-9_./-]+$/.test(path))return;
+  hero.innerHTML='';
+  const img=document.createElement('img');img.className='bw77-backdrop';img.alt='Cinematic backdrop for '+m.title;
+  img.loading='eager';img.src='https://image.tmdb.org/t/p/w1280'+path;
+  img.onerror=()=>{if(hero.isConnected){hero.innerHTML='<div class="bw77-fallback">Backdrop unavailable · '+esc(m.title)+'</div>'}};
+  hero.appendChild(img);
+ };
+ const fallback=()=>{
+  if(!hero.isConnected)return;
+  hero.innerHTML='<div class="bw77-fallback">'+esc(m.title)+'</div>';
+ };
+ if(!id||!/^\d+$/.test(id)){fallback();return;}
+ if(Object.prototype.hasOwnProperty.call(bw77BackdropCache,id)){
+  if(bw77BackdropCache[id])show(bw77BackdropCache[id]);else fallback();
+  return;
+ }
+ // Avoid showing a portrait poster in a landscape area while the backdrop loads.
+ hero.innerHTML='<div class="bw77-fallback">Loading cinematic backdrop…</div>';
+ if(!tmdbKey){fallback();return;}
+ fetch('https://api.themoviedb.org/3/movie/'+encodeURIComponent(id)+'?language=en-US',{
+  headers:{Authorization:'Bearer '+tmdbKey,Accept:'application/json'}
+ }).then(r=>{if(!r.ok)throw Error('TMDB backdrop unavailable');return r.json()}).then(data=>{
+  const path=typeof data.backdrop_path==='string'?data.backdrop_path:'';
+  bw77BackdropCache[id]=path;
+  try{localStorage.setItem(BW77_BACKDROP_CACHE,JSON.stringify(bw77BackdropCache))}catch(e){}
+  if(path)show(path);else fallback();
+ }).catch(fallback);
+};
+
+// First render must run after all wrappers, not midway through application initialization.
+render();
+if(cloudConfig)initCloudClient();
 
 </script></body></html>
