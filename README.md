@@ -64,3 +64,6 @@ V7.7.15: Illustrated Horrorfest and Christmas Fest frame overlays on seasonal Mo
 
 
 V7.7.17: festival border-image edges use repeat:round instead of stretch; clicking the Movie Memory Card opens a full-screen lightbox (Escape or close to exit), with 10% taller card proportions on mobile. External ratings cloud synchronization preserved.
+
+
+V7.7.18: holiday frames replaced with non-stretched repeating Christmas light strands, falling snowflakes, red blood border with varied dripping streaks and jack-o-lantern corners. Fullscreen mobile Movie Memory Card is vertically scaled 10%; title font enlarged and wrapping preserved. Ratings cloud sync unchanged.
