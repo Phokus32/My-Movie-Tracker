@@ -53,3 +53,6 @@ V7.7.7: Library and cloud sync baselines are stored in IndexedDB instead of loca
 
 
 V7.7.8: Added 10 optimized WebP menu tiles for Holiday Fest, Statistics & Reports and Goals & Achievements. Original image files are not bundled. No database schema or storage changes.
+
+
+V7.7.12: Movie Memory Card now uses the supplied Blackwood Theater artwork as a built-in WebP background with dynamically positioned poster, title, fractional rating stars, metadata and notes.
