@@ -81,3 +81,6 @@ V7.7.22: Seasonal overlays use 9-slice borders with continuous narrow left/right
 V7.7.24: Restored nine-slice border art, added tiled side strings, reduced horror droplets from 12 to 9 and diameter by 25%, kept snow unchanged. Added missing sw.js with network-first HTML navigation and offline fallback to prevent stale PWA versions. No data/cache clearing needed.
 
 V7.7.25: side borders shifted outward 6px desktop and 3px mobile; unchanged artwork, animation and data handling.
+
+
+V7.7.26: More aggressive outward side alignment; 180-degree rotated right Horrorfest side; includes the actual artwork files referenced by the styles so they can load in production.\n
