@@ -579,9 +579,30 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 @media(max-width:650px){.bw710-card{padding:6px}.bw710-inner{padding:17px 13px}.bw710-marquee{padding:10px 6px 14px}.bw710-reel{font-size:22px}.bw710-feature{grid-template-columns:1fr;gap:20px}.bw710-poster-wrap{width:min(70%,270px);margin:auto}.bw710-facts{grid-template-columns:repeat(2,minmax(0,1fr))}.bw710-curtain{width:11%}.bw710-filmline{margin-bottom:20px}.bw710-score{margin:16px 0}}
 @media print{@page{size:auto;margin:10mm}#bw7Report.bw710-card{position:relative!important;top:auto!important;left:auto!important;width:100%!important;max-width:175mm!important;margin:0 auto!important;print-color-adjust:exact!important;-webkit-print-color-adjust:exact!important;box-shadow:none!important;break-inside:avoid;page-break-inside:avoid}.bw710-inner{print-color-adjust:exact!important;-webkit-print-color-adjust:exact!important}}
 
+
+/* V7.7.11: brighter stage and ornate marquee */
+.bw710-inner{background:radial-gradient(ellipse at 50% 37%,#fff9e9 0%,#f2e4c9 48%,#d6bea1 83%)!important}
+.bw710-curtain{opacity:.91!important;background:repeating-linear-gradient(90deg,#360006 0 8px,#a80c20 14px,#d91b30 22px,#68000e 34px)!important}
+.bw710-marquee{border:4px ridge #ffdb89!important;border-radius:48% 48% 16px 16px/40% 40% 16px 16px!important;background:radial-gradient(ellipse at 50% 15%,#782012,#290d0c 70%)!important;box-shadow:0 0 0 3px #42230b,0 0 0 7px #e4ad4e,0 0 26px #ffba4b,inset 0 0 18px #f9a02a70!important}
+.bw710-brand{font-family:Georgia,serif!important;font-weight:900!important;letter-spacing:.075em!important;color:#ffe5a0!important;text-shadow:0 2px #99500f,0 4px #5b2504,2px 5px 2px #000,0 0 12px #ffc258!important}
+.bw710-brand-sub{font-weight:900!important;color:#ffe1a0!important;text-shadow:0 2px 2px #000}
+.bw710-monogram{font-size:21px!important;color:#ffdc8b!important}
+.bw710-reel{font-size:clamp(32px,5vw,55px)!important;color:#e2b76d!important}
+.bw710-filmline{color:#513013!important}
+.bw710-title{color:#201312!important;text-shadow:0 1px #fff9e8!important;font-size:clamp(26px,3.8vw,41px)!important}
+.bw710-score{background:linear-gradient(120deg,#260607,#690d16,#260607)!important;border:2px ridge #dba453!important}
+.bw710-facts>div{border:2px ridge #bc8545!important;background:linear-gradient(150deg,#191015,#302024)!important;padding:16px 10px!important;min-height:76px}
+.bw710-facts span{font-size:11px!important;color:#f3c77f!important}
+.bw710-facts strong{font-size:clamp(15px,1.8vw,19px)!important;color:#fff2d9!important}
+.bw710-poster-wrap{border:4px ridge #e6ba69!important;box-shadow:0 0 0 3px #40210e,0 0 0 6px #ad7737,0 12px 24px #0009!important}
+.bw710-poster-foot{color:#573214!important}
+.bw710-footer{color:#68421e!important}.bw710-footer small{color:#79552e!important}
+.bw710-seats{color:#ae1228!important}
+.bw710-thoughts{background:#21131a!important;border:3px ridge #e1af64!important}
+
 </style></head>
 <body><div class="app">
-<header class="topbar"><button class="bw-home" id="bwHome" type="button" title="Go to Movie Log" aria-label="Blackwood Movie Log home"><div class="brandmark">B</div><div class="brand"><span class="bw-wordmark">BLACKWOOD</span><span class="bw-submark">MOVIE LOG</span><small>YOUR PERSONAL FILM ARCHIVE <span class="bw-version">Version 7.7.10</span></small></div></button><div class="top-spacer"></div><div class="status"><span class="dot"></span><span id="saveStatus">Saved on this device</span></div><button class="iconbtn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☼</button><button class="iconbtn" id="menuBtn" aria-label="Open navigation" title="Navigation">☰</button></header>
+<header class="topbar"><button class="bw-home" id="bwHome" type="button" title="Go to Movie Log" aria-label="Blackwood Movie Log home"><div class="brandmark">B</div><div class="brand"><span class="bw-wordmark">BLACKWOOD</span><span class="bw-submark">MOVIE LOG</span><small>YOUR PERSONAL FILM ARCHIVE <span class="bw-version">Version 7.7.11</span></small></div></button><div class="top-spacer"></div><div class="status"><span class="dot"></span><span id="saveStatus">Saved on this device</span></div><button class="iconbtn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☼</button><button class="iconbtn" id="menuBtn" aria-label="Open navigation" title="Navigation">☰</button></header>
 <div class="layout"><aside class="sidebar"><div class="side-label">LIBRARY</div><nav class="navlist" id="sideNav"></nav><div class="sidebar-note"><strong style="color:var(--text)">Private by design</strong><br>This first build saves your records in this browser on this device. Cloud sync is not connected yet.</div></aside><main class="main" id="main"></main></div>
 <nav class="mobile-nav" id="mobileNav"></nav></div>
 <div class="modal-backdrop" id="modalBackdrop"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modalhead"><h2 id="modalTitle">Add movie</h2><button class="iconbtn" id="modalClose" aria-label="Close">×</button></div><div id="modalBody"></div><div class="modalfoot" id="modalFoot"></div></section></div><div class="toast" id="toast"></div>
@@ -1429,10 +1450,12 @@ function bw7Memory(m){
  const companion=v?.watchedWithWife==='yes'?'With Beth':v?.watchedWithWife==='no'?'Watched Alone':'Not recorded';
  const genre=Array.isArray(m.genres)?m.genres.slice(0,2).join(' · '):'';
  const thoughts=(v?.notes||m.notes||'').trim();
- const poster=m.posterPath?'<img class="bw710-poster" src="https://image.tmdb.org/t/p/w500'+esc(m.posterPath)+'" alt="Poster for '+esc(m.title)+'" crossorigin="anonymous">':'<div class="bw710-no-poster">MOVIE POSTER<br>NOT AVAILABLE</div>';
+ const pp=String(m.posterPath||'').trim();
+ const posterUrl=pp?(pp.startsWith('http')?pp:'https://image.tmdb.org/t/p/w500'+(pp.startsWith('/')?pp:'/'+pp)):'';
+ const poster=posterUrl?'<img class="bw710-poster" src="'+esc(posterUrl)+'" alt="Poster for '+esc(m.title)+'" referrerpolicy="no-referrer">':'<div class="bw710-no-poster">MOVIE POSTER<br>NOT AVAILABLE</div>';
  const runtime=Number(m.runtime)>0?Number(m.runtime)+' min':'Runtime unavailable';
  const year=m.year||'Year unknown';
- const meta=[year,runtime].map(x=>esc(String(x))).join('<span class="bw710-dot">✦</span>');
+ 
  $('main').innerHTML=pageHead('A PERSONAL CINEMA KEEPSAKE','Movie Memory Card','A collectible record of your screening at Blackwood Theater.')+
  '<div class="bw7-controls"><button class="btn primary" id="bw7PrintMemory">Print / Save PDF</button><button class="btn" id="bw7MemoryBack">Back to movie</button></div>'+
  '<article id="bw7Report" class="bw710-card" aria-label="Blackwood Theater movie memory card">'+
@@ -1441,13 +1464,31 @@ function bw7Memory(m){
  '<header class="bw710-marquee"><div class="bw710-reel">◉</div><div class="bw710-theater"><div class="bw710-monogram">✦ B ✦</div><div class="bw710-brand">BLACKWOOD</div><div class="bw710-brand-sub">T H E A T E R</div></div><div class="bw710-reel">◉</div></header>'+
  '<div class="bw710-filmline">✦ &nbsp; A MOVIE MEMORY &nbsp; ✦</div>'+
  '<div class="bw710-feature"><div class="bw710-poster-wrap">'+poster+'<div class="bw710-poster-foot">✦ &nbsp; FEATURE PRESENTATION &nbsp; ✦</div></div>'+
- '<div class="bw710-story"><h2 class="bw710-title">'+esc(m.title)+'</h2><div class="bw710-meta">'+meta+'</div>'+
- (genre?'<div class="bw710-genre">'+esc(genre)+'</div>':'')+
+ '<div class="bw710-story"><h2 class="bw710-title">'+esc(m.title)+'</h2>'+
+ 
  '<div class="bw710-score"><div class="bw710-kicker">✦ &nbsp; MY RATING &nbsp; ✦</div><strong>'+esc(rating)+'</strong></div>'+
- '<div class="bw710-facts"><div><span>WATCHED ON</span><strong>'+esc(watched)+'</strong></div><div><span>WATCHED WITH</span><strong>'+esc(companion)+'</strong></div><div><span>VIEWING TYPE</span><strong>'+esc(viewingType)+'</strong></div><div><span>RUNNING TIME</span><strong>'+esc(runtime)+'</strong></div></div></div></div>'+
+ '<div class="bw710-facts"><div><span>WATCHED ON</span><strong>'+esc(watched)+'</strong></div><div><span>RELEASE YEAR</span><strong>'+esc(String(year))+'</strong></div><div><span>GENRE</span><strong>'+esc(genre||'Not recorded')+'</strong></div><div><span>RUNNING TIME</span><strong>'+esc(runtime)+'</strong></div></div></div></div>'+
  (thoughts?'<section class="bw710-thoughts"><div class="bw710-kicker">✦ &nbsp; MY THOUGHTS &nbsp; ✦</div><p>'+esc(thoughts)+'</p></section>':'')+
  '<footer class="bw710-footer"><div class="bw710-seats">▰ ▰ ▰ ▰ ▰ ▰ ▰ ▰ ▰ ▰ ▰ ▰</div><div>✦ &nbsp; BLACKWOOD MOVIE LOG &nbsp; ✦</div><small>EVERY MOVIE HAS A STORY. EVERY VIEWING HAS A MEMORY.</small></footer>'+
  '</div></article>';
+ const cardPoster=document.querySelector('#bw7Report .bw710-poster');
+ if(cardPoster){
+  cardPoster.addEventListener('error',async()=>{
+   if(cardPoster.dataset.retried)return;
+   cardPoster.dataset.retried='1';
+   try{
+    const keys=await caches.keys();
+    for(const key of keys){
+     const cache=await caches.open(key);
+     const entries=await cache.keys();
+     const found=entries.find(req=>req.url.includes(String(m.posterPath||'')) && req.url.includes('image.tmdb.org'));
+     if(found){const response=await cache.match(found);if(response){const blob=await response.blob();cardPoster.src=URL.createObjectURL(blob);return}}
+    }
+   }catch(e){}
+   cardPoster.removeAttribute('referrerpolicy');
+   cardPoster.src=cardPoster.src.replace('/w500/','/w342/');
+  },{once:false});
+ }
  $('bw7PrintMemory').onclick=()=>window.print();
  $('bw7MemoryBack').onclick=()=>openDetail(m.id);
 }
@@ -1559,7 +1600,7 @@ const bw779EmbeddedArtwork={'horrorfest':'data:image/webp;base64,UklGRqiDAABXRUJ
 function bw778Art(id,title){const names={horrorfest60:'horrorfest',christmasfest60:'christmas-fest',stats5:'statistics-center',review5:'year-in-review',compare7:'year-vs-year',reports7:'report-studio',timeline75:'movie-history-timeline',health5:'data-health',awards5:'movie-awards',topten:'my-top-10'};const file=names[id];return file?`<img class="bw778-art" src="${bw779EmbeddedArtwork[file]}" alt="${title}" loading="lazy" decoding="async">`:'';}
 function bw73Holiday(){$('main').innerHTML=pageHead('SEASONAL CINEMA','Holiday Fest','Two traditions. Every movie remembered.')+'<div class="bw73-hub bw73-holiday bw778-gallery"><button class="bw73-tile" id="bw73Horror" aria-label="Open Horrorfest">'+bw778Art('horrorfest60','Horrorfest')+'</button><button class="bw73-tile" id="bw73Christmas" aria-label="Open Christmas Fest">'+bw778Art('christmasfest60','Christmas Fest')+'</button></div>';$('bw73Horror').onclick=()=>go('horrorfest60');$('bw73Christmas').onclick=()=>go('christmasfest60')}
 function bw73Insights(){$('main').innerHTML=pageHead('YOUR MOVIE STORY','Statistics & Reports','Explore your viewing history and share what matters.')+'<div class="bw73-hub bw778-gallery">'+[['stats5','Statistics Center'],['review5','Year in Review'],['compare7','Year vs. Year'],['reports7','Report Studio']].map(([id,title])=>'<button class="bw73-tile" data-bw73-page="'+id+'" aria-label="Open '+title+'">'+bw778Art(id,title)+'</button>').join('')+'</div>';document.querySelectorAll('[data-bw73-page]').forEach(b=>b.onclick=()=>go(b.dataset.bw73Page))}
-const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.7.10';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
+const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.7.11';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
 // Always reset modal's internal scroll position, not the underlying page.
 const bw73OpenModal=openModal;openModal=function(...args){bw73OpenModal(...args);requestAnimationFrame(()=>{for(const el of [$('modalBody'),document.querySelector('.modal'),document.querySelector('.modal-backdrop.open')])if(el)el.scrollTop=0})};
 // Decorate only the actual filtered rows, after every list redraw.
