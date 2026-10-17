@@ -84,3 +84,4 @@ V7.7.25: side borders shifted outward 6px desktop and 3px mobile; unchanged artw
 
 
 V7.7.26: More aggressive outward side alignment; 180-degree rotated right Horrorfest side; includes the actual artwork files referenced by the styles so they can load in production.\n
+V7.7.27: memory card titles auto-shrink when wrapping to three lines, increased line height and padding. Fullscreen memory card is 5% narrower with 5% horizontal stretch; vertical stretch unchanged. Holiday frames unchanged.\n
