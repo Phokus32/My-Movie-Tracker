@@ -623,7 +623,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 @media print{@page{margin:6mm}body *{visibility:hidden!important}#bw7Report,#bw7Report *{visibility:visible!important}#bw7Report.bw712-card{position:absolute!important;left:50%!important;top:0!important;transform:translateX(-50%);width:min(100%,175mm)!important;max-width:175mm!important;margin:0!important;box-shadow:none!important;print-color-adjust:exact!important;-webkit-print-color-adjust:exact!important}}
 
 
-/* V7.7.16: memory card text refinements */
+/* V7.7.17: memory card text refinements */
 .bw712-title{font-size:clamp(13px,3.35vw,32px)!important;white-space:normal!important;overflow-wrap:break-word!important;word-break:normal!important;line-height:1.07!important}
 .bw712-genre{font-size:clamp(8px,1.25vw,12px)!important;line-height:1.1!important;white-space:normal!important;overflow-wrap:anywhere!important}
 @media(max-width:550px){.bw712-title{font-size:clamp(11px,3.65vw,21px)!important}.bw712-genre{font-size:clamp(7px,1.6vw,10px)!important}}
@@ -634,7 +634,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 .bw714-ratings strong{font-size:clamp(13px,2vw,22px);color:var(--text)}
 @media(max-width:650px){.bw714-ratings{grid-template-columns:repeat(2,minmax(0,1fr))}.bw731-bottom{font-size:11px!important;line-height:1.45;white-space:normal!important;overflow-wrap:normal}}
 
-/* V7.7.16: genuine illustrated holiday overlays, no impact on the card's content */
+/* V7.7.17: genuine illustrated holiday overlays, no impact on the card's content */
 #movieList .movie-row.bw715-horror,#movieList .movie-row.bw715-christmas{position:relative!important;isolation:isolate;border-color:transparent!important;overflow:visible!important}
 #movieList .movie-row.bw715-horror::after,#movieList .movie-row.bw715-christmas::after{content:"";position:absolute;z-index:5;inset:-5px;pointer-events:none;border-style:solid;border-width:17px 20px;border-image-slice:90 115 90 115;border-image-width:17px 20px;border-image-repeat:stretch;filter:drop-shadow(0 1px 2px #0009)}
 #movieList .movie-row.bw715-horror::after{border-image-source:url("frame-horror.webp")}
@@ -648,10 +648,23 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 .bw716-subcard h3{font-size:13px;margin-bottom:5px}
 .bw716-subcard p{margin:4px 0 8px}
 .bw716-wide .bw716-subcard{max-width:none}
-#movieList .movie-row.bw715-horror::after,#movieList .movie-row.bw715-christmas::after{border-image-repeat:stretch;filter:drop-shadow(0 1px 1px #0009)}
+#movieList .movie-row.bw715-horror::after,#movieList .movie-row.bw715-christmas::after{border-image-repeat:round;filter:drop-shadow(0 1px 1px #0009)}
+
+/* V7.7.17 full-screen share card viewer and distortion-resistant festival frames */
+#bw7Report{cursor:zoom-in}
+.bw717-lightbox{position:fixed;inset:0;z-index:999999;background:#050304f5;display:flex;align-items:center;justify-content:center;padding:14px;overflow:auto}
+.bw717-viewport{width:100%;height:100%;display:flex;align-items:center;justify-content:center;overflow:auto}
+#bw717FullscreenCard.bw712-card{width:min(96vw,calc(94dvh * 1221 / 1289),1100px);max-width:none;margin:auto;flex:none;box-shadow:0 12px 80px #000}
+.bw717-close{position:fixed;z-index:2;top:max(12px,env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right));width:42px;height:42px;border:1px solid #b99a62;border-radius:50%;background:#171010;color:#f9db91;font-size:28px;cursor:pointer}
+@media(max-width:650px){
+ .bw717-lightbox{padding:5px 5px 12px}
+ #bw717FullscreenCard.bw712-card{width:min(98vw,calc(88dvh * 1221 / (1289 * 1.1)));aspect-ratio:1221 / 1418;min-height:0}
+ #bw717FullscreenCard .bw712-title{font-size:clamp(11px,3.3vw,20px)}
+}
+@media print{.bw717-lightbox{display:none!important}}
 </style></head>
 <body><div class="app">
-<header class="topbar"><button class="bw-home" id="bwHome" type="button" title="Go to Movie Log" aria-label="Blackwood Movie Log home"><div class="brandmark">B</div><div class="brand"><span class="bw-wordmark">BLACKWOOD</span><span class="bw-submark">MOVIE LOG</span><small>YOUR PERSONAL FILM ARCHIVE <span class="bw-version">Version 7.7.16</span></small></div></button><div class="top-spacer"></div><div class="status"><span class="dot"></span><span id="saveStatus">Saved on this device</span></div><button class="iconbtn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☼</button><button class="iconbtn" id="menuBtn" aria-label="Open navigation" title="Navigation">☰</button></header>
+<header class="topbar"><button class="bw-home" id="bwHome" type="button" title="Go to Movie Log" aria-label="Blackwood Movie Log home"><div class="brandmark">B</div><div class="brand"><span class="bw-wordmark">BLACKWOOD</span><span class="bw-submark">MOVIE LOG</span><small>YOUR PERSONAL FILM ARCHIVE <span class="bw-version">Version 7.7.17</span></small></div></button><div class="top-spacer"></div><div class="status"><span class="dot"></span><span id="saveStatus">Saved on this device</span></div><button class="iconbtn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☼</button><button class="iconbtn" id="menuBtn" aria-label="Open navigation" title="Navigation">☰</button></header>
 <div class="layout"><aside class="sidebar"><div class="side-label">LIBRARY</div><nav class="navlist" id="sideNav"></nav><div class="sidebar-note"><strong style="color:var(--text)">Private by design</strong><br>This first build saves your records in this browser on this device. Cloud sync is not connected yet.</div></aside><main class="main" id="main"></main></div>
 <nav class="mobile-nav" id="mobileNav"></nav></div>
 <div class="modal-backdrop" id="modalBackdrop"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modalhead"><h2 id="modalTitle">Add movie</h2><button class="iconbtn" id="modalClose" aria-label="Close">×</button></div><div id="modalBody"></div><div class="modalfoot" id="modalFoot"></div></section></div><div class="toast" id="toast"></div>
@@ -1534,7 +1547,12 @@ function bw7Memory(m){
    if(tries===1)posterEl.src=posterEl.src.replace('/w500/','/w342/');
   });
  }
- $('bw7PrintMemory').onclick=()=>window.print();
+ $('bw7Report').setAttribute('role','button');
+ $('bw7Report').setAttribute('tabindex','0');
+ $('bw7Report').setAttribute('title','Click to view the memory card full screen');
+ $('bw7Report').addEventListener('click',bw717ShowMemory);
+ $('bw7Report').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();bw717ShowMemory()}});
+  $('bw7PrintMemory').onclick=()=>window.print();
  $('bw7MemoryBack').onclick=()=>openDetail(m.id);
 }
 
@@ -1645,7 +1663,7 @@ const bw779EmbeddedArtwork={'horrorfest':'data:image/webp;base64,UklGRqiDAABXRUJ
 function bw778Art(id,title){const names={horrorfest60:'horrorfest',christmasfest60:'christmas-fest',stats5:'statistics-center',review5:'year-in-review',compare7:'year-vs-year',reports7:'report-studio',timeline75:'movie-history-timeline',health5:'data-health',awards5:'movie-awards',topten:'my-top-10'};const file=names[id];return file?`<img class="bw778-art" src="${bw779EmbeddedArtwork[file]}" alt="${title}" loading="lazy" decoding="async">`:'';}
 function bw73Holiday(){$('main').innerHTML=pageHead('SEASONAL CINEMA','Holiday Fest','Two traditions. Every movie remembered.')+'<div class="bw73-hub bw73-holiday bw778-gallery"><button class="bw73-tile" id="bw73Horror" aria-label="Open Horrorfest">'+bw778Art('horrorfest60','Horrorfest')+'</button><button class="bw73-tile" id="bw73Christmas" aria-label="Open Christmas Fest">'+bw778Art('christmasfest60','Christmas Fest')+'</button></div>';$('bw73Horror').onclick=()=>go('horrorfest60');$('bw73Christmas').onclick=()=>go('christmasfest60')}
 function bw73Insights(){$('main').innerHTML=pageHead('YOUR MOVIE STORY','Statistics & Reports','Explore your viewing history and share what matters.')+'<div class="bw73-hub bw778-gallery">'+[['stats5','Statistics Center'],['review5','Year in Review'],['compare7','Year vs. Year'],['reports7','Report Studio']].map(([id,title])=>'<button class="bw73-tile" data-bw73-page="'+id+'" aria-label="Open '+title+'">'+bw778Art(id,title)+'</button>').join('')+'</div>';document.querySelectorAll('[data-bw73-page]').forEach(b=>b.onclick=()=>go(b.dataset.bw73Page))}
-const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.7.16';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
+const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.7.17';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
 // Always reset modal's internal scroll position, not the underlying page.
 const bw73OpenModal=openModal;openModal=function(...args){bw73OpenModal(...args);requestAnimationFrame(()=>{for(const el of [$('modalBody'),document.querySelector('.modal'),document.querySelector('.modal-backdrop.open')])if(el)el.scrollTop=0})};
 // Decorate only the actual filtered rows, after every list redraw.
@@ -2232,7 +2250,7 @@ openDetail=function(...args){
 };
 // First render must run after all wrappers, not midway through application initialization.
 
-/* V7.7.16: external ratings. Key is saved on this device, not published with the app. */
+/* V7.7.17: external ratings. Key is saved on this device, not published with the app. */
 const BW714_KEY='blackwood.omdb.key';
 const BW714_CACHE='blackwood.omdb.ratings.v1';
 let bw714Cache={};
@@ -2364,7 +2382,7 @@ bw731Decorate=function(){
 };
 
 
-/* V7.7.16: migrate OMDb results into the same Supabase-backed library payload. */
+/* V7.7.17: migrate OMDb results into the same Supabase-backed library payload. */
 function bw716MigrateRatings(){
  if(!state.externalRatings)state.externalRatings={};
  let changed=false;
@@ -2414,6 +2432,27 @@ renderSettings=function(){
   return (ai<0?999:ai)-(bi<0?999:bi);
  }).forEach(c=>grid.appendChild(c));
 };
+
+
+function bw717ShowMemory(){
+ const source=document.getElementById('bw7Report');
+ if(!source||document.getElementById('bw717Lightbox'))return;
+ const overlay=document.createElement('div');
+ overlay.id='bw717Lightbox';overlay.className='bw717-lightbox';
+ overlay.innerHTML='<button type="button" class="bw717-close" aria-label="Close full-screen movie memory card">×</button><div class="bw717-viewport"></div>';
+ const clone=source.cloneNode(true);
+ clone.id='bw717FullscreenCard';
+ clone.removeAttribute('role');clone.removeAttribute('tabindex');clone.removeAttribute('title');
+ overlay.querySelector('.bw717-viewport').appendChild(clone);
+ document.body.appendChild(overlay);
+ const prior=document.body.style.overflow;document.body.style.overflow='hidden';
+ function close(){document.body.style.overflow=prior;overlay.remove();document.removeEventListener('keydown',keyHandler)}
+ function keyHandler(e){if(e.key==='Escape')close()}
+ document.addEventListener('keydown',keyHandler);
+ overlay.querySelector('.bw717-close').onclick=close;
+ overlay.onclick=e=>{if(e.target===overlay||e.target.classList.contains('bw717-viewport'))close()};
+ overlay.querySelector('.bw717-close').focus();
+}
 
 (async()=>{
  await bw777Bootstrap();

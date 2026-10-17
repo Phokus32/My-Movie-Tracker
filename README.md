@@ -63,4 +63,4 @@ V7.7.13: Movie Memory Card date MM/DD/YY, smaller genre text, slightly larger wr
 V7.7.15: Illustrated Horrorfest and Christmas Fest frame overlays on seasonal Movie Log cards. Original generated artwork embedded as optimized WebP in index.html; no additional asset requests. Existing frame settings: None disables artwork, other choices show the appropriate holiday artwork.
 
 
-V7.7.16: revised lightweight 6:1 holiday borders using 9-slice rendering; external OMDb ratings saved into existing Supabase-backed library payload and merged from local cache; Settings reorganized into compact grouped sections. Reload another device to fetch the cloud copy after the first device finishes syncing.
+V7.7.17: festival border-image edges use repeat:round instead of stretch; clicking the Movie Memory Card opens a full-screen lightbox (Escape or close to exit), with 10% taller card proportions on mobile. External ratings cloud synchronization preserved.
