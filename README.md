@@ -77,3 +77,4 @@ V7.7.20: exact user-supplied transparent holiday frames, trimmed vertically to 2
 V7.7.21: Slimmed both seasonal overlays with independent compressed top/bottom artwork and a transparent central window. Kept existing card dimensions, controls, ratings cloud sync and Memory Card.
 
 V7.7.22: Seasonal overlays use 9-slice borders with continuous narrow left/right edges and preserved corners. Added subtle animated bats to horror rows. Snow animation remains. Mobile fullscreen Memory Card stretch increased from 1.10x to 1.188x (additional 8%).
+\nV7.7.23: four-edge independent seasonal artwork; removed bats; added falling blood drops with bottom splash; doubled Christmas snowflakes; gentle light flicker; preserved V7.7.22 fullscreen stretch.\n
