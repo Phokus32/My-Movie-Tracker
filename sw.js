@@ -1,1 +1,32 @@
-const CACHE='blackwood-v7.7.6',ASSETS=['./','./index.html','./manifest.webmanifest','./icon-180.png','./icon-192.png','./icon-512.png'];self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)));self.skipWaiting()});self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('blackwood-v')&&k!==CACHE).map(k=>caches.delete(k)))));self.clients.claim()});self.addEventListener('fetch',e=>{const url=new URL(e.request.url);if(e.request.method==='GET'&&url.origin==='https://image.tmdb.org'&&(/^\/t\/p\/w780\//.test(url.pathname)||/^\/t\/p\/w342\//.test(url.pathname))){const name=url.pathname.startsWith('/t/p/w342/')?'bw-posters-images-v773':'bw-backdrops-images-v771';e.respondWith(caches.open(name).then(async c=>(await c.match(e.request))||fetch(e.request)));return;}if(e.request.method!=='GET'||new URL(e.request.url).origin!==self.location.origin)return;e.respondWith(fetch(e.request).then(r=>{if(r.ok){let c=r.clone();caches.open(CACHE).then(cache=>cache.put(e.request,c))}return r}).catch(()=>caches.match(e.request)))})
+/* Blackwood Movie Log service worker 7.7.24 - network-first HTML, offline fallback. */
+const BW_SW_VERSION='7.7.24';
+const SHELL='blackwood-shell-'+BW_SW_VERSION;
+self.addEventListener('install',event=>{
+ event.waitUntil((async()=>{
+  const cache=await caches.open(SHELL);
+  try{const response=await fetch(new Request('./index.html',{cache:'reload'}));if(response.ok)await cache.put('./index.html',response.clone())}catch(e){}
+  await self.skipWaiting();
+ })());
+});
+self.addEventListener('activate',event=>{
+ event.waitUntil((async()=>{
+  const keys=await caches.keys();
+  await Promise.all(keys.filter(k=>k.startsWith('blackwood-shell-')&&k!==SHELL).map(k=>caches.delete(k)));
+  await self.clients.claim();
+ })());
+});
+self.addEventListener('fetch',event=>{
+ const request=event.request;
+ if(request.method!=='GET')return;
+ const url=new URL(request.url);
+ if(url.origin!==self.location.origin)return;
+ if(request.mode==='navigate'||url.pathname.endsWith('/index.html')){
+  event.respondWith((async()=>{
+   try{
+    const response=await fetch(new Request(request,{cache:'no-store'}));
+    if(response.ok){const cache=await caches.open(SHELL);await cache.put('./index.html',response.clone())}
+    return response;
+   }catch(e){const cache=await caches.open(SHELL);return await cache.match('./index.html')||Response.error()}
+  })());
+ }
+});

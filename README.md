@@ -78,3 +78,4 @@ V7.7.21: Slimmed both seasonal overlays with independent compressed top/bottom a
 
 V7.7.22: Seasonal overlays use 9-slice borders with continuous narrow left/right edges and preserved corners. Added subtle animated bats to horror rows. Snow animation remains. Mobile fullscreen Memory Card stretch increased from 1.10x to 1.188x (additional 8%).
 \nV7.7.23: four-edge independent seasonal artwork; removed bats; added falling blood drops with bottom splash; doubled Christmas snowflakes; gentle light flicker; preserved V7.7.22 fullscreen stretch.\n
+V7.7.24: Restored nine-slice border art, added tiled side strings, reduced horror droplets from 12 to 9 and diameter by 25%, kept snow unchanged. Added missing sw.js with network-first HTML navigation and offline fallback to prevent stale PWA versions. No data/cache clearing needed.
