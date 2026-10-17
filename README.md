@@ -67,3 +67,6 @@ V7.7.17: festival border-image edges use repeat:round instead of stretch; clicki
 
 
 V7.7.18: holiday frames replaced with non-stretched repeating Christmas light strands, falling snowflakes, red blood border with varied dripping streaks and jack-o-lantern corners. Fullscreen mobile Movie Memory Card is vertically scaled 10%; title font enlarged and wrapping preserved. Ratings cloud sync unchanged.
+
+
+V7.7.19: replaced approximate SVG/emoji frames with transparent frame overlays extracted from the exact user-approved Christmas and Horror concept. Dedicated desktop and mobile 9-slice artwork; falling snow preserved.
