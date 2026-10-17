@@ -50,3 +50,6 @@ V7.7.6: Corrected JavaScript scope: V7.6+ functions now remain inside applicatio
 
 
 V7.7.7: Library and cloud sync baselines are stored in IndexedDB instead of localStorage. Original localStorage data is removed only after IndexedDB confirms successful storage. Cloud sync errors are not caused by localStorage quota errors. Back up your JSON before upgrading.
+
+
+V7.7.8: Added 10 optimized WebP menu tiles for Holiday Fest, Statistics & Reports and Goals & Achievements. Original image files are not bundled. No database schema or storage changes.
