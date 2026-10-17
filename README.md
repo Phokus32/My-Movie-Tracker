@@ -70,3 +70,5 @@ V7.7.18: holiday frames replaced with non-stretched repeating Christmas light st
 
 
 V7.7.19: replaced approximate SVG/emoji frames with transparent frame overlays extracted from the exact user-approved Christmas and Horror concept. Dedicated desktop and mobile 9-slice artwork; falling snow preserved.
+
+V7.7.20: exact user-supplied transparent holiday frames, trimmed vertically to 2048x345 (5.94:1) without scaling pumpkins or lights; foreground overlays with click-through. Christmas snow and Supabase ratings sync preserved.
