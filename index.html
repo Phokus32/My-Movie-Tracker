@@ -623,13 +623,19 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 @media print{@page{margin:6mm}body *{visibility:hidden!important}#bw7Report,#bw7Report *{visibility:visible!important}#bw7Report.bw712-card{position:absolute!important;left:50%!important;top:0!important;transform:translateX(-50%);width:min(100%,175mm)!important;max-width:175mm!important;margin:0!important;box-shadow:none!important;print-color-adjust:exact!important;-webkit-print-color-adjust:exact!important}}
 
 
-/* V7.7.13: memory card text refinements */
+/* V7.7.14: memory card text refinements */
 .bw712-title{font-size:clamp(13px,3.35vw,32px)!important;white-space:normal!important;overflow-wrap:break-word!important;word-break:normal!important;line-height:1.07!important}
 .bw712-genre{font-size:clamp(8px,1.25vw,12px)!important;line-height:1.1!important;white-space:normal!important;overflow-wrap:anywhere!important}
 @media(max-width:550px){.bw712-title{font-size:clamp(11px,3.65vw,21px)!important}.bw712-genre{font-size:clamp(7px,1.6vw,10px)!important}}
+
+.bw714-ratings{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:16px 0 8px;width:100%}
+.bw714-ratings>div{border:1px solid var(--border);border-radius:10px;background:var(--surface2,var(--panel));padding:12px 8px;text-align:center;min-width:0}
+.bw714-ratings small{display:block;font-size:11px;letter-spacing:.4px;color:var(--muted);margin-bottom:6px}
+.bw714-ratings strong{font-size:clamp(13px,2vw,22px);color:var(--text)}
+@media(max-width:650px){.bw714-ratings{grid-template-columns:repeat(2,minmax(0,1fr))}.bw731-bottom{font-size:11px!important;line-height:1.45;white-space:normal!important;overflow-wrap:normal}}
 </style></head>
 <body><div class="app">
-<header class="topbar"><button class="bw-home" id="bwHome" type="button" title="Go to Movie Log" aria-label="Blackwood Movie Log home"><div class="brandmark">B</div><div class="brand"><span class="bw-wordmark">BLACKWOOD</span><span class="bw-submark">MOVIE LOG</span><small>YOUR PERSONAL FILM ARCHIVE <span class="bw-version">Version 7.7.13</span></small></div></button><div class="top-spacer"></div><div class="status"><span class="dot"></span><span id="saveStatus">Saved on this device</span></div><button class="iconbtn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☼</button><button class="iconbtn" id="menuBtn" aria-label="Open navigation" title="Navigation">☰</button></header>
+<header class="topbar"><button class="bw-home" id="bwHome" type="button" title="Go to Movie Log" aria-label="Blackwood Movie Log home"><div class="brandmark">B</div><div class="brand"><span class="bw-wordmark">BLACKWOOD</span><span class="bw-submark">MOVIE LOG</span><small>YOUR PERSONAL FILM ARCHIVE <span class="bw-version">Version 7.7.14</span></small></div></button><div class="top-spacer"></div><div class="status"><span class="dot"></span><span id="saveStatus">Saved on this device</span></div><button class="iconbtn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☼</button><button class="iconbtn" id="menuBtn" aria-label="Open navigation" title="Navigation">☰</button></header>
 <div class="layout"><aside class="sidebar"><div class="side-label">LIBRARY</div><nav class="navlist" id="sideNav"></nav><div class="sidebar-note"><strong style="color:var(--text)">Private by design</strong><br>This first build saves your records in this browser on this device. Cloud sync is not connected yet.</div></aside><main class="main" id="main"></main></div>
 <nav class="mobile-nav" id="mobileNav"></nav></div>
 <div class="modal-backdrop" id="modalBackdrop"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modalhead"><h2 id="modalTitle">Add movie</h2><button class="iconbtn" id="modalClose" aria-label="Close">×</button></div><div id="modalBody"></div><div class="modalfoot" id="modalFoot"></div></section></div><div class="toast" id="toast"></div>
@@ -1623,7 +1629,7 @@ const bw779EmbeddedArtwork={'horrorfest':'data:image/webp;base64,UklGRqiDAABXRUJ
 function bw778Art(id,title){const names={horrorfest60:'horrorfest',christmasfest60:'christmas-fest',stats5:'statistics-center',review5:'year-in-review',compare7:'year-vs-year',reports7:'report-studio',timeline75:'movie-history-timeline',health5:'data-health',awards5:'movie-awards',topten:'my-top-10'};const file=names[id];return file?`<img class="bw778-art" src="${bw779EmbeddedArtwork[file]}" alt="${title}" loading="lazy" decoding="async">`:'';}
 function bw73Holiday(){$('main').innerHTML=pageHead('SEASONAL CINEMA','Holiday Fest','Two traditions. Every movie remembered.')+'<div class="bw73-hub bw73-holiday bw778-gallery"><button class="bw73-tile" id="bw73Horror" aria-label="Open Horrorfest">'+bw778Art('horrorfest60','Horrorfest')+'</button><button class="bw73-tile" id="bw73Christmas" aria-label="Open Christmas Fest">'+bw778Art('christmasfest60','Christmas Fest')+'</button></div>';$('bw73Horror').onclick=()=>go('horrorfest60');$('bw73Christmas').onclick=()=>go('christmasfest60')}
 function bw73Insights(){$('main').innerHTML=pageHead('YOUR MOVIE STORY','Statistics & Reports','Explore your viewing history and share what matters.')+'<div class="bw73-hub bw778-gallery">'+[['stats5','Statistics Center'],['review5','Year in Review'],['compare7','Year vs. Year'],['reports7','Report Studio']].map(([id,title])=>'<button class="bw73-tile" data-bw73-page="'+id+'" aria-label="Open '+title+'">'+bw778Art(id,title)+'</button>').join('')+'</div>';document.querySelectorAll('[data-bw73-page]').forEach(b=>b.onclick=()=>go(b.dataset.bw73Page))}
-const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.7.13';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
+const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.7.14';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
 // Always reset modal's internal scroll position, not the underlying page.
 const bw73OpenModal=openModal;openModal=function(...args){bw73OpenModal(...args);requestAnimationFrame(()=>{for(const el of [$('modalBody'),document.querySelector('.modal'),document.querySelector('.modal-backdrop.open')])if(el)el.scrollTop=0})};
 // Decorate only the actual filtered rows, after every list redraw.
@@ -1688,7 +1694,7 @@ function bw731Decorate(){
   const mine=v.rating==null||v.rating===''?'—':Number(v.rating).toFixed(1);
   const tmdb=m.voteAverage??m.tmdbRating??m.tmdbVoteAverage??m.tmdbScore;
   const other=tmdb==null||tmdb===''?'—':Number(tmdb).toFixed(1);
-  bottom.textContent='Watched: '+bw731ShortDate(v.startDate)+' – '+bw731ShortDate(v.finishDate)+'   Mine: '+mine+' · TMDB: '+other;
+  bottom.textContent=bw731ShortDate(v.startDate)+' – '+bw731ShortDate(v.finishDate)+'   Mine: '+mine+' · TMDB: '+other;
   let star=actions.querySelector('.bw731-star');
   if(!star){star=document.createElement('button');star.type='button';star.className='bw731-star';star.textContent='☆';star.title='Quick rate this viewing';star.setAttribute('aria-label','Quick rate '+m.title);actions.prepend(star)}
   star.onclick=e=>{e.stopPropagation();bw731QuickRate(viewId)};
@@ -2209,6 +2215,116 @@ openDetail=function(...args){
  return result;
 };
 // First render must run after all wrappers, not midway through application initialization.
+
+/* V7.7.14: external ratings. Key is saved on this device, not published with the app. */
+const BW714_KEY='blackwood.omdb.key';
+const BW714_CACHE='blackwood.omdb.ratings.v1';
+let bw714Cache={};
+try{bw714Cache=JSON.parse(localStorage.getItem(BW714_CACHE)||'{}')||{}}catch(e){}
+function bw714Key(){try{return localStorage.getItem(BW714_KEY)||''}catch(e){return ''}}
+function bw714Score(m,kind){
+ const c=bw714Cache[String(m.tmdbId||'')]||{};
+ if(kind==='imdb')return c.imdbRating||m.imdbRating||'—';
+ if(kind==='rt')return c.rtScore||m.rtScore||'—';
+ const v=m.voteAverage??m.tmdbRating??m.tmdbVoteAverage??m.tmdbScore;
+ return v!=null&&v!==''&&Number(v)>0?Number(v).toFixed(1):'—';
+}
+function bw714RatingHtml(m){
+ return '<section class="bw714-ratings" aria-label="Movie ratings">'+
+ [['My rating',(()=>{const a=viewsFor(m.id).filter(v=>v.rating!==null&&v.rating!==undefined&&v.rating!=='');return a.length?Number(a[0].rating).toFixed(1)+'/10':'—'})()],
+ ['TMDB',bw714Score(m,'tmdb')==='—'?'—':bw714Score(m,'tmdb')+'/10'],
+ ['IMDb',bw714Score(m,'imdb')==='—'?'—':bw714Score(m,'imdb')+'/10'],
+ ['RT Critics',bw714Score(m,'rt')]].map(([label,value])=>'<div><small>'+label+'</small><strong>'+esc(String(value))+'</strong></div>').join('')+
+ '</section>';
+}
+async function bw714Fetch(m,force=false){
+ const key=bw714Key(),id=String(m.tmdbId||'').trim();
+ if(!key||!/^\d+$/.test(id))return false;
+ const existing=bw714Cache[id];
+ if(!force&&existing&&Date.now()-Number(existing.updated||0)<30*86400000)return true;
+ try{
+  let imdbId=existing?.imdbId||m.imdbId||'';
+  if(!/^tt\d+$/.test(imdbId)){
+   if(!tmdbKey)return false;
+   const t=await fetch('https://api.themoviedb.org/3/movie/'+encodeURIComponent(id)+'/external_ids',{headers:{Authorization:'Bearer '+tmdbKey,Accept:'application/json'}});
+   if(!t.ok)throw Error('TMDB '+t.status);
+   const d=await t.json();imdbId=d.imdb_id||'';
+  }
+  if(!/^tt\d+$/.test(imdbId))return false;
+  const r=await fetch('https://www.omdbapi.com/?apikey='+encodeURIComponent(key)+'&i='+encodeURIComponent(imdbId));
+  if(!r.ok)throw Error('OMDb '+r.status);
+  const d=await r.json();
+  if(d.Response==='False')throw Error(d.Error||'OMDb unavailable');
+  const rt=(d.Ratings||[]).find(x=>x.Source==='Rotten Tomatoes')?.Value||'';
+  bw714Cache[id]={imdbId,imdbRating:d.imdbRating&&d.imdbRating!=='N/A'?d.imdbRating:'',rtScore:rt,updated:Date.now()};
+  try{localStorage.setItem(BW714_CACHE,JSON.stringify(bw714Cache))}catch(e){}
+  return true;
+ }catch(e){console.warn('External ratings unavailable:',e.message);return false}
+}
+const bw714OldDetail=renderDetail;
+renderDetail=function(){
+ bw714OldDetail();
+ const m=movie(activeMovie);if(!m)return;
+ const card=$('main')?.querySelector('.detail-card');
+ if(!card)return;
+ const old=card.querySelector('.bw714-ratings');if(old)old.remove();
+ card.insertAdjacentHTML('beforeend',bw714RatingHtml(m));
+ const movieId=m.id;
+ if(bw714Key()&&m.tmdbId)bw714Fetch(m).then(ok=>{
+  if(!ok||page!=='detail'||activeMovie!==movieId)return;
+  const target=$('main')?.querySelector('.bw714-ratings');
+  if(target)target.outerHTML=bw714RatingHtml(m);
+ });
+};
+const bw714OldSettings=renderSettings;
+renderSettings=function(){
+ bw714OldSettings();
+ const grid=$('main')?.querySelector('.settings-grid');if(!grid)return;
+ const section=document.createElement('section');
+ section.className='setting-item';
+ section.style.gridColumn='1 / -1';
+ section.innerHTML='<h3>IMDb & Rotten Tomatoes (OMDb)</h3><p>Enter your OMDb API key. It stays in this browser and is not included in the published app. Movie Details loads available external ratings automatically. Download ratings for your entire collection below.</p>'+
+ '<div class="field"><label for="bw714KeyInput">OMDb API key</label><input id="bw714KeyInput" type="password" autocomplete="off" placeholder="Enter your OMDb key"></div>'+
+ '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button class="btn primary" id="bw714SaveKey">Save key</button><button class="btn" id="bw714Bulk">Download missing ratings</button><button class="btn" id="bw714Stop" disabled>Stop</button></div><p class="footer-note" id="bw714Status">Ratings are cached locally for 30 days. OMDb coverage varies by movie.</p>';
+ grid.appendChild(section);
+ $('bw714KeyInput').value=bw714Key();
+ $('bw714SaveKey').onclick=()=>{try{localStorage.setItem(BW714_KEY,$('bw714KeyInput').value.trim());toast('OMDb key saved on this device.')}catch(e){toast('Unable to save key.')}};
+ let stopped=false;
+ $('bw714Stop').onclick=()=>{stopped=true;$('bw714Status').textContent='Stopping after current request…'};
+ $('bw714Bulk').onclick=async()=>{
+  if(!bw714Key()){toast('Save your OMDb API key first.');return}
+  const candidates=state.movies.filter(m=>/^\d+$/.test(String(m.tmdbId||'')));
+  const unique=[...new Map(candidates.map(m=>[String(m.tmdbId),m])).values()];
+  const pending=unique.filter(m=>!bw714Cache[String(m.tmdbId)]||Date.now()-Number(bw714Cache[String(m.tmdbId)].updated||0)>=30*86400000);
+  stopped=false;$('bw714Bulk').disabled=true;$('bw714Stop').disabled=false;
+  let ok=0,fail=0;
+  for(let i=0;i<pending.length&&!stopped;i++){
+   const status=$('bw714Status');if(!status)break;
+   status.textContent='Checking '+(i+1)+' / '+pending.length+' · '+ok+' updated · '+fail+' unavailable';
+   if(await bw714Fetch(pending[i]))ok++;else fail++;
+   await new Promise(resolve=>setTimeout(resolve,180));
+  }
+  if($('bw714Status'))$('bw714Status').textContent='Finished: '+ok+' updated · '+fail+' unavailable'+(stopped?' · stopped early':'')+'.';
+  if($('bw714Bulk'))$('bw714Bulk').disabled=false;
+  if($('bw714Stop'))$('bw714Stop').disabled=true;
+ };
+};
+const bw714OldDecorate=bw731Decorate;
+bw731Decorate=function(){
+ bw714OldDecorate();
+ document.querySelectorAll('#movieList .bw731-card').forEach(row=>{
+  const id=row.querySelector('[data-editview]')?.dataset.editview;
+  const v=state.viewings.find(x=>x.id===id),m=v&&movie(v.movieId);
+  if(!m)return;
+  const bottom=row.querySelector('.bw731-bottom');
+  if(bottom){
+   const mine=v.rating==null||v.rating===''?'—':Number(v.rating).toFixed(1);
+   bottom.textContent=bw731ShortDate(v.startDate)+' – '+bw731ShortDate(v.finishDate)+'   Mine: '+mine+' · TMDB: '+bw714Score(m,'tmdb')+
+   ' · IMDb: '+bw714Score(m,'imdb')+' · RT: '+bw714Score(m,'rt');
+  }
+ });
+};
+
 (async()=>{
  await bw777Bootstrap();
  bw777LastSavedContent=bw42Content(state);
