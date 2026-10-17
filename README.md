@@ -56,3 +56,5 @@ V7.7.8: Added 10 optimized WebP menu tiles for Holiday Fest, Statistics & Report
 
 
 V7.7.12: Movie Memory Card now uses the supplied Blackwood Theater artwork as a built-in WebP background with dynamically positioned poster, title, fractional rating stars, metadata and notes.
+
+V7.7.13: Movie Memory Card date MM/DD/YY, smaller genre text, slightly larger wrapped movie title.
