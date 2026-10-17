@@ -537,14 +537,14 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 #viewForm .formgrid,#viewForm .field,#modalBody{min-width:0;max-width:100%;box-sizing:border-box}
 #viewForm #tmdbResults{max-width:100%;overflow-wrap:anywhere}
 
-/* V7.7.6: year selector remains accessible when advanced filters are collapsed. */
+/* V7.7.7: year selector remains accessible when advanced filters are collapsed. */
 .bw776-year{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:12px;white-space:nowrap}
 .bw776-year select{min-width:120px;max-width:165px}
 .bw776-more{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:9px;padding:20px 8px}
 @media(max-width:700px){.bw776-year{width:100%;justify-content:space-between}.bw776-year select{flex:1;max-width:230px}}
 </style></head>
 <body><div class="app">
-<header class="topbar"><button class="bw-home" id="bwHome" type="button" title="Go to Movie Log" aria-label="Blackwood Movie Log home"><div class="brandmark">B</div><div class="brand"><span class="bw-wordmark">BLACKWOOD</span><span class="bw-submark">MOVIE LOG</span><small>YOUR PERSONAL FILM ARCHIVE <span class="bw-version">Version 7.7.6</span></small></div></button><div class="top-spacer"></div><div class="status"><span class="dot"></span><span id="saveStatus">Saved on this device</span></div><button class="iconbtn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☼</button><button class="iconbtn" id="menuBtn" aria-label="Open navigation" title="Navigation">☰</button></header>
+<header class="topbar"><button class="bw-home" id="bwHome" type="button" title="Go to Movie Log" aria-label="Blackwood Movie Log home"><div class="brandmark">B</div><div class="brand"><span class="bw-wordmark">BLACKWOOD</span><span class="bw-submark">MOVIE LOG</span><small>YOUR PERSONAL FILM ARCHIVE <span class="bw-version">Version 7.7.7</span></small></div></button><div class="top-spacer"></div><div class="status"><span class="dot"></span><span id="saveStatus">Saved on this device</span></div><button class="iconbtn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☼</button><button class="iconbtn" id="menuBtn" aria-label="Open navigation" title="Navigation">☰</button></header>
 <div class="layout"><aside class="sidebar"><div class="side-label">LIBRARY</div><nav class="navlist" id="sideNav"></nav><div class="sidebar-note"><strong style="color:var(--text)">Private by design</strong><br>This first build saves your records in this browser on this device. Cloud sync is not connected yet.</div></aside><main class="main" id="main"></main></div>
 <nav class="mobile-nav" id="mobileNav"></nav></div>
 <div class="modal-backdrop" id="modalBackdrop"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modalhead"><h2 id="modalTitle">Add movie</h2><button class="iconbtn" id="modalClose" aria-label="Close">×</button></div><div id="modalBody"></div><div class="modalfoot" id="modalFoot"></div></section></div><div class="toast" id="toast"></div>
@@ -552,6 +552,65 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 </script>
 <script>
 (()=>{'use strict';
+// V7.7.7: Large libraries live in IndexedDB, not the 5 MB localStorage quota.
+// The original localStorage record is retained until IndexedDB has confirmed migration.
+let bw777DBPromise=null,bw777WriteQueue=Promise.resolve(),bw777StorageError='',bw777LastSavedContent=null;
+function bw777DB(){
+ if(!('indexedDB' in window))return Promise.reject(Error('IndexedDB is unavailable'));
+ if(!bw777DBPromise)bw777DBPromise=new Promise((resolve,reject)=>{
+  const request=indexedDB.open('blackwood-movie-log',1);
+  request.onupgradeneeded=()=>{if(!request.result.objectStoreNames.contains('records'))request.result.createObjectStore('records')};
+  request.onsuccess=()=>resolve(request.result);
+  request.onerror=()=>reject(request.error||Error('Could not open local database'));
+  request.onblocked=()=>reject(Error('Local database upgrade is blocked by another tab'));
+ });
+ return bw777DBPromise;
+}
+async function bw777Get(key){
+ const db=await bw777DB();return new Promise((resolve,reject)=>{
+  const req=db.transaction('records','readonly').objectStore('records').get(key);
+  req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);
+ });
+}
+async function bw777Put(key,value){
+ const db=await bw777DB();return new Promise((resolve,reject)=>{
+  const tx=db.transaction('records','readwrite');tx.objectStore('records').put(value,key);
+  tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error);
+ });
+}
+function bw777Queue(key,value,oldKey){
+ const job=bw777WriteQueue.catch(()=>{}).then(async()=>{
+  await bw777Put(key,value);
+  // Never remove the old record before its IndexedDB replacement commits.
+  if(oldKey){try{localStorage.removeItem(oldKey)}catch(e){}}
+  bw777StorageError='';
+ });
+ bw777WriteQueue=job.catch(e=>{
+  bw777StorageError=e.message||String(e);
+  const el=document.getElementById('saveStatus');if(el)el.textContent='Local database unavailable · verify cloud sync';
+  try{if(key==='library')localStorage.setItem('myMovieTracker.v1',JSON.stringify(value))}catch(fallbackError){console.warn('Legacy localStorage fallback also unavailable',fallbackError)}
+  console.error('Blackwood local database save failed',e);
+ });
+ return job;
+}
+function bw777PersistState(value){return bw777Queue('library',structuredClone(value),'myMovieTracker.v1')}
+function bw777PersistBaseline(value){if(!cloudUser)return Promise.resolve();return bw777Queue('baseline:'+cloudUser.id,value,'blackwood.cloudBaseline.'+cloudUser.id)}
+async function bw777Bootstrap(){
+ try{
+  const stored=await bw777Get('library');
+  if(stored&&Array.isArray(stored.movies)&&Array.isArray(stored.viewings)){
+   // An old localStorage record can be newer if a prior IndexedDB write failed.
+   const fromLegacy=loadState();
+   const oldTime=Date.parse(fromLegacy.lastSaved||'')||0;
+   const newTime=Date.parse(stored.lastSaved||'')||0;
+   if(oldTime>newTime){state=normalizeState(fromLegacy);await bw777PersistState(state)}
+   else {state=normalizeState(stored);try{localStorage.removeItem(KEY)}catch(e){}}
+  }else if(stateHasRecords(state))await bw777PersistState(state);
+ }catch(e){
+  bw777StorageError=e.message||String(e);
+  console.warn('IndexedDB unavailable; cloud sync can still operate',e);
+ }
+}
 const KEY='myMovieTracker.v1';const PREF='myMovieTracker.prefs';const today=()=>new Date().toISOString().slice(0,10);const uid=()=>crypto.randomUUID?crypto.randomUUID():'id-'+Date.now()+'-'+Math.random().toString(16).slice(2);const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));const dateFmt=d=>d?new Date(d+'T12:00:00').toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'}):'—';const yearOf=d=>d?Number(d.slice(0,4)):null;let state=loadState();let prefs=loadPrefs();let page=prefs.page||'log',activeMovie=null,editingViewing=null,editingMovie=null,undoData=null,toastTimer=null;
 function loadState(){try{let x=JSON.parse(localStorage.getItem(KEY));if(x&&Array.isArray(x.movies)&&Array.isArray(x.viewings)&&Array.isArray(x.watchlist))return x}catch(e){}return{movies:[],viewings:[],watchlist:[],tags:[],uiSettings:{},topTen:[],awards:{},lastSaved:null};}function loadPrefs(){try{return Object.assign({theme:'dark',page:'log',sort:'start-desc',group:'none',year:new Date().getFullYear(),language:'preferred',filters:false},JSON.parse(localStorage.getItem(PREF)||'{}'))}catch(e){return{theme:'dark',page:'log',sort:'start-desc',group:'none',year:new Date().getFullYear(),language:'preferred',filters:false}}}
 const CLOUD_CONFIG_KEY='myMovieTracker.supabase.config.v1';const TMDB_CONFIG_KEY='myMovieTracker.tmdb.key.v1';let tmdbKey=localStorage.getItem(TMDB_CONFIG_KEY)||'';let cloudConfig=readCloudConfig(),cloudClient=null,cloudUser=null,cloudReady=false,cloudSyncTimer=null,cloudSyncChain=Promise.resolve(),cloudConflict=false,cloudCheckSerial=0,tmdbResults=[],cloudStatusMessage='';
@@ -561,12 +620,13 @@ function stateHasRecords(x=state){return (x.movies||[]).length+(x.viewings||[]).
 function bw42Content(x){const n=normalizeState(x);delete n.lastSaved;return stableStringify(n)}
 let bw42Baseline=null,bw42LocalDirty=false,bw42Checking=false;
 function bw42BaselineKey(){return cloudUser?'blackwood.cloudBaseline.'+cloudUser.id:null}
-function bw42StoreBaseline(x){bw42Baseline=bw42Content(x);try{if(bw42BaselineKey())localStorage.setItem(bw42BaselineKey(),bw42Baseline)}catch(e){}bw42LocalDirty=false}
+function bw42StoreBaseline(x){bw42Baseline=bw42Content(x);bw777PersistBaseline(bw42Baseline);bw42LocalDirty=false}
 function save(){
- const previous=localStorage.getItem(KEY);const prior=previous?JSON.parse(previous):null;
- const changed=!prior||bw42Content(prior)!==bw42Content(state);
+ const currentContent=bw42Content(state);
+ const changed=bw777LastSavedContent!==null&&bw777LastSavedContent!==currentContent;
  if(changed){state.lastSaved=new Date().toISOString();bw42LocalDirty=true}
- try{localStorage.setItem(KEY,JSON.stringify(state));const el=$('saveStatus');if(el)el.textContent=cloudUser&&cloudReady?(changed?'Saved locally · syncing…':'Cloud connected'):'Saved on this device'}catch(e){toast('Local save failed: '+e.message)}
+ bw777LastSavedContent=currentContent;
+ bw777PersistState(state);const el=$('saveStatus');if(el)el.textContent=cloudUser&&cloudReady?(changed?'Saved locally · syncing…':'Cloud connected'):'Saving on this device…';
  try{localStorage.setItem(PREF,JSON.stringify({...prefs,page}))}catch(e){}
  if(changed&&cloudUser&&cloudReady&&!cloudConflict){clearTimeout(cloudSyncTimer);cloudSyncTimer=setTimeout(()=>syncCloudState(),750)}
 }
@@ -579,10 +639,10 @@ async function handleCloudSession(session){
   const {data,error}=await cloudClient.from('movie_tracker_data').select('payload,updated_at').eq('user_id',cloudUser.id).maybeSingle();
   if(serial!==cloudCheckSerial)return;if(error)throw error;
   const local=bw42Content(state),remote=data?bw42Content(data.payload):null;
-  const previous=localStorage.getItem(bw42BaselineKey());bw42Baseline=previous||null;const remoteIncludesLocal=!!data&&['movies','viewings','watchlist'].every(k=>(state[k]||[]).every(x=>(data.payload?.[k]||[]).some(y=>y.id===x.id)));
+  const previous=(await bw777Get('baseline:'+cloudUser.id).catch(()=>null))||localStorage.getItem(bw42BaselineKey());bw42Baseline=previous||null;const remoteIncludesLocal=!!data&&['movies','viewings','watchlist'].every(k=>(state[k]||[]).every(x=>(data.payload?.[k]||[]).some(y=>y.id===x.id)));
   if(!data){cloudReady=true;const ok=await syncCloudState(true);if(!ok){cloudReady=false;setCloudStatus('Could not create cloud library. Retry from Settings.')}else setCloudStatus('Cloud library created.');}
   else if(local===remote || !stateHasRecords(state) || (previous&&local===previous) || (!previous&&remoteIncludesLocal)){
-   state=normalizeState(data.payload);localStorage.setItem(KEY,JSON.stringify(state));bw42StoreBaseline(state);cloudReady=true;render();setCloudStatus('Cloud library loaded automatically.');
+   state=normalizeState(data.payload);bw777PersistState(state);bw777LastSavedContent=bw42Content(state);bw42StoreBaseline(state);cloudReady=true;render();setCloudStatus('Cloud library loaded automatically.');
   }else{cloudConflict=true;setCloudStatus('Unsynced local changes detected. Choose cloud or local copy in Settings to avoid data loss.');}
   renderCloudControls();
  }catch(e){cloudReady=false;setCloudStatus('Cloud connection error: '+e.message);renderCloudControls()}
@@ -605,7 +665,7 @@ async function syncCloudState(force=false){
  }).catch(e=>{setCloudStatus('Cloud sync failed: '+e.message);const el=$('saveStatus');if(el)el.textContent='Cloud sync failed · local data retained';});
  await cloudSyncChain;return ok;
 }
-async function useCloudCopy(){if(!cloudClient||!cloudUser)return;try{const {data,error}=await cloudClient.from('movie_tracker_data').select('payload').eq('user_id',cloudUser.id).single();if(error)throw error;state=normalizeState(data.payload);localStorage.setItem(KEY,JSON.stringify(state));cloudConflict=false;cloudReady=true;bw42StoreBaseline(state);render();setCloudStatus('Cloud copy loaded on this device.');renderCloudControls();toast('Cloud library loaded')}catch(e){toast('Could not load cloud data: '+e.message)}}
+async function useCloudCopy(){if(!cloudClient||!cloudUser)return;try{const {data,error}=await cloudClient.from('movie_tracker_data').select('payload').eq('user_id',cloudUser.id).single();if(error)throw error;state=normalizeState(data.payload);bw777PersistState(state);bw777LastSavedContent=bw42Content(state);cloudConflict=false;cloudReady=true;bw42StoreBaseline(state);render();setCloudStatus('Cloud copy loaded on this device.');renderCloudControls();toast('Cloud library loaded')}catch(e){toast('Could not load cloud data: '+e.message)}}
 async function uploadLocalCopy(){if(!cloudClient||!cloudUser)return;if(!confirm('Overwrite the cloud library with this device? Export a JSON backup first. This can discard changes from another device.'))return;cloudConflict=false;cloudReady=true;const ok=await syncCloudState(true);renderCloudControls();toast(ok?'Local library uploaded to cloud':'Cloud upload failed; local data retained')}
 function renderCloudControls(){const status=$('cloudStatusText');if(status)status.textContent=cloudStatusMessage||(cloudConflict?'Both this device and cloud have data. Choose which copy to keep.':cloudUser?(cloudReady?'Signed in as '+cloudUser.email:'Signed in as '+cloudUser.email+' · checking cloud…'):cloudConfig?'Cloud configured, not signed in.':'Enter your Supabase project URL and publishable/anon key.');const pill=$('cloudStatusPill');if(pill){pill.textContent=cloudConflict?'Action required':cloudUser?(cloudReady?'Connected':'Connecting'):(cloudConfig?'Not signed in':'Not configured');pill.className='pill '+(cloudUser&&cloudReady?'good':'warn')}['cloudEmail','cloudPassword','cloudUrl','cloudKey','cloudSetup','cloudSignIn','cloudSignUp'].forEach(id=>{const e=$(id);if(e&&cloudUser&&['cloudEmail','cloudPassword','cloudSignIn','cloudSignUp'].includes(id))e.disabled=true;else if(e)e.disabled=false});const signout=$('cloudSignOut');if(signout){signout.classList.toggle('hide',!cloudUser);signout.style.display=cloudUser?'inline-flex':'none';signout.textContent=cloudUser?'Sign out ('+(cloudUser.email||'account')+')':'Sign out';}const resolve=$('cloudResolveButtons');if(resolve)resolve.classList.toggle('hide',!cloudConflict);const auth=$('cloudAuthButtons');if(auth)auth.classList.toggle('hide',!!cloudUser)}
 async function saveCloudConfig(){const url=$('cloudUrl').value.trim().replace(/\/$/,'');const key=$('cloudKey').value.trim();if(!/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(url)){toast('Enter the project URL from Supabase.');return}if(!key||key.length<20){toast('Enter the publishable/anon key from Supabase.');return}cloudConfig={url,key};localStorage.setItem(CLOUD_CONFIG_KEY,JSON.stringify(cloudConfig));cloudClient=null;cloudUser=null;cloudReady=false;if(!initCloudClient()){toast('Could not initialize Supabase.');return}setCloudStatus('Supabase configured. Checking sign-in…');renderCloudControls();toast('Cloud settings saved on this device')}
@@ -638,7 +698,7 @@ function showAllTimeDashboard(){const y=Number(prefs.year);const all=state.viewi
 function calcStreak(vs){let days=[...new Set(vs.flatMap(v=>[v.startDate,v.finishDate]).filter(Boolean))].sort();let best=0,run=0,prev=null;for(let d of days){let dt=new Date(d+'T12:00:00');if(prev&&((dt-prev)/86400000)===1)run++;else run=1;best=Math.max(best,run);prev=dt}return best}
 function renderSettings(){$('main').innerHTML=pageHead('PREFERENCES','Settings','Manage appearance and your movie data.')+`<div class="settings-grid"><section class="setting-item"><h3>Appearance</h3><p>Choose a theme for this device. Your preference is saved locally.</p><button class="btn" id="settingTheme">Switch to ${prefs.theme==='dark'?'light':'dark'} theme</button></section><section class="setting-item"><h3>Movie title display</h3><p>Choose which title appears in the main log. Search still checks both.</p><select id="titlePref"><option value="preferred">English / preferred title</option><option value="original">Original title when available</option></select></section><section class="setting-item"><h3>Export your data</h3><p>Download a complete JSON backup or spreadsheet-friendly CSV files. Keep exports somewhere safe.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn primary" id="exportJson">Export JSON</button><button class="btn" id="exportCsv">Export CSV</button></div></section><section class="setting-item"><h3>Import data</h3><p>Import a JSON backup exported by this app. Review the file before replacing your current data.</p><input type="file" id="importFile" accept=".json,application/json" style="margin-bottom:10px"><button class="btn" id="importBtn">Import JSON backup</button></section><section class="setting-item"><h3>Local storage</h3><p id="storageInfo">Checking storage…</p><button class="btn" id="storageRefresh">Refresh status</button></section><section class="setting-item" style="grid-column:1/-1"><h3>Movie metadata lookup</h3><p>Search The Movie Database (TMDB) while adding a viewing to fill in release year, runtime, original title, genres, synopsis and poster. Manual entry remains available if lookup is not configured.</p><div class="field"><label for="tmdbKeyInput">TMDB API Read Access Token</label><input id="tmdbKeyInput" type="password" autocomplete="off" placeholder="Paste your TMDB API Read Access Token"></div><div class="cloud-tools"><button class="btn primary" id="saveTmdbKey">Save metadata key</button><a class="btn" href="https://www.themoviedb.org/settings/api" target="_blank" rel="noopener">Get a TMDB API key</a></div><p class="footer-note">TMDB is free for qualifying non-commercial personal use, subject to its terms and attribution rules. The token is saved only in this browser, so enter it on each device where you want movie search. This product uses the TMDB API but is not endorsed or certified by TMDB.</p></section><section class="setting-item" style="grid-column:1/-1"><h3>Cloud account and sync</h3><p>Connect a Supabase project to sync your library between devices. Only the project URL and public publishable/anon key belong here. Never enter a service-role or secret key. Your local data stays available if cloud sync is disconnected.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-bottom:12px"><div><label for="cloudUrl">Supabase project URL</label><input id="cloudUrl" type="url" placeholder="https://your-project.supabase.co" autocomplete="off"></div><div><label for="cloudKey">Publishable / anon key</label><input id="cloudKey" type="password" placeholder="Paste the public key" autocomplete="off"></div></div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><button class="btn primary" id="cloudSetup">Save cloud settings</button><button class="btn" id="cloudRetry">Test / retry connection</button><button class="btn danger" id="cloudSignOut" style="display:none">Sign out</button></div><div id="cloudAuthArea" style="border-top:1px solid var(--line);padding-top:14px"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:10px"><div><label for="cloudEmail">Email</label><input id="cloudEmail" type="email" placeholder="you@example.com" autocomplete="username"></div><div><label for="cloudPassword">Password</label><input id="cloudPassword" type="password" placeholder="At least 8 characters" autocomplete="current-password"></div></div><div id="cloudAuthButtons" style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn primary" id="cloudSignIn">Sign in</button><button class="btn" id="cloudSignUp">Create account</button></div></div><div style="margin-top:14px;display:flex;gap:9px;align-items:center;flex-wrap:wrap"><span class="pill warn" id="cloudStatusPill">Not configured</span><span id="cloudStatusText" style="font-size:12px;color:var(--muted)">Enter your Supabase project URL and publishable/anon key.</span></div><div id="cloudResolveButtons" class="hide" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px"><button class="btn primary" id="cloudUseCopy">Use cloud copy on this device</button><button class="btn danger" id="cloudUploadCopy">Replace cloud with this device</button></div><p style="margin-top:14px">This build uses a single cloud JSON record protected by row-level security. It does not yet provide automatic daily/90-day backups. Keep exporting JSON backups until a separate backup system is implemented.</p></section><section class="setting-item"><h3>Clear local data</h3><p>Remove all movies, viewings and watchlist items stored by this app in this browser. Export a backup first.</p><button class="btn danger" id="clearData">Clear all local data</button></section></div><p class="footer-note">Privacy note: local data stays in this browser. When cloud sync is connected, the library is also stored in your private Supabase row. Export JSON backups regularly; cloud sync is not a substitute for backups.</p>`;$('titlePref').value=prefs.language;$('titlePref').onchange=e=>{prefs.language=e.target.value;save();render()};$('settingTheme').onclick=toggleTheme;$('tmdbKeyInput').value=tmdbKey;$('saveTmdbKey').onclick=saveTmdbKey;bw771SettingsPanel();
 if(cloudConfig){$('cloudUrl').value=cloudConfig.url||'';$('cloudKey').value=cloudConfig.key||''} $('cloudSetup').onclick=saveCloudConfig;$('cloudRetry').onclick=retryCloudConnection;$('cloudSignIn').onclick=()=>cloudSignIn(false);$('cloudSignUp').onclick=()=>cloudSignIn(true);$('cloudSignOut').onclick=cloudSignOut;$('cloudUseCopy').onclick=useCloudCopy;$('cloudUploadCopy').onclick=uploadLocalCopy;renderCloudControls();$('exportJson').onclick=exportJson;$('exportCsv').onclick=exportCsv;$('importBtn').onclick=importJson;$('storageRefresh').onclick=storageInfo;$('clearData').onclick=()=>{if(confirm('Delete ALL locally stored movie data from this browser? Export a backup first.')){state=normalizeState({movies:[],viewings:[],watchlist:[],tags:[],uiSettings:{},topTen:[],awards:{},collectionsV5:[],awardsV5:{}});save();renderSettings();toast('Local data cleared')}};storageInfo()}
-function storageInfo(){let bytes=0;try{bytes=new Blob([localStorage.getItem(KEY)||'']).size}catch(e){}$('storageInfo').textContent=`Approx. ${(bytes/1024).toFixed(1)} KB used for movie data in this browser. Browser storage limits vary.`}
+function storageInfo(){let bytes=0;try{bytes=new Blob([localStorage.getItem(KEY)||'']).size}catch(e){}$('storageInfo').textContent=`Movie library uses IndexedDB (not localStorage). ${state.movies.length} movies and ${state.viewings.length} viewings. ${bw777StorageError?'Local storage warning: '+bw777StorageError:'Cloud sync remains separate.'}`}
 function toggleTheme(){prefs.theme=prefs.theme==='dark'?'light':'dark';save();render()}$('themeToggle').onclick=toggleTheme;$('menuBtn').onclick=()=>{const opts=navItems().map(([id,ic,label],i)=>`${i+1}. ${label}`).join('\n');openModal('Navigate',`<div class="navlist">${navItems().map(([id,ic,label])=>`<button class="navbtn" data-modalpage="${id}"><span class="navicon">${ic}</span>${label}</button>`).join('')}</div>`,`<button class="btn" id="closeNav">Close</button>`);$('closeNav').onclick=closeModal;document.querySelectorAll('[data-modalpage]').forEach(b=>b.onclick=()=>{closeModal();go(b.dataset.modalpage)})};
 function download(name,text,type){let blob=new Blob([text],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}function exportJson(){download('my-movie-tracker-backup-'+today()+'.json',JSON.stringify({schemaVersion:1,exportedAt:new Date().toISOString(),...state},null,2),'application/json');toast('JSON backup downloaded')}function csvCell(v){return '"'+String(v??'').replace(/"/g,'""')+'"'}function exportCsv(){let movies=[['movie_id','title','original_title','release_year','runtime','genres','tags','favorite','synopsis','movie_notes'],...state.movies.map(m=>[m.id,m.title,m.originalTitle,m.year,m.runtime,(m.genres||[]).join('|'),(m.tags||[]).join('|'),m.favorite,m.synopsis,m.notes])];let views=[['viewing_id','movie_id','title','start_date','finish_date','status','rating','rewatch','watched_with_wife','viewing_notes'],...state.viewings.map(v=>[v.id,v.movieId,movie(v.movieId)?.title,v.startDate,v.finishDate,v.status,v.rating,v.rewatch,v.watchedWithWife,v.notes])];download('my-movie-tracker-movies-'+today()+'.csv',movies.map(r=>r.map(csvCell).join(',')).join('\r\n'),'text/csv;charset=utf-8');download('my-movie-tracker-viewings-'+today()+'.csv',views.map(r=>r.map(csvCell).join(',')).join('\r\n'),'text/csv;charset=utf-8');toast('CSV files downloaded')}
 function importJson(){let f=$('importFile').files[0];if(!f){toast('Choose a JSON backup file first.');return}let reader=new FileReader();reader.onload=()=>{try{let x=JSON.parse(reader.result);if(!Array.isArray(x.movies)||!Array.isArray(x.viewings)||!Array.isArray(x.watchlist))throw new Error('Not a valid My Movie Tracker backup');if(!confirm(`Import ${x.movies.length} movies, ${x.viewings.length} viewings and ${x.watchlist.length} watchlist items? This replaces current local data.`))return;state=normalizeState(x);save();renderSettings();toast('Backup imported')}catch(e){toast('Import failed: '+e.message)}};reader.readAsText(f)}
@@ -1000,7 +1060,7 @@ async function bw42PullCloud(){if(!cloudUser||!cloudReady||cloudConflict||bw42Ch
  const remote=bw42Content(data.payload),local=bw42Content(state);
  if(remote===local){bw42StoreBaseline(state);return}
  if(bw42LocalDirty||bw42Baseline!==local){cloudConflict=true;cloudReady=false;setCloudStatus('Both devices changed the library. Review the conflict in Settings.');renderCloudControls();return}
- state=normalizeState(data.payload);localStorage.setItem(KEY,JSON.stringify(state));bw42StoreBaseline(state);render();setCloudStatus('Updated from cloud automatically.');
+ state=normalizeState(data.payload);bw777PersistState(state);bw777LastSavedContent=bw42Content(state);bw42StoreBaseline(state);render();setCloudStatus('Updated from cloud automatically.');
  }catch(e){setCloudStatus('Cloud refresh failed: '+e.message)}finally{bw42Checking=false}}
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)bw42PullCloud()});
 window.addEventListener('focus',()=>bw42PullCloud());
@@ -1428,7 +1488,7 @@ const bw73OldNav=navItems;
 navItems=function(){const remove=new Set(['horrorfest60','christmasfest60','review5','compare7','reports7','stats5','statistics5','health5']);const a=bw73OldNav().filter(x=>!remove.has(x[0]));const at=a.findIndex(x=>x[0]==='settings');a.splice(at<0?a.length:at,0,['holiday73','✦','Holiday Fest'],['insights73','▤','Statistics & Reports']);return a};
 function bw73Holiday(){$('main').innerHTML=pageHead('SEASONAL CINEMA','Holiday Fest','Two traditions. Every movie remembered.')+'<div class="bw73-hub bw73-holiday"><button class="bw73-tile" id="bw73Horror"><strong>🎃 Horrorfest</strong><small>October viewings, milestones and annual statistics</small></button><button class="bw73-tile" id="bw73Christmas"><strong>❄ Christmas Fest</strong><small>December viewings, favorites and annual statistics</small></button></div>';$('bw73Horror').onclick=()=>go('horrorfest60');$('bw73Christmas').onclick=()=>go('christmasfest60')}
 function bw73Insights(){$('main').innerHTML=pageHead('YOUR MOVIE STORY','Statistics & Reports','Explore your viewing history and share what matters.')+'<div class="bw73-hub">'+[['stats5','Statistics Center','Rankings, ratings and trends'],['review5','Year in Review','Your annual cinema retrospective'],['compare7','Year vs. Year','Compare your movie years'],['reports7','Report Studio','Create, export and share reports']].map(([id,title,desc])=>'<button class="bw73-tile" data-bw73-page="'+id+'"><strong>'+title+'</strong><small>'+desc+'</small></button>').join('')+'</div>';document.querySelectorAll('[data-bw73-page]').forEach(b=>b.onclick=()=>go(b.dataset.bw73Page))}
-const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.7.6';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
+const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.7.7';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
 // Always reset modal's internal scroll position, not the underlying page.
 const bw73OpenModal=openModal;openModal=function(...args){bw73OpenModal(...args);requestAnimationFrame(()=>{for(const el of [$('modalBody'),document.querySelector('.modal'),document.querySelector('.modal-backdrop.open')])if(el)el.scrollTop=0})};
 // Decorate only the actual filtered rows, after every list redraw.
@@ -1969,7 +2029,7 @@ document.addEventListener('click',function(e){
  bw771Status('Starting '+(kind==='poster'?'poster':'backdrop')+' download…');
  Promise.resolve().then(()=>bw773Start(kind)).catch(err=>bw771Status('Could not start download: '+err.message));
 },true);
-// V7.7.6: navigation context, current-year log filter and progressive rendering.
+// V7.7.7: navigation context, current-year log filter and progressive rendering.
 let bw776EditReturn=null;
 function bw776ScrollPositions(){
  const main=$('main');return {windowY:window.scrollY||0,mainY:main?.scrollTop||0};
@@ -2014,8 +2074,12 @@ openDetail=function(...args){
  return result;
 };
 // First render must run after all wrappers, not midway through application initialization.
-render();
-if(cloudConfig){
+(async()=>{
+ await bw777Bootstrap();
+ bw777LastSavedContent=bw42Content(state);
+ render();
+ if(bw777StorageError)setCloudStatus('Local database warning: '+bw777StorageError+'. Cloud sync is independent.');
+ if(cloudConfig){
   if(!initCloudClient()){
     let retries=0;
     const cloudRetryTimer=setInterval(()=>{
@@ -2023,6 +2087,7 @@ if(cloudConfig){
       if(initCloudClient())clearInterval(cloudRetryTimer);
     },1000);
   }
-}
+ }
+})().catch(e=>{console.error('App initialization failed',e);render();});
 })();
 </script></body></html>

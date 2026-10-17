@@ -47,3 +47,6 @@ V7.7.6: Corrected JavaScript scope: V7.6+ functions now remain inside applicatio
 - Opening Movie Details resets scroll to the top.
 - Movie Log defaults to the current viewing year, with an always-visible year selector and All Years option.
 - Movie Log renders 75 cards initially and loads more as the user scrolls or clicks Show next. Full history and statistics remain intact.
+
+
+V7.7.7: Library and cloud sync baselines are stored in IndexedDB instead of localStorage. Original localStorage data is removed only after IndexedDB confirms successful storage. Cloud sync errors are not caused by localStorage quota errors. Back up your JSON before upgrading.
