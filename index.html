@@ -623,7 +623,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 @media print{@page{margin:6mm}body *{visibility:hidden!important}#bw7Report,#bw7Report *{visibility:visible!important}#bw7Report.bw712-card{position:absolute!important;left:50%!important;top:0!important;transform:translateX(-50%);width:min(100%,175mm)!important;max-width:175mm!important;margin:0!important;box-shadow:none!important;print-color-adjust:exact!important;-webkit-print-color-adjust:exact!important}}
 
 
-/* V7.8.16: memory card text refinements */
+/* V7.8.17: memory card text refinements */
 .bw712-title{font-size:clamp(13px,3.35vw,32px)!important;white-space:normal!important;overflow-wrap:break-word!important;word-break:normal!important;line-height:1.07!important}
 .bw712-genre{font-size:clamp(8px,1.25vw,12px)!important;line-height:1.1!important;white-space:normal!important;overflow-wrap:anywhere!important}
 @media(max-width:550px){.bw712-title{font-size:clamp(11px,3.65vw,21px)!important}.bw712-genre{font-size:clamp(7px,1.6vw,10px)!important}}
@@ -634,7 +634,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 .bw714-ratings strong{font-size:clamp(13px,2vw,22px);color:var(--text)}
 @media(max-width:650px){.bw714-ratings{grid-template-columns:repeat(2,minmax(0,1fr))}.bw731-bottom{font-size:11px!important;line-height:1.45;white-space:normal!important;overflow-wrap:normal}}
 
-/* V7.8.16: genuine illustrated holiday overlays, no impact on the card's content */
+/* V7.8.17: genuine illustrated holiday overlays, no impact on the card's content */
 #movieList .movie-row.bw715-horror,#movieList .movie-row.bw715-christmas{position:relative!important;isolation:isolate;border-color:transparent!important;overflow:visible!important}
 #movieList .movie-row.bw715-horror::after,#movieList .movie-row.bw715-christmas::after{content:"";position:absolute;z-index:5;inset:-5px;pointer-events:none;border-style:solid;border-width:17px 20px;border-image-slice:90 115 90 115;border-image-width:17px 20px;border-image-repeat:stretch;filter:drop-shadow(0 1px 2px #0009)}
 #movieList .movie-row.bw715-horror::after{border-image-source:url("frame-horror.webp")}
@@ -650,7 +650,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 .bw716-wide .bw716-subcard{max-width:none}
 #movieList .movie-row.bw715-horror::after,#movieList .movie-row.bw715-christmas::after{border-image-repeat:round;filter:drop-shadow(0 1px 1px #0009)}
 
-/* V7.8.16 full-screen share card viewer and distortion-resistant festival frames */
+/* V7.8.17 full-screen share card viewer and distortion-resistant festival frames */
 #bw7Report{cursor:zoom-in}
 .bw717-lightbox{position:fixed;inset:0;z-index:999999;background:#050304f5;display:flex;align-items:center;justify-content:center;padding:14px;overflow:auto}
 .bw717-viewport{width:100%;height:100%;display:flex;align-items:center;justify-content:center;overflow:auto}
@@ -663,7 +663,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 }
 @media print{.bw717-lightbox{display:none!important}}
 
-/* V7.8.16 seasonal decorations: repeat at native scale, never stretch an image. */
+/* V7.8.17 seasonal decorations: repeat at native scale, never stretch an image. */
 #movieList .movie-row.bw715-horror,
 #movieList .movie-row.bw715-christmas{
  border:1px solid transparent!important;
@@ -731,7 +731,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 @media(min-width:651px){#bw717FullscreenCard .bw712-title{font-size:clamp(17px,3.9vw,38px)!important;line-height:1.04!important}}
 
 
-/* V7.8.16: exact approved concept artwork, with transparent interior. */
+/* V7.8.17: exact approved concept artwork, with transparent interior. */
 #movieList .movie-row.bw715-horror::after,
 #movieList .movie-row.bw715-christmas::after{
  inset:-5px!important;content:""!important;border:0!important;box-shadow:none!important;
@@ -749,7 +749,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
  #movieList .movie-row.bw715-christmas::after{background-image:url("fest-christmas-mobile.webp")!important}
 }
 
-/* V7.8.16: user-supplied transparent art, proportion-matched to ~6:1 log cards.
+/* V7.8.17: user-supplied transparent art, proportion-matched to ~6:1 log cards.
    Overlay occupies card surface; clicks pass through to controls. */
 #movieList .movie-row.bw715-horror::after,
 #movieList .movie-row.bw715-christmas::after{
@@ -766,7 +766,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
  #movieList .movie-row.bw715-christmas::after{inset:-2px!important}
 }
 
-/* V7.8.16: slimmer holiday overlays, no opaque center, no change to card sizing. */
+/* V7.8.17: slimmer holiday overlays, no opaque center, no change to card sizing. */
 #movieList .movie-row.bw715-horror::after{background-image:url("fest-horror-slim.webp")!important}
 #movieList .movie-row.bw715-christmas::after{background-image:url("fest-christmas-slim.webp")!important}
 #movieList .movie-row.bw715-horror::after,
@@ -782,7 +782,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 }
 
 
-/* V7.8.16: nine-slice holiday artwork. Corners remain undistorted;
+/* V7.8.17: nine-slice holiday artwork. Corners remain undistorted;
    top/bottom and sides extend continuously around the actual card edge. */
 #movieList .movie-row.bw715-horror::after,
 #movieList .movie-row.bw715-christmas::after{
@@ -827,7 +827,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 }
 @media(prefers-reduced-motion:reduce){#movieList .bw722-bat{animation:none!important}}
 
-/* V7.8.16: independently sized perimeter artwork; avoids nine-slice seams and fat corners. */
+/* V7.8.17: independently sized perimeter artwork; avoids nine-slice seams and fat corners. */
 #movieList .movie-row.bw715-horror::after,
 #movieList .movie-row.bw715-christmas::after{
  border:0!important;border-image:none!important;
@@ -881,7 +881,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
  #movieList .bw723-drop,#movieList .bw723-splash,#movieList .movie-row.bw715-christmas::after{animation:none!important}
 }
 
-/* V7.8.16: return to the more attractive nine-slice frame from 7.7.22.
+/* V7.8.17: return to the more attractive nine-slice frame from 7.7.22.
    Side strings are separately tiled; corners are drawn once by border-image. */
 #movieList .movie-row.bw715-horror::after,
 #movieList .movie-row.bw715-christmas::after{
@@ -916,7 +916,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 }
 @media(prefers-reduced-motion:reduce){#movieList .movie-row.bw715-christmas::after{animation:none!important}}
 
-/* V7.8.16: move the side frame artwork outward without changing its scale. */
+/* V7.8.17: move the side frame artwork outward without changing its scale. */
 #movieList .movie-row.bw715-horror::after,
 #movieList .movie-row.bw715-christmas::after{
  left:-8px!important;right:-8px!important;
@@ -927,7 +927,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
  #movieList .movie-row.bw715-christmas::after{left:-5px!important;right:-5px!important}
 }
 
-/* V7.8.16: correct and ship image assets, push both sides clearly outward.
+/* V7.8.17: correct and ship image assets, push both sides clearly outward.
    Separate left/right artwork permits 180-degree rotation of the horror right side. */
 #movieList .movie-row.bw715-horror::after,
 #movieList .movie-row.bw715-christmas::after{
@@ -950,7 +950,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
  }
 }
 
-/* V7.8.16: keep three-line movie titles completely inside their designated area. */
+/* V7.8.17: keep three-line movie titles completely inside their designated area. */
 .bw712-title{
  white-space:normal!important;
  overflow-wrap:anywhere!important;
@@ -974,7 +974,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
  }
 }
 
-/* V7.8.16: smaller long titles, safe three-line wrap, no vertical clipping. */
+/* V7.8.17: smaller long titles, safe three-line wrap, no vertical clipping. */
 .bw712-title,#bw717FullscreenCard .bw712-title{
  font-size:clamp(10px,2.55vw,23px)!important;
  line-height:1.12!important;
@@ -994,7 +994,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
  }
 }
 
-/* V7.8.16: clean settings, simple holiday borders, low-overhead animation options */
+/* V7.8.17: clean settings, simple holiday borders, low-overhead animation options */
 .bw729-controls{margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
 .bw729-controls h3{margin:15px 0 9px;font-size:17px}
 .bw729-controls h4{margin:8px 0;font-size:14px}
@@ -1016,7 +1016,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 @keyframes bw729Fall{0%{transform:translateY(-15px);opacity:0}10%{opacity:.85}90%{opacity:.85}100%{transform:translateY(190px);opacity:0}}
 @media(prefers-reduced-motion:reduce){#movieList .bw729-fall{animation:none!important}}
 
-/* V7.8.16 distinct holiday frames, animated preview and effect-specific motion */
+/* V7.8.17 distinct holiday frames, animated preview and effect-specific motion */
 .bw730-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .bw730-preview-label{font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--muted);margin:5px 0 10px}
 .bw730-preview{position:relative;isolation:isolate;overflow:hidden;min-height:108px;display:flex;align-items:center;gap:12px;padding:14px;background:#20242d;border:1px solid #4b5262;border-radius:11px;color:white}
@@ -1063,7 +1063,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 @media(max-width:850px){#main .cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:440px){#main .cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
-/* V7.8.16: collection banners and quick movie-log actions */
+/* V7.8.17: collection banners and quick movie-log actions */
 .bw782-banner-toggle{display:block;width:100%;background:none;border:0;padding:0;cursor:pointer;text-align:left;color:inherit}
 .bw782-banner-toggle .bw78-banner{margin:10px 0 3px}
 .bw782-expand-label{display:block;text-align:right;font-size:12px;color:var(--muted);padding:4px 2px 10px}
@@ -1083,7 +1083,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 #movieList .bw782-external{font-size:11px;color:var(--muted);margin-top:7px;white-space:normal;line-height:1.5}
 @media(max-width:650px){#movieList .row-actions .bw782-beth,#movieList .row-actions .bw782-finish{min-width:35px;min-height:35px}}
 
-/* V7.8.16: action bar and holiday decoration recovery */
+/* V7.8.17: action bar and holiday decoration recovery */
 #movieList .movie-row .row-actions{display:flex!important;flex-direction:column!important;align-items:stretch!important;justify-content:center!important;gap:7px!important;min-width:48px!important;visibility:visible!important;opacity:1!important}
 #movieList .movie-row .row-actions .bw731-star,#movieList .movie-row .row-actions .bw782-beth,#movieList .movie-row .row-actions .bw782-finish{display:flex!important;position:relative!important;visibility:visible!important;opacity:1!important;align-items:center!important;justify-content:center!important;grid-column:auto!important;grid-row:auto!important;min-width:42px!important;min-height:42px!important;border:1px solid var(--line)!important;border-radius:9px!important;background:transparent!important;cursor:pointer!important}
 #movieList .movie-row .row-actions .bw782-beth{color:#ed4762!important}
@@ -1093,7 +1093,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 #movieList .movie-row.bw715-horror::after,#movieList .movie-row.bw715-christmas::after{display:block!important;visibility:visible!important}
 @media(max-width:650px){#movieList .movie-row .row-actions{min-width:36px!important}#movieList .movie-row .row-actions .bw731-star,#movieList .movie-row .row-actions .bw782-beth,#movieList .movie-row .row-actions .bw782-finish{min-width:34px!important;min-height:34px!important}}
 
-/* V7.8.16: movie-card recovery, independent buttons and external ratings */
+/* V7.8.17: movie-card recovery, independent buttons and external ratings */
 #movieList .movie-row .row-actions{display:flex!important;flex-direction:column!important;gap:6px!important;align-items:center!important;justify-content:center!important;min-width:46px!important}
 #movieList .movie-row .row-actions .bw731-star,#movieList .movie-row .row-actions .bw782-beth,#movieList .movie-row .row-actions .bw782-finish{display:inline-flex!important;visibility:visible!important;opacity:1!important;align-items:center!important;justify-content:center!important;width:43px!important;height:43px!important;min-width:43px!important;min-height:43px!important;border:1px solid var(--line)!important;border-radius:9px!important;background:transparent!important}
 #movieList .movie-row .row-actions .bw782-beth{color:#ed4762!important}
@@ -1114,7 +1114,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 #movieList.v36-grid .movie-row.bw731-card .row-actions > button.bw782-beth,
 #movieList.v36-grid .movie-row.bw731-card .row-actions > button.bw782-finish{display:inline-flex!important;visibility:visible!important;opacity:1!important}
 
-/* V7.8.16: minimal, scoped card-action layout fixes */
+/* V7.8.17: minimal, scoped card-action layout fixes */
 @media(min-width:651px){
  #movieList .movie-row .row-actions{
   display:flex!important;flex-direction:column!important;grid-template-columns:none!important;
@@ -1145,7 +1145,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 .bw712-card.bw789-alt-frame{background-size:100% 100%!important;background-position:center!important;background-repeat:no-repeat!important}
 @media print{.bw789-memory-controls,.bw789-frame-help{display:none!important}.bw712-card.bw789-alt-frame{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
 
-/* V7.8.16: Compact iPhone action column; prevent controls from dictating card height. */
+/* V7.8.17: Compact iPhone action column; prevent controls from dictating card height. */
 @media(max-width:650px){
  #movieList:not(.v36-grid):not(.bw43-textonly) .movie-row.bw731-card .row-actions{
   display:flex!important;flex-direction:column!important;grid-template-columns:none!important;
@@ -1168,7 +1168,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
  }
 }
 
-/* V7.8.16: override the original desktop 2x2 action grid at equal/higher specificity.
+/* V7.8.17: override the original desktop 2x2 action grid at equal/higher specificity.
    Keep the three functional controls vertically stacked in the existing third column. */
 @media(min-width:761px){
  #movieList:not(.v36-grid):not(.bw43-textonly) .movie-row.bw731-card{
@@ -1200,7 +1200,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
  }
 }
 
-/* V7.8.16: compact iPhone log controls, search and year on the first row. */
+/* V7.8.17: compact iPhone log controls, search and year on the first row. */
 @media(max-width:700px){
  #main .toolbar{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,0.8fr) auto auto!important;gap:9px!important;align-items:center!important}
  #main .toolbar .searchwrap{grid-column:1 / 3!important;grid-row:1!important;min-width:0!important;width:100%!important}
@@ -1212,7 +1212,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
  #main .toolbar #groupSelect{grid-column:4!important;grid-row:2!important;width:100%!important;min-width:0!important}
 }
 
-/* V7.8.16: filled star represents an existing personal viewing rating. */
+/* V7.8.17: filled star represents an existing personal viewing rating. */
 #movieList .movie-row .row-actions button.bw731-star.bw7813-rated{color:#edbd57!important}
 /* The search occupies the full first line; the remaining controls share line two. */
 @media(max-width:700px){
@@ -1227,7 +1227,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 }
 </style></head>
 <body><div class="app">
-<header class="topbar"><button class="bw-home" id="bwHome" type="button" title="Go to Movie Log" aria-label="Blackwood Movie Log home"><div class="brandmark">B</div><div class="brand"><span class="bw-wordmark">BLACKWOOD</span><span class="bw-submark">MOVIE LOG</span><small>YOUR PERSONAL FILM ARCHIVE <span class="bw-version">Version 7.8.16</span></small></div></button><div class="top-spacer"></div><div class="status"><span class="dot"></span><span id="saveStatus">Saved on this device</span></div><button class="iconbtn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☼</button><button class="iconbtn" id="menuBtn" aria-label="Open navigation" title="Navigation">☰</button></header>
+<header class="topbar"><button class="bw-home" id="bwHome" type="button" title="Go to Movie Log" aria-label="Blackwood Movie Log home"><div class="brandmark">B</div><div class="brand"><span class="bw-wordmark">BLACKWOOD</span><span class="bw-submark">MOVIE LOG</span><small>YOUR PERSONAL FILM ARCHIVE <span class="bw-version">Version 7.8.17</span></small></div></button><div class="top-spacer"></div><div class="status"><span class="dot"></span><span id="saveStatus">Saved on this device</span></div><button class="iconbtn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☼</button><button class="iconbtn" id="menuBtn" aria-label="Open navigation" title="Navigation">☰</button></header>
 <div class="layout"><aside class="sidebar"><div class="side-label">LIBRARY</div><nav class="navlist" id="sideNav"></nav><div class="sidebar-note"><strong style="color:var(--text)">Private by design</strong><br>This first build saves your records in this browser on this device. Cloud sync is not connected yet.</div></aside><main class="main" id="main"></main></div>
 <nav class="mobile-nav" id="mobileNav"></nav></div>
 <div class="modal-backdrop" id="modalBackdrop"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modalhead"><h2 id="modalTitle">Add movie</h2><button class="iconbtn" id="modalClose" aria-label="Close">×</button></div><div id="modalBody"></div><div class="modalfoot" id="modalFoot"></div></section></div><div class="toast" id="toast"></div>
@@ -2071,7 +2071,7 @@ const bw60OldHealth=bw5Health;bw5Health=function(){bw60OldHealth();const total=s
 
 
 // ===== BLACKWOOD MOVIE LOG V7.0 =====
-const BW7_VERSION='7.8.16';
+const BW7_VERSION='7.8.17';
 function bw7Views(){return bw5V().slice().sort((a,b)=>bw5Date(a).localeCompare(bw5Date(b))||String(a.id).localeCompare(String(b.id)))}
 function bw7Key(v){const m=movie(v.movieId);return m?bw60MovieKey(m):v.movieId}
 function bw7Classify(){const seen=new Set();return bw7Views().map(v=>{const key=bw7Key(v),rewatch=seen.has(key)||!!v.rewatch;seen.add(key);return {v,rewatch,m:movie(v.movieId)}})}
@@ -2105,7 +2105,7 @@ function bw7Goals(){state.uiSettings.bw7Goals??={};const y=bw7Year(),n=bw7Views(
 function bw7Compare(){const years=bw5Years().sort((a,b)=>b-a),a=Number(state.uiSettings.bw7CompareA||years[0]||new Date().getFullYear()),b=Number(state.uiSettings.bw7CompareB||years[1]||a-1),metric=y=>{const s=bw7StatsFor(y),rated=s.all.filter(x=>x.v.rating!=null);return [s.all.length,new Set(s.all.map(x=>bw7Key(x.v))).size,s.first,s.re,s.h.n,s.c.n,Math.round(s.all.reduce((n,x)=>n+Number(x.m?.runtime||0),0)/60),rated.length?(rated.reduce((n,x)=>n+Number(x.v.rating),0)/rated.length).toFixed(1):'—']};const va=metric(a),vb=metric(b);$('main').innerHTML=pageHead('YOUR MOVIE YEARS','Year vs. Year','Compare your viewing habits across two years.')+'<div class="bw7-controls"><select id="bw7CA">'+years.map(y=>'<option '+(a===y?'selected':'')+'>'+y+'</option>').join('')+'</select><span>versus</span><select id="bw7CB">'+years.map(y=>'<option '+(b===y?'selected':'')+'>'+y+'</option>').join('')+'</select></div><div class="bw7-panel"><table style="width:100%;text-align:left"><thead><tr><th>Metric</th><th>'+a+'</th><th>'+b+'</th></tr></thead><tbody>'+['Viewings','Unique movies','New movies','Rewatches','Horrorfest','Christmas Fest','Hours watched','Average rating'].map((name,i)=>'<tr><td>'+name+'</td><td>'+va[i]+'</td><td>'+vb[i]+'</td></tr>').join('')+'</tbody></table></div>';['bw7CA','bw7CB'].forEach((id,i)=>$(id).onchange=e=>{state.uiSettings[i?'bw7CompareB':'bw7CompareA']=Number(e.target.value);save();bw7Compare()})}
 
 
-/* V7.8.16: Movie Memory Card frame library. Built-in images are bundled.
+/* V7.8.17: Movie Memory Card frame library. Built-in images are bundled.
    Custom uploads are saved in IndexedDB, not the cloud movie payload. */
 const bw789BuiltinFrames=['Classic','Horror','Christmas','Castle','Patriotic','Hero','Action','Comedy'];
 let bw789CustomFrames=[];
@@ -2113,6 +2113,18 @@ let bw789SelectedFrame=localStorage.getItem('bw789SelectedFrame')||'original';
 const bw7816FrameBucket='movie-memory-frames';
 let bw7816CloudFrameIds=new Set();
 let bw7816FrameLoading=false;
+async function bw7817CloudNames(){
+ if(!cloudClient||!cloudUser)return {};
+ const {data,error}=await cloudClient.storage.from(bw7816FrameBucket).download(cloudUser.id+'/frame-names.json');
+ if(error)return {};
+ try{return JSON.parse(await data.text())||{}}catch(e){return {}}
+}
+async function bw7817SaveCloudNames(names){
+ if(!cloudClient||!cloudUser)throw Error('Sign in to sync names');
+ const blob=new Blob([JSON.stringify(names)],{type:'application/json'});
+ const {error}=await cloudClient.storage.from(bw7816FrameBucket).upload(cloudUser.id+'/frame-names.json',blob,{contentType:'application/json',upsert:true});
+ if(error)throw error;
+}
 async function bw7816SyncFrames(){
  if(bw7816FrameLoading||!cloudClient||!cloudUser)return;
  bw7816FrameLoading=true;
@@ -2120,6 +2132,7 @@ async function bw7816SyncFrames(){
   const prefix=cloudUser.id+'/';
   const {data:items,error}=await cloudClient.storage.from(bw7816FrameBucket).list(cloudUser.id,{limit:1000});
   if(error)throw error;
+  const names=await bw7817CloudNames();
   const cloudFrames=[];
   for(const item of items||[]){
    if(!item.name.endsWith('.webp'))continue;
@@ -2128,16 +2141,77 @@ async function bw7816SyncFrames(){
    if(downloadError)throw downloadError;
    const data=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=()=>reject(reader.error);reader.readAsDataURL(downloadBlob)});
    const local=bw789CustomFrames.find(f=>f.id===id);
-   const frame={id,name:local?.name||id.split('__').slice(1).join('__')||'Custom frame',data};
+   const frame={id,name:names[id]||local?.name||id.split('__').slice(1).join('__')||'Custom frame',data};
    cloudFrames.push(frame);await bw789StoreFrame(frame);
   }
   bw7816CloudFrameIds=new Set(cloudFrames.map(f=>f.id));
-  // Keep device-only uploads available until they have been successfully uploaded.
   bw789CustomFrames=[...cloudFrames,...bw789CustomFrames.filter(f=>!bw7816CloudFrameIds.has(f.id))];
-  const select=document.getElementById('bw789FrameSelect');
-  if(select){select.innerHTML=bw789FrameOptions();bw789ApplyFrame(document.getElementById('bw7Report'));bw7810SyncDeleteButton()}
+  bw7817RefreshPicker();
  }catch(e){console.warn('Memory frame cloud sync:',e);if(document.getElementById('bw789FrameSelect'))toast('Frame cloud sync unavailable. Check Supabase Storage setup.');}
  finally{bw7816FrameLoading=false}
+}
+function bw7817RefreshPicker(){
+ const select=document.getElementById('bw789FrameSelect');
+ if(select){select.innerHTML=bw789FrameOptions();bw789ApplyFrame(document.getElementById('bw7Report'));bw7810SyncDeleteButton()}
+}
+async function bw7817RenameFrame(){
+ const frame=bw789CustomFrames.find(f=>'custom:'+f.id===bw789SelectedFrame);
+ if(!frame){toast('Select an uploaded frame to rename');return}
+ const proposed=prompt('Name this Movie Memory frame:',frame.name);
+ if(proposed===null)return;
+ const name=proposed.trim().slice(0,80);
+ if(!name){toast('Please enter a frame name');return}
+ const old=frame.name;frame.name=name;
+ await bw789StoreFrame(frame);bw7817RefreshPicker();
+ try{if(cloudUser&&bw7816CloudFrameIds.has(frame.id)){const names=await bw7817CloudNames();names[frame.id]=name;await bw7817SaveCloudNames(names);toast('Frame renamed and synced across devices')}
+ else toast('Frame renamed locally. Use Sync Existing Frames to upload it.')}
+ catch(e){console.warn('Frame rename cloud sync failed',e);toast('Renamed on this device; cloud name sync failed')}
+}
+async function bw7817SyncExisting(){
+ if(!cloudClient||!cloudUser){toast('Sign in to Supabase before syncing frames');return}
+ const btn=document.getElementById('bw7817SyncExisting');if(btn)btn.disabled=true;
+ let uploaded=0,failed=0;
+ try{
+  const {data:items,error}=await cloudClient.storage.from(bw7816FrameBucket).list(cloudUser.id,{limit:1000});
+  if(error)throw error;
+  const existing=new Set((items||[]).filter(x=>x.name.endsWith('.webp')).map(x=>x.name.slice(0,-5)));
+  const names=await bw7817CloudNames();
+  const local=await bw789AllFrames();
+  for(const frame of local){
+   if(!existing.has(frame.id)){
+    try{await bw7816UploadFrame(frame);uploaded++}catch(e){failed++;console.warn('Frame migration failed',frame.id,e)}
+   }
+   if(!names[frame.id]&&frame.name)names[frame.id]=frame.name;
+  }
+  try{await bw7817SaveCloudNames(names)}catch(e){failed++;console.warn('Frame names sync failed',e)}
+  await bw7816SyncFrames();
+  toast('Frame sync: '+uploaded+' uploaded, '+failed+' failed. '+(failed?'Check console or retry.':'Available on other devices.'));
+ }catch(e){console.error(e);toast('Unable to sync frames: '+(e.message||e))}
+ finally{if(btn)btn.disabled=false}
+}
+async function bw7817ConvertFile(file){
+ if(!file.type.startsWith('image/'))throw Error('Unsupported image: '+file.name);
+ const bitmap=await createImageBitmap(file);
+ const canvas=document.createElement('canvas');canvas.width=1177;canvas.height=1337;
+ canvas.getContext('2d').drawImage(bitmap,0,0,1177,1337);bitmap.close?.();
+ return {id:Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,10),name:file.name.replace(/\.[^.]+$/,'').slice(0,80)||'Custom frame',data:canvas.toDataURL('image/webp',.84)};
+}
+async function bw7817BulkUpload(files){
+ const list=[...files];if(!list.length)return;
+ const btn=document.getElementById('bw7817BulkUpload');if(btn)btn.disabled=true;
+ let success=0,localOnly=0,failed=0;
+ for(let i=0;i<list.length;i++){
+  const file=list[i];
+  try{
+   const frame=await bw7817ConvertFile(file);await bw789StoreFrame(frame);
+   bw789CustomFrames.push(frame);
+   try{if(await bw7816UploadFrame(frame)){success++;const names=await bw7817CloudNames();names[frame.id]=frame.name;await bw7817SaveCloudNames(names)}else localOnly++}
+   catch(e){console.warn('Frame cloud upload failed:',file.name,e);localOnly++}
+  }catch(e){console.warn('Frame processing failed:',file.name,e);failed++}
+  toast('Importing frames '+(i+1)+' / '+list.length);bw7817RefreshPicker();
+ }
+ if(btn)btn.disabled=false;
+ toast('Frames imported: '+success+' cloud synced, '+localOnly+' local only, '+failed+' failed.');
 }
 async function bw7816UploadFrame(frame){
  if(!cloudClient||!cloudUser)return false;
@@ -2237,6 +2311,7 @@ function bw789WireFramePicker(){
   deleteBtn.disabled=true;
   try{
    await bw7816DeleteFrame(frame.id);
+   if(cloudUser){try{const names=await bw7817CloudNames();delete names[frame.id];await bw7817SaveCloudNames(names)}catch(e){console.warn('Could not remove cloud name',e)}}
    await bw7810RemoveFrame(frame.id);
    bw789CustomFrames=bw789CustomFrames.filter(f=>f.id!==frame.id);
    bw789SelectedFrame='original';
@@ -2255,28 +2330,24 @@ function bw789WireFramePicker(){
   requestAnimationFrame(()=>bw727FitMemoryTitle(document.getElementById('bw7Report')));
  };
  document.getElementById('bw789UploadFrame').onclick=()=>input.click();
+ document.getElementById('bw7817RenameFrame').onclick=()=>bw7817RenameFrame();
+ document.getElementById('bw7817SyncExisting').onclick=()=>bw7817SyncExisting();
+ const bulk=document.getElementById('bw7817BulkFiles');
+ document.getElementById('bw7817BulkUpload').onclick=()=>bulk.click();
+ bulk.onchange=async()=>{await bw7817BulkUpload(bulk.files||[]);bulk.value=''};
  input.onchange=async()=>{
   const file=input.files&&input.files[0];if(!file)return;
-  if(!file.type.startsWith('image/')){toast('Choose an image file');return}
   try{
-   const bitmap=await createImageBitmap(file);
-   const canvas=document.createElement('canvas');
-   canvas.width=1177;canvas.height=1337;
-   canvas.getContext('2d').drawImage(bitmap,0,0,1177,1337);
-   bitmap.close?.();
-   const data=canvas.toDataURL('image/webp',.84);
-   const id=Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,7);
-   const name=file.name.replace(/\.[^.]+$/,'').slice(0,55)||'Custom frame';
-   const frame={id,name,data};
+   const frame=await bw7817ConvertFile(file);
    await bw789StoreFrame(frame);
    let synced=false;
-   try{synced=await bw7816UploadFrame(frame)}catch(syncError){console.warn('Frame saved locally but cloud upload failed:',syncError)}
-   bw789CustomFrames=await bw789AllFrames();
-   bw789SelectedFrame='custom:'+id;
+   try{
+    synced=await bw7816UploadFrame(frame);
+    if(synced){const names=await bw7817CloudNames();names[frame.id]=frame.name;await bw7817SaveCloudNames(names)}
+   }catch(syncError){console.warn('Frame saved locally but cloud upload failed:',syncError)}
+   bw789CustomFrames=await bw789AllFrames();bw789SelectedFrame='custom:'+frame.id;
    try{localStorage.setItem('bw789SelectedFrame',bw789SelectedFrame)}catch(e){}
-   select.innerHTML=bw789FrameOptions();
-   bw789ApplyFrame(document.getElementById('bw7Report'));
-   bw7810SyncDeleteButton();
+   bw7817RefreshPicker();
    toast(synced?'Frame uploaded and synced across devices':'Frame saved on this device only. Check cloud sign-in and Storage setup.');
   }catch(e){console.error(e);toast('Could not save frame. Check available device storage.')}
   input.value='';
@@ -2298,7 +2369,7 @@ function bw7Memory(m){
  const poster=posterUrl?'<img class="bw712-poster" src="'+esc(posterUrl)+'" alt="Poster for '+esc(m.title)+'">':'<div class="bw712-poster-missing">Poster unavailable</div>';
  const ratingFill=ratingNumber===null?0:Math.max(0,Math.min(100,ratingNumber*10));
  $('main').innerHTML=pageHead('A PERSONAL CINEMA KEEPSAKE','Movie Memory Card','A collectible record of your screening at Blackwood Theater.')+
- '<div class="bw7-controls bw789-memory-controls"><label for="bw789FrameSelect">Memory card frame</label><select id="bw789FrameSelect" aria-label="Choose memory card frame">'+bw789FrameOptions()+'</select><button class="btn" type="button" id="bw789UploadFrame">Upload Frame</button><button class="btn danger" type="button" id="bw7810DeleteFrame" disabled title="Only uploaded frames can be deleted">Delete Frame</button><input id="bw789FrameFile" type="file" accept="image/png,image/jpeg,image/webp" hidden><button class="btn primary" id="bw7PrintMemory">Print / Save PDF</button><button class="btn" id="bw7MemoryBack">Back to movie</button></div><p class="bw789-frame-help">For best alignment, upload a frame with the same 1177 × 1337 layout and matching empty data areas. Uploaded frames are stored on this device.</p>'+
+ '<div class="bw7-controls bw789-memory-controls"><label for="bw789FrameSelect">Memory card frame</label><select id="bw789FrameSelect" aria-label="Choose memory card frame">'+bw789FrameOptions()+'</select><button class="btn" type="button" id="bw789UploadFrame">Upload Frame</button><button class="btn" type="button" id="bw7817RenameFrame">Rename Frame</button><button class="btn" type="button" id="bw7817BulkUpload">Bulk Upload Frames</button><input id="bw7817BulkFiles" type="file" accept="image/png,image/jpeg,image/webp" multiple hidden><button class="btn" type="button" id="bw7817SyncExisting">Sync Existing Frames</button><button class="btn danger" type="button" id="bw7810DeleteFrame" disabled title="Only uploaded frames can be deleted">Delete Frame</button><input id="bw789FrameFile" type="file" accept="image/png,image/jpeg,image/webp" hidden><button class="btn primary" id="bw7PrintMemory">Print / Save PDF</button><button class="btn" id="bw7MemoryBack">Back to movie</button></div><p class="bw789-frame-help">For best alignment, upload a frame with the same 1177 × 1337 layout and matching empty data areas. Uploaded frames sync through your Supabase account. Use Sync Existing Frames to migrate older uploads.</p>'+
  '<article id="bw7Report" class="bw712-card" aria-label="Blackwood Theater movie memory card">'+
  '<div class="bw712-poster-area">'+poster+'</div>'+
  '<div class="bw712-title">'+esc(m.title)+'</div>'+
@@ -2444,7 +2515,7 @@ const bw779EmbeddedArtwork={'horrorfest':'data:image/webp;base64,UklGRqiDAABXRUJ
 function bw778Art(id,title){const names={horrorfest60:'horrorfest',christmasfest60:'christmas-fest',stats5:'statistics-center',review5:'year-in-review',compare7:'year-vs-year',reports7:'report-studio',timeline75:'movie-history-timeline',health5:'data-health',awards5:'movie-awards',topten:'my-top-10'};const file=names[id];return file?`<img class="bw778-art" src="${bw779EmbeddedArtwork[file]}" alt="${title}" loading="lazy" decoding="async">`:'';}
 function bw73Holiday(){$('main').innerHTML=pageHead('SEASONAL CINEMA','Holiday Fest','Two traditions. Every movie remembered.')+'<div class="bw73-hub bw73-holiday bw778-gallery"><button class="bw73-tile" id="bw73Horror" aria-label="Open Horrorfest">'+bw778Art('horrorfest60','Horrorfest')+'</button><button class="bw73-tile" id="bw73Christmas" aria-label="Open Christmas Fest">'+bw778Art('christmasfest60','Christmas Fest')+'</button></div>';$('bw73Horror').onclick=()=>go('horrorfest60');$('bw73Christmas').onclick=()=>go('christmasfest60')}
 function bw73Insights(){$('main').innerHTML=pageHead('YOUR MOVIE STORY','Statistics & Reports','Explore your viewing history and share what matters.')+'<div class="bw73-hub bw778-gallery">'+[['stats5','Statistics Center'],['review5','Year in Review'],['compare7','Year vs. Year'],['reports7','Report Studio']].map(([id,title])=>'<button class="bw73-tile" data-bw73-page="'+id+'" aria-label="Open '+title+'">'+bw778Art(id,title)+'</button>').join('')+'</div>';document.querySelectorAll('[data-bw73-page]').forEach(b=>b.onclick=()=>go(b.dataset.bw73Page))}
-const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.8.16';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
+const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.8.17';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
 // Always reset modal's internal scroll position, not the underlying page.
 const bw73OpenModal=openModal;openModal=function(...args){bw73OpenModal(...args);requestAnimationFrame(()=>{for(const el of [$('modalBody'),document.querySelector('.modal'),document.querySelector('.modal-backdrop.open')])if(el)el.scrollTop=0})};
 // Decorate only the actual filtered rows, after every list redraw.
@@ -3047,7 +3118,7 @@ openDetail=function(...args){
 };
 // First render must run after all wrappers, not midway through application initialization.
 
-/* V7.8.16: external ratings. Key is saved on this device, not published with the app. */
+/* V7.8.17: external ratings. Key is saved on this device, not published with the app. */
 const BW714_KEY='blackwood.omdb.key';
 const BW714_CACHE='blackwood.omdb.ratings.v1';
 let bw714Cache={};
@@ -3217,7 +3288,7 @@ bw731Decorate=function(){
 };
 
 
-/* V7.8.16: migrate OMDb results into the same Supabase-backed library payload. */
+/* V7.8.17: migrate OMDb results into the same Supabase-backed library payload. */
 function bw716MigrateRatings(){
  if(!state.externalRatings)state.externalRatings={};
  let changed=false;
@@ -3271,7 +3342,7 @@ renderSettings=function(){
 
 
 
-/* V7.8.16 unified seasonal controls; legacy controls remain wired but are hidden. */
+/* V7.8.17 unified seasonal controls; legacy controls remain wired but are hidden. */
 const bw729OldSettings=renderSettings;
 renderSettings=function(){
  bw729OldSettings();
@@ -3370,7 +3441,7 @@ function bw717ShowMemory(){
  overlay.querySelector('.bw717-close').focus();
 }
 
-/* V7.8.16: capture edit clicks before movie-card overlays or re-render handlers. */
+/* V7.8.17: capture edit clicks before movie-card overlays or re-render handlers. */
 document.addEventListener('click',function(event){
  const btn=event.target.closest?.('#movieList [data-editview]');
  if(!btn)return;
@@ -3378,7 +3449,7 @@ document.addEventListener('click',function(event){
  const id=btn.getAttribute('data-editview');
  if(id)openViewingForm(id);
 },true);
-/* V7.8.16 quick Beth / completion actions and desktop external ratings. */
+/* V7.8.17 quick Beth / completion actions and desktop external ratings. */
 function bw782QuickBeth(viewId){
  const v=state.viewings.find(x=>x.id===viewId);if(!v)return;
  openModal('Watched with Beth?','<p>Was this watched with Beth?</p>',
@@ -3424,7 +3495,7 @@ function bw78RestoreFilters(values){for(const [id,val] of Object.entries(values)
 function bw78ResizeBanner(file){return new Promise((resolve,reject)=>{const url=URL.createObjectURL(file),img=new Image();img.onload=()=>{try{const canvas=document.createElement('canvas');canvas.width=1250;canvas.height=250;const ctx=canvas.getContext('2d');const scale=Math.max(canvas.width/img.width,canvas.height/img.height),w=img.width*scale,h=img.height*scale;ctx.drawImage(img,(1250-w)/2,(250-h)/2,w,h);URL.revokeObjectURL(url);resolve(canvas.toDataURL('image/jpeg',.78))}catch(e){reject(e)}};img.onerror=()=>{URL.revokeObjectURL(url);reject(Error('Invalid image'))};img.src=url})}
 
 
-/* V7.8.16: Movie Awards. Keep existing awardsV5 winners and all unrelated UI intact. */
+/* V7.8.17: Movie Awards. Keep existing awardsV5 winners and all unrelated UI intact. */
 const bw814Categories=['Best Picture','Best Actor','Best Actress','Best Supporting Actor','Best Supporting Actress','Best Director','Best Comedy','Best Action','Best Drama','Best Horror','Best Thriller','Best Documentary','Best Science Fiction','Best Animated','Best Sequel','Best Rewatch','Worst Film','Most Underrated','Most Overrated','Biggest Surprise','Biggest Disappointment'];
 const bw814PeopleCategories=new Set(['Best Actor','Best Actress','Best Supporting Actor','Best Supporting Actress','Best Director']);
 const bw814GenreMap={'Best Comedy':'Comedy','Best Action':'Action','Best Drama':'Drama','Best Horror':'Horror','Best Thriller':'Thriller','Best Documentary':'Documentary','Best Science Fiction':'Science Fiction','Best Animated':'Animation'};
@@ -3433,7 +3504,7 @@ function bw815ReleaseYear(m){const raw=m?.year??m?.releaseYear??m?.releaseDate??
 function bw814YearViews(year){return state.viewings.filter(v=>v.status==='completed'&&movie(v.movieId)&&bw815ReleaseYear(movie(v.movieId))===year)}
 function bw814Entries(year){const byMovie=new Map();for(const v of bw814YearViews(year)){const m=movie(v.movieId);if(!byMovie.has(m.id))byMovie.set(m.id,{m,views:[]});byMovie.get(m.id).views.push(v)}return [...byMovie.values()].map(e=>({...e,rating:Math.max(...e.views.map(v=>v.rating==null?-1:Number(v.rating)).filter(Number.isFinite)),tmdb:Number(e.m.voteAverage??e.m.tmdbRating??e.m.tmdbVoteAverage??e.m.tmdbScore??NaN)}))}
 function bw814GenreMatch(m,g){const genres=Array.isArray(m.genres)?m.genres.map(x=>typeof x==='string'?x:x?.name):String(m.genres||'').split(',');return genres.some(x=>String(x||'').toLowerCase()===g.toLowerCase())||(g==='Horror'&&m.isHorror===true)}
-function bw814Candidates(entries,cat){let a=entries.slice();if(bw814GenreMap[cat])a=a.filter(e=>bw814GenreMatch(e.m,bw814GenreMap[cat]));if(cat==='Best Rewatch')a=a.filter(e=>e.views.some(v=>v.rewatch||v.watchType==='rewatch'));
+function bw814Candidates(entries,cat){let a=entries.slice();if(bw814GenreMap[cat])a=a.filter(e=>bw814GenreMatch(e.m,bw814GenreMap[cat]));if(cat==='Best Rewatch')a=a.filter(e=>e.views.some(v=>v.rewatch===true||v.watchType==='rewatch'||v.isRewatch===true||v.viewingType==='rewatch')||state.viewings.filter(v=>String(v.movieId)===String(e.m.id)&&v.status==='completed').length>1);
  if(cat==='Best Sequel')a=a.filter(e=>/\b(?:part\s*(?:[2-9]|ii|iii|iv|v)|(?:2|3|4|5|6|7|8|9|ii|iii|iv|v|vi|vii|viii|ix))\b/i.test(e.m.title||'')||e.m.isSequel===true);
  if(cat==='Most Underrated'||cat==='Most Overrated')a=a.filter(e=>e.rating>=0&&Number.isFinite(e.tmdb));
  const score=e=>cat==='Most Underrated'?e.rating-e.tmdb:cat==='Most Overrated'?e.tmdb-e.rating:cat==='Worst Film'?-e.rating:e.rating;

@@ -121,7 +121,7 @@ V7.8.14: 21 awards categories including existing Best Picture, TMDB individual p
 V7.8.15: Movie Awards eligibility and year selector now use original movie release year, not viewing year. Existing award records are preserved.
 
 
-## V7.8.16: Cross-device Movie Memory frames
+## V7.8.17: Cross-device Movie Memory frames
 Custom frames remain cached in IndexedDB and now upload/download through a **private Supabase Storage bucket** named `movie-memory-frames` when signed in.
 
 ### One-time Supabase setup
@@ -135,3 +135,11 @@ create policy "Memory frames delete own" on storage.objects for delete to authen
 ```
 
 Previously uploaded device-only frames will remain available locally. To sync an older frame, select its source file and upload again after configuring Storage. All devices must be signed into the same Supabase account.
+
+
+## V7.8.17
+- Rename custom Movie Memory frames on any device. Frame names sync in private Supabase Storage using a per-user `frame-names.json` file.
+- Bulk upload PNG/JPEG/WebP frames with filenames used as names.
+- Sync Existing Frames migrates local IndexedDB frames to Supabase, skipping existing cloud images.
+- Best Rewatch includes marked rewatches or films with multiple completed viewing records, regardless of when they were watched. Awards still filter by original release year.
+- Supabase bucket `movie-memory-frames` must permit authenticated SELECT, INSERT and UPDATE for paths under the signed-in user ID, including JSON metadata.
