@@ -623,7 +623,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 @media print{@page{margin:6mm}body *{visibility:hidden!important}#bw7Report,#bw7Report *{visibility:visible!important}#bw7Report.bw712-card{position:absolute!important;left:50%!important;top:0!important;transform:translateX(-50%);width:min(100%,175mm)!important;max-width:175mm!important;margin:0!important;box-shadow:none!important;print-color-adjust:exact!important;-webkit-print-color-adjust:exact!important}}
 
 
-/* V7.8.4: memory card text refinements */
+/* V7.8.5: memory card text refinements */
 .bw712-title{font-size:clamp(13px,3.35vw,32px)!important;white-space:normal!important;overflow-wrap:break-word!important;word-break:normal!important;line-height:1.07!important}
 .bw712-genre{font-size:clamp(8px,1.25vw,12px)!important;line-height:1.1!important;white-space:normal!important;overflow-wrap:anywhere!important}
 @media(max-width:550px){.bw712-title{font-size:clamp(11px,3.65vw,21px)!important}.bw712-genre{font-size:clamp(7px,1.6vw,10px)!important}}
@@ -634,7 +634,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 .bw714-ratings strong{font-size:clamp(13px,2vw,22px);color:var(--text)}
 @media(max-width:650px){.bw714-ratings{grid-template-columns:repeat(2,minmax(0,1fr))}.bw731-bottom{font-size:11px!important;line-height:1.45;white-space:normal!important;overflow-wrap:normal}}
 
-/* V7.8.4: genuine illustrated holiday overlays, no impact on the card's content */
+/* V7.8.5: genuine illustrated holiday overlays, no impact on the card's content */
 #movieList .movie-row.bw715-horror,#movieList .movie-row.bw715-christmas{position:relative!important;isolation:isolate;border-color:transparent!important;overflow:visible!important}
 #movieList .movie-row.bw715-horror::after,#movieList .movie-row.bw715-christmas::after{content:"";position:absolute;z-index:5;inset:-5px;pointer-events:none;border-style:solid;border-width:17px 20px;border-image-slice:90 115 90 115;border-image-width:17px 20px;border-image-repeat:stretch;filter:drop-shadow(0 1px 2px #0009)}
 #movieList .movie-row.bw715-horror::after{border-image-source:url("frame-horror.webp")}
@@ -650,7 +650,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 .bw716-wide .bw716-subcard{max-width:none}
 #movieList .movie-row.bw715-horror::after,#movieList .movie-row.bw715-christmas::after{border-image-repeat:round;filter:drop-shadow(0 1px 1px #0009)}
 
-/* V7.8.4 full-screen share card viewer and distortion-resistant festival frames */
+/* V7.8.5 full-screen share card viewer and distortion-resistant festival frames */
 #bw7Report{cursor:zoom-in}
 .bw717-lightbox{position:fixed;inset:0;z-index:999999;background:#050304f5;display:flex;align-items:center;justify-content:center;padding:14px;overflow:auto}
 .bw717-viewport{width:100%;height:100%;display:flex;align-items:center;justify-content:center;overflow:auto}
@@ -663,7 +663,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 }
 @media print{.bw717-lightbox{display:none!important}}
 
-/* V7.8.4 seasonal decorations: repeat at native scale, never stretch an image. */
+/* V7.8.5 seasonal decorations: repeat at native scale, never stretch an image. */
 #movieList .movie-row.bw715-horror,
 #movieList .movie-row.bw715-christmas{
  border:1px solid transparent!important;
@@ -731,7 +731,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 @media(min-width:651px){#bw717FullscreenCard .bw712-title{font-size:clamp(17px,3.9vw,38px)!important;line-height:1.04!important}}
 
 
-/* V7.8.4: exact approved concept artwork, with transparent interior. */
+/* V7.8.5: exact approved concept artwork, with transparent interior. */
 #movieList .movie-row.bw715-horror::after,
 #movieList .movie-row.bw715-christmas::after{
  inset:-5px!important;content:""!important;border:0!important;box-shadow:none!important;
@@ -749,7 +749,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
  #movieList .movie-row.bw715-christmas::after{background-image:url("fest-christmas-mobile.webp")!important}
 }
 
-/* V7.8.4: user-supplied transparent art, proportion-matched to ~6:1 log cards.
+/* V7.8.5: user-supplied transparent art, proportion-matched to ~6:1 log cards.
    Overlay occupies card surface; clicks pass through to controls. */
 #movieList .movie-row.bw715-horror::after,
 #movieList .movie-row.bw715-christmas::after{
@@ -766,7 +766,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
  #movieList .movie-row.bw715-christmas::after{inset:-2px!important}
 }
 
-/* V7.8.4: slimmer holiday overlays, no opaque center, no change to card sizing. */
+/* V7.8.5: slimmer holiday overlays, no opaque center, no change to card sizing. */
 #movieList .movie-row.bw715-horror::after{background-image:url("fest-horror-slim.webp")!important}
 #movieList .movie-row.bw715-christmas::after{background-image:url("fest-christmas-slim.webp")!important}
 #movieList .movie-row.bw715-horror::after,
@@ -782,7 +782,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 }
 
 
-/* V7.8.4: nine-slice holiday artwork. Corners remain undistorted;
+/* V7.8.5: nine-slice holiday artwork. Corners remain undistorted;
    top/bottom and sides extend continuously around the actual card edge. */
 #movieList .movie-row.bw715-horror::after,
 #movieList .movie-row.bw715-christmas::after{
@@ -827,7 +827,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 }
 @media(prefers-reduced-motion:reduce){#movieList .bw722-bat{animation:none!important}}
 
-/* V7.8.4: independently sized perimeter artwork; avoids nine-slice seams and fat corners. */
+/* V7.8.5: independently sized perimeter artwork; avoids nine-slice seams and fat corners. */
 #movieList .movie-row.bw715-horror::after,
 #movieList .movie-row.bw715-christmas::after{
  border:0!important;border-image:none!important;
@@ -881,7 +881,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
  #movieList .bw723-drop,#movieList .bw723-splash,#movieList .movie-row.bw715-christmas::after{animation:none!important}
 }
 
-/* V7.8.4: return to the more attractive nine-slice frame from 7.7.22.
+/* V7.8.5: return to the more attractive nine-slice frame from 7.7.22.
    Side strings are separately tiled; corners are drawn once by border-image. */
 #movieList .movie-row.bw715-horror::after,
 #movieList .movie-row.bw715-christmas::after{
@@ -916,7 +916,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 }
 @media(prefers-reduced-motion:reduce){#movieList .movie-row.bw715-christmas::after{animation:none!important}}
 
-/* V7.8.4: move the side frame artwork outward without changing its scale. */
+/* V7.8.5: move the side frame artwork outward without changing its scale. */
 #movieList .movie-row.bw715-horror::after,
 #movieList .movie-row.bw715-christmas::after{
  left:-8px!important;right:-8px!important;
@@ -927,7 +927,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
  #movieList .movie-row.bw715-christmas::after{left:-5px!important;right:-5px!important}
 }
 
-/* V7.8.4: correct and ship image assets, push both sides clearly outward.
+/* V7.8.5: correct and ship image assets, push both sides clearly outward.
    Separate left/right artwork permits 180-degree rotation of the horror right side. */
 #movieList .movie-row.bw715-horror::after,
 #movieList .movie-row.bw715-christmas::after{
@@ -950,7 +950,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
  }
 }
 
-/* V7.8.4: keep three-line movie titles completely inside their designated area. */
+/* V7.8.5: keep three-line movie titles completely inside their designated area. */
 .bw712-title{
  white-space:normal!important;
  overflow-wrap:anywhere!important;
@@ -974,7 +974,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
  }
 }
 
-/* V7.8.4: smaller long titles, safe three-line wrap, no vertical clipping. */
+/* V7.8.5: smaller long titles, safe three-line wrap, no vertical clipping. */
 .bw712-title,#bw717FullscreenCard .bw712-title{
  font-size:clamp(10px,2.55vw,23px)!important;
  line-height:1.12!important;
@@ -994,7 +994,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
  }
 }
 
-/* V7.8.4: clean settings, simple holiday borders, low-overhead animation options */
+/* V7.8.5: clean settings, simple holiday borders, low-overhead animation options */
 .bw729-controls{margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
 .bw729-controls h3{margin:15px 0 9px;font-size:17px}
 .bw729-controls h4{margin:8px 0;font-size:14px}
@@ -1016,7 +1016,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 @keyframes bw729Fall{0%{transform:translateY(-15px);opacity:0}10%{opacity:.85}90%{opacity:.85}100%{transform:translateY(190px);opacity:0}}
 @media(prefers-reduced-motion:reduce){#movieList .bw729-fall{animation:none!important}}
 
-/* V7.8.4 distinct holiday frames, animated preview and effect-specific motion */
+/* V7.8.5 distinct holiday frames, animated preview and effect-specific motion */
 .bw730-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .bw730-preview-label{font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--muted);margin:5px 0 10px}
 .bw730-preview{position:relative;isolation:isolate;overflow:hidden;min-height:108px;display:flex;align-items:center;gap:12px;padding:14px;background:#20242d;border:1px solid #4b5262;border-radius:11px;color:white}
@@ -1063,7 +1063,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 @media(max-width:850px){#main .cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:440px){#main .cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
-/* V7.8.4: collection banners and quick movie-log actions */
+/* V7.8.5: collection banners and quick movie-log actions */
 .bw782-banner-toggle{display:block;width:100%;background:none;border:0;padding:0;cursor:pointer;text-align:left;color:inherit}
 .bw782-banner-toggle .bw78-banner{margin:10px 0 3px}
 .bw782-expand-label{display:block;text-align:right;font-size:12px;color:var(--muted);padding:4px 2px 10px}
@@ -1083,7 +1083,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 #movieList .bw782-external{font-size:11px;color:var(--muted);margin-top:7px;white-space:normal;line-height:1.5}
 @media(max-width:650px){#movieList .row-actions .bw782-beth,#movieList .row-actions .bw782-finish{min-width:35px;min-height:35px}}
 
-/* V7.8.4: action bar and holiday decoration recovery */
+/* V7.8.5: action bar and holiday decoration recovery */
 #movieList .movie-row .row-actions{display:flex!important;flex-direction:column!important;align-items:stretch!important;justify-content:center!important;gap:7px!important;min-width:48px!important;visibility:visible!important;opacity:1!important}
 #movieList .movie-row .row-actions .bw731-star,#movieList .movie-row .row-actions .bw782-beth,#movieList .movie-row .row-actions .bw782-finish{display:flex!important;position:relative!important;visibility:visible!important;opacity:1!important;align-items:center!important;justify-content:center!important;grid-column:auto!important;grid-row:auto!important;min-width:42px!important;min-height:42px!important;border:1px solid var(--line)!important;border-radius:9px!important;background:transparent!important;cursor:pointer!important}
 #movieList .movie-row .row-actions .bw782-beth{color:#ed4762!important}
@@ -1093,35 +1093,29 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 #movieList .movie-row.bw715-horror::after,#movieList .movie-row.bw715-christmas::after{display:block!important;visibility:visible!important}
 @media(max-width:650px){#movieList .movie-row .row-actions{min-width:36px!important}#movieList .movie-row .row-actions .bw731-star,#movieList .movie-row .row-actions .bw782-beth,#movieList .movie-row .row-actions .bw782-finish{min-width:34px!important;min-height:34px!important}}
 
-/* V7.8.6: action buttons in a single vertical column at every desktop width. */
-#movieList:not(.v36-grid) .movie-row .row-actions{
- display:flex!important;flex-direction:column!important;grid-template-columns:none!important;
- align-items:center!important;justify-content:center!important;gap:6px!important;
- width:46px!important;min-width:46px!important;max-width:46px!important;
-}
-#movieList:not(.v36-grid) .movie-row .row-actions .bw731-star,
-#movieList:not(.v36-grid) .movie-row .row-actions .bw782-beth,
-#movieList:not(.v36-grid) .movie-row .row-actions .bw782-finish{
- display:inline-flex!important;position:relative!important;grid-column:auto!important;grid-row:auto!important;
- width:42px!important;height:42px!important;min-width:42px!important;min-height:42px!important;
- max-width:42px!important;max-height:42px!important;padding:0!important;margin:0!important;
- font-size:21px!important;line-height:1!important;flex:0 0 42px!important;
-}
-@media(max-width:760px){
- #movieList:not(.v36-grid) .movie-row .row-actions{
-  width:34px!important;min-width:34px!important;max-width:34px!important;gap:5px!important;
- }
- #movieList:not(.v36-grid) .movie-row .row-actions .bw731-star,
- #movieList:not(.v36-grid) .movie-row .row-actions .bw782-beth,
- #movieList:not(.v36-grid) .movie-row .row-actions .bw782-finish{
-  width:33.6px!important;height:33.6px!important;min-width:33.6px!important;min-height:33.6px!important;
-  max-width:33.6px!important;max-height:33.6px!important;flex:0 0 33.6px!important;
-  font-size:17px!important;
- }
-}
+/* V7.8.5: movie-card recovery, independent buttons and external ratings */
+#movieList .movie-row .row-actions{display:flex!important;flex-direction:column!important;gap:6px!important;align-items:center!important;justify-content:center!important;min-width:46px!important}
+#movieList .movie-row .row-actions .bw731-star,#movieList .movie-row .row-actions .bw782-beth,#movieList .movie-row .row-actions .bw782-finish{display:inline-flex!important;visibility:visible!important;opacity:1!important;align-items:center!important;justify-content:center!important;width:43px!important;height:43px!important;min-width:43px!important;min-height:43px!important;border:1px solid var(--line)!important;border-radius:9px!important;background:transparent!important}
+#movieList .movie-row .row-actions .bw782-beth{color:#ed4762!important}
+#movieList .movie-row .row-actions .bw782-beth.yes{color:#ed3349!important}
+#movieList .movie-row .row-actions .bw782-beth.no{color:#969ba5!important}
+#movieList .movie-row .row-actions .bw782-finish.complete{color:#39bb70!important}
+#movieList .movie-row .row-right .bw782-external{display:flex!important;gap:13px!important;margin-top:7px!important;font-size:11px!important}
+#movieList .movie-row .row-right .bw782-external>div{display:flex;flex-direction:column;gap:3px}
+#movieList .movie-row .row-right .bw782-external span{font-size:10px;color:var(--muted)}
+#movieList .movie-row .row-right .bw782-external strong{font-size:13px;color:var(--text)}
+@media(max-width:650px){#movieList .movie-row .row-actions .bw731-star,#movieList .movie-row .row-actions .bw782-beth,#movieList .movie-row .row-actions .bw782-finish{width:34px!important;height:34px!important;min-width:34px!important;min-height:34px!important}#movieList .movie-row .row-right .bw782-external{gap:7px!important;font-size:10px!important;flex-wrap:wrap}}
+
+/* Higher specificity than legacy desktop/mobile rules that hide unknown action buttons. */
+#movieList .movie-row.bw731-card .row-actions > button.bw731-star,
+#movieList .movie-row.bw731-card .row-actions > button.bw782-beth,
+#movieList .movie-row.bw731-card .row-actions > button.bw782-finish,
+#movieList.v36-grid .movie-row.bw731-card .row-actions > button.bw731-star,
+#movieList.v36-grid .movie-row.bw731-card .row-actions > button.bw782-beth,
+#movieList.v36-grid .movie-row.bw731-card .row-actions > button.bw782-finish{display:inline-flex!important;visibility:visible!important;opacity:1!important}
 </style></head>
 <body><div class="app">
-<header class="topbar"><button class="bw-home" id="bwHome" type="button" title="Go to Movie Log" aria-label="Blackwood Movie Log home"><div class="brandmark">B</div><div class="brand"><span class="bw-wordmark">BLACKWOOD</span><span class="bw-submark">MOVIE LOG</span><small>YOUR PERSONAL FILM ARCHIVE <span class="bw-version">Version 7.8.4</span></small></div></button><div class="top-spacer"></div><div class="status"><span class="dot"></span><span id="saveStatus">Saved on this device</span></div><button class="iconbtn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☼</button><button class="iconbtn" id="menuBtn" aria-label="Open navigation" title="Navigation">☰</button></header>
+<header class="topbar"><button class="bw-home" id="bwHome" type="button" title="Go to Movie Log" aria-label="Blackwood Movie Log home"><div class="brandmark">B</div><div class="brand"><span class="bw-wordmark">BLACKWOOD</span><span class="bw-submark">MOVIE LOG</span><small>YOUR PERSONAL FILM ARCHIVE <span class="bw-version">Version 7.8.5</span></small></div></button><div class="top-spacer"></div><div class="status"><span class="dot"></span><span id="saveStatus">Saved on this device</span></div><button class="iconbtn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☼</button><button class="iconbtn" id="menuBtn" aria-label="Open navigation" title="Navigation">☰</button></header>
 <div class="layout"><aside class="sidebar"><div class="side-label">LIBRARY</div><nav class="navlist" id="sideNav"></nav><div class="sidebar-note"><strong style="color:var(--text)">Private by design</strong><br>This first build saves your records in this browser on this device. Cloud sync is not connected yet.</div></aside><main class="main" id="main"></main></div>
 <nav class="mobile-nav" id="mobileNav"></nav></div>
 <div class="modal-backdrop" id="modalBackdrop"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modalhead"><h2 id="modalTitle">Add movie</h2><button class="iconbtn" id="modalClose" aria-label="Close">×</button></div><div id="modalBody"></div><div class="modalfoot" id="modalFoot"></div></section></div><div class="toast" id="toast"></div>
@@ -1257,7 +1251,7 @@ function renderLog(){let q='',status='',year='',rating='',wife='',rewatch='',fav
 $('main').innerHTML=pageHead('YOUR LIBRARY','Movie Log','Every viewing, one personal archive.',`<button class="btn primary" id="addMovieBtn">＋ Add Movie</button>`)+`<div class="toolbar"><div class="searchwrap"><span>⌕</span><input id="logSearch" placeholder="Search movies, notes or tags…" autocomplete="off"></div><button class="btn" id="filterToggle">☷ Filters</button><select id="sortSelect" aria-label="Sort records"><option value="start-desc">Newest start date</option><option value="start-asc">Oldest start date</option><option value="title-asc">Title A–Z</option><option value="rating-desc">Highest rating</option><option value="rating-asc">Lowest rating</option></select><select id="groupSelect" aria-label="Group records"><option value="none">No grouping</option><option value="year">Group by year</option><option value="status">Group by status</option></select></div><div class="filter-panel ${prefs.filters?'open':''}" id="filterPanel"><div class="field"><label>Status</label><select id="fStatus"><option value="">All statuses</option><option value="completed">Completed</option><option value="inprogress">In Progress</option><option value="dnf">Abandoned</option></select></div><div class="field"><label>Start year</label><select id="fYear"><option value="">All years</option>${[...new Set([new Date().getFullYear(),...views.map(v=>yearOf(v.startDate)).filter(Boolean)])].sort((a,b)=>b-a).map(y=>`<option>${y}</option>`).join('')}</select></div><div class="field"><label>Rating</label><select id="fRating"><option value="">Any rating</option><option value="rated">Rated</option><option value="unrated">Unrated</option></select></div><div class="field"><label>Watched with wife</label><select id="fWife"><option value="">Any</option><option value="yes">Yes</option><option value="no">No</option><option value="unknown">Unknown</option></select></div><div class="field"><label>Rewatch</label><select id="fRewatch"><option value="">Any</option><option value="true">Rewatch</option><option value="false">First logged viewing</option></select></div><div class="field"><label>Favorite movie</label><select id="fFav"><option value="">Any</option><option value="true">Favorites</option><option value="false">Not favorites</option></select></div><div class="field" style="align-self:end"><button class="btn small" id="clearFilters">Clear filters</button></div></div><div class="list-head"><span id="resultCount">${views.length} viewing records</span><span>Tap a title for details</span></div><div id="movieList" class="movie-list"></div>`;
 $('fYear').value=prefs.bw776Year==='all'?'':prefs.bw776Year&&prefs.bw776Year!=='current'?String(prefs.bw776Year):String(new Date().getFullYear());$('addMovieBtn').onclick=()=>openViewingForm();$('filterToggle').onclick=()=>{prefs.filters=!prefs.filters;$('filterPanel').classList.toggle('open',prefs.filters);save()};$('sortSelect').value=prefs.sort;$('sortSelect').onchange=e=>{prefs.sort=e.target.value;save();draw()};$('groupSelect').value=prefs.group;$('groupSelect').onchange=e=>{prefs.group=e.target.value;save();draw()};['logSearch','fStatus','fYear','fRating','fWife','fRewatch','fFav'].forEach(id=>$(id).addEventListener(id==='logSearch'?'input':'change',()=>{bw776Limit=75;if(id==='fYear'){prefs.bw776Year=$('fYear').value||'all';save();const quick=$('bw776QuickYear');if(quick)quick.value=$('fYear').value;}draw()}));$('clearFilters').onclick=()=>{['logSearch','fStatus','fYear','fRating','fWife','fRewatch','fFav'].forEach(id=>$(id).value='');draw()};
 function draw(){q=$('logSearch').value.trim();status=$('fStatus').value;year=$('fYear').value;rating=$('fRating').value;wife=$('fWife').value;rewatch=$('fRewatch').value;fav=$('fFav').value;let a=filtered();$('resultCount').textContent=`${a.length} viewing record${a.length===1?'':'s'}`;if(!a.length){$('movieList').innerHTML=`<div class="empty"><strong>${views.length?'No matches found':'Your movie log starts here'}</strong>${views.length?'Try adjusting your search or filters.':'Add your first movie to begin building your personal history.'}<div style="margin-top:16px"><button class="btn primary" id="emptyAdd">＋ Add Movie</button></div></div>`;$('emptyAdd').onclick=()=>openViewingForm();return}
-if(bw776Observer){bw776Observer.disconnect();bw776Observer=null;}let groups={};a.slice(0,bw776Limit).forEach(v=>{let g=prefs.group==='year'?(yearOf(v.startDate)||'Unknown year'):prefs.group==='status'?statusName(v):'All viewings';(groups[g]??=[]).push(v)});$('movieList').innerHTML=Object.entries(groups).map(([g,items])=>`${prefs.group!=='none'?`<div class="side-label" style="padding:13px 3px 3px">${esc(g)} · ${items.length}</div>`:''}${items.map(v=>`<article class="movie-row"><div><div class="mov-title"><button data-detail="${v.m.id}" style="background:none;border:0;color:var(--text);padding:0;text-align:left;font-weight:750">${esc(titleOf(v.m))}</button> <span style="color:var(--muted);font-weight:500">(${esc(v.m.year||'Year unknown')})</span></div><div class="mov-sub">Started ${dateFmt(v.startDate)} · Finished ${v.finishDate?dateFmt(v.finishDate):'—'}</div></div><div class="row-mid">${pill(v)} <div class="mov-sub" style="margin-top:6px">${v.watchedWithWife==='yes'?'With wife':v.watchedWithWife==='no'?'Solo':'Companion unknown'}</div></div><div class="row-right"><div class="rating">${ratingText(v.rating)}</div><div class="mov-sub">${v.m.runtime?esc(v.m.runtime)+' min':'Runtime —'}</div></div><div class="row-actions"><button data-editview="${v.id}" title="Edit viewing">✎</button><button data-more="${v.m.id}" title="Movie details">›</button></div></article>`).join('')}`).join('');if(a.length>bw776Limit){const remaining=a.length-bw776Limit;const more=document.createElement('div');more.className='bw776-more';more.innerHTML='<button type="button" class="btn" id="bw776LoadMore">Show next '+Math.min(75,remaining)+' of '+remaining+' remaining</button><span class="mov-sub">Showing '+bw776Limit+' of '+a.length+' viewings</span>'; $('movieList').appendChild(more);const load=()=>{if(!more.isConnected)return;bw776Limit+=75;draw()};$('bw776LoadMore').onclick=load;if('IntersectionObserver'in window){bw776Observer=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){bw776Observer?.disconnect();bw776Observer=null;load()}},{rootMargin:'180px'});bw776Observer.observe(more)}}document.querySelectorAll('[data-detail],[data-more]').forEach(b=>b.onclick=()=>openDetail(b.dataset.detail||b.dataset.more));document.querySelectorAll('[data-editview]').forEach(b=>b.onclick=()=>openViewingForm(b.dataset.editview));}draw();}
+if(bw776Observer){bw776Observer.disconnect();bw776Observer=null;}let groups={};a.slice(0,bw776Limit).forEach(v=>{let g=prefs.group==='year'?(yearOf(v.startDate)||'Unknown year'):prefs.group==='status'?statusName(v):'All viewings';(groups[g]??=[]).push(v)});$('movieList').innerHTML=Object.entries(groups).map(([g,items])=>`${prefs.group!=='none'?`<div class="side-label" style="padding:13px 3px 3px">${esc(g)} · ${items.length}</div>`:''}${items.map(v=>`<article class="movie-row" data-view-id="${esc(v.id)}"><div><div class="mov-title"><button data-detail="${v.m.id}" style="background:none;border:0;color:var(--text);padding:0;text-align:left;font-weight:750">${esc(titleOf(v.m))}</button> <span style="color:var(--muted);font-weight:500">(${esc(v.m.year||'Year unknown')})</span></div><div class="mov-sub">Started ${dateFmt(v.startDate)} · Finished ${v.finishDate?dateFmt(v.finishDate):'—'}</div></div><div class="row-mid">${pill(v)} <div class="mov-sub" style="margin-top:6px">${v.watchedWithWife==='yes'?'With wife':v.watchedWithWife==='no'?'Solo':'Companion unknown'}</div></div><div class="row-right"><div class="rating">${ratingText(v.rating)}</div><div class="mov-sub">${v.m.runtime?esc(v.m.runtime)+' min':'Runtime —'}</div></div><div class="row-actions"><button data-editview="${v.id}" title="Edit viewing">✎</button><button data-more="${v.m.id}" title="Movie details">›</button></div></article>`).join('')}`).join('');if(a.length>bw776Limit){const remaining=a.length-bw776Limit;const more=document.createElement('div');more.className='bw776-more';more.innerHTML='<button type="button" class="btn" id="bw776LoadMore">Show next '+Math.min(75,remaining)+' of '+remaining+' remaining</button><span class="mov-sub">Showing '+bw776Limit+' of '+a.length+' viewings</span>'; $('movieList').appendChild(more);const load=()=>{if(!more.isConnected)return;bw776Limit+=75;draw()};$('bw776LoadMore').onclick=load;if('IntersectionObserver'in window){bw776Observer=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){bw776Observer?.disconnect();bw776Observer=null;load()}},{rootMargin:'180px'});bw776Observer.observe(more)}}document.querySelectorAll('[data-detail],[data-more]').forEach(b=>b.onclick=()=>openDetail(b.dataset.detail||b.dataset.more));document.querySelectorAll('[data-editview]').forEach(b=>b.onclick=()=>openViewingForm(b.dataset.editview));}draw();}
 function openModal(title,body,buttons){$('modalTitle').textContent=title;$('modalBody').innerHTML=body;$('modalFoot').innerHTML=buttons;$('modalBackdrop').classList.add('open');$('modalClose').onclick=closeModal;$('modalBackdrop').onclick=e=>{if(e.target===$('modalBackdrop'))closeModal()};}function closeModal(){$('modalBackdrop').classList.remove('open')}
 function openViewingForm(viewId=null,movieId=null){editingViewing=viewId;editingMovie=movieId;const v=viewId?state.viewings.find(x=>x.id===viewId):null;const m=v?movie(v.movieId):(movieId?movie(movieId):null);const body=`<form id="viewForm"><div class="formgrid"><div class="field wide"><label>Movie title *</label><div style="display:flex;gap:8px;align-items:stretch"><input id="vTitle" required value="${esc(m?.title||'')}" placeholder="e.g. The Thing"><button type="button" class="btn" id="tmdbSearchBtn" style="white-space:nowrap">Search movies</button></div><div id="tmdbResults" class="tmdb-results" aria-live="polite"></div><input type="hidden" id="vTmdbId" value="${esc(m?.tmdbId||'')}"><div class="field" style="margin-top:9px"><label for="vTmdbIdVisible">TMDB movie ID (optional)</label><input id="vTmdbIdVisible" inputmode="numeric" pattern="[0-9]*" value="${esc(m?.tmdbId||'')}" placeholder="Movie ID from TMDB"><p class="footer-note">Edit this if a movie was matched incorrectly. Metadata refresh uses this ID.</p></div><input type="hidden" id="vPosterPath" value="${esc(m?.posterPath||'')}"><p class="footer-note">Search by title or numeric TMDB movie ID. Select the matching film to fill in its details.</p></div><div class="field"><label>Release year</label><input id="vYear" type="number" min="1888" max="2100" value="${esc(m?.year||'')}" placeholder="1982"></div><div class="field"><label>Runtime (minutes)</label><input id="vRuntime" type="number" min="1" max="1000" value="${esc(m?.runtime||'')}" placeholder="109"></div><div class="field"><label>Original / alternate title</label><input id="vOriginal" value="${esc(m?.originalTitle||'')}" placeholder="Optional"></div><div class="field"><label>Start date *</label><input id="vStart" type="date" required value="${esc(v?.startDate||today())}"></div><div class="field"><label>Finish date</label><input id="vFinish" type="date" value="${esc(v?.finishDate||'')}"></div><div class="field wide bw-status-field"><label class="checkline"><input type="checkbox" id="vAbandoned" ${v?.status==='dnf'||v?.status==='abandoned'?'checked':''}> Abandoned this viewing</label><div class="mov-sub" id="vAutoStatus" aria-live="polite">Status is calculated automatically from your dates.</div></div><div class="field"><label>Personal rating (1.0–10.0)</label><input id="vRating" type="number" min="1" max="10" step="0.1" value="${v?.rating??''}" placeholder="Leave blank"></div><div class="field"><label>Watched with wife?</label><select id="vWife"><option value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></div><div class="field"><label>Viewing type</label><select id="vRewatch"><option value="false">First logged viewing</option><option value="true">Rewatch</option></select></div><div class="field wide"><label>Genres (comma-separated)</label><input id="vGenres" value="${esc((m?.genres||[]).join(', '))}" placeholder="Horror, Science Fiction"></div><div class="field wide"><label>Personal tags (comma-separated)</label><input id="vTags" value="${esc((m?.tags||[]).join(', '))}" placeholder="Halloween tradition, comfort movie"></div><div class="field wide"><label>Synopsis</label><textarea id="vSynopsis" rows="2" placeholder="Optional summary">${esc(m?.synopsis||'')}</textarea></div><div class="field wide"><label>Movie notes</label><textarea id="vMovieNotes" rows="2" placeholder="General notes about this movie">${esc(m?.notes||'')}</textarea></div><div class="field wide"><label>Notes for this viewing</label><textarea id="vNotes" rows="3" placeholder="What did you think this time?">${esc(v?.notes||'')}</textarea></div><label class="checkline wide"><input type="checkbox" id="vFavorite" ${m?.favorite?'checked':''}> Mark this movie as a favorite</label></div></form>`;openModal(v?'Edit viewing':m?'Log a viewing':'Add a movie',body,`<button class="btn" id="cancelForm">Cancel</button><button class="btn primary" id="saveView">Save viewing</button>`);const updateAutoStatus=()=>{const abandoned=$('vAbandoned').checked;const end=$('vFinish').value;if(abandoned&&end){$('vFinish').value='';}const status=abandoned?'Abandoned':$('vFinish').value?'Completed':$('vStart').value?'In Progress':'Not Started';$('vAutoStatus').textContent='Automatic status: '+status;};$('vAbandoned').addEventListener('change',updateAutoStatus);$('vFinish').addEventListener('change',()=>{if($('vFinish').value)$('vAbandoned').checked=false;updateAutoStatus()});$('vStart').addEventListener('change',updateAutoStatus);updateAutoStatus();$('vWife').value=v?(v.watchedWithWife||'unknown'):'no';$('vRewatch').value=String(!!v?.rewatch);$('tmdbSearchBtn').onclick=searchTmdbMovies;$('vTitle').addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.value.trim()){e.preventDefault();searchTmdbMovies()}});$('cancelForm').onclick=closeModal;$('saveView').onclick=saveViewing;}
 async function searchTmdbMovies(){const query=$('vTitle')?.value.trim();const box=$('tmdbResults');if(!query){toast('Enter a movie title to search.');return}if(!tmdbKey){if(box)box.innerHTML='<div class="empty" style="padding:14px">Add your TMDB API key in Settings → Movie metadata, then search again.</div>';return}if(box)box.innerHTML='<div class="mov-sub">Searching TMDB…</div>';try{const url=/^[0-9]+$/.test(query)?'https://api.themoviedb.org/3/movie/'+encodeURIComponent(query)+'?language=en-US':'https://api.themoviedb.org/3/search/movie?query='+encodeURIComponent(query)+'&include_adult=false&language=en-US&page=1';const res=await fetch(url,{headers:{Authorization:'Bearer '+tmdbKey,Accept:'application/json'}});const data=await res.json();if(!res.ok)throw new Error(data.status_message||('TMDB request failed ('+res.status+')'));tmdbResults=(Array.isArray(data.results)?data.results:(data.id?[data]:[])).slice(0,8);if(!tmdbResults.length){box.innerHTML='<div class="empty" style="padding:14px">No matching movies found. You can still enter details manually.</div>';return}box.innerHTML=tmdbResults.map((r,i)=>`<button type="button" class="tmdb-result" data-tmdb-result="${i}">${r.poster_path?`<img src="https://image.tmdb.org/t/p/w92${esc(r.poster_path)}" alt="">`:'<div class="poster-placeholder" style="aspect-ratio:2/3;min-height:0">No poster</div>'}<span><strong>${esc(r.title||r.original_title||'Untitled')} (${esc((r.release_date||'').slice(0,4)||'Year unknown')})</strong><small>${esc(r.original_title&&r.original_title!==r.title?'Original title: '+r.original_title+' · ':'')}${esc((r.overview||'No synopsis available.').slice(0,180))}</small></span></button>`).join('');box.querySelectorAll('[data-tmdb-result]').forEach(b=>b.onclick=()=>applyTmdbMovie(Number(b.dataset.tmdbResult)))}catch(e){if(box)box.innerHTML='<div class="empty" style="padding:14px">Movie lookup failed: '+esc(e.message)+'. You can still enter details manually.</div>'}}
@@ -1671,7 +1665,7 @@ function bw43DecorateRows(){
  const root=$('movieList');if(!root)return;
  root.classList.toggle('bw43-textonly',state.uiSettings?.bw43LogView==='text');
  root.querySelectorAll('.movie-row').forEach(row=>{
-  const id=row.querySelector('[data-editview]')?.dataset.editview,v=state.viewings.find(x=>x.id===id);
+  const id=row.dataset.viewId||row.querySelector('[data-editview]')?.dataset.editview,v=state.viewings.find(x=>x.id===id);
   if(!v)return;
   const label=bw43WatchLabel(v);
   if(label&&!row.querySelector('.bw43-watchtype')){
@@ -1879,7 +1873,7 @@ const bw53OldSettings=renderSettings;renderSettings=function(){bw53OldSettings()
  const preview=$('bw52Preview');if(preview){const btn=document.createElement('button');btn.className='btn small';btn.type='button';btn.textContent='Full-screen background preview';preview.after(btn);btn.onclick=()=>{const current=bw52Catalog.find(x=>x.id===bw52Selected());if(!current)return;const body='<div class="bw53-full-preview" style="background-image:url(&quot;'+current.file+'&quot;)"></div><p>'+esc(current.name)+'</p>';openModal('Background preview',body,'<button class="btn primary" id="bw53PreviewClose">Close</button>');$('bw53PreviewClose').onclick=closeModal}}};
 // Ensure badges are visible even before finish dates, and keep explicit rewatch priority.
 const bw53OldDecor=v36DecorateLog;
-v36DecorateLog=function(){bw53OldDecor();document.querySelectorAll('#movieList .movie-row').forEach(row=>{const id=row.querySelector('[data-editview]')?.dataset.editview,v=state.viewings.find(x=>x.id===id);if(!v)return;const label=bw43WatchLabel(v),rewatch=/REWATCH/.test(label);let badge=row.querySelector('.bw43-watchtype');if(!badge){badge=document.createElement('span');badge.className='bw43-watchtype';(row.querySelector('.bw-title-text .mov-title')||row.querySelector('.mov-title'))?.appendChild(badge)}badge.textContent=rewatch?'REWATCH':'NEW WATCH';badge.classList.toggle('bw5-rewatch',rewatch);badge.classList.toggle('bw5-new',!rewatch);const compact=row.querySelector('.bw43-compact-status');if(compact)compact.textContent=badge.textContent})};
+v36DecorateLog=function(){bw53OldDecor();document.querySelectorAll('#movieList .movie-row').forEach(row=>{const id=row.dataset.viewId||row.querySelector('[data-editview]')?.dataset.editview,v=state.viewings.find(x=>x.id===id);if(!v)return;const label=bw43WatchLabel(v),rewatch=/REWATCH/.test(label);let badge=row.querySelector('.bw43-watchtype');if(!badge){badge=document.createElement('span');badge.className='bw43-watchtype';(row.querySelector('.bw-title-text .mov-title')||row.querySelector('.mov-title'))?.appendChild(badge)}badge.textContent=rewatch?'REWATCH':'NEW WATCH';badge.classList.toggle('bw5-rewatch',rewatch);badge.classList.toggle('bw5-new',!rewatch);const compact=row.querySelector('.bw43-compact-status');if(compact)compact.textContent=badge.textContent})};
 
 
 // V5.4 — historical import workspace. No changes are made until explicit confirmation.
@@ -2149,12 +2143,12 @@ const bw779EmbeddedArtwork={'horrorfest':'data:image/webp;base64,UklGRqiDAABXRUJ
 function bw778Art(id,title){const names={horrorfest60:'horrorfest',christmasfest60:'christmas-fest',stats5:'statistics-center',review5:'year-in-review',compare7:'year-vs-year',reports7:'report-studio',timeline75:'movie-history-timeline',health5:'data-health',awards5:'movie-awards',topten:'my-top-10'};const file=names[id];return file?`<img class="bw778-art" src="${bw779EmbeddedArtwork[file]}" alt="${title}" loading="lazy" decoding="async">`:'';}
 function bw73Holiday(){$('main').innerHTML=pageHead('SEASONAL CINEMA','Holiday Fest','Two traditions. Every movie remembered.')+'<div class="bw73-hub bw73-holiday bw778-gallery"><button class="bw73-tile" id="bw73Horror" aria-label="Open Horrorfest">'+bw778Art('horrorfest60','Horrorfest')+'</button><button class="bw73-tile" id="bw73Christmas" aria-label="Open Christmas Fest">'+bw778Art('christmasfest60','Christmas Fest')+'</button></div>';$('bw73Horror').onclick=()=>go('horrorfest60');$('bw73Christmas').onclick=()=>go('christmasfest60')}
 function bw73Insights(){$('main').innerHTML=pageHead('YOUR MOVIE STORY','Statistics & Reports','Explore your viewing history and share what matters.')+'<div class="bw73-hub bw778-gallery">'+[['stats5','Statistics Center'],['review5','Year in Review'],['compare7','Year vs. Year'],['reports7','Report Studio']].map(([id,title])=>'<button class="bw73-tile" data-bw73-page="'+id+'" aria-label="Open '+title+'">'+bw778Art(id,title)+'</button>').join('')+'</div>';document.querySelectorAll('[data-bw73-page]').forEach(b=>b.onclick=()=>go(b.dataset.bw73Page))}
-const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.8.4';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
+const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.8.5';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
 // Always reset modal's internal scroll position, not the underlying page.
 const bw73OpenModal=openModal;openModal=function(...args){bw73OpenModal(...args);requestAnimationFrame(()=>{for(const el of [$('modalBody'),document.querySelector('.modal'),document.querySelector('.modal-backdrop.open')])if(el)el.scrollTop=0})};
 // Decorate only the actual filtered rows, after every list redraw.
 const bw73Decor=v36DecorateLog;v36DecorateLog=function(){bw73Decor();bw73CompactRows()};
-function bw73CompactRows(){const root=$('movieList');if(!root)return;root.querySelectorAll('.movie-row').forEach(row=>{const id=row.querySelector('[data-editview]')?.dataset.editview;const v=state.viewings.find(x=>x.id===id);if(!v)return;const m=movie(v.movieId);if(!m)return;row.querySelectorAll('.bw73-inline').forEach(x=>x.remove());const info=row.querySelector('.bw-title-text')||row.querySelector('.bw-title-block');if(!info)return;const extra=document.createElement('div');extra.className='bw73-inline';const score=v.rating==null||v.rating===''?'—':Number(v.rating).toFixed(1);const tmdb=m.voteAverage??m.tmdbRating??m.tmdbVoteAverage??m.tmdbScore;const tmdbScore=tmdb==null||tmdb===''?'—':Number(tmdb).toFixed(1);extra.innerHTML='<div class="bw73-meta">'+esc((v.startDate||'').slice(5))+' – '+esc((v.finishDate||'—').slice(5))+' · '+esc(statusName(v))+'</div><div class="bw73-ratings">Mine: <b>'+esc(score)+'</b> &nbsp; TMDB: <b>'+esc(tmdbScore)+'</b></div>';info.appendChild(extra);row.querySelectorAll('.row-actions [data-rewatch],.row-actions [data-rewatchview],.row-actions [title*="Rewatch"],.row-actions [title*="rewatch"]').forEach(x=>x.classList.add('bw73-hide'));const date=info.querySelector('.mov-sub');if(date)date.classList.add('bw73-hide');row.querySelectorAll('.row-mid .mov-sub').forEach(x=>x.classList.add('bw73-hide'))})}
+function bw73CompactRows(){const root=$('movieList');if(!root)return;root.querySelectorAll('.movie-row').forEach(row=>{const id=row.dataset.viewId||row.querySelector('[data-editview]')?.dataset.editview;const v=state.viewings.find(x=>x.id===id);if(!v)return;const m=movie(v.movieId);if(!m)return;row.querySelectorAll('.bw73-inline').forEach(x=>x.remove());const info=row.querySelector('.bw-title-text')||row.querySelector('.bw-title-block');if(!info)return;const extra=document.createElement('div');extra.className='bw73-inline';const score=v.rating==null||v.rating===''?'—':Number(v.rating).toFixed(1);const tmdb=m.voteAverage??m.tmdbRating??m.tmdbVoteAverage??m.tmdbScore;const tmdbScore=tmdb==null||tmdb===''?'—':Number(tmdb).toFixed(1);extra.innerHTML='<div class="bw73-meta">'+esc((v.startDate||'').slice(5))+' – '+esc((v.finishDate||'—').slice(5))+' · '+esc(statusName(v))+'</div><div class="bw73-ratings">Mine: <b>'+esc(score)+'</b> &nbsp; TMDB: <b>'+esc(tmdbScore)+'</b></div>';info.appendChild(extra);row.querySelectorAll('.row-actions [data-rewatch],.row-actions [data-rewatchview],.row-actions [title*="Rewatch"],.row-actions [title*="rewatch"]').forEach(x=>x.classList.add('bw73-hide'));const date=info.querySelector('.mov-sub');if(date)date.classList.add('bw73-hide');row.querySelectorAll('.row-mid .mov-sub').forEach(x=>x.classList.add('bw73-hide'))})}
 // Compact mode must not bypass filters: run decoration on the same rendered filtered list.
 const bw73OldLog=renderLog;renderLog=function(){bw73OldLog();bw73CompactRows();const list=$('movieList');if(list){const observer=new MutationObserver(()=>{observer.disconnect();bw73CompactRows();observer.observe(list,{childList:true})});observer.observe(list,{childList:true})}};
 // TMDB catalog search, without creating a viewing record or a movie-library entry.
@@ -2192,7 +2186,7 @@ function bw731QuickRate(viewId){
 function bw731Decorate(){
  const root=$('movieList');if(!root)return;
  root.querySelectorAll('.movie-row.bw-row').forEach(row=>{
-  const viewId=row.querySelector('[data-editview]')?.dataset.editview;
+  const viewId=row.dataset.viewId||row.querySelector('[data-editview]')?.dataset.editview;
   const v=state.viewings.find(x=>x.id===viewId);if(!v)return;
   const m=movie(v.movieId);if(!m)return;
   row.classList.add('bw731-card');
@@ -2230,7 +2224,7 @@ function bw731Decorate(){
 function bw733DesktopCards(){
  const root=$('movieList');if(!root)return;
  root.querySelectorAll('.bw731-card').forEach(row=>{
-  const id=row.querySelector('[data-editview]')?.dataset.editview;
+  const id=row.dataset.viewId||row.querySelector('[data-editview]')?.dataset.editview;
   const v=state.viewings.find(x=>x.id===id);if(!v)return;
   const m=movie(v.movieId);if(!m)return;
   const text=row.querySelector('.bw-title-text');
@@ -2340,7 +2334,7 @@ function bw734ApplyVerificationFilter(){
  const mode=select.value||'all';
  let count=0;
  root.querySelectorAll('.movie-row').forEach(row=>{
-  const viewId=row.querySelector('[data-editview]')?.dataset.editview;
+  const viewId=row.dataset.viewId||row.querySelector('[data-editview]')?.dataset.editview;
   const v=state.viewings.find(x=>String(x.id)===String(viewId));
   const m=v?movie(v.movieId):null;
   const show=!!m&&(mode==='all'||(mode==='unverified'?bw55Unverified(m):!bw55Unverified(m)));
@@ -2415,7 +2409,7 @@ const slider=$('bw74Slider'),exact=$('bw74Exact'),label=$('bw74Value');slider.on
 const bw74Menu=$('menuBtn');if(bw74Menu)bw74Menu.onclick=()=>{const current=state.uiSettings?.bw43LogView||'list';openModal('Navigation',`<div class="navlist">${navItems().map(([id,ic,label])=>`<button class="navbtn" data-modalpage="${id}"><span class="navicon">${ic}</span>${label}</button>`).join('')}</div><div style="margin-top:12px;padding:10px;border-top:1px solid var(--line)"><div class="side-label">MOVIE LOG VIEW</div><div style="display:flex;gap:8px"><button class="btn ${current==='list'?'primary':''}" data-bw74-view="list">List View</button><button class="btn ${current==='posters'?'primary':''}" data-bw74-view="posters">Poster View</button></div></div>`, '<button class="btn" id="closeNav">Close</button>');$('closeNav').onclick=closeModal;document.querySelectorAll('[data-modalpage]').forEach(b=>b.onclick=()=>{closeModal();go(b.dataset.modalpage)});document.querySelectorAll('[data-bw74-view]').forEach(b=>b.onclick=()=>{state.uiSettings??={};state.uiSettings.bw43LogView=b.dataset.bw74View;state.uiSettings.grid=b.dataset.bw74View==='posters';save();closeModal();go('log')})};
 // Larger poster and compact details, preserving existing functional detail controls.
 const bw74Detail=renderDetail;renderDetail=function(){bw74Detail();const m=movie(activeMovie);if(!m)return;const panel=$('main')?.querySelector('.panel'),old=panel?.querySelector('.detail-card');if(!old)return;const hero=document.createElement('div');hero.className='bw74-hero';hero.innerHTML='<div class="bw77-fallback">Loading cinematic backdrop…</div>';panel.insertBefore(hero,old);old.querySelector('.poster-placeholder')?.remove();old.style.display='block'};
-/* V7.8.6: redundant second service worker registration removed. */
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 
 
 // 7.5 adds new pages without changing the approved 7.4 movie-log layouts.
@@ -2748,7 +2742,7 @@ openDetail=function(...args){
 };
 // First render must run after all wrappers, not midway through application initialization.
 
-/* V7.8.4: external ratings. Key is saved on this device, not published with the app. */
+/* V7.8.5: external ratings. Key is saved on this device, not published with the app. */
 const BW714_KEY='blackwood.omdb.key';
 const BW714_CACHE='blackwood.omdb.ratings.v1';
 let bw714Cache={};
@@ -2859,7 +2853,7 @@ function bw715HolidayFrames(){
   row.classList.remove(...Array.from(row.classList).filter(x=>x==='bw715-horror'||x==='bw715-christmas'||x==='bw729-simple'||x.startsWith('bw729-')||x.startsWith('bw730-')));
   row.querySelector('.bw718-decor')?.remove();
   row.classList.remove(...Array.from(row.classList).filter(x=>x.startsWith('bw60-frame-')));
-  const viewId=row.querySelector('[data-editview]')?.dataset.editview;
+  const viewId=row.dataset.viewId||row.querySelector('[data-editview]')?.dataset.editview;
   const v=state.viewings.find(x=>x.id===viewId),m=v&&movie(v.movieId);
   if(!v||!m)return;
   const horror=bw60Season(m,v,'horror'),christmas=bw60Season(m,v,'christmas');
@@ -2905,7 +2899,7 @@ bw731Decorate=function(){
  bw714OldDecorate();
  bw715HolidayFrames();
  document.querySelectorAll('#movieList .bw731-card').forEach(row=>{
-  const id=row.querySelector('[data-editview]')?.dataset.editview;
+  const id=row.dataset.viewId||row.querySelector('[data-editview]')?.dataset.editview;
   const v=state.viewings.find(x=>x.id===id),m=v&&movie(v.movieId);
   if(!m)return;
   const bottom=row.querySelector('.bw731-bottom');
@@ -2918,7 +2912,7 @@ bw731Decorate=function(){
 };
 
 
-/* V7.8.4: migrate OMDb results into the same Supabase-backed library payload. */
+/* V7.8.5: migrate OMDb results into the same Supabase-backed library payload. */
 function bw716MigrateRatings(){
  if(!state.externalRatings)state.externalRatings={};
  let changed=false;
@@ -2972,7 +2966,7 @@ renderSettings=function(){
 
 
 
-/* V7.8.4 unified seasonal controls; legacy controls remain wired but are hidden. */
+/* V7.8.5 unified seasonal controls; legacy controls remain wired but are hidden. */
 const bw729OldSettings=renderSettings;
 renderSettings=function(){
  bw729OldSettings();
@@ -3071,6 +3065,60 @@ function bw717ShowMemory(){
  overlay.querySelector('.bw717-close').focus();
 }
 
+/* V7.8.5: capture edit clicks before movie-card overlays or re-render handlers. */
+document.addEventListener('click',function(event){
+ const btn=event.target.closest?.('#movieList [data-editview]');
+ if(!btn)return;
+ event.preventDefault();event.stopImmediatePropagation();
+ const id=btn.getAttribute('data-editview');
+ if(id)openViewingForm(id);
+},true);
+/* V7.8.5 quick Beth / completion actions and desktop external ratings. */
+function bw782QuickBeth(viewId){
+ const v=state.viewings.find(x=>x.id===viewId);if(!v)return;
+ openModal('Watched with Beth?','<p>Was this watched with Beth?</p>',
+ '<button class="btn" id="bw782BethNo">No</button><button class="btn primary" id="bw782BethYes">Yes</button>');
+ for(const [id,value] of [['bw782BethNo','no'],['bw782BethYes','yes']])$(id).onclick=()=>{v.watchedWithWife=value;v.updatedAt=new Date().toISOString();save();closeModal();render();toast('Companion updated')};
+}
+function bw782QuickFinish(viewId){
+ const v=state.viewings.find(x=>x.id===viewId);if(!v)return;
+ openModal('Finish viewing','<div class="field"><label>Start date (reference)</label><input type="date" value="'+esc(v.startDate||'')+'" disabled></div><div class="field"><label for="bw782FinishDate">Finish date</label><input id="bw782FinishDate" type="date" value="'+esc(v.finishDate||today())+'"></div>',
+ '<button class="btn" id="bw782CancelFinish">Cancel</button><button class="btn primary" id="bw782SaveFinish">Save finish date</button>');
+ $('bw782CancelFinish').onclick=closeModal;
+ $('bw782SaveFinish').onclick=()=>{const date=$('bw782FinishDate').value;if(!date){toast('Select a finish date');return}if(v.startDate&&date<v.startDate){toast('Finish date cannot precede start date');return}v.finishDate=date;v.status='completed';v.updatedAt=new Date().toISOString();save();closeModal();render();toast('Viewing completed')};
+}
+function bw783ApplyCardActions(){
+ document.querySelectorAll('#movieList .movie-row').forEach(row=>{
+  const viewId=row.dataset.viewId||row.querySelector('[data-editview]')?.dataset.editview;
+  const v=state.viewings.find(x=>x.id===viewId),m=v&&movie(v.movieId);
+  if(!v||!m)return;
+  const actions=row.querySelector('.row-actions');if(!actions)return;
+  let heart=actions.querySelector('button.bw782-beth');
+  if(!heart){heart=document.createElement('button');heart.type='button';heart.className='bw782-beth';actions.appendChild(heart)}
+  heart.style.setProperty('display','inline-flex','important');
+  heart.textContent=v.watchedWithWife==='yes'?'♥':'♡';heart.classList.toggle('yes',v.watchedWithWife==='yes');heart.classList.toggle('no',v.watchedWithWife==='no');
+  heart.title='Was this watched with Beth?';heart.setAttribute('aria-label',heart.title);heart.onclick=e=>{e.stopPropagation();bw782QuickBeth(viewId)};
+  let done=actions.querySelector('button.bw782-finish');
+  if(!done){done=document.createElement('button');done.type='button';done.className='bw782-finish';actions.appendChild(done)}
+  done.style.setProperty('display','inline-flex','important');
+  done.textContent='✓';done.classList.toggle('complete',!!v.startDate&&!!v.finishDate);done.title='Set finish date';done.setAttribute('aria-label',done.title);
+  done.onclick=e=>{e.stopPropagation();bw782QuickFinish(viewId)};
+  const ratingBox=row.querySelector('.row-right');
+  if(ratingBox){
+   let ext=ratingBox.querySelector('.bw782-external');
+   if(!ext){ext=document.createElement('div');ext.className='bw782-external';ratingBox.appendChild(ext)}
+   const imdb=bw714Score(m,'imdb'),rt=bw714Score(m,'rt');
+   ext.innerHTML='<div><span>IMDb</span><strong>'+esc(imdb==='—'?'—':imdb+'/10')+'</strong></div><div><span>Rotten Tomatoes</span><strong>'+esc(rt)+'</strong></div>';
+  }
+
+ });
+};
+/* V7.8: filter restoration and collection banners */
+function bw78CaptureFilters(){const ids=['fStatus','fYear','fRating','fWife','fRewatch','fFav'];const values={};for(const id of ids){const el=$(id);if(el)values[id]=el.value}return values}
+function bw78RestoreFilters(values){for(const [id,val] of Object.entries(values)){const el=$(id);if(el){el.value=val;el.dispatchEvent(new Event(el.tagName==='INPUT'?'input':'change',{bubbles:true}))}}}
+function bw78ResizeBanner(file){return new Promise((resolve,reject)=>{const url=URL.createObjectURL(file),img=new Image();img.onload=()=>{try{const canvas=document.createElement('canvas');canvas.width=1250;canvas.height=250;const ctx=canvas.getContext('2d');const scale=Math.max(canvas.width/img.width,canvas.height/img.height),w=img.width*scale,h=img.height*scale;ctx.drawImage(img,(1250-w)/2,(250-h)/2,w,h);URL.revokeObjectURL(url);resolve(canvas.toDataURL('image/jpeg',.78))}catch(e){reject(e)}};img.onerror=()=>{URL.revokeObjectURL(url);reject(Error('Invalid image'))};img.src=url})}
+
+
 (async()=>{
  await bw777Bootstrap();
  bw777LastSavedContent=bw42Content(state);
@@ -3087,52 +3135,5 @@ function bw717ShowMemory(){
  }
 })().catch(e=>{console.error('App initialization failed',e);render();});
 })();
-
-/* V7.8.4: capture edit clicks before movie-card overlays or re-render handlers. */
-document.addEventListener('click',function(event){
- const btn=event.target.closest?.('#movieList [data-editview]');
- if(!btn)return;
- event.preventDefault();event.stopImmediatePropagation();
- const id=btn.getAttribute('data-editview');
- if(id)openViewingForm(id);
-},true);
-/* V7.8.4 quick Beth / completion actions and desktop external ratings. */
-function bw782QuickBeth(viewId){
- const v=state.viewings.find(x=>x.id===viewId);if(!v)return;
- openModal('Watched with Beth?','<p>Was this watched with Beth?</p>',
- '<button class="btn" id="bw782BethNo">No</button><button class="btn primary" id="bw782BethYes">Yes</button>');
- for(const [id,value] of [['bw782BethNo','no'],['bw782BethYes','yes']])$(id).onclick=()=>{v.watchedWithWife=value;v.updatedAt=new Date().toISOString();save();closeModal();render();toast('Companion updated')};
-}
-function bw782QuickFinish(viewId){
- const v=state.viewings.find(x=>x.id===viewId);if(!v)return;
- openModal('Finish viewing','<div class="field"><label>Start date (reference)</label><input type="date" value="'+esc(v.startDate||'')+'" disabled></div><div class="field"><label for="bw782FinishDate">Finish date</label><input id="bw782FinishDate" type="date" value="'+esc(v.finishDate||today())+'"></div>',
- '<button class="btn" id="bw782CancelFinish">Cancel</button><button class="btn primary" id="bw782SaveFinish">Save finish date</button>');
- $('bw782CancelFinish').onclick=closeModal;
- $('bw782SaveFinish').onclick=()=>{const date=$('bw782FinishDate').value;if(!date){toast('Select a finish date');return}if(v.startDate&&date<v.startDate){toast('Finish date cannot precede start date');return}v.finishDate=date;v.status='completed';v.updatedAt=new Date().toISOString();save();closeModal();render();toast('Viewing completed')};
-}
-function bw783ApplyCardActions(){
- document.querySelectorAll('#movieList .movie-row').forEach(row=>{
-  const viewId=row.querySelector('[data-editview]')?.dataset.editview;
-  const v=state.viewings.find(x=>x.id===viewId),m=v&&movie(v.movieId);
-  if(!v||!m)return;
-  const actions=row.querySelector('.row-actions');if(!actions)return;
-  let heart=actions.querySelector('button.bw782-beth');
-  if(!heart){heart=document.createElement('button');heart.type='button';heart.className='bw782-beth';actions.appendChild(heart)}
-  heart.textContent=v.watchedWithWife==='yes'?'♥':'♡';heart.classList.toggle('yes',v.watchedWithWife==='yes');heart.classList.toggle('no',v.watchedWithWife==='no');
-  heart.title='Was this watched with Beth?';heart.setAttribute('aria-label',heart.title);heart.onclick=e=>{e.stopPropagation();bw782QuickBeth(viewId)};
-  let done=actions.querySelector('button.bw782-finish');
-  if(!done){done=document.createElement('button');done.type='button';done.className='bw782-finish';actions.appendChild(done)}
-  done.textContent='✓';done.classList.toggle('complete',!!v.startDate&&!!v.finishDate);done.title='Set finish date';done.setAttribute('aria-label',done.title);
-  done.onclick=e=>{e.stopPropagation();bw782QuickFinish(viewId)};
-  const ratingBox=row.querySelector('.row-right');
-  if(ratingBox){let ext=ratingBox.querySelector('.bw782-external');if(!ext){ext=document.createElement('div');ext.className='bw782-external';ratingBox.appendChild(ext)}
-   ext.textContent='IMDb: '+bw714Score(m,'imdb')+'  ·  Rotten Tomatoes: '+bw714Score(m,'rt');
-  }
- });
-};
-/* V7.8: filter restoration and collection banners */
-function bw78CaptureFilters(){const ids=['fStatus','fYear','fRating','fWife','fRewatch','fFav'];const values={};for(const id of ids){const el=$(id);if(el)values[id]=el.value}return values}
-function bw78RestoreFilters(values){for(const [id,val] of Object.entries(values)){const el=$(id);if(el){el.value=val;el.dispatchEvent(new Event(el.tagName==='INPUT'?'input':'change',{bubbles:true}))}}}
-function bw78ResizeBanner(file){return new Promise((resolve,reject)=>{const url=URL.createObjectURL(file),img=new Image();img.onload=()=>{try{const canvas=document.createElement('canvas');canvas.width=1250;canvas.height=250;const ctx=canvas.getContext('2d');const scale=Math.max(canvas.width/img.width,canvas.height/img.height),w=img.width*scale,h=img.height*scale;ctx.drawImage(img,(1250-w)/2,(250-h)/2,w,h);URL.revokeObjectURL(url);resolve(canvas.toDataURL('image/jpeg',.78))}catch(e){reject(e)}};img.onerror=()=>{URL.revokeObjectURL(url);reject(Error('Invalid image'))};img.src=url})}
 
 </script></body></html>
