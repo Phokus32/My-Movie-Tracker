@@ -113,3 +113,5 @@ V7.8.10: Mobile movie action controls 24px high with 3px spacing to reduce card 
 V7.8.11: Desktop action controls forced into one column using the specificity of the original desktop grid selector; mobile column shifted 3px left. No card JavaScript or data changes.
 
 V7.8.12: Year-specific dashboard streak with date range, iPhone Movie Log toolbar refinement.
+
+V7.8.13: Mobile Movie Log full-width search; no viewing-year label; controls in second row with narrower sorting selectors; removed Pick a movie button; personal-rating star fills when viewing has a rating.
