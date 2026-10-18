@@ -623,7 +623,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 @media print{@page{margin:6mm}body *{visibility:hidden!important}#bw7Report,#bw7Report *{visibility:visible!important}#bw7Report.bw712-card{position:absolute!important;left:50%!important;top:0!important;transform:translateX(-50%);width:min(100%,175mm)!important;max-width:175mm!important;margin:0!important;box-shadow:none!important;print-color-adjust:exact!important;-webkit-print-color-adjust:exact!important}}
 
 
-/* V7.8.0: memory card text refinements */
+/* V7.8.1: memory card text refinements */
 .bw712-title{font-size:clamp(13px,3.35vw,32px)!important;white-space:normal!important;overflow-wrap:break-word!important;word-break:normal!important;line-height:1.07!important}
 .bw712-genre{font-size:clamp(8px,1.25vw,12px)!important;line-height:1.1!important;white-space:normal!important;overflow-wrap:anywhere!important}
 @media(max-width:550px){.bw712-title{font-size:clamp(11px,3.65vw,21px)!important}.bw712-genre{font-size:clamp(7px,1.6vw,10px)!important}}
@@ -634,7 +634,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 .bw714-ratings strong{font-size:clamp(13px,2vw,22px);color:var(--text)}
 @media(max-width:650px){.bw714-ratings{grid-template-columns:repeat(2,minmax(0,1fr))}.bw731-bottom{font-size:11px!important;line-height:1.45;white-space:normal!important;overflow-wrap:normal}}
 
-/* V7.8.0: genuine illustrated holiday overlays, no impact on the card's content */
+/* V7.8.1: genuine illustrated holiday overlays, no impact on the card's content */
 #movieList .movie-row.bw715-horror,#movieList .movie-row.bw715-christmas{position:relative!important;isolation:isolate;border-color:transparent!important;overflow:visible!important}
 #movieList .movie-row.bw715-horror::after,#movieList .movie-row.bw715-christmas::after{content:"";position:absolute;z-index:5;inset:-5px;pointer-events:none;border-style:solid;border-width:17px 20px;border-image-slice:90 115 90 115;border-image-width:17px 20px;border-image-repeat:stretch;filter:drop-shadow(0 1px 2px #0009)}
 #movieList .movie-row.bw715-horror::after{border-image-source:url("frame-horror.webp")}
@@ -650,7 +650,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 .bw716-wide .bw716-subcard{max-width:none}
 #movieList .movie-row.bw715-horror::after,#movieList .movie-row.bw715-christmas::after{border-image-repeat:round;filter:drop-shadow(0 1px 1px #0009)}
 
-/* V7.8.0 full-screen share card viewer and distortion-resistant festival frames */
+/* V7.8.1 full-screen share card viewer and distortion-resistant festival frames */
 #bw7Report{cursor:zoom-in}
 .bw717-lightbox{position:fixed;inset:0;z-index:999999;background:#050304f5;display:flex;align-items:center;justify-content:center;padding:14px;overflow:auto}
 .bw717-viewport{width:100%;height:100%;display:flex;align-items:center;justify-content:center;overflow:auto}
@@ -663,7 +663,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 }
 @media print{.bw717-lightbox{display:none!important}}
 
-/* V7.8.0 seasonal decorations: repeat at native scale, never stretch an image. */
+/* V7.8.1 seasonal decorations: repeat at native scale, never stretch an image. */
 #movieList .movie-row.bw715-horror,
 #movieList .movie-row.bw715-christmas{
  border:1px solid transparent!important;
@@ -731,7 +731,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 @media(min-width:651px){#bw717FullscreenCard .bw712-title{font-size:clamp(17px,3.9vw,38px)!important;line-height:1.04!important}}
 
 
-/* V7.8.0: exact approved concept artwork, with transparent interior. */
+/* V7.8.1: exact approved concept artwork, with transparent interior. */
 #movieList .movie-row.bw715-horror::after,
 #movieList .movie-row.bw715-christmas::after{
  inset:-5px!important;content:""!important;border:0!important;box-shadow:none!important;
@@ -749,7 +749,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
  #movieList .movie-row.bw715-christmas::after{background-image:url("fest-christmas-mobile.webp")!important}
 }
 
-/* V7.8.0: user-supplied transparent art, proportion-matched to ~6:1 log cards.
+/* V7.8.1: user-supplied transparent art, proportion-matched to ~6:1 log cards.
    Overlay occupies card surface; clicks pass through to controls. */
 #movieList .movie-row.bw715-horror::after,
 #movieList .movie-row.bw715-christmas::after{
@@ -766,7 +766,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
  #movieList .movie-row.bw715-christmas::after{inset:-2px!important}
 }
 
-/* V7.8.0: slimmer holiday overlays, no opaque center, no change to card sizing. */
+/* V7.8.1: slimmer holiday overlays, no opaque center, no change to card sizing. */
 #movieList .movie-row.bw715-horror::after{background-image:url("fest-horror-slim.webp")!important}
 #movieList .movie-row.bw715-christmas::after{background-image:url("fest-christmas-slim.webp")!important}
 #movieList .movie-row.bw715-horror::after,
@@ -782,7 +782,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 }
 
 
-/* V7.8.0: nine-slice holiday artwork. Corners remain undistorted;
+/* V7.8.1: nine-slice holiday artwork. Corners remain undistorted;
    top/bottom and sides extend continuously around the actual card edge. */
 #movieList .movie-row.bw715-horror::after,
 #movieList .movie-row.bw715-christmas::after{
@@ -827,7 +827,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 }
 @media(prefers-reduced-motion:reduce){#movieList .bw722-bat{animation:none!important}}
 
-/* V7.8.0: independently sized perimeter artwork; avoids nine-slice seams and fat corners. */
+/* V7.8.1: independently sized perimeter artwork; avoids nine-slice seams and fat corners. */
 #movieList .movie-row.bw715-horror::after,
 #movieList .movie-row.bw715-christmas::after{
  border:0!important;border-image:none!important;
@@ -881,7 +881,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
  #movieList .bw723-drop,#movieList .bw723-splash,#movieList .movie-row.bw715-christmas::after{animation:none!important}
 }
 
-/* V7.8.0: return to the more attractive nine-slice frame from 7.7.22.
+/* V7.8.1: return to the more attractive nine-slice frame from 7.7.22.
    Side strings are separately tiled; corners are drawn once by border-image. */
 #movieList .movie-row.bw715-horror::after,
 #movieList .movie-row.bw715-christmas::after{
@@ -916,7 +916,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 }
 @media(prefers-reduced-motion:reduce){#movieList .movie-row.bw715-christmas::after{animation:none!important}}
 
-/* V7.8.0: move the side frame artwork outward without changing its scale. */
+/* V7.8.1: move the side frame artwork outward without changing its scale. */
 #movieList .movie-row.bw715-horror::after,
 #movieList .movie-row.bw715-christmas::after{
  left:-8px!important;right:-8px!important;
@@ -927,7 +927,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
  #movieList .movie-row.bw715-christmas::after{left:-5px!important;right:-5px!important}
 }
 
-/* V7.8.0: correct and ship image assets, push both sides clearly outward.
+/* V7.8.1: correct and ship image assets, push both sides clearly outward.
    Separate left/right artwork permits 180-degree rotation of the horror right side. */
 #movieList .movie-row.bw715-horror::after,
 #movieList .movie-row.bw715-christmas::after{
@@ -950,7 +950,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
  }
 }
 
-/* V7.8.0: keep three-line movie titles completely inside their designated area. */
+/* V7.8.1: keep three-line movie titles completely inside their designated area. */
 .bw712-title{
  white-space:normal!important;
  overflow-wrap:anywhere!important;
@@ -974,7 +974,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
  }
 }
 
-/* V7.8.0: smaller long titles, safe three-line wrap, no vertical clipping. */
+/* V7.8.1: smaller long titles, safe three-line wrap, no vertical clipping. */
 .bw712-title,#bw717FullscreenCard .bw712-title{
  font-size:clamp(10px,2.55vw,23px)!important;
  line-height:1.12!important;
@@ -994,7 +994,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
  }
 }
 
-/* V7.8.0: clean settings, simple holiday borders, low-overhead animation options */
+/* V7.8.1: clean settings, simple holiday borders, low-overhead animation options */
 .bw729-controls{margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
 .bw729-controls h3{margin:15px 0 9px;font-size:17px}
 .bw729-controls h4{margin:8px 0;font-size:14px}
@@ -1016,7 +1016,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 @keyframes bw729Fall{0%{transform:translateY(-15px);opacity:0}10%{opacity:.85}90%{opacity:.85}100%{transform:translateY(190px);opacity:0}}
 @media(prefers-reduced-motion:reduce){#movieList .bw729-fall{animation:none!important}}
 
-/* V7.8.0 distinct holiday frames, animated preview and effect-specific motion */
+/* V7.8.1 distinct holiday frames, animated preview and effect-specific motion */
 .bw730-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .bw730-preview-label{font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--muted);margin:5px 0 10px}
 .bw730-preview{position:relative;isolation:isolate;overflow:hidden;min-height:108px;display:flex;align-items:center;gap:12px;padding:14px;background:#20242d;border:1px solid #4b5262;border-radius:11px;color:white}
@@ -1064,7 +1064,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 @media(max-width:440px){#main .cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style></head>
 <body><div class="app">
-<header class="topbar"><button class="bw-home" id="bwHome" type="button" title="Go to Movie Log" aria-label="Blackwood Movie Log home"><div class="brandmark">B</div><div class="brand"><span class="bw-wordmark">BLACKWOOD</span><span class="bw-submark">MOVIE LOG</span><small>YOUR PERSONAL FILM ARCHIVE <span class="bw-version">Version 7.8.0</span></small></div></button><div class="top-spacer"></div><div class="status"><span class="dot"></span><span id="saveStatus">Saved on this device</span></div><button class="iconbtn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☼</button><button class="iconbtn" id="menuBtn" aria-label="Open navigation" title="Navigation">☰</button></header>
+<header class="topbar"><button class="bw-home" id="bwHome" type="button" title="Go to Movie Log" aria-label="Blackwood Movie Log home"><div class="brandmark">B</div><div class="brand"><span class="bw-wordmark">BLACKWOOD</span><span class="bw-submark">MOVIE LOG</span><small>YOUR PERSONAL FILM ARCHIVE <span class="bw-version">Version 7.8.1</span></small></div></button><div class="top-spacer"></div><div class="status"><span class="dot"></span><span id="saveStatus">Saved on this device</span></div><button class="iconbtn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☼</button><button class="iconbtn" id="menuBtn" aria-label="Open navigation" title="Navigation">☰</button></header>
 <div class="layout"><aside class="sidebar"><div class="side-label">LIBRARY</div><nav class="navlist" id="sideNav"></nav><div class="sidebar-note"><strong style="color:var(--text)">Private by design</strong><br>This first build saves your records in this browser on this device. Cloud sync is not connected yet.</div></aside><main class="main" id="main"></main></div>
 <nav class="mobile-nav" id="mobileNav"></nav></div>
 <div class="modal-backdrop" id="modalBackdrop"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modalhead"><h2 id="modalTitle">Add movie</h2><button class="iconbtn" id="modalClose" aria-label="Close">×</button></div><div id="modalBody"></div><div class="modalfoot" id="modalFoot"></div></section></div><div class="toast" id="toast"></div>
@@ -1711,12 +1711,15 @@ function bw5Stats(){const period=state.uiSettings?.bw5StatsPeriod||String(new Da
  }$('bw5Measure').onchange=draw;draw();
 }
 function bw5Collections(){state.collectionsV5=Array.isArray(state.collectionsV5)?state.collectionsV5:[];const collections=state.collectionsV5;
- $('main').innerHTML=pageHead('CURATE YOUR CINEMA','Custom Collections','Build your own ordered movie lists. Deleting a collection never deletes its movies.')+`<section class="bw5-section"><h3>Create a collection</h3><div class="bw5-fields"><input id="bw5CollectionName" placeholder="e.g. Halloween Essentials" maxlength="100"><input id="bw5CollectionDesc" placeholder="Optional description" maxlength="240"><button class="btn primary" id="bw5CreateCollection">Create</button></div></section><div class="bw5-list">${collections.map(c=>`<section class="bw5-section"><h3>${esc(c.name)} <span class="bw5-muted">(${c.movieIds.length} films)</span></h3><p class="bw5-muted">${esc(c.description||'')}</p><div class="bw5-fields"><select data-bw5-add="${esc(c.id)}"><option value="">Choose movie to add…</option>${state.movies.filter(m=>!c.movieIds.includes(m.id)).sort((a,b)=>a.title.localeCompare(b.title)).map(m=>`<option value="${esc(m.id)}">${esc(m.title)} (${esc(m.year||'—')})</option>`).join('')}</select><button class="btn small" data-bw5-rename="${esc(c.id)}">Edit details</button><button class="btn small danger" data-bw5-delete="${esc(c.id)}">Delete collection</button></div><div class="bw5-list">${c.movieIds.map((id,i)=>{const m=movie(id);return m?`<div class="bw5-entry"><span>${i+1}. ${esc(m.title)} (${esc(m.year||'—')})</span><span><button class="btn small" data-bw5-move="${esc(c.id)}" data-id="${esc(id)}" data-dir="-1" aria-label="Move up">↑</button> <button class="btn small" data-bw5-move="${esc(c.id)}" data-id="${esc(id)}" data-dir="1" aria-label="Move down">↓</button> <button class="btn small" data-bw5-remove="${esc(c.id)}" data-id="${esc(id)}">×</button></span></div>`:''}).join('')}</div></section>`).join('')}</div>`;
+ $('main').innerHTML=pageHead('CURATE YOUR CINEMA','Custom Collections','Build your own ordered movie lists. Deleting a collection never deletes its movies.')+`<section class="bw5-section"><h3>Create a collection</h3><div class="bw5-fields"><input id="bw5CollectionName" placeholder="e.g. Halloween Essentials" maxlength="100"><input id="bw5CollectionDesc" placeholder="Optional description" maxlength="240"><button class="btn primary" id="bw5CreateCollection">Create</button></div></section><div class="bw5-list">${collections.map(c=>`<section class="bw5-section"><h3>${esc(c.name)} <span class="bw5-muted">(${c.movieIds.length} films)</span></h3><p class="bw5-muted">${esc(c.description||'')}</p><div class="bw78-banner" data-bw78-banner="${esc(c.id)}">${c.banner?`<img src="${esc(c.banner)}" alt="Banner for ${esc(c.name)}">`:`<div class="bw78-banner-placeholder">Upload a collection banner · Ideal aspect ratio 5:1</div>`}<input type="file" accept="image/*" data-bw78-file="${esc(c.id)}" style="display:none"><button type="button" class="btn small bw78-banner-button" data-bw78-upload="${esc(c.id)}">${c.banner?'Replace banner':'Upload banner'}</button>${c.banner?`<button type="button" class="btn small bw78-banner-remove" data-bw78-remove="${esc(c.id)}">Remove</button>`:''}</div><div class="bw5-fields"><select data-bw5-add="${esc(c.id)}"><option value="">Choose movie to add…</option>${state.movies.filter(m=>!c.movieIds.includes(m.id)).sort((a,b)=>a.title.localeCompare(b.title)).map(m=>`<option value="${esc(m.id)}">${esc(m.title)} (${esc(m.year||'—')})</option>`).join('')}</select><button class="btn small" data-bw5-rename="${esc(c.id)}">Edit details</button><button class="btn small danger" data-bw5-delete="${esc(c.id)}">Delete collection</button></div><div class="bw5-list">${c.movieIds.map((id,i)=>{const m=movie(id);return m?`<div class="bw5-entry"><span>${i+1}. ${esc(m.title)} (${esc(m.year||'—')})</span><span><button class="btn small" data-bw5-move="${esc(c.id)}" data-id="${esc(id)}" data-dir="-1" aria-label="Move up">↑</button> <button class="btn small" data-bw5-move="${esc(c.id)}" data-id="${esc(id)}" data-dir="1" aria-label="Move down">↓</button> <button class="btn small" data-bw5-remove="${esc(c.id)}" data-id="${esc(id)}">×</button></span></div>`:''}).join('')}</div></section>`).join('')}</div>`;
  $('bw5CreateCollection').onclick=()=>{const name=$('bw5CollectionName').value.trim();if(!name)return toast('Enter a collection name');collections.push({id:uid(),name,description:$('bw5CollectionDesc').value.trim(),movieIds:[]});save();bw5Collections()};
  document.querySelectorAll('[data-bw5-add]').forEach(el=>el.onchange=()=>{const c=collections.find(c=>c.id===el.dataset.bw5Add);if(c&&el.value&&!c.movieIds.includes(el.value)){c.movieIds.push(el.value);save();bw5Collections()}});
  document.querySelectorAll('[data-bw5-rename]').forEach(el=>el.onclick=()=>{const c=collections.find(c=>c.id===el.dataset.bw5Rename);if(!c)return;const name=prompt('Collection name',c.name);if(name===null||!name.trim())return;const description=prompt('Description',c.description||'');if(description===null)return;c.name=name.trim();c.description=description.trim();save();bw5Collections()});
  document.querySelectorAll('[data-bw5-delete]').forEach(el=>el.onclick=()=>{const i=collections.findIndex(c=>c.id===el.dataset.bw5Delete);if(i>=0&&confirm('Delete this collection? Movies will not be deleted.')){collections.splice(i,1);save();bw5Collections()}});
  document.querySelectorAll('[data-bw5-remove]').forEach(el=>el.onclick=()=>{const c=collections.find(c=>c.id===el.dataset.bw5Remove);if(c){c.movieIds=c.movieIds.filter(id=>id!==el.dataset.id);save();bw5Collections()}});
+ document.querySelectorAll('[data-bw78-upload]').forEach(btn=>btn.onclick=()=>{const file=document.querySelector('[data-bw78-file="'+btn.dataset.bw78Upload+'"]');file?.click()});
+ document.querySelectorAll('[data-bw78-remove]').forEach(btn=>btn.onclick=()=>{const c=collections.find(x=>x.id===btn.dataset.bw78Remove);if(!c)return;delete c.banner;save();bw5Collections()});
+ document.querySelectorAll('[data-bw78-file]').forEach(input=>input.onchange=async()=>{const c=collections.find(x=>x.id===input.dataset.bw78File),file=input.files?.[0];if(!c||!file)return;try{if(!file.type.startsWith('image/'))throw Error('Choose an image file');c.banner=await bw78ResizeBanner(file);save();bw5Collections();toast('Collection banner saved')}catch(e){toast('Banner upload failed: '+e.message)}});
  document.querySelectorAll('[data-bw5-move]').forEach(el=>el.onclick=()=>{const c=collections.find(c=>c.id===el.dataset.bw5Move);if(!c)return;const i=c.movieIds.indexOf(el.dataset.id),j=i+Number(el.dataset.dir);if(i<0||j<0||j>=c.movieIds.length)return;[c.movieIds[i],c.movieIds[j]]=[c.movieIds[j],c.movieIds[i]];save();bw5Collections()});
 }
 function bw5Awards(){state.awardsV5=state.awardsV5||{};const year=Number(state.uiSettings?.bw5AwardYear||new Date().getFullYear()),categories=['Best Picture','Best Horror','Best Comedy','Biggest Surprise','Biggest Disappointment','Best Rewatch','Best Performance','Best Director'];const eligible=[...new Map(bw5Filtered(String(year)).map(v=>[v.movieId,movie(v.movieId)])).values()].filter(Boolean).sort((a,b)=>a.title.localeCompare(b.title));const yearData=state.awardsV5[year]||{};
@@ -2064,7 +2067,7 @@ const bw779EmbeddedArtwork={'horrorfest':'data:image/webp;base64,UklGRqiDAABXRUJ
 function bw778Art(id,title){const names={horrorfest60:'horrorfest',christmasfest60:'christmas-fest',stats5:'statistics-center',review5:'year-in-review',compare7:'year-vs-year',reports7:'report-studio',timeline75:'movie-history-timeline',health5:'data-health',awards5:'movie-awards',topten:'my-top-10'};const file=names[id];return file?`<img class="bw778-art" src="${bw779EmbeddedArtwork[file]}" alt="${title}" loading="lazy" decoding="async">`:'';}
 function bw73Holiday(){$('main').innerHTML=pageHead('SEASONAL CINEMA','Holiday Fest','Two traditions. Every movie remembered.')+'<div class="bw73-hub bw73-holiday bw778-gallery"><button class="bw73-tile" id="bw73Horror" aria-label="Open Horrorfest">'+bw778Art('horrorfest60','Horrorfest')+'</button><button class="bw73-tile" id="bw73Christmas" aria-label="Open Christmas Fest">'+bw778Art('christmasfest60','Christmas Fest')+'</button></div>';$('bw73Horror').onclick=()=>go('horrorfest60');$('bw73Christmas').onclick=()=>go('christmasfest60')}
 function bw73Insights(){$('main').innerHTML=pageHead('YOUR MOVIE STORY','Statistics & Reports','Explore your viewing history and share what matters.')+'<div class="bw73-hub bw778-gallery">'+[['stats5','Statistics Center'],['review5','Year in Review'],['compare7','Year vs. Year'],['reports7','Report Studio']].map(([id,title])=>'<button class="bw73-tile" data-bw73-page="'+id+'" aria-label="Open '+title+'">'+bw778Art(id,title)+'</button>').join('')+'</div>';document.querySelectorAll('[data-bw73-page]').forEach(b=>b.onclick=()=>go(b.dataset.bw73Page))}
-const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.8.0';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
+const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.8.1';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
 // Always reset modal's internal scroll position, not the underlying page.
 const bw73OpenModal=openModal;openModal=function(...args){bw73OpenModal(...args);requestAnimationFrame(()=>{for(const el of [$('modalBody'),document.querySelector('.modal'),document.querySelector('.modal-backdrop.open')])if(el)el.scrollTop=0})};
 // Decorate only the actual filtered rows, after every list redraw.
@@ -2662,7 +2665,7 @@ openDetail=function(...args){
 };
 // First render must run after all wrappers, not midway through application initialization.
 
-/* V7.8.0: external ratings. Key is saved on this device, not published with the app. */
+/* V7.8.1: external ratings. Key is saved on this device, not published with the app. */
 const BW714_KEY='blackwood.omdb.key';
 const BW714_CACHE='blackwood.omdb.ratings.v1';
 let bw714Cache={};
@@ -2832,7 +2835,7 @@ bw731Decorate=function(){
 };
 
 
-/* V7.8.0: migrate OMDb results into the same Supabase-backed library payload. */
+/* V7.8.1: migrate OMDb results into the same Supabase-backed library payload. */
 function bw716MigrateRatings(){
  if(!state.externalRatings)state.externalRatings={};
  let changed=false;
@@ -2886,7 +2889,7 @@ renderSettings=function(){
 
 
 
-/* V7.8.0 unified seasonal controls; legacy controls remain wired but are hidden. */
+/* V7.8.1 unified seasonal controls; legacy controls remain wired but are hidden. */
 const bw729OldSettings=renderSettings;
 renderSettings=function(){
  bw729OldSettings();
@@ -3002,10 +3005,16 @@ function bw717ShowMemory(){
 })().catch(e=>{console.error('App initialization failed',e);render();});
 })();
 
+/* V7.8.1: capture edit clicks before movie-card overlays or re-render handlers. */
+document.addEventListener('click',function(event){
+ const btn=event.target.closest?.('#movieList [data-editview]');
+ if(!btn)return;
+ event.preventDefault();event.stopImmediatePropagation();
+ const id=btn.getAttribute('data-editview');
+ if(id)openViewingForm(id);
+},true);
 /* V7.8: filter restoration and collection banners */
 function bw78CaptureFilters(){const ids=['fStatus','fYear','fRating','fWife','fRewatch','fFav'];const values={};for(const id of ids){const el=$(id);if(el)values[id]=el.value}return values}
 function bw78RestoreFilters(values){for(const [id,val] of Object.entries(values)){const el=$(id);if(el){el.value=val;el.dispatchEvent(new Event(el.tagName==='INPUT'?'input':'change',{bubbles:true}))}}}
-const bw78OldCollections=bw5Collections;
-bw5Collections=function(){bw78OldCollections();const list=$('main')?.querySelector('.bw5-list');if(!list)return;const cards=Array.from(list.children).filter(el=>el.classList.contains('bw5-section'));const collections=state.collectionsV5||[];cards.forEach((card,i)=>{const c=collections[i];if(!c)return;const banner=document.createElement('div');banner.className='bw78-banner';banner.innerHTML='<div class="bw78-banner-placeholder">'+(c.banner?'':'Collection banner · Recommended aspect ratio 5:1')+'</div><input type="file" accept="image/*" aria-label="Upload collection banner" hidden><button type="button" class="btn small bw78-banner-button">'+(c.banner?'Replace banner':'Upload banner')+'</button>'+(c.banner?'<button type="button" class="btn small bw78-banner-remove">Remove</button>':'');if(c.banner){const img=document.createElement('img');img.src=c.banner;img.alt='Banner for '+c.name;banner.prepend(img)}const title=card.querySelector('h3');if(title)title.insertAdjacentElement('afterend',banner);const input=banner.querySelector('input');banner.querySelector('.bw78-banner-button').onclick=()=>input.click();banner.querySelector('.bw78-banner-remove')?.addEventListener('click',()=>{delete c.banner;save();bw5Collections()});input.onchange=async()=>{const file=input.files?.[0];if(!file)return;if(!file.type.startsWith('image/'))return toast('Please choose an image');try{const data=await bw78ResizeBanner(file);c.banner=data;save();bw5Collections();toast('Collection banner saved')}catch(e){toast('Could not process image: '+e.message)}}})};
 function bw78ResizeBanner(file){return new Promise((resolve,reject)=>{const url=URL.createObjectURL(file),img=new Image();img.onload=()=>{try{const canvas=document.createElement('canvas');canvas.width=1250;canvas.height=250;const ctx=canvas.getContext('2d');const scale=Math.max(canvas.width/img.width,canvas.height/img.height),w=img.width*scale,h=img.height*scale;ctx.drawImage(img,(1250-w)/2,(250-h)/2,w,h);URL.revokeObjectURL(url);resolve(canvas.toDataURL('image/jpeg',.78))}catch(e){reject(e)}};img.onerror=()=>{URL.revokeObjectURL(url);reject(Error('Invalid image'))};img.src=url})}
 </script></body></html>
