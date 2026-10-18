@@ -87,3 +87,4 @@ V7.7.26: More aggressive outward side alignment; 180-degree rotated right Horror
 V7.7.27: memory card titles auto-shrink when wrapping to three lines, increased line height and padding. Fullscreen memory card is 5% narrower with 5% horizontal stretch; vertical stretch unchanged. Holiday frames unchanged.\n
 V7.7.28: Reduced Memory Card title font and replaced overflow fitting with actual rendered text measurement, including fullscreen mode. Other app features unchanged.\n
 V7.7.29: Unified holiday frames and animation controls, density scaling, simple frames; Movie Suggester year/runtime/rating ranges with TMDB discover API support.\n
+V7.7.30: Independent Horror and Christmas frame styles, new Christmas simple frames, animated effects with appropriate movement, live settings preview, and restored missing holiday artwork files.\n
