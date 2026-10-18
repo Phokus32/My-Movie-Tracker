@@ -119,3 +119,19 @@ V7.8.13: Mobile Movie Log full-width search; no viewing-year label; controls in 
 V7.8.14: 21 awards categories including existing Best Picture, TMDB individual performer/director winners, genre and viewing-year filters, rating ranking, rewatch and score-gap awards. Existing award data preserved.
 
 V7.8.15: Movie Awards eligibility and year selector now use original movie release year, not viewing year. Existing award records are preserved.
+
+
+## V7.8.16: Cross-device Movie Memory frames
+Custom frames remain cached in IndexedDB and now upload/download through a **private Supabase Storage bucket** named `movie-memory-frames` when signed in.
+
+### One-time Supabase setup
+In Supabase Dashboard > Storage create a PRIVATE bucket named `movie-memory-frames`. In SQL Editor execute:
+
+```sql
+create policy "Memory frames read own" on storage.objects for select to authenticated using (bucket_id = 'movie-memory-frames' and (storage.foldername(name))[1] = (select auth.uid()::text));
+create policy "Memory frames insert own" on storage.objects for insert to authenticated with check (bucket_id = 'movie-memory-frames' and (storage.foldername(name))[1] = (select auth.uid()::text));
+create policy "Memory frames update own" on storage.objects for update to authenticated using (bucket_id = 'movie-memory-frames' and (storage.foldername(name))[1] = (select auth.uid()::text)) with check (bucket_id = 'movie-memory-frames' and (storage.foldername(name))[1] = (select auth.uid()::text));
+create policy "Memory frames delete own" on storage.objects for delete to authenticated using (bucket_id = 'movie-memory-frames' and (storage.foldername(name))[1] = (select auth.uid()::text));
+```
+
+Previously uploaded device-only frames will remain available locally. To sync an older frame, select its source file and upload again after configuring Storage. All devices must be signed into the same Supabase account.
