@@ -117,3 +117,5 @@ V7.8.12: Year-specific dashboard streak with date range, iPhone Movie Log toolba
 V7.8.13: Mobile Movie Log full-width search; no viewing-year label; controls in second row with narrower sorting selectors; removed Pick a movie button; personal-rating star fills when viewing has a rating.
 
 V7.8.14: 21 awards categories including existing Best Picture, TMDB individual performer/director winners, genre and viewing-year filters, rating ranking, rewatch and score-gap awards. Existing award data preserved.
+
+V7.8.15: Movie Awards eligibility and year selector now use original movie release year, not viewing year. Existing award records are preserved.
