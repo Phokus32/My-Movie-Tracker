@@ -111,3 +111,5 @@ V7.8.9 (based specifically on the user-supplied WORKING V7.8.5 ZIP)
 V7.8.10: Mobile movie action controls 24px high with 3px spacing to reduce card height; Delete Frame button removes only device-local custom frames after confirmation, never built-in frames.
 
 V7.8.11: Desktop action controls forced into one column using the specificity of the original desktop grid selector; mobile column shifted 3px left. No card JavaScript or data changes.
+
+V7.8.12: Year-specific dashboard streak with date range, iPhone Movie Log toolbar refinement.
