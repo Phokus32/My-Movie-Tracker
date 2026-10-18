@@ -98,4 +98,4 @@ V7.8.3: Restore missing desktop heart, finish-date checkmark, IMDb and RT displa
 
 V7.8.4: Stop mutation-observer infinite decoration loop introduced with dynamic holiday effects. Restore three quick-action buttons and festival frame rendering; guard rendering stages.
 
-V7.8.5: Fixed root-cause scoping bug: V7.8.2+ action handlers were mistakenly defined outside the application closure. Restored buttons, ratings and holiday renderer; stable data-view-id added to cards.
+V7.8.6: Desktop action buttons strictly vertical; mobile action buttons 20% smaller; new service worker never serves cached old index.html, removes older Blackwood caches upon activation, removes duplicate registration and does not force page reload. No movie data or Supabase settings are cleared.\n
