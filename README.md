@@ -97,5 +97,3 @@ V7.8.2: desktop IMDb/RT display, collapsible collection banners, TMDB collection
 V7.8.3: Restore missing desktop heart, finish-date checkmark, IMDb and RT displays by integrating actions into Movie Log card decoration and redraw handling.
 
 V7.8.4: Stop mutation-observer infinite decoration loop introduced with dynamic holiday effects. Restore three quick-action buttons and festival frame rendering; guard rendering stages.
-
-V7.8.5: Fixed root-cause scoping bug: V7.8.2+ action handlers were mistakenly defined outside the application closure. Restored buttons, ratings and holiday renderer; stable data-view-id added to cards.
