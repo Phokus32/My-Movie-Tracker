@@ -1,8 +1,8 @@
-/* Blackwood Movie Log V7.8.6
+/* Blackwood Movie Log V7.8.7
    Always fetch current app HTML. Never serve stale HTML from an old PWA cache.
    Do not force reload of an already open client or skipWaiting automatically.
 */
-const CACHE='blackwood-v7.8.6-assets';
+const CACHE='blackwood-v7.8.7-assets';
 self.addEventListener('install',event=>{event.waitUntil(Promise.resolve())});
 self.addEventListener('activate',event=>{
  event.waitUntil((async()=>{
