@@ -95,3 +95,5 @@ V7.8.1: Fix Edit button with delegated click handling; integrate collection bann
 V7.8.2: desktop IMDb/RT display, collapsible collection banners, TMDB collection search, quick Beth and finish-date buttons on movie cards.
 
 V7.8.3: Restore missing desktop heart, finish-date checkmark, IMDb and RT displays by integrating actions into Movie Log card decoration and redraw handling.
+
+V7.8.4: Stop mutation-observer infinite decoration loop introduced with dynamic holiday effects. Restore three quick-action buttons and festival frame rendering; guard rendering stages.
