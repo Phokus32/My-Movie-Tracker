@@ -88,3 +88,4 @@ V7.7.27: memory card titles auto-shrink when wrapping to three lines, increased 
 V7.7.28: Reduced Memory Card title font and replaced overflow fitting with actual rendered text measurement, including fullscreen mode. Other app features unchanged.\n
 V7.7.29: Unified holiday frames and animation controls, density scaling, simple frames; Movie Suggester year/runtime/rating ranges with TMDB discover API support.\n
 V7.7.30: Independent Horror and Christmas frame styles, new Christmas simple frames, animated effects with appropriate movement, live settings preview, and restored missing holiday artwork files.\n
+V7.8.0: eight dashboard stats including busiest date, removes duplicate stats heatmap, restores log filters after edits, watchlist Suggested By, 5:1 collection banner upload, red/green Christmas twinkles. PWA reload root cause still under investigation.
