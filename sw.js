@@ -1,5 +1,5 @@
-/* Blackwood Movie Log V7.8.10: avoid stale HTML and unsolicited reloads. */
-const CACHE='blackwood-v7.8.10-assets';
+/* Blackwood Movie Log V7.8.11: avoid stale HTML and unsolicited reloads. */
+const CACHE='blackwood-v7.8.11-assets';
 self.addEventListener('install',event=>{event.waitUntil(Promise.resolve())});
 self.addEventListener('activate',event=>{event.waitUntil((async()=>{
  const keys=await caches.keys();
