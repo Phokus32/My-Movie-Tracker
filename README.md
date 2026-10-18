@@ -93,3 +93,5 @@ V7.8.0: eight dashboard stats including busiest date, removes duplicate stats he
 V7.8.1: Fix Edit button with delegated click handling; integrate collection banner upload controls directly into collection rendering.
 
 V7.8.2: desktop IMDb/RT display, collapsible collection banners, TMDB collection search, quick Beth and finish-date buttons on movie cards.
+
+V7.8.3: Restore missing desktop heart, finish-date checkmark, IMDb and RT displays by integrating actions into Movie Log card decoration and redraw handling.
