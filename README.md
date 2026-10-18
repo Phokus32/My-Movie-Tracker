@@ -97,3 +97,13 @@ V7.8.2: desktop IMDb/RT display, collapsible collection banners, TMDB collection
 V7.8.3: Restore missing desktop heart, finish-date checkmark, IMDb and RT displays by integrating actions into Movie Log card decoration and redraw handling.
 
 V7.8.4: Stop mutation-observer infinite decoration loop introduced with dynamic holiday effects. Restore three quick-action buttons and festival frame rendering; guard rendering stages.
+
+V7.8.5: Fixed root-cause scoping bug: V7.8.2+ action handlers were mistakenly defined outside the application closure. Restored buttons, ratings and holiday renderer; stable data-view-id added to cards.
+
+V7.8.9 (based specifically on the user-supplied WORKING V7.8.5 ZIP)
+- Desktop star, Beth heart and completion buttons in a single column.
+- Mobile buttons 20% smaller (28px) and action bar 10px to the right.
+- Movie Memory Card: dropdown with Original Theater, Classic, Horror, Christmas, Castle, Patriotic, Hero, Action and Comedy.
+- Upload Frame saves a 1177 x 1337 WebP image into device-local IndexedDB; uploads are NOT synchronized across devices. A matching template is required for data overlays.
+- Selecting a frame changes the report background without altering overlay text and preserves the click-to-fullscreen view.
+- Service worker no longer caches HTML and has a new cache version. No data is cleared.
