@@ -107,3 +107,5 @@ V7.8.9 (based specifically on the user-supplied WORKING V7.8.5 ZIP)
 - Upload Frame saves a 1177 x 1337 WebP image into device-local IndexedDB; uploads are NOT synchronized across devices. A matching template is required for data overlays.
 - Selecting a frame changes the report background without altering overlay text and preserves the click-to-fullscreen view.
 - Service worker no longer caches HTML and has a new cache version. No data is cleared.
+
+V7.8.10: Mobile movie action controls 24px high with 3px spacing to reduce card height; Delete Frame button removes only device-local custom frames after confirmation, never built-in frames.
