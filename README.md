@@ -36,3 +36,14 @@ Deploy these files over the existing site. Your Supabase movie tracking database
 - Optional Adaptive buffering (on by default): after repeated stalls, progressively steps down to 720p at 2.5 Mbps, then 480p at 1.5 Mbps. Preserves the approximate playback position, but switching streams may cause a brief pause.
 - Emby Remember login (on by default on the login screen): stores the access token in browser localStorage, not the password. Disconnect removes it, and expired/revoked tokens require sign-in again. Avoid on shared devices.
 - The Emby server/browser may have limits; no guarantee of uninterrupted playback.
+
+
+## V7.10.5 — Theater Player
+- Redesigned the Emby video experience into an edge-to-edge, dark theater player with a floating seek bar, centered pause/play controls, ten-second skips, unobtrusive status and a separate translucent settings sheet. Controls fade while a movie plays and reappear on interaction. Mobile-safe-area spacing and keyboard controls are included.
+- Removed the **forced HLS-to-MP4 switch when selecting speeds above 2.0x**, which could cause stream errors. Playback speed now changes continuously without restarting; ranges 0.5x–2.5x in 0.1x steps using a slider and +/- buttons. Native browser rate and pitch support vary, especially on iOS. 2.1x–2.5x continuous playback is not guaranteed on all devices.
+- Added an optional **HLS.js compatibility engine** for browsers with Media Source Extensions (MSE); available under Settings. Switching engines intentionally restarts near the current time.
+- Retained 1080p/4 Mbps default, buffering-related quality reduction, audio and subtitle selection, MP4 fallback, Emby login persistence and contextual playback.
+- Does not automatically invoke the browser's native fullscreen player, which can replace custom overlays on iOS. Uses a full-viewport web player by default, with an optional native fullscreen button.
+
+### Verification
+Package/source syntax and static browser UI testing are performed locally, but playback needs real-world testing against your Emby server and phone. In particular, some iOS WebKit configurations implement >2x as fast-forward/trick-play rather than continuous video and audio. A frontend alone cannot override hardware/OS playback limits.
