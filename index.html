@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#101217"><meta name="description" content="Blackwood Movie Log: a private personal film archive with cloud sync."><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" href="favicon.png" type="image/png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Blackwood"><title>Blackwood Movie Log | V7.5.0</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#101217"><meta name="description" content="Blackwood Movie Log: a private personal film archive with cloud sync."><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" href="favicon.png" type="image/png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Blackwood"><title>Blackwood Movie Log | V7.9.0</title>
 <style>
 :root{color-scheme:dark;--bg:#101217;--panel:#191c23;--panel2:#20242d;--text:#f4f5f7;--muted:#9da5b3;--line:#303541;--accent:#e6b45d;--accent2:#f2cc83;--good:#75c6a0;--warn:#e6b45d;--bad:#ed8989;--shadow:0 10px 35px #0003}*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}body.light{color-scheme:light;--bg:#f4f5f7;--panel:#fff;--panel2:#eef0f4;--text:#1c2028;--muted:#656d7b;--line:#d9dde5;--accent:#95621a;--accent2:#74480d;--good:#237e58;--warn:#95621a;--bad:#b33e3e;--shadow:0 10px 35px #1d263015}button,input,select,textarea{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.app{max-width:1240px;margin:auto;padding:0 20px 40px}.topbar{display:flex;align-items:center;gap:14px;padding:22px 0 18px;border-bottom:1px solid var(--line);position:sticky;top:0;background:color-mix(in srgb,var(--bg) 93%,transparent);backdrop-filter:blur(16px);z-index:5}.brandmark{width:38px;height:38px;border-radius:12px;background:var(--accent);color:#181511;display:grid;place-items:center;font-weight:900;font-size:20px}.brand{font-size:14px;letter-spacing:.13em;font-weight:800}.brand small{display:block;color:var(--muted);font-size:11px;letter-spacing:.08em;font-weight:500;margin-top:3px}.top-spacer{flex:1}.status{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:7px}.dot{width:7px;height:7px;border-radius:50%;background:var(--good)}.iconbtn,.btn,.navbtn{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:10px;padding:10px 13px}.iconbtn{width:42px;height:42px;padding:0;font-size:18px}.btn.primary{background:var(--accent);border-color:var(--accent);color:#17140e;font-weight:750}.btn.ghost{background:transparent}.btn.danger{color:var(--bad)}.btn.small{padding:7px 10px;font-size:12px}.layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:28px;padding-top:25px}.sidebar{position:sticky;top:100px;align-self:start}.side-label{font-size:10px;letter-spacing:.16em;color:var(--muted);font-weight:800;padding:10px 12px}.navlist{display:grid;gap:5px}.navbtn{border:0;background:transparent;text-align:left;display:flex;gap:12px;align-items:center;color:var(--muted);padding:12px;border-radius:10px;width:100%}.navbtn.active{background:var(--panel2);color:var(--text)}.navbtn.active .navicon{color:var(--accent)}.navicon{width:20px;text-align:center;font-size:16px}.sidebar-note{margin-top:28px;padding:15px;background:var(--panel);border:1px solid var(--line);border-radius:14px;font-size:12px;line-height:1.6;color:var(--muted)}.main{min-width:0}.pagehead{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin:5px 0 23px}.eyebrow{font-size:10px;letter-spacing:.16em;color:var(--accent);font-weight:800;text-transform:uppercase;margin-bottom:8px}.pagehead h1{font-size:30px;letter-spacing:-.04em;margin:0 0 7px}.pagehead p{margin:0;color:var(--muted);font-size:14px}.actions{display:flex;gap:8px;flex-wrap:wrap}.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:15px}.searchwrap{position:relative;flex:1;min-width:200px}.searchwrap span{position:absolute;left:13px;top:10px;color:var(--muted)}input,select,textarea{background:var(--panel);border:1px solid var(--line);border-radius:10px;color:var(--text);padding:11px 12px;width:100%;min-width:0}input::placeholder,textarea::placeholder{color:var(--muted)}.searchwrap input{padding-left:37px}.toolbar select{width:auto;min-width:125px}.filter-panel{display:none;background:var(--panel);border:1px solid var(--line);padding:14px;border-radius:12px;margin-bottom:15px;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.filter-panel.open{display:grid}.field label{display:block;font-size:11px;color:var(--muted);margin:0 0 6px 2px}.list-head{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:12px;margin:12px 2px}.movie-list{display:grid;gap:8px}.movie-row{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:14px 15px;display:grid;grid-template-columns:minmax(0,1.65fr) minmax(115px,.85fr) minmax(100px,.65fr) auto;gap:14px;align-items:center;transition:border-color .15s}.movie-row:hover{border-color:color-mix(in srgb,var(--accent) 55%,var(--line))}.mov-title{font-weight:750;font-size:14px;line-height:1.35}.mov-sub{color:var(--muted);font-size:11px;margin-top:5px}.pill{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;padding:4px 8px;font-size:10px;color:var(--muted);white-space:nowrap}.pill.good{color:var(--good);border-color:color-mix(in srgb,var(--good) 35%,var(--line))}.pill.warn{color:var(--warn);border-color:color-mix(in srgb,var(--warn) 35%,var(--line))}.pill.bad{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 35%,var(--line))}.rating{font-size:16px;font-weight:800;white-space:nowrap}.rating em{font-style:normal;color:var(--muted);font-size:10px;font-weight:500}.row-actions{display:flex;gap:6px}.row-actions button{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:7px 8px}.empty{border:1px dashed var(--line);border-radius:16px;padding:46px 20px;text-align:center;color:var(--muted)}.empty strong{display:block;color:var(--text);font-size:16px;margin-bottom:7px}.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin-bottom:20px}.stat{padding:17px;border:1px solid var(--line);background:var(--panel);border-radius:14px}.stat label{font-size:11px;color:var(--muted)}.stat strong{display:block;font-size:28px;letter-spacing:-.04em;margin:8px 0 3px}.stat small{font-size:11px;color:var(--muted)}.dashboard-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:14px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:18px;min-width:0}.panel h3{font-size:14px;margin:0 0 15px}.panel .subhead{font-size:11px;color:var(--muted);margin-top:-9px;margin-bottom:15px}.chart{height:170px;display:flex;align-items:end;gap:9px;padding:10px 3px 0;border-bottom:1px solid var(--line)}.barcol{height:100%;flex:1;display:flex;flex-direction:column;justify-content:end;align-items:center;gap:8px;min-width:0}.bar{width:min(28px,72%);min-height:3px;border-radius:5px 5px 0 0;background:var(--accent);opacity:.9}.barlabel{font-size:10px;color:var(--muted)}.ranklist{display:grid;gap:8px}.rankrow{display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}.rankrow:last-child{border-bottom:0}.ranknum{color:var(--muted);width:20px;font-size:11px}.rankname{flex:1;font-size:12px;font-weight:650}.rankyear{font-size:10px;color:var(--muted);margin-top:3px}.rankrating{font-size:13px;font-weight:800}.year-control{display:flex;gap:6px;align-items:center}.year-control select{width:100px}.watch-priority{min-width:78px;text-align:center}.detail-card{display:grid;grid-template-columns:140px minmax(0,1fr);gap:22px}.poster-placeholder{aspect-ratio:2/3;border-radius:12px;background:linear-gradient(145deg,var(--panel2),var(--bg));border:1px solid var(--line);display:grid;place-items:center;text-align:center;padding:12px;color:var(--muted);font-size:12px}.detail-title{font-size:27px;letter-spacing:-.04em;margin:0 0 5px}.detail-meta{color:var(--muted);font-size:12px;margin-bottom:16px}.detail-buttons{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}.detail-info{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:17px 0}.detail-info div{padding:11px;background:var(--panel2);border-radius:9px}.detail-info label{display:block;color:var(--muted);font-size:10px;margin-bottom:5px}.detail-info strong{font-size:13px}.section-title{font-size:14px;margin:23px 0 10px}.viewing-card{border:1px solid var(--line);border-radius:11px;padding:13px;margin-bottom:8px}.viewing-top{display:flex;justify-content:space-between;gap:10px;font-size:12px;font-weight:700}.viewing-notes{font-size:12px;color:var(--muted);margin-top:8px;white-space:pre-wrap}.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.formgrid .wide{grid-column:1/-1}.checkline{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--muted)}.checkline input{width:auto}.modal-backdrop{position:fixed;inset:0;background:#0009;z-index:20;display:none;align-items:center;justify-content:center;padding:15px}.modal-backdrop.open{display:flex}.modal{width:min(680px,100%);max-height:92vh;overflow:auto;background:var(--bg);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:22px}.modalhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}.modalhead h2{font-size:20px;margin:0}.modalfoot{display:flex;justify-content:flex-end;gap:8px;margin-top:20px;flex-wrap:wrap}.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:var(--text);color:var(--bg);padding:12px 16px;border-radius:11px;z-index:50;font-size:13px;box-shadow:var(--shadow);transition:.2s;max-width:90vw}.toast.show{opacity:1;transform:translate(-50%,0)}.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.tmdb-results{display:grid;gap:8px;margin-top:10px}.tmdb-result{display:grid;grid-template-columns:52px 1fr;gap:10px;padding:9px;border:1px solid var(--line);background:var(--panel);border-radius:10px;text-align:left;color:var(--text);width:100%}.tmdb-result img{width:52px;aspect-ratio:2/3;object-fit:cover;border-radius:5px;background:var(--panel2)}.tmdb-result small{display:block;color:var(--muted);line-height:1.4;margin-top:4px}.cloud-tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.setting-item{border:1px solid var(--line);background:var(--panel);border-radius:13px;padding:16px}.setting-item h3{font-size:14px;margin:0 0 7px}.setting-item p{font-size:12px;line-height:1.5;color:var(--muted);margin:0 0 13px}.footer-note{font-size:11px;line-height:1.6;color:var(--muted);margin-top:18px}.mobile-nav{display:none}.hide{display:none!important}
 @media(max-width:850px){.layout{grid-template-columns:1fr}.sidebar{display:none}.mobile-nav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:10;background:color-mix(in srgb,var(--bg) 95%,transparent);backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:7px 10px calc(7px + env(safe-area-inset-bottom));justify-content:space-around}.mobile-nav .navbtn{display:grid;justify-items:center;gap:4px;padding:7px 12px;font-size:10px}.mobile-nav .navicon{font-size:17px}.app{padding:0 14px 90px}.topbar{padding-top:15px}.status{display:none}.pagehead h1{font-size:26px}.movie-row{grid-template-columns:minmax(0,1fr) auto;gap:8px 12px;padding:13px}.movie-row .row-mid{grid-column:1;grid-row:2}.movie-row .row-right{grid-column:2;grid-row:1;align-self:start;text-align:right}.movie-row .row-actions{grid-column:2;grid-row:2;justify-content:end}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.dashboard-grid{grid-template-columns:1fr}.filter-panel{grid-template-columns:repeat(2,minmax(0,1fr))}.detail-card{grid-template-columns:95px minmax(0,1fr);gap:14px}.detail-title{font-size:22px}.detail-info{grid-template-columns:repeat(2,minmax(0,1fr))}.settings-grid{grid-template-columns:1fr}}
@@ -1340,9 +1340,28 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 #main #movieList .movie-row .row-actions > button.bw731-star.bw7813-rated{
  color:#edbd57!important;
 }
+/* V7.9.0 People Explorer: all styles intentionally scoped. */
+.bw90-intro{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px 22px;margin:0 0 16px;border:1px solid rgba(207,158,83,.25);border-radius:14px;background:linear-gradient(115deg,rgba(161,115,46,.18),rgba(27,30,42,.35));}
+.bw90-intro h3{font-size:18px;margin:0 0 6px;color:var(--text)}.bw90-intro p{color:var(--muted);font-size:13px;line-height:1.55;margin:0}.bw90-intro-icon{font-size:50px;color:#cbaa6a;opacity:.8}
+.bw90-controls,.bw90-section{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:16px;min-width:0}
+.bw90-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:15px}.bw90-tab{background:transparent;border:1px solid var(--line);border-radius:9px;color:var(--muted);padding:9px 16px;font-weight:700;cursor:pointer}.bw90-tab.active{background:rgba(203,163,93,.16);border-color:#cba363;color:#e6c47c}
+.bw90-search{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:10px;padding:0 12px;background:var(--bg)}.bw90-search span{font-size:24px;color:var(--muted)}.bw90-search input{width:100%;min-width:0;background:transparent;border:0!important;box-shadow:none!important;padding:12px 2px;color:var(--text)}
+.bw90-filterbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.bw90-filterbar label{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}.bw90-filterbar select{min-width:124px;max-width:190px}
+.bw90-metrics,.bw90-profile-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 16px}.bw90-metrics>div,.bw90-profile-metrics>div{border:1px solid var(--line);background:var(--panel);padding:13px;border-radius:10px;min-width:0}.bw90-metrics span,.bw90-profile-metrics span{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}.bw90-metrics strong,.bw90-profile-metrics strong{font-size:22px;color:var(--text);word-break:break-word}
+.bw90-dual{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;align-items:start}.bw90-section h3{font-size:17px;margin:0 0 12px}.bw90-section-title{margin:0 0 12px}.bw90-section-title h3{margin-bottom:4px}.bw90-section-title small{display:block;color:var(--muted);line-height:1.55}
+.bw90-people-list{display:grid;gap:6px}.bw90-person{width:100%;display:flex;align-items:center;gap:9px;padding:8px;text-align:left;background:rgba(255,255,255,.025);color:var(--text);border:1px solid var(--line);border-radius:10px;min-width:0;cursor:pointer;transition:border-color .2s,background .2s}.bw90-person:hover{background:rgba(212,167,99,.08);border-color:#bf965e}.bw90-rank{font-family:Georgia,serif;font-size:17px;color:#d0af70;min-width:22px;text-align:center}.bw90-avatar{flex:none;width:52px;height:68px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:7px;background:rgba(128,137,153,.16);color:var(--muted)}.bw90-avatar img{width:100%;height:100%;object-fit:cover}.bw90-person-details{flex:1;min-width:0}.bw90-person-details strong,.bw90-person-details small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.bw90-person-details strong{font-size:13px;margin-bottom:3px}.bw90-person-details small{font-size:11px;color:var(--muted);line-height:1.45}.bw90-person-arrow{font-size:24px;color:#a98a54;flex:none}
+.bw90-empty{color:var(--muted);line-height:1.55;margin:10px 0}.bw90-muted{font-size:12px;line-height:1.55;color:var(--muted)}.bw90-inline{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.bw90-inline input{flex:1;min-width:170px}.bw90-remote-results{display:grid;gap:8px;margin-top:12px}.bw90-remote-card{display:flex;align-items:center;gap:9px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px}.bw90-remote-card>.bw90-avatar{height:54px;width:42px}.bw90-remote-card>div{flex:1;min-width:0}.bw90-remote-card strong,.bw90-remote-card small{display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.bw90-remote-card small{font-size:11px;color:var(--muted)}
+.bw90-progress-line{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:12px}.bw90-meter{background:var(--bg);height:7px;overflow:hidden;border-radius:20px;margin:7px 0 11px}.bw90-meter>div{height:100%;background:#d5a958;border-radius:20px;transition:width .2s}.bw90-index #bw90IndexStatus>small{display:block;color:var(--muted);margin-bottom:10px}
+.bw90-profile{padding-bottom:24px}.bw90-profile>button:first-child{margin-bottom:15px}.bw90-hero{display:flex;gap:20px;align-items:start;padding:20px;border-radius:13px;border:1px solid var(--line);background:var(--panel);margin-bottom:14px}.bw90-portrait{width:140px;aspect-ratio:2/3;flex:none;background:var(--bg);border-radius:9px;overflow:hidden;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:45px}.bw90-portrait img{width:100%;height:100%;object-fit:cover}.bw90-hero h1{font-family:Georgia,serif;font-size:clamp(24px,3vw,35px);margin:8px 0 12px}.bw90-bio{color:var(--muted);line-height:1.55;font-size:13px;max-height:240px;overflow:auto}.bw90-profile-metrics{grid-template-columns:repeat(4,minmax(0,1fr))}
+.bw90-film-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(125px,1fr));gap:12px}.bw90-film{display:flex;flex-direction:column;align-items:stretch;gap:5px;background:var(--bg);color:var(--text);text-align:left;border:1px solid var(--line);border-radius:9px;padding:9px;cursor:pointer;min-width:0}.bw90-film:hover{border-color:#d0a564}.bw90-film strong{font-size:12px;line-height:1.3}.bw90-film small{color:var(--muted);font-size:11px}.bw90-poster{display:flex;align-items:center;justify-content:center;aspect-ratio:2/3;overflow:hidden;border-radius:6px;background:rgba(110,110,120,.2);color:var(--muted);font-size:9px;text-align:center}.bw90-poster img{width:100%;height:100%;object-fit:cover}
+.bw90-match{display:flex;align-items:center;gap:12px;width:100%;padding:7px;margin-bottom:7px;text-align:left;color:var(--text);background:var(--bg);border:1px solid var(--line);border-radius:9px;cursor:pointer}.bw90-match img,.bw90-match>span{width:45px;height:60px;object-fit:cover}.bw90-match small{color:var(--muted)}
+.bw90-filmography-head{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:15px 0}.bw90-filmography-head strong{margin-right:auto}.bw90-filmography-head label{display:flex;gap:6px;align-items:center;font-size:12px;color:var(--muted)}.bw90-filmography-item{display:grid;grid-template-columns:50px minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--line)}.bw90-filmography-item .bw90-poster{width:50px;min-width:50px}.bw90-filmography-item strong,.bw90-filmography-item small{display:block}.bw90-filmography-item strong{font-size:13px}.bw90-filmography-item small{font-size:11px;color:var(--muted)}.bw90-filmography-item .bw90-watched{color:#68c894}
+@media(max-width:800px){.bw90-dual{grid-template-columns:1fr}.bw90-profile-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:500px){.bw90-intro{padding:15px}.bw90-intro-icon{display:none}.bw90-controls,.bw90-section{padding:13px}.bw90-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.bw90-metrics>div:last-child{grid-column:1/-1}.bw90-hero{padding:13px;gap:12px}.bw90-portrait{width:95px}.bw90-person-details small{font-size:10px}.bw90-remote-card{flex-wrap:wrap}.bw90-remote-card .btn{padding:6px 8px}.bw90-film-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.bw90-film{padding:5px}.bw90-filmography-head{align-items:stretch}.bw90-filmography-head label{width:100%;justify-content:space-between}.bw90-filmography-head select{min-width:130px}}
+
 </style></head>
 <body><div class="app">
-<header class="topbar"><button class="bw-home" id="bwHome" type="button" title="Go to Movie Log" aria-label="Blackwood Movie Log home"><div class="brandmark">B</div><div class="brand"><span class="bw-wordmark">BLACKWOOD</span><span class="bw-submark">MOVIE LOG</span><small>YOUR PERSONAL FILM ARCHIVE <span class="bw-version">Version 7.8.23</span></small></div></button><div class="top-spacer"></div><div class="status"><span class="dot"></span><span id="saveStatus">Saved on this device</span></div><button class="iconbtn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☼</button><button class="iconbtn" id="menuBtn" aria-label="Open navigation" title="Navigation">☰</button></header>
+<header class="topbar"><button class="bw-home" id="bwHome" type="button" title="Go to Movie Log" aria-label="Blackwood Movie Log home"><div class="brandmark">B</div><div class="brand"><span class="bw-wordmark">BLACKWOOD</span><span class="bw-submark">MOVIE LOG</span><small>YOUR PERSONAL FILM ARCHIVE <span class="bw-version">Version 7.9.0</span></small></div></button><div class="top-spacer"></div><div class="status"><span class="dot"></span><span id="saveStatus">Saved on this device</span></div><button class="iconbtn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☼</button><button class="iconbtn" id="menuBtn" aria-label="Open navigation" title="Navigation">☰</button></header>
 <div class="layout"><aside class="sidebar"><div class="side-label">LIBRARY</div><nav class="navlist" id="sideNav"></nav><div class="sidebar-note"><strong style="color:var(--text)">Private by design</strong><br>This first build saves your records in this browser on this device. Cloud sync is not connected yet.</div></aside><main class="main" id="main"></main></div>
 <nav class="mobile-nav" id="mobileNav"></nav></div>
 <div class="modal-backdrop" id="modalBackdrop"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modalhead"><h2 id="modalTitle">Add movie</h2><button class="iconbtn" id="modalClose" aria-label="Close">×</button></div><div id="modalBody"></div><div class="modalfoot" id="modalFoot"></div></section></div><div class="toast" id="toast"></div>
@@ -2630,7 +2649,7 @@ const bw779EmbeddedArtwork={'horrorfest':'data:image/webp;base64,UklGRqiDAABXRUJ
 function bw778Art(id,title){const names={horrorfest60:'horrorfest',christmasfest60:'christmas-fest',stats5:'statistics-center',review5:'year-in-review',compare7:'year-vs-year',reports7:'report-studio',timeline75:'movie-history-timeline',health5:'data-health',awards5:'movie-awards',topten:'my-top-10'};const file=names[id];return file?`<img class="bw778-art" src="${bw779EmbeddedArtwork[file]}" alt="${title}" loading="lazy" decoding="async">`:'';}
 function bw73Holiday(){$('main').innerHTML=pageHead('SEASONAL CINEMA','Holiday Fest','Two traditions. Every movie remembered.')+'<div class="bw73-hub bw73-holiday bw778-gallery"><button class="bw73-tile" id="bw73Horror" aria-label="Open Horrorfest">'+bw778Art('horrorfest60','Horrorfest')+'</button><button class="bw73-tile" id="bw73Christmas" aria-label="Open Christmas Fest">'+bw778Art('christmasfest60','Christmas Fest')+'</button></div>';$('bw73Horror').onclick=()=>go('horrorfest60');$('bw73Christmas').onclick=()=>go('christmasfest60')}
 function bw73Insights(){$('main').innerHTML=pageHead('YOUR MOVIE STORY','Statistics & Reports','Explore your viewing history and share what matters.')+'<div class="bw73-hub bw778-gallery">'+[['stats5','Statistics Center'],['review5','Year in Review'],['compare7','Year vs. Year'],['reports7','Report Studio']].map(([id,title])=>'<button class="bw73-tile" data-bw73-page="'+id+'" aria-label="Open '+title+'">'+bw778Art(id,title)+'</button>').join('')+'</div>';document.querySelectorAll('[data-bw73-page]').forEach(b=>b.onclick=()=>go(b.dataset.bw73Page))}
-const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.8.23';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
+const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.9.0';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
 // Always reset modal's internal scroll position, not the underlying page.
 const bw73OpenModal=openModal;openModal=function(...args){bw73OpenModal(...args);requestAnimationFrame(()=>{for(const el of [$('modalBody'),document.querySelector('.modal'),document.querySelector('.modal-backdrop.open')])if(el)el.scrollTop=0})};
 // Decorate only the actual filtered rows, after every list redraw.
@@ -3696,6 +3715,281 @@ bw783ApplyCardActions=function(){
   if(m)bw718SetCommentState(row,m);
  });
 };
+
+/* V7.9.0 — People Explorer. Read-only derived film credits; no movie-data migrations. */
+const BW90_VERSION='7.9.0';
+const bw90PriorNav=navItems;
+navItems=function(){const result=bw90PriorNav();const pos=result.findIndex(item=>item[0]==='dashboard');result.splice(pos<0?1:pos,0,['people90','♟','People Explorer']);return result;};
+const bw90PriorRender=render;
+render=function(){
+ if(page==='people90'){
+  document.body.classList.remove('light');
+  if(typeof bw5ApplyTheme==='function')bw5ApplyTheme();
+  renderNav();bw90Render();
+  $('themeToggle')?.remove();
+  const home=$('bwHome');if(home)home.onclick=()=>go('log');
+ }else bw90PriorRender();
+ const v=document.querySelector('.bw-version');if(v)v.textContent='Version '+BW90_VERSION;
+};
+const bw90PrefsKey='blackwood.people.v7.9.settings';
+let bw90Prefs={mode:'actors',order:'rating',minimum:3,search:''};
+try{Object.assign(bw90Prefs,JSON.parse(localStorage.getItem(bw90PrefsKey)||'{}'))}catch(e){}
+let bw90Index=new Map(),bw90Entries=[],bw90LoadedIds=new Set(),bw90CachedCredits=new Map();
+let bw90LoadPromise=null,bw90Job=null,bw90Selected=null,bw90RemoteResults=[],bw90RemoteQuery='',bw90IndexStamp='';
+let bw90PersonData=new Map(),bw90Filmographies=new Map(),bw90UiToken=0;
+const bw90Norm=name=>String(name||'').trim().normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+const bw90Img=(path,size='w185')=>path&&/^\/[a-zA-Z0-9_./-]+$/.test(path)?'https://image.tmdb.org/t/p/'+size+path:'';
+function bw90Persist(){try{localStorage.setItem(bw90PrefsKey,JSON.stringify(bw90Prefs))}catch(e){}}
+function bw90RatedSummary(m,completed){const nums=completed.map(v=>Number(v.rating)).filter((n,i)=>completed[i].rating!==null&&completed[i].rating!==undefined&&completed[i].rating!==''&&Number.isFinite(n)&&n>=0&&n<=10);return {m,viewings:completed.length,rewatches:completed.filter((v,i)=>v.rewatch||i>0).length,rating:nums.length?nums.reduce((a,b)=>a+b,0)/nums.length:null};}
+function bw90MovieStats(){
+ const completedByMovie=new Map();
+ for(const v of state.viewings||[]){if(v.status!=='completed')continue;const a=completedByMovie.get(v.movieId)||[];a.push(v);completedByMovie.set(v.movieId,a)}
+ const result=[];
+ for(const m of state.movies||[]){const vs=completedByMovie.get(m.id);if(vs?.length)result.push(bw90RatedSummary(m,vs));}
+ return result;
+}
+function bw90Build(){
+ const groups=new Map();const summaries=bw90MovieStats();
+ function accumulate(kind,p,s,role){
+  if(!p?.name||!bw90Norm(p.name))return;
+  const key=kind+':'+bw90Norm(p.name);
+  let g=groups.get(key);
+  if(!g){g={key,kind,name:p.name,id:null,profilePath:'',entries:[],movies:0,rated:0,avg:null,viewings:0,rewatches:0};groups.set(key,g)}
+  if(p.id&&!g.id)g.id=Number(p.id);
+  if(p.profile_path&&!g.profilePath)g.profilePath=p.profile_path;
+  g.entries.push({...s,role:role||''});
+ }
+ for(const s of summaries){
+  const m=s.m,id=String(m.tmdbId||'');
+  const credits=bw90CachedCredits.get(id);
+  if(credits){
+   const actorIds=new Set(),directorIds=new Set();
+   for(const a of credits.actors||[]){const key=String(a.id||bw90Norm(a.name));if(actorIds.has(key))continue;actorIds.add(key);accumulate('actor',a,s,a.character)}
+   for(const d of credits.directors||[]){const key=String(d.id||bw90Norm(d.name));if(directorIds.has(key))continue;directorIds.add(key);accumulate('director',d,s,'Director')}
+  }else{
+   const localCast=Array.isArray(m.cast)?m.cast:typeof m.cast==='string'?m.cast.split(','):[];
+   for(const name of new Set(localCast.map(x=>String(x).trim()).filter(Boolean)))accumulate('actor',{name},s,'');
+   for(const name of new Set(String(m.director||'').split(',').map(x=>x.trim()).filter(Boolean)))accumulate('director',{name},s,'Director');
+  }
+ }
+ for(const g of groups.values()){
+  g.movies=g.entries.length;g.viewings=g.entries.reduce((sum,e)=>sum+e.viewings,0);
+  g.rewatches=g.entries.reduce((sum,e)=>sum+e.rewatches,0);
+  const ratings=g.entries.filter(e=>e.rating!==null);
+  g.rated=ratings.length;
+  g.avg=ratings.length?ratings.reduce((sum,e)=>sum+e.rating,0)/ratings.length:null;
+  g.entries.sort((a,b)=>(b.rating??-1)-(a.rating??-1)||String(a.m.title).localeCompare(String(b.m.title)));
+ }
+ bw90Index=groups;bw90Entries=[...groups.values()];
+ bw90IndexStamp=summaries.length+' completed movies · '+bw90LoadedIds.size+' movies with TMDB credits';
+}
+async function bw90LoadCache(){
+ if(bw90LoadPromise)return bw90LoadPromise;
+ bw90LoadPromise=(async()=>{
+  const ids=[...new Set(bw90MovieStats().map(x=>String(x.m.tmdbId||'')).filter(x=>/^\d+$/.test(x)))];
+  for(let i=0;i<ids.length;i+=45){
+   const chunk=ids.slice(i,i+45);
+   await Promise.all(chunk.map(async id=>{try{const value=await bw777Get('bw90credits:'+id);if(value?.actors&&value?.directors){bw90CachedCredits.set(id,value);bw90LoadedIds.add(id)}}catch(e){}}));
+  }
+  bw90Build();if(page==='people90')bw90Refresh();
+ })().finally(()=>bw90LoadPromise=null);
+ return bw90LoadPromise;
+}
+async function bw90Api(path){
+ if(!tmdbKey)throw Error('Enter your TMDB API Read Access Token in Settings first.');
+ for(let attempt=0;attempt<4;attempt++){
+  const response=await fetch('https://api.themoviedb.org/3/'+path,{headers:{Authorization:'Bearer '+tmdbKey,Accept:'application/json'}});
+  if(response.status===429||response.status>=500){if(attempt===3)throw Error('TMDB request failed ('+response.status+').');const wait=Number(response.headers.get('Retry-After'));await new Promise(r=>setTimeout(r,Number.isFinite(wait)&&wait>0?Math.min(wait*1000,18000):900*(attempt+1)**2));continue}
+  const data=await response.json().catch(()=>({}));
+  if(!response.ok)throw Error(data.status_message||'TMDB returned '+response.status);
+  return data;
+ }
+ throw Error('Could not connect to TMDB.');
+}
+function bw90DecodeCredits(data){return {
+ fetched:Date.now(),
+ actors:(data.cast||[]).filter(p=>p.id&&p.name).map(p=>({id:p.id,name:p.name,profile_path:p.profile_path||'',character:p.character||'',order:Number(p.order)||0})),
+ directors:(data.crew||[]).filter(p=>p.job==='Director'&&p.id&&p.name).map(p=>({id:p.id,name:p.name,profile_path:p.profile_path||''}))
+}}
+async function bw90RunIndex(){
+ if(bw90Job?.running)return;
+ if(!tmdbKey){toast('Add your TMDB token in Settings first.');return}
+ await bw90LoadCache();
+ const candidates=bw90MovieStats().map(s=>s.m).filter(m=>/^\d+$/.test(String(m.tmdbId||''))&&!bw90LoadedIds.has(String(m.tmdbId)));
+ if(!candidates.length){toast('All linked watched movies are indexed.');bw90Refresh();return}
+ const job=bw90Job={running:true,cancel:false,done:0,total:candidates.length,failed:0,error:''};bw90Progress();
+ for(const m of candidates){
+  if(job.cancel||page!=='people90')break;
+  try{
+   const data=await bw90Api('movie/'+encodeURIComponent(m.tmdbId)+'/credits?language=en-US');
+   const credits=bw90DecodeCredits(data);
+   bw90CachedCredits.set(String(m.tmdbId),credits);
+   bw90LoadedIds.add(String(m.tmdbId));
+   try{await bw777Put('bw90credits:'+m.tmdbId,credits)}catch(err){job.error='Local credit cache unavailable; changes may need to be reindexed.';}
+  }catch(err){job.failed++;job.error=err.message||String(err)}
+  job.done++;
+  if(job.done%8===0||job.done===job.total){bw90Build();if(page==='people90')bw90Refresh();}
+  await new Promise(r=>setTimeout(r,235));
+ }
+ job.running=false;bw90Build();if(page==='people90')bw90Refresh();
+}
+function bw90Refresh(){
+ if(page!=='people90')return;
+ if(!bw90Selected)bw90DrawDirectory();
+ bw90Progress();
+}
+function bw90Progress(){
+ const status=$('bw90IndexStatus');if(!status)return;
+ const total=bw90MovieStats().filter(s=>/^\d+$/.test(String(s.m.tmdbId||''))).length;
+ const complete=[...bw90LoadedIds].length;
+ const job=bw90Job;
+ const progress=total?Math.min(100,Math.round(100*complete/total)):100;
+ const more=job?.running?' · '+job.done+'/'+job.total+' requested':job?.failed?' · '+job.failed+' request(s) failed':'';
+ status.innerHTML=`<div class="bw90-progress-line"><span>${complete} of ${total} linked watched films indexed${more}</span><strong>${progress}%</strong></div><div class="bw90-meter"><div style="width:${progress}%"></div></div>${job?.error?`<small>${esc(job.error)}</small>`:''}${!total?'<small>Movies with a TMDB ID can be indexed for complete cast and director credits.</small>':''}`;
+ const start=$('bw90Start'),stop=$('bw90Stop');
+ if(start){start.disabled=!!job?.running||!tmdbKey||!total||complete>=total;start.textContent=job?.running?'Indexing…':complete>=total?'Credits up to date':'Index missing credits'}
+ if(stop)stop.hidden=!job?.running;
+}
+function bw90PersonCard(p,rank,compact=false){
+ const pic=bw90Img(p.profilePath,'w185');
+ return `<button class="bw90-person ${compact?'compact':''}" data-bw90-person="${esc(p.key)}" title="View ${esc(p.name)} profile"><span class="bw90-rank">${rank||'⌕'}</span><span class="bw90-avatar">${pic?`<img loading="lazy" src="${pic}" alt="">`:'<span>♟</span>'}</span><span class="bw90-person-details"><strong>${esc(p.name)}</strong><small>${p.movies} watched ${p.movies===1?'film':'films'} · ${p.rated} rated</small><small>${p.avg===null?'No personal ratings':p.avg.toFixed(2)+'/10 average'}</small></span><span class="bw90-person-arrow">›</span></button>`;
+}
+function bw90Sorted(mode,sort='rating',minimum=1){
+ const list=bw90Entries.filter(p=>(mode==='all'||p.kind===(mode==='directors'?'director':'actor')));
+ if(sort==='rating')return list.filter(p=>p.rated>=minimum).sort((a,b)=>(b.avg??-1)-(a.avg??-1)||b.rated-a.rated||a.name.localeCompare(b.name));
+ if(sort==='watched')return list.sort((a,b)=>b.movies-a.movies||(b.avg??-1)-(a.avg??-1)||a.name.localeCompare(b.name));
+ if(sort==='rewatches')return list.sort((a,b)=>b.rewatches-a.rewatches||b.movies-a.movies||a.name.localeCompare(b.name));
+ return list.sort((a,b)=>a.name.localeCompare(b.name));
+}
+function bw90NavTab(id,label,selected){return `<button class="bw90-tab ${selected===id?'active':''}" type="button" data-bw90-mode="${id}">${label}</button>`}
+function bw90Render(){
+ bw90UiToken++;
+ if(bw90Selected){bw90RenderProfile();return}
+ $('main').innerHTML=pageHead('YOUR PERSONAL FILM HISTORY','People Explorer','Discover your favorite actors and directors through the films you have watched.')+`
+ <section class="bw90-intro"><div><h3>Your film history, through the people who made it</h3><p>Ranked from your ratings and unique watched films. Only your existing movie records are used; no changes are made to them.</p></div><span class="bw90-intro-icon">♟</span></section>
+ <section class="bw90-controls"><div class="bw90-tabs">${bw90NavTab('actors','Actors',bw90Prefs.mode)}${bw90NavTab('directors','Directors',bw90Prefs.mode)}${bw90NavTab('all','Everyone',bw90Prefs.mode)}</div>
+ <div class="bw90-search"><span>⌕</span><input id="bw90Search" type="search" placeholder="Search people in your movie history…" value="${esc(bw90Prefs.search)}" aria-label="Search actors and directors"></div>
+ <div class="bw90-filterbar"><label>Rank by <select id="bw90Order"><option value="rating">Highest rated</option><option value="watched">Most movies watched</option><option value="rewatches">Most rewatches</option><option value="name">Name A–Z</option></select></label><label>Minimum rated films <select id="bw90Minimum"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="5">5</option><option value="10">10</option></select></label></div></section>
+ <div id="bw90Directory"></div>
+ <section class="bw90-section"><div class="bw90-section-title"><h3>Search TMDB for someone else</h3><small>Explore any actor or director, including people not yet in your library.</small></div><div class="bw90-inline"><input id="bw90RemoteInput" placeholder="Enter a person's name" aria-label="TMDB person search"><button class="btn" id="bw90RemoteBtn">Search TMDB</button></div><div id="bw90RemoteResults" class="bw90-remote-results"></div></section>
+ <section class="bw90-section bw90-index"><div class="bw90-section-title"><h3>Complete credits index</h3><small>TMDB adds cast photographs, character names and complete cast lists. The starter directory uses existing movie metadata immediately. A full index builds gradually and stays cached on this device.</small></div><div id="bw90IndexStatus"></div><div class="bw90-inline"><button class="btn primary" id="bw90Start">Index missing credits</button><button class="btn" id="bw90Stop" hidden>Pause indexing</button></div></section>`;
+ $('bw90Order').value=bw90Prefs.order;$('bw90Minimum').value=String(bw90Prefs.minimum);
+ document.querySelectorAll('[data-bw90-mode]').forEach(b=>b.onclick=()=>{bw90Prefs.mode=b.dataset.bw90Mode;bw90Persist();bw90Render()});
+ $('bw90Search').oninput=e=>{bw90Prefs.search=e.target.value;bw90Persist();bw90DrawDirectory()};
+ $('bw90Order').onchange=e=>{bw90Prefs.order=e.target.value;bw90Persist();bw90DrawDirectory()};
+ $('bw90Minimum').onchange=e=>{bw90Prefs.minimum=Number(e.target.value)||3;bw90Persist();bw90DrawDirectory()};
+ $('bw90RemoteBtn').onclick=()=>bw90RemoteSearch();
+ $('bw90RemoteInput').onkeydown=e=>{if(e.key==='Enter')bw90RemoteSearch()};
+ $('bw90Start').onclick=()=>bw90RunIndex();$('bw90Stop').onclick=()=>{if(bw90Job)bw90Job.cancel=true;toast('Stopping after current movie.')};
+ bw90DrawDirectory();bw90Progress();
+ if(!bw90CachedCredits.size&&!bw90LoadPromise)bw90LoadCache();
+}
+function bw90DrawDirectory(){
+ const root=$('bw90Directory');if(!root)return;
+ const query=bw90Norm(bw90Prefs.search),filtered=bw90Sorted(bw90Prefs.mode,bw90Prefs.order,query?1:bw90Prefs.minimum).filter(p=>!query||bw90Norm(p.name).includes(query));
+ const actors=bw90Sorted('actors','rating',bw90Prefs.minimum).slice(0,50),directors=bw90Sorted('directors','rating',bw90Prefs.minimum).slice(0,50);
+ const renderCards=(arr,limit=50)=>arr.length?arr.slice(0,limit).map((p,i)=>bw90PersonCard(p,i+1)).join(''):'<p class="bw90-empty">No matching profiles yet. Try lowering the minimum rated films, or index more TMDB credits.</p>';
+ const leaderboard=!query&&bw90Prefs.order==='rating';
+ root.innerHTML=`<section class="bw90-metrics"><div><span>Actors in your history</span><strong>${bw90Entries.filter(x=>x.kind==='actor').length.toLocaleString()}</strong></div><div><span>Directors in your history</span><strong>${bw90Entries.filter(x=>x.kind==='director').length.toLocaleString()}</strong></div><div><span>TMDB credit coverage</span><strong>${bw90LoadedIds.size.toLocaleString()} films</strong></div></section>
+ ${leaderboard&&bw90Prefs.mode==='all'?`<div class="bw90-dual"><section class="bw90-section"><h3>Top 50 Actors</h3><div class="bw90-people-list">${renderCards(actors)}</div></section><section class="bw90-section"><h3>Top 50 Directors</h3><div class="bw90-people-list">${renderCards(directors)}</div></section></div>`:
+ `<section class="bw90-section"><div class="bw90-section-title"><h3>${query?'Directory search results':bw90Prefs.order==='rating'?'Top 50 '+(bw90Prefs.mode==='directors'?'Directors':bw90Prefs.mode==='actors'?'Actors':'People'):'People directory'}</h3><small>${filtered.length.toLocaleString()} ${query?'matching':'eligible'} profiles · ${bw90Prefs.order==='rating'?'highest personal average first':bw90Prefs.order==='watched'?'most unique films first':bw90Prefs.order==='rewatches'?'most repeat viewings first':'alphabetical'}${bw90Prefs.order==='rating'?' · minimum '+bw90Prefs.minimum+' rated films':''}</small></div><div class="bw90-people-list">${renderCards(filtered,query?100:50)}</div>${filtered.length>(query?100:50)?'<p class="bw90-muted">Showing the first results. Narrow your search to find someone specific.</p>':''}</section>`}`;
+ root.querySelectorAll('[data-bw90-person]').forEach(b=>b.onclick=()=>{const person=bw90Index.get(b.dataset.bw90Person);if(person){bw90Selected={...person};bw90RenderProfile();window.scrollTo({top:0})}});
+}
+async function bw90RemoteSearch(){
+ const text=$('bw90RemoteInput')?.value.trim()||'';
+ const box=$('bw90RemoteResults');if(!box)return;
+ if(!text){box.textContent='Enter a name to search.';return}
+ box.textContent='Searching TMDB…';bw90RemoteResults=[];
+ try{
+  const payload=await bw90Api('search/person?query='+encodeURIComponent(text)+'&include_adult=false&language=en-US&page=1');
+  if(page!=='people90'||!$('bw90RemoteResults'))return;
+  bw90RemoteResults=(payload.results||[]).filter(p=>p.known_for_department==='Acting'||p.known_for_department==='Directing').slice(0,16);
+  box.innerHTML=bw90RemoteResults.length?bw90RemoteResults.map((p,i)=>`<div class="bw90-remote-card"><span class="bw90-avatar">${bw90Img(p.profile_path)?`<img src="${bw90Img(p.profile_path)}" loading="lazy" alt="">`:'♟'}</span><div><strong>${esc(p.name)}</strong><small>${esc(p.known_for_department||'Film')}</small></div><button class="btn small" data-bw90-remote="${i}" data-bw90-kind="actor">Actor</button><button class="btn small" data-bw90-remote="${i}" data-bw90-kind="director">Director</button></div>`).join(''):'<p class="bw90-empty">No matching film people found.</p>';
+  box.querySelectorAll('[data-bw90-remote]').forEach(b=>b.onclick=()=>{const p=bw90RemoteResults[Number(b.dataset.bw90Remote)];if(!p)return;const kind=b.dataset.bw90Kind;const existing=bw90Index.get(kind+':'+bw90Norm(p.name));bw90Selected={...(existing||{key:kind+':'+bw90Norm(p.name),name:p.name,kind,entries:[],movies:0,rated:0,avg:null,viewings:0,rewatches:0}),id:p.id,profilePath:p.profile_path||existing?.profilePath||''};bw90RenderProfile();window.scrollTo({top:0})});
+ }catch(err){box.innerHTML='<p class="bw90-empty">'+esc(err.message)+'</p>'}
+}
+function bw90ProfileWatchCard(e){
+ const m=e.m,img=bw90Img(m.posterPath,'w185');
+ return `<button class="bw90-film" data-bw90-film="${esc(m.id)}"><span class="bw90-poster">${img?`<img loading="lazy" src="${img}" alt="">`:'<span>NO POSTER</span>'}</span><strong>${esc(m.title)}</strong><small>${esc(m.year||'—')} · ${e.rating===null?'Unrated':e.rating.toFixed(1)+'/10'}</small>${e.role?`<small>${esc(e.role)}</small>`:''}<small>${e.viewings} ${e.viewings===1?'viewing':'viewings'}</small></button>`;
+}
+function bw90RenderProfile(){
+ const p=bw90Selected;if(!p)return;
+ const token=++bw90UiToken,pic=bw90Img(p.profilePath,'w342');
+ const latest=bw90Index.get(p.key);
+ if(latest){p.entries=latest.entries;p.movies=latest.movies;p.avg=latest.avg;p.rated=latest.rated;p.viewings=latest.viewings;p.rewatches=latest.rewatches;if(!p.id)p.id=latest.id;if(!p.profilePath)p.profilePath=latest.profilePath}
+ $('main').innerHTML=`<div class="bw90-profile"><button class="btn small" id="bw90Back">← Back to People Explorer</button><div class="bw90-hero"><div class="bw90-portrait">${pic?`<img src="${pic}" alt="Portrait of ${esc(p.name)}">`:'<span>♟</span>'}</div><div class="bw90-hero-text"><span class="eyebrow">${p.kind==='director'?'DIRECTOR PROFILE':'ACTOR PROFILE'}</span><h1>${esc(p.name)}</h1><p id="bw90Bio" class="bw90-bio">A personalized profile based on movies in your collection.</p></div></div><div class="bw90-profile-metrics"><div><span>Films watched</span><strong>${p.movies||0}</strong></div><div><span>Average rating</span><strong>${p.avg===null?'—':p.avg.toFixed(2)+'/10'}</strong></div><div><span>Total viewings</span><strong>${p.viewings||0}</strong></div><div><span>Repeat viewings</span><strong>${p.rewatches||0}</strong></div></div><section class="bw90-section"><h3>Your watched filmography</h3><p class="bw90-muted">Movies you've completed, ranked by your personal rating. Each unique movie counts once.</p><div class="bw90-film-grid">${(p.entries||[]).length?p.entries.map(bw90ProfileWatchCard).join(''):'<p class="bw90-empty">No completed movies featuring this person are in your log yet.</p>'}</div></section><section class="bw90-section"><h3>Explore their complete filmography</h3><p class="bw90-muted">See movies beyond your watched collection. The full filmography loads only when you ask for it.</p><button class="btn primary" id="bw90LoadFilms">${p.id?'Load complete filmography':'Find this person on TMDB'}</button><div id="bw90Filmography"></div></section></div>`;
+ $('bw90Back').onclick=()=>{bw90Selected=null;bw90Render();window.scrollTo({top:0})};
+ $('main').querySelectorAll('[data-bw90-film]').forEach(b=>b.onclick=()=>{openDetail(b.dataset.bw90Film);window.scrollTo({top:0})});
+ $('bw90LoadFilms').onclick=()=>bw90ExpandFilmography(p,token);
+ if(p.id)bw90PersonInfo(p,token);
+}
+async function bw90PersonInfo(p,token){
+ try{
+  let info=bw90PersonData.get(p.id);
+  if(!info){info=await bw777Get('bw90person:'+p.id).catch(()=>null);if(info&&Date.now()-info.fetched>45*86400000)info=null}
+  if(!info){info={...await bw90Api('person/'+p.id+'?language=en-US'),fetched:Date.now()};bw777Put('bw90person:'+p.id,info).catch(()=>{})}
+  bw90PersonData.set(p.id,info);
+  if(page!=='people90'||token!==bw90UiToken||bw90Selected!==p)return;
+  const bio=$('bw90Bio');if(bio)bio.textContent=(info.biography||'Biography unavailable.').slice(0,850);
+  const portrait=$('main')?.querySelector('.bw90-portrait');
+  const path=bw90Img(info.profile_path,'w342');if(path&&portrait){portrait.innerHTML=`<img src="${path}" alt="Portrait of ${esc(p.name)}">`}
+ }catch(err){console.warn('People profile biography unavailable:',err.message)}
+}
+async function bw90ExpandFilmography(p,token){
+ const box=$('bw90Filmography');if(!box)return;
+ if(!p.id){
+  box.innerHTML='<p class="bw90-muted">Searching TMDB for this person…</p>';
+  try{
+   const data=await bw90Api('search/person?query='+encodeURIComponent(p.name)+'&include_adult=false&language=en-US&page=1');
+   if(token!==bw90UiToken)return;
+   const matches=(data.results||[]).filter(r=>bw90Norm(r.name)===bw90Norm(p.name));
+   box.innerHTML=matches.length?'<p class="bw90-muted">Select the correct person to link this profile:</p>'+matches.slice(0,8).map((r,i)=>`<button class="bw90-match" data-bw90-match="${i}">${bw90Img(r.profile_path)?`<img src="${bw90Img(r.profile_path)}" loading="lazy" alt="">`:'<span>♟</span>'}<strong>${esc(r.name)}</strong><small>TMDB #${Number(r.id)} · ${esc(r.known_for_department)}</small></button>`).join(''):'<p class="bw90-empty">No exact TMDB match was found. Try searching in the People directory.</p>';
+   box.querySelectorAll('[data-bw90-match]').forEach(b=>b.onclick=()=>{const matched=matches[Number(b.dataset.bw90Match)];p.id=matched.id;p.profilePath=matched.profile_path||p.profilePath;bw90RenderProfile();bw90ExpandFilmography(p,bw90UiToken)});
+  }catch(err){box.innerHTML=`<p class="bw90-empty">${esc(err.message)}</p>`}
+  return;
+ }
+ box.innerHTML='<p class="bw90-muted">Loading filmography from TMDB…</p>';
+ try{
+  const key=p.kind+':'+p.id;let data=bw90Filmographies.get(key);
+  if(!data){data=await bw777Get('bw90film:'+key).catch(()=>null);if(data&&Date.now()-data.fetched>30*86400000)data=null}
+  if(!data){
+   const payload=await bw90Api('person/'+p.id+'/movie_credits?language=en-US');
+   const credits=(p.kind==='director'?(payload.crew||[]).filter(f=>f.job==='Director'):(payload.cast||[])).filter(f=>f.id&&f.title);
+   const unique=[...new Map(credits.map(f=>[String(f.id),{id:f.id,title:f.title,year:Number((f.release_date||'').slice(0,4))||null,poster_path:f.poster_path||'',role:p.kind==='director'?'Director':f.character||'',rating:Number(f.vote_average)||0}])).values()];
+   data={fetched:Date.now(),films:unique};bw777Put('bw90film:'+key,data).catch(()=>{});
+  }
+  bw90Filmographies.set(key,data);
+  if(page!=='people90'||token!==bw90UiToken||bw90Selected!==p)return;
+  bw90DrawFilmography(p,data.films);
+ }catch(err){if(token===bw90UiToken&&$('bw90Filmography'))$('bw90Filmography').innerHTML='<p class="bw90-empty">'+esc(err.message)+'</p>'}
+}
+function bw90DrawFilmography(p,films){
+ const box=$('bw90Filmography');if(!box)return;
+ const known=new Map((state.movies||[]).filter(m=>m.tmdbId).map(m=>[String(m.tmdbId),m]));
+ const watched=new Set((state.viewings||[]).filter(v=>v.status==='completed').map(v=>v.movieId));
+ const items=films.map(f=>{
+  let m=known.get(String(f.id));if(!m){m=(state.movies||[]).find(x=>Number(x.year)===f.year&&bw90Norm(x.title)===bw90Norm(f.title))||null}
+  return {...f,m,isWatched:!!m&&watched.has(m.id),watchlisted:!!m&&(state.watchlist||[]).some(w=>w.movieId===m.id)};
+ });
+ const makeItem=f=>`<div class="bw90-filmography-item"><span class="bw90-poster">${bw90Img(f.poster_path,'w185')?`<img loading="lazy" src="${bw90Img(f.poster_path,'w185')}" alt="">`:'<span>NO POSTER</span>'}</span><div><strong>${esc(f.title)}</strong><small>${esc(f.year||'Year unknown')}${f.role?' · '+esc(f.role):''}</small>${f.isWatched?'<small class="bw90-watched">✓ Watched</small>':f.watchlisted?'<small>✓ On watchlist</small>':''}</div>${f.isWatched?`<button class="btn small" data-bw90-open="${esc(f.m.id)}">Details</button>`:f.watchlisted?'<span class="bw90-muted">Saved</span>':`<button class="btn small" data-bw90-add="${Number(f.id)}">+ Watchlist</button>`}</div>`;
+ box.innerHTML=`<div class="bw90-filmography-head"><strong>${items.length} feature film credits</strong><label>Show <select id="bw90FilmFilter"><option value="all">All films</option><option value="unwatched">Unwatched</option><option value="watched">Watched</option></select></label><label>Sort <select id="bw90FilmSort"><option value="year-desc">Newest first</option><option value="year-asc">Oldest first</option><option value="title">Title A–Z</option></select></label></div><div id="bw90FilmList"></div>`;
+ const draw=()=>{
+  let found=items.filter(f=>$('bw90FilmFilter').value==='all'||($('bw90FilmFilter').value==='watched'?f.isWatched:!f.isWatched));
+  const sort=$('bw90FilmSort').value;
+  found.sort((a,b)=>sort==='title'?String(a.title).localeCompare(String(b.title)):sort==='year-asc'?(a.year||9999)-(b.year||9999)||String(a.title).localeCompare(String(b.title)):(b.year||0)-(a.year||0)||String(a.title).localeCompare(String(b.title)));
+  $('bw90FilmList').innerHTML=found.length?found.map(makeItem).join(''):'<p class="bw90-empty">No films match this filter.</p>';
+  $('bw90FilmList').querySelectorAll('[data-bw90-open]').forEach(b=>b.onclick=()=>{openDetail(b.dataset.bw90Open);window.scrollTo({top:0})});
+  $('bw90FilmList').querySelectorAll('[data-bw90-add]').forEach(b=>b.onclick=()=>{
+   const f=items.find(x=>String(x.id)===b.dataset.bw90Add);if(!f)return;
+   let m=f.m;
+   if(!m){m={id:uid(),tmdbId:String(f.id),title:f.title,originalTitle:f.title,year:f.year,posterPath:f.poster_path,synopsis:'',genres:[],tags:[],notes:'',runtime:null,favorite:false,metadataProvider:'TMDB',createdAt:new Date().toISOString()};state.movies.push(m);f.m=m}
+   if(!state.watchlist.some(w=>w.movieId===m.id)){state.watchlist.push({id:uid(),movieId:m.id,priority:'normal',notes:'',addedAt:new Date().toISOString()});save();toast('Added to watchlist: '+m.title)}
+   f.watchlisted=true;draw();
+  });
+ };
+ $('bw90FilmFilter').onchange=draw;$('bw90FilmSort').onchange=draw;draw();
+}
+
 
 (async()=>{
  await bw777Bootstrap();

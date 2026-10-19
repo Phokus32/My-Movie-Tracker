@@ -1,3 +1,13 @@
+# Blackwood Movie Log V7.9.0 — People Explorer
+
+Built from the stable V7.8.23. Adds a dedicated People Explorer page with Top 50 actor/director leaderboards, searchable directory, individual profiles, ratings statistics, optional TMDB credit indexing, expandable complete movie filmographies, watchlist actions, and locally cached people credits. No changes to the Supabase schema or existing movie records.
+
+**Setup:** Existing TMDB bearer token in Settings is used for portraits, complete casts, searches, biographies and full filmographies. The directory works from existing cast/director data without the token. On the People page use **Index missing credits** to enrich the entire watched library. It runs progressively, can be paused and resumes using the device-specific IndexedDB cache; it may take several minutes for large libraries. The index is intentionally separate from your cloud movie data to keep sync sizes manageable.
+
+**Rankings:** Average of a movie’s rated completed viewings, with each unique movie contributing once; unrated films do not count in the average. Default minimum is three distinct rated movies. Watched-film totals are limited to completed viewings. Top 50 lists may be incomplete until the TMDB credit index is built.
+
+---
+
 # V7.8.23 - Rating star appearance only
 
 Based on the confirmed-working V7.8.22 release. The Movie Log quick-rating star is now **gray and outlined** when that viewing has no saved personal rating, and **solid filled gold** when a saved personal rating exists. It uses the existing viewing rating, `bw7813-rated` state and `☆`/`★` glyph switching. Clicking still opens Quick Rate.
