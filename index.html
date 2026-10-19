@@ -1359,6 +1359,14 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 @media(max-width:800px){.bw90-dual{grid-template-columns:1fr}.bw90-profile-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:500px){.bw90-intro{padding:15px}.bw90-intro-icon{display:none}.bw90-controls,.bw90-section{padding:13px}.bw90-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.bw90-metrics>div:last-child{grid-column:1/-1}.bw90-hero{padding:13px;gap:12px}.bw90-portrait{width:95px}.bw90-person-details small{font-size:10px}.bw90-remote-card{flex-wrap:wrap}.bw90-remote-card .btn{padding:6px 8px}.bw90-film-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.bw90-film{padding:5px}.bw90-filmography-head{align-items:stretch}.bw90-filmography-head label{width:100%;justify-content:space-between}.bw90-filmography-head select{min-width:130px}}
 
+
+/* People Explorer: cast portrait links retain the existing card dimensions. */
+.bw53-cast button.bw90-detail-person{font:inherit;color:var(--text);text-align:left;cursor:pointer;width:100%;appearance:none;}
+.bw53-cast button.bw90-detail-person:hover,.bw53-cast button.bw90-detail-person:focus-visible{border-color:#c9a55c;outline:2px solid rgba(201,165,92,.25);outline-offset:1px;}
+.bw53-cast button.bw90-detail-person strong{font-weight:700;}
+.bw90-detail-director{display:inline;border:0;padding:0;background:transparent;color:var(--accent);text-decoration:underline;text-underline-offset:3px;font:inherit;cursor:pointer;}
+.bw90-detail-director:hover{color:#eecf83;}
+
 </style></head>
 <body><div class="app">
 <header class="topbar"><button class="bw-home" id="bwHome" type="button" title="Go to Movie Log" aria-label="Blackwood Movie Log home"><div class="brandmark">B</div><div class="brand"><span class="bw-wordmark">BLACKWOOD</span><span class="bw-submark">MOVIE LOG</span><small>YOUR PERSONAL FILM ARCHIVE <span class="bw-version">Version 7.9.0</span></small></div></button><div class="top-spacer"></div><div class="status"><span class="dot"></span><span id="saveStatus">Saved on this device</span></div><button class="iconbtn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☼</button><button class="iconbtn" id="menuBtn" aria-label="Open navigation" title="Navigation">☰</button></header>
@@ -2110,14 +2118,16 @@ const bw53OldOpenDetail=openDetail;
 openDetail=function(id){bw53Remember(id);bw53OldOpenDetail(id)};
 function bw53CastHtml(cast){return cast.map(p=>{const name=typeof p==='string'?p:p.name,role=typeof p==='string'?'':p.character||'',pic=typeof p==='string'?null:p.profile_path;return '<div class="bw53-person">'+(pic?'<img loading="lazy" src="https://image.tmdb.org/t/p/w185'+encodeURI(pic)+'" alt="">':'')+'<strong>'+esc(name)+'</strong>'+(role?'<small>'+esc(role)+'</small>':'')+'</div>'}).join('')}
 function bw53DecorateDetails(){const m=movie(activeMovie),main=$('main');if(!m||!main)return;const panel=main.querySelector('.panel');if(!panel)return;
- const section=document.createElement('section');section.className='bw53-detail';section.innerHTML='<h3>Cast &amp; crew</h3><div id="bw53CastStatus" class="mov-sub">Loading credits…</div><div class="bw53-cast" id="bw53Cast"></div>';panel.appendChild(section);
+  const section=document.createElement('section');section.className='bw53-detail';section.innerHTML='<h3>Cast &amp; crew</h3><div id="bw53CastStatus" class="mov-sub">Loading credits…</div><div class="bw53-cast" id="bw53Cast"></div>';panel.appendChild(section);
+  // Profiles open from the original credits section, whether credits are live or cached.
+  section.addEventListener('click',e=>{const b=e.target.closest('[data-bw90-detail-person]');if(!b||!section.contains(b))return;bw90OpenFromMovieCard({kind:b.dataset.bw90Kind||'actor',name:b.dataset.bw90Name,id:b.dataset.bw90Id,profile_path:b.dataset.bw90Profile,movieId:m.id})});
  const director=m.director||'',localCast=Array.isArray(m.cast)?m.cast:[];
- const draw=(people,dir)=>{if(!document.getElementById('bw53Cast')||movie(activeMovie)?.id!==m.id)return;const cast=$('bw53Cast'),status=$('bw53CastStatus');cast.innerHTML=bw53CastHtml(people);status.textContent=(dir?'Director: '+dir+' · ':'')+(people.length?people.length+' cast members':'Cast unavailable');};
+  const draw=(people,dir,dirId)=>{if(!document.getElementById('bw53Cast')||movie(activeMovie)?.id!==m.id)return;const cast=$('bw53Cast'),status=$('bw53CastStatus');cast.innerHTML=bw53CastHtml(people);status.innerHTML=(dir?'<span>Director: </span><button type="button" class="bw90-detail-director" data-bw90-detail-person data-bw90-kind="director" data-bw90-name="'+esc(dir)+'" data-bw90-id="'+esc(dirId||'')+'">'+esc(dir)+'</button> · ':'')+(people.length?people.length+' cast members':'Cast unavailable');};
  draw(localCast,director);
  if(!m.tmdbId||!tmdbKey)return;
  const cacheKey='blackwood.credits.v53.'+m.tmdbId;let cached=null;try{cached=JSON.parse(localStorage.getItem(cacheKey)||'null')}catch{}
- if(cached&&Date.now()-cached.at<30*86400000){draw(cached.cast,cached.director);return}
- fetch('https://api.themoviedb.org/3/movie/'+encodeURIComponent(m.tmdbId)+'/credits?language=en-US',{headers:{Authorization:'Bearer '+tmdbKey,Accept:'application/json'}}).then(r=>{if(!r.ok)throw Error('Credits unavailable');return r.json()}).then(data=>{const people=(data.cast||[]).slice(0,15).map(p=>({name:p.name,character:p.character,profile_path:p.profile_path})),dir=(data.crew||[]).find(p=>p.job==='Director')?.name||director;try{localStorage.setItem(cacheKey,JSON.stringify({cast:people,director:dir,at:Date.now()}))}catch{}draw(people,dir)}).catch(()=>draw(localCast,director));
+ if(cached&&Date.now()-cached.at<30*86400000){draw(cached.cast,cached.director,cached.directorId);return}
+  fetch('https://api.themoviedb.org/3/movie/'+encodeURIComponent(m.tmdbId)+'/credits?language=en-US',{headers:{Authorization:'Bearer '+tmdbKey,Accept:'application/json'}}).then(r=>{if(!r.ok)throw Error('Credits unavailable');return r.json()}).then(data=>{const people=(data.cast||[]).slice(0,15).map(p=>({id:p.id,name:p.name,character:p.character,profile_path:p.profile_path})),directorPerson=(data.crew||[]).find(p=>p.job==='Director'),dir=directorPerson?.name||director,dirId=directorPerson?.id||null;try{localStorage.setItem(cacheKey,JSON.stringify({cast:people,director:dir,directorId:dirId,at:Date.now()}))}catch{}draw(people,dir,dirId)}).catch(()=>draw(localCast,director));
 }
 const bw53OldDetail=renderDetail;
 renderDetail=function(){bw53OldDetail();bw53DecorateDetails()};
@@ -2156,7 +2166,7 @@ window.addEventListener('pageshow',()=>{bw54Version();bw54PullCloud()});
 window.addEventListener('online',()=>bw54PullCloud());
 setInterval(()=>{if(!document.hidden)bw54PullCloud()},30000);
 // Cast cards retain a consistent image slot across narrow mobile layouts and themes.
-const bw54OldCastHtml=bw53CastHtml;bw53CastHtml=function(cast){return cast.map(p=>{const name=typeof p==='string'?p:p.name,role=typeof p==='string'?'':p.character||'',pic=typeof p==='string'?null:p.profile_path;return '<div class="bw53-person"><div class="bw54-face">'+(pic?'<img loading="lazy" src="https://image.tmdb.org/t/p/w185'+encodeURI(pic)+'" alt="Portrait of '+esc(name)+'">':'<span>Portrait unavailable</span>')+'</div><strong>'+esc(name)+'</strong>'+(role?'<small>'+esc(role)+'</small>':'')+'</div>'}).join('')};
+ const bw54OldCastHtml=bw53CastHtml;bw53CastHtml=function(cast){return cast.map(p=>{const name=typeof p==='string'?p:p.name,role=typeof p==='string'?'':p.character||'',pic=typeof p==='string'?null:p.profile_path,id=typeof p==='string'?'':p.id||'',safePic=pic&&/^\/[a-zA-Z0-9_./-]+$/.test(pic)?'https://image.tmdb.org/t/p/w185'+pic:'';return '<button type="button" class="bw53-person bw90-detail-person" data-bw90-detail-person data-bw90-kind="actor" data-bw90-name="'+esc(name)+'" data-bw90-id="'+esc(id)+'" data-bw90-profile="'+esc(pic||'')+'" aria-label="View '+esc(name)+' profile"><span class="bw54-face">'+(safePic?'<img loading="lazy" src="'+safePic+'" alt="Portrait of '+esc(name)+'">':'<span>Portrait unavailable</span>')+'</span><strong>'+esc(name)+'</strong>'+(role?'<small>'+esc(role)+'</small>':'')+'</button>'}).join('')};
 
 // V5.5 — verification workflow: verification is distinct from having an ID.
 const bw55Unverified=m=>!(/^[1-9]\d*$/.test(String(m?.tmdbId??'').trim()));
@@ -3726,13 +3736,12 @@ render=function(){
   document.body.classList.remove('light');
   if(typeof bw5ApplyTheme==='function')bw5ApplyTheme();
   renderNav();bw90Render();
-  $('themeToggle')?.remove();
   const home=$('bwHome');if(home)home.onclick=()=>go('log');
  }else bw90PriorRender();
  const v=document.querySelector('.bw-version');if(v)v.textContent='Version '+BW90_VERSION;
 };
 const bw90PrefsKey='blackwood.people.v7.9.settings';
-let bw90Prefs={mode:'actors',order:'rating',minimum:3,search:''};
+let bw90Prefs={mode:'all',order:'rating',minimum:3,search:''};
 try{Object.assign(bw90Prefs,JSON.parse(localStorage.getItem(bw90PrefsKey)||'{}'))}catch(e){}
 let bw90Index=new Map(),bw90Entries=[],bw90LoadedIds=new Set(),bw90CachedCredits=new Map();
 let bw90LoadPromise=null,bw90Job=null,bw90Selected=null,bw90RemoteResults=[],bw90RemoteQuery='',bw90IndexStamp='';
@@ -3768,7 +3777,7 @@ function bw90Build(){
    for(const d of credits.directors||[]){const key=String(d.id||bw90Norm(d.name));if(directorIds.has(key))continue;directorIds.add(key);accumulate('director',d,s,'Director')}
   }else{
    const localCast=Array.isArray(m.cast)?m.cast:typeof m.cast==='string'?m.cast.split(','):[];
-   for(const name of new Set(localCast.map(x=>String(x).trim()).filter(Boolean)))accumulate('actor',{name},s,'');
+    for(const item of localCast){const name=typeof item==='string'?item.trim():String(item?.name||'').trim();if(name)accumulate('actor',typeof item==='string'?{name}:item,s,typeof item==='string'?'':item.character||'')}
    for(const name of new Set(String(m.director||'').split(',').map(x=>x.trim()).filter(Boolean)))accumulate('director',{name},s,'Director');
   }
  }
@@ -3911,6 +3920,33 @@ async function bw90RemoteSearch(){
 function bw90ProfileWatchCard(e){
  const m=e.m,img=bw90Img(m.posterPath,'w185');
  return `<button class="bw90-film" data-bw90-film="${esc(m.id)}"><span class="bw90-poster">${img?`<img loading="lazy" src="${img}" alt="">`:'<span>NO POSTER</span>'}</span><strong>${esc(m.title)}</strong><small>${esc(m.year||'—')} · ${e.rating===null?'Unrated':e.rating.toFixed(1)+'/10'}</small>${e.role?`<small>${esc(e.role)}</small>`:''}<small>${e.viewings} ${e.viewings===1?'viewing':'viewings'}</small></button>`;
+}
+// Navigate to People Explorer directly from a movie's cast portrait or director credit.
+// Uses stable person IDs when provided by TMDB, but older cached names still work.
+function bw90OpenFromMovieCard(input){
+ if(!input?.name)return;
+ if(!bw90Entries.length)bw90Build();
+ const kind=input.kind==='director'?'director':'actor',key=kind+':'+bw90Norm(input.name);
+ const existing=bw90Index.get(key);
+ const movieStats=bw90MovieStats().find(s=>String(s.m.id)===String(input.movieId));
+ const entries=existing?.entries?.slice()||(movieStats?[{...movieStats,role:kind==='director'?'Director':''}]:[]);
+ const rated=entries.filter(e=>e.rating!==null);
+ bw90Selected={
+  key,name:input.name,kind,id:Number(input.id)||existing?.id||null,
+  profilePath:input.profile_path||existing?.profilePath||'',entries,
+  movies:entries.length,rated:rated.length,
+  avg:rated.length?rated.reduce((n,e)=>n+e.rating,0)/rated.length:null,
+  viewings:entries.reduce((n,e)=>n+e.viewings,0),rewatches:entries.reduce((n,e)=>n+e.rewatches,0)
+ };
+ page='people90';renderNav();bw90RenderProfile();window.scrollTo({top:0});
+ // Enrich the profile from the local credit index without changing movie data.
+ if(!bw90LoadPromise&&!bw90LoadedIds.size)bw90LoadCache().then(()=>{
+  if(page!=='people90'||!bw90Selected||bw90Selected.key!==key)return;
+  const latest=bw90Index.get(key);if(!latest)return;
+  // Keep the opened profile and refresh its watched-film counts after cache indexing.
+  Object.assign(bw90Selected,{entries:latest.entries,movies:latest.movies,rated:latest.rated,avg:latest.avg,viewings:latest.viewings,rewatches:latest.rewatches});
+  bw90RenderProfile();
+ }).catch(err=>console.warn('People credit cache:',err.message));
 }
 function bw90RenderProfile(){
  const p=bw90Selected;if(!p)return;

@@ -2,6 +2,8 @@
 
 Built from the stable V7.8.23. Adds a dedicated People Explorer page with Top 50 actor/director leaderboards, searchable directory, individual profiles, ratings statistics, optional TMDB credit indexing, expandable complete movie filmographies, watchlist actions, and locally cached people credits. No changes to the Supabase schema or existing movie records.
 
+**Cast links:** Cast portrait/name cards and the director credit on Movie Details now open the corresponding People profile. Existing TMDB credentials provide portraits; no add-ons are required. Legacy name-only credit caches remain clickable.
+
 **Setup:** Existing TMDB bearer token in Settings is used for portraits, complete casts, searches, biographies and full filmographies. The directory works from existing cast/director data without the token. On the People page use **Index missing credits** to enrich the entire watched library. It runs progressively, can be paused and resumes using the device-specific IndexedDB cache; it may take several minutes for large libraries. The index is intentionally separate from your cloud movie data to keep sync sizes manageable.
 
 **Rankings:** Average of a movie’s rated completed viewings, with each unique movie contributing once; unrated films do not count in the average. Default minimum is three distinct rated movies. Watched-film totals are limited to completed viewings. Top 50 lists may be incomplete until the TMDB credit index is built.
