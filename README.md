@@ -1,30 +1,23 @@
-# Blackwood Movie Log V7.10.1 — Emby Integration
+# Blackwood Movie Log V7.10.2
 
-Builds on V7.9.1 and retains People Explorer, movie records, cloud sync and existing views.
+Built from Blackwood Movie Log V7.10.1. Original movie tracking features retained.
 
-## New features
-- Optional **Emby Library** item in navigation
-- Emby username/password sign-in, with password never stored, access token retained only in browser sessionStorage (cleared on disconnect/session end)
-- Browse Emby movies in pages of 100 with search, posters and resume markers
-- **Watch on Emby** button in Blackwood Movie Log movie details, matching TMDB ID first then title + release year
-- Integrated browser video player with resume, basic playback reporting and native browser controls
-- **Open in Emby** alternative for incompatible browser playback
+## Emby playback changes
+- Built-in video player now requests H.264/AAC HLS transcoding by default.
+- On browsers without native HLS playback, it loads hls.js 1.6.13 from jsDelivr (internet access and compatible CORS permissions required).
+- Speed selection: 0.5x through 2.5x, in 0.1x increments.
+- Quality selection: 16 / 8 / 4 / 1.5 Mbps transcoding bitrates (labels are target presets, not guaranteed resolution).
+- Audio and subtitle selectors based on Emby MediaStreams.
+- MP4 transcoding fallback button, with a way to open the movie in Emby's own web player.
+- Resume position and playback reporting with stream offsets.
 
-## Setup
-1. Deploy the ZIP files, replacing the prior site contents as usual.
-2. Open **Emby Library** in navigation.
-3. Enter your local HTTP/HTTPS URL and/or remote HTTPS URL, choose Automatic, Local or Remote, then enter your Emby username and password. No separately generated Emby API key is needed.
-4. Select **Connect to Emby**.
-5. Browse the library or open one of your Blackwood movie cards and select **Watch on Emby**.
+## Important caveats
+- The streaming functionality has not been tested against your Emby server. Some playback formats, server settings, subtitle formats or transcoding permissions may require more work.
+- Browser CORS restrictions and HTTPS mixed-content restrictions still apply.
+- Server transcoding uses CPU/GPU resources, may require Emby permissions and can impact playback at higher speeds.
+- Some browsers may not support accurate seeking or burned-in subtitles in all transcoded streams.
+- API access tokens are used in Emby stream URLs within the browser session; use trusted devices and HTTPS for remote access.
+- A remote Tailscale Serve address works only while the client is connected to the same permitted tailnet.
 
-## Security and playback limitations
-- Use a trusted HTTPS proxy, HTTPS tunnel or other protected HTTPS endpoint for remote access. HTTPS pages cannot load insecure HTTP media URLs. The app accepts HTTP and HTTPS addresses in settings, but refuses a blocked mixed-content connection when the app is hosted over HTTPS. Automatic mode prioritizes remote HTTPS on HTTPS pages and local on HTTP pages.
-- Emby must permit cross-origin requests (CORS) from the Blackwood application's origin. A browser integration cannot evade CORS restrictions. Configure Emby/reverse proxy accordingly.
-- The password is never saved. Your Emby access token is kept only in browser sessionStorage, and is used in video and poster URLs because HTML video/image elements cannot attach custom authentication headers. Avoid sharing browser session or copying those URLs.
-- The built-in player uses browser-native playback of direct streams, or Emby-generated HLS / progressive streams. Not every server, container, subtitle track, audio codec or browser is supported. **Open in Emby** is the fallback. Subtitle and audio track switching may be better in the native Emby app.
-- An Emby access token does not travel to Supabase. Movie record schema and cloud database are unchanged.
-- The external Emby button uses the standard web client's item deep link. Emby versions and reverse proxy setups vary. If the deep link does not open the movie, open Emby from its home page.
-- Some advanced features of official Emby clients, including full transcoding profiles, audio/subtitle selection and perfect remote playback reporting, are not replicated here.
-
-## Verification
-Static JS syntax was checked with Node.js. Browser integration against an actual Emby server and responsive layout have NOT been live tested. Test login, search, playback and logout before replacing your primary deployment.
+## Install
+Deploy these files over the existing site. Your Supabase movie tracking database is unchanged.
