@@ -145,13 +145,16 @@ Previously uploaded device-only frames will remain available locally. To sync an
 - Supabase bucket `movie-memory-frames` must permit authenticated SELECT, INSERT and UPDATE for paths under the signed-in user ID, including JSON metadata.
 
 
-## V7.8.20
+## V7.8.21
 - Movie Log action buttons arranged in a 2x2 grid (rating, Beth, movie notes, completed).
 - Movie notes button is gray outline when empty and solid blue when notes exist.
 - Quick edit saves to the existing movie-level notes field and existing cloud sync. No data schema changes.
 
 
-V7.8.20 hotfix: Moved Movie Notes quick action into the application scope before initialization so the 2x2 controls render and the comment editor works. No data schema changes.
+V7.8.21 hotfix: Moved Movie Notes quick action into the application scope before initialization so the 2x2 controls render and the comment editor works. No data schema changes.
 
 
-V7.8.20: Fixed Movie Log comment button insertion during card rendering and after list redraws; forced 2x2 controls layout. No data model changes.
+V7.8.21: Fixed Movie Log comment button insertion during card rendering and after list redraws; forced 2x2 controls layout. No data model changes.
+
+
+V7.8.21: Comment control now exists directly in the core Movie Log row template, not only as a post-render decorator. Existing notes field and controls unchanged.
