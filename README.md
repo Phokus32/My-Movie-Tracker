@@ -29,3 +29,10 @@ Deploy these files over the existing site. Your Supabase movie tracking database
 - Emby actor/director availability cross-reference.
 - Emby collection view filters and sorting, plus full-library indexing.
 - Over-2x playback attempts MP4 fallback; whether 2.1x–2.5x works smoothly is browser/codec-dependent, not guaranteed.
+
+
+## V7.10.4 Emby playback changes
+- Default stream quality: 1080p up to 4 Mbps.
+- Optional Adaptive buffering (on by default): after repeated stalls, progressively steps down to 720p at 2.5 Mbps, then 480p at 1.5 Mbps. Preserves the approximate playback position, but switching streams may cause a brief pause.
+- Emby Remember login (on by default on the login screen): stores the access token in browser localStorage, not the password. Disconnect removes it, and expired/revoked tokens require sign-in again. Avoid on shared devices.
+- The Emby server/browser may have limits; no guarantee of uninterrupted playback.
