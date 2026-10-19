@@ -1,3 +1,9 @@
+# V7.8.23 - Rating star appearance only
+
+Based on the confirmed-working V7.8.22 release. The Movie Log quick-rating star is now **gray and outlined** when that viewing has no saved personal rating, and **solid filled gold** when a saved personal rating exists. It uses the existing viewing rating, `bw7813-rated` state and `☆`/`★` glyph switching. Clicking still opens Quick Rate.
+
+No change to the 2×2 action grid, notes, cloud sync, award features, custom frames or data format. No database migration.
+
 # V7.8.22 - Movie Log quick-action display fix
 
 Corrects the CSS specificity conflict that forced the rating, companion and finish buttons into a single column and hid the comment button. Normal Movie Log cards use four visible buttons in a 2×2 grid at desktop and mobile widths. Movie notes remain stored in the existing movie-level `notes` field and synced using the existing data flow. No database migration or Supabase setup required.
