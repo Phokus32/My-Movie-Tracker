@@ -1,4 +1,4 @@
-# Blackwood Movie Log V7.10.0 — Emby Integration
+# Blackwood Movie Log V7.10.1 — Emby Integration
 
 Builds on V7.9.1 and retains People Explorer, movie records, cloud sync and existing views.
 
@@ -13,12 +13,12 @@ Builds on V7.9.1 and retains People Explorer, movie records, cloud sync and exis
 ## Setup
 1. Deploy the ZIP files, replacing the prior site contents as usual.
 2. Open **Emby Library** in navigation.
-3. Enter a browser-reachable Emby server URL, username and password. Do not use your LAN-only address unless your device can reach that network.
+3. Enter your local HTTP/HTTPS URL and/or remote HTTPS URL, choose Automatic, Local or Remote, then enter your Emby username and password. No separately generated Emby API key is needed.
 4. Select **Connect to Emby**.
 5. Browse the library or open one of your Blackwood movie cards and select **Watch on Emby**.
 
 ## Security and playback limitations
-- Use a trusted HTTPS proxy, HTTPS tunnel or other protected HTTPS endpoint for remote access. HTTPS pages cannot load insecure HTTP media URLs. The app rejects plain HTTP Emby endpoints when the app is running on HTTPS (except localhost for testing).
+- Use a trusted HTTPS proxy, HTTPS tunnel or other protected HTTPS endpoint for remote access. HTTPS pages cannot load insecure HTTP media URLs. The app accepts HTTP and HTTPS addresses in settings, but refuses a blocked mixed-content connection when the app is hosted over HTTPS. Automatic mode prioritizes remote HTTPS on HTTPS pages and local on HTTP pages.
 - Emby must permit cross-origin requests (CORS) from the Blackwood application's origin. A browser integration cannot evade CORS restrictions. Configure Emby/reverse proxy accordingly.
 - The password is never saved. Your Emby access token is kept only in browser sessionStorage, and is used in video and poster URLs because HTML video/image elements cannot attach custom authentication headers. Avoid sharing browser session or copying those URLs.
 - The built-in player uses browser-native playback of direct streams, or Emby-generated HLS / progressive streams. Not every server, container, subtitle track, audio codec or browser is supported. **Open in Emby** is the fallback. Subtitle and audio track switching may be better in the native Emby app.
