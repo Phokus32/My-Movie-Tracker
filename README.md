@@ -143,3 +143,9 @@ Previously uploaded device-only frames will remain available locally. To sync an
 - Sync Existing Frames migrates local IndexedDB frames to Supabase, skipping existing cloud images.
 - Best Rewatch includes marked rewatches or films with multiple completed viewing records, regardless of when they were watched. Awards still filter by original release year.
 - Supabase bucket `movie-memory-frames` must permit authenticated SELECT, INSERT and UPDATE for paths under the signed-in user ID, including JSON metadata.
+
+
+## V7.8.18
+- Movie Log action buttons arranged in a 2x2 grid (rating, Beth, movie notes, completed).
+- Movie notes button is gray outline when empty and solid blue when notes exist.
+- Quick edit saves to the existing movie-level notes field and existing cloud sync. No data schema changes.
