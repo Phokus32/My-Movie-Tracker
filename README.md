@@ -1,3 +1,7 @@
+# V7.8.22 - Movie Log quick-action display fix
+
+Corrects the CSS specificity conflict that forced the rating, companion and finish buttons into a single column and hid the comment button. Normal Movie Log cards use four visible buttons in a 2×2 grid at desktop and mobile widths. Movie notes remain stored in the existing movie-level `notes` field and synced using the existing data flow. No database migration or Supabase setup required.
+
 Blackwood Movie Log V7.5.0
 
 Complete 7.4 release plus 7.5 features:
@@ -145,16 +149,16 @@ Previously uploaded device-only frames will remain available locally. To sync an
 - Supabase bucket `movie-memory-frames` must permit authenticated SELECT, INSERT and UPDATE for paths under the signed-in user ID, including JSON metadata.
 
 
-## V7.8.21
+## v7.8.22
 - Movie Log action buttons arranged in a 2x2 grid (rating, Beth, movie notes, completed).
 - Movie notes button is gray outline when empty and solid blue when notes exist.
 - Quick edit saves to the existing movie-level notes field and existing cloud sync. No data schema changes.
 
 
-V7.8.21 hotfix: Moved Movie Notes quick action into the application scope before initialization so the 2x2 controls render and the comment editor works. No data schema changes.
+v7.8.22 hotfix: Moved Movie Notes quick action into the application scope before initialization so the 2x2 controls render and the comment editor works. No data schema changes.
 
 
-V7.8.21: Fixed Movie Log comment button insertion during card rendering and after list redraws; forced 2x2 controls layout. No data model changes.
+v7.8.22: Fixed Movie Log comment button insertion during card rendering and after list redraws; forced 2x2 controls layout. No data model changes.
 
 
-V7.8.21: Comment control now exists directly in the core Movie Log row template, not only as a post-render decorator. Existing notes field and controls unchanged.
+v7.8.22: Comment control now exists directly in the core Movie Log row template, not only as a post-render decorator. Existing notes field and controls unchanged.
