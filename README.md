@@ -21,3 +21,11 @@ Built from Blackwood Movie Log V7.10.1. Original movie tracking features retaine
 
 ## Install
 Deploy these files over the existing site. Your Supabase movie tracking database is unchanged.
+
+
+## V7.10.3
+- Playback shortcuts added to Watchlist and Smart Movie Suggester.
+- Full-viewport Emby player with floating controls and optional native fullscreen.
+- Emby actor/director availability cross-reference.
+- Emby collection view filters and sorting, plus full-library indexing.
+- Over-2x playback attempts MP4 fallback; whether 2.1x–2.5x works smoothly is browser/codec-dependent, not guaranteed.
