@@ -1,3 +1,48 @@
+# Blackwood Movie Log V7.10.9 — Bandwidth Optimization
+
+This version is based directly on V7.10.8 and retains its movie data model, Emby player, Watchlist, dashboards, TMDB integration, cloud authentication and separate Emby Sync webhook integration. No database migration is required for the bandwidth optimization.
+
+## What changed
+
+- Removed the duplicate 30-second full-library cloud download timer.
+- Replaced the 60-second full-library download with a **five-minute lightweight `updated_at` check** while the app is visible. Focus/return triggers an earlier check (with a 30-second throttle). The manual Sync Now button still checks immediately.
+- Only downloads the full `movie_tracker_data.payload` when the timestamp indicates another device has modified the library, or on initial sign-in/manual cloud recovery.
+- Saves no longer download the full previous payload; they use a **version-constrained atomic update** based on `updated_at`, which prevents overwriting cloud data changed by another device. After a successful save the new timestamp is retained.
+- Unchanged state no longer triggers redundant Supabase cloud writes when sync is explicitly invoked by other features.
+- Custom Movie Memory frames are cached by their Supabase Storage object version in IndexedDB and only downloaded again if a frame changed. New devices still download images once.
+- Supabase Edge Function/webhook code and Emby Sync polling remain unchanged; this version does not fix any existing webhook 503 errors.
+
+## Important tradeoff
+
+While the app is open, changes saved on another device may take **up to five minutes** to appear automatically. Reopening the app usually checks sooner. The **Sync Now** control checks immediately. Local edits still save to the cloud after the normal short debounce. Conflicting edits are not silently overwritten; use the cloud conflict resolution controls if necessary.
+
+## Safe testing sequence
+
+1. **Export a JSON backup** from V7.10.8 and keep its deployment ZIP for rollback.
+2. Deploy this ZIP's normal frontend files in the same place as V7.10.8. Keep Supabase schema, account credentials, frames and Edge Function unchanged.
+3. On device A, add a clearly marked test movie or change a harmless note. Verify the app says **Saved to cloud**.
+4. On device B, use **Sync Now** or wait for the next check; verify the edit appears.
+5. Modify the movie on device B and sync on A. Verify it appears without duplicate viewings.
+6. If both devices edit simultaneously, confirm conflict protection stops one of the writes rather than silently overwriting changes.
+7. Check Supabase egress after a full day. This reduces redundant Blackwood transfers but does not address egress from the separate **Our Quest** app or custom images stored in Supabase.
+
+## Sources of network traffic
+
+- TMDB posters and TMDB API searches: fetched directly from TMDB (not Supabase egress).
+- Emby video playback: delivered directly from your Emby/Tailscale endpoint (not Supabase egress).
+- Supabase: cloud JSON payload on initial login, on changes, and on deliberate cloud saves; Emby event records and custom frame assets.
+
+## Important operational notes
+
+- The existing Supabase `movie_tracker_data.updated_at` column must continue to be updated on each edit. This version uses it as a token for conflict-safe writes, not as a device-local clock.
+- Avoid using V7.10.8 and V7.10.9 simultaneously to modify the same cloud movie library while testing: older builds can still overwrite the cloud using an unconditional upsert.
+- An image stored in Supabase Storage (custom memory frame) consumes Supabase egress when transferred, unlike a TMDB image.
+- A failure to write cloud changes leaves them locally stored and must be resolved before editing on another device.
+
+---
+
+## Original V7.10.8 notes
+
 # Blackwood Movie Log V7.10.8 — Emby Sync Foundation
 
 Built on the user's V7.10.7 application; existing movie records, cloud payload layout, dashboards, player, metadata repair and movie cards are retained.

@@ -1504,7 +1504,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 @media(max-width:540px){.bw717-tools{align-items:stretch;flex-direction:column}.bw717-tools button{width:100%}}
 
 
-/* V7.10.8 — understated synchronization controls */
+/* V7.10.9 — understated synchronization controls */
 .bw718-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px;margin:18px 0}.bw718-cards>.panel{margin:0;min-width:0}.bw718-cards h3,.bw718-inbox strong{margin:0 0 9px}.bw718-big{font:700 36px/1.1 system-ui;margin:10px 0;color:#d3b47b}.bw718-health{font-weight:700}.bw718-okay{color:#67c9a3}.bw718-warning{color:#ebaa85}.bw718-inbox{display:grid;gap:9px}.bw718-inbox article{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:13px;border-radius:12px;background:rgba(255,255,255,.045)}.bw718-inbox article small{display:block;margin-top:4px;opacity:.75}.bw718-autocheck{display:flex;gap:10px;align-items:center;margin-top:15px}.bw718-autocheck input{width:auto}.bw718-inline{color:#cdb789;margin-left:8px}.bw718-inbox article button{flex-shrink:0}@media(max-width:590px){.bw718-inbox article{flex-direction:column;align-items:flex-start}.bw718-inbox article button{width:100%}}
 
 </style></head>
@@ -1584,6 +1584,22 @@ function setCloudStatus(msg){cloudStatusMessage=msg;const el=$('cloudStatusText'
 function stateHasRecords(x=state){return (x.movies||[]).length+(x.viewings||[]).length+(x.watchlist||[]).length>0}
 function bw42Content(x){const n=normalizeState(x);delete n.lastSaved;return stableStringify(n)}
 let bw42Baseline=null,bw42LocalDirty=false,bw42Checking=false;
+// V7.10.9: The cloud's updated_at value is a lightweight sync token.
+// A full JSON payload is transferred only at sign-in, after a remote change,
+// or when choosing a cloud copy. Optimistic writes prevent lost updates.
+let bw719RemoteVersion=null,bw719LastCheck=0;
+const bw719CheckIntervalMs=5*60*1000;
+const bw719ReturnThrottleMs=30*1000;
+function bw719NextVersion(){
+ const previous=Date.parse(bw719RemoteVersion||'')||0;
+ return new Date(Math.max(Date.now(),previous+1)).toISOString();
+}
+function bw719Conflict(message){
+ cloudConflict=true;cloudReady=false;
+ setCloudStatus(message||'Cloud changed on another device. Resolve the conflict in Settings before saving.');
+ renderCloudControls();
+}
+
 function bw42BaselineKey(){return cloudUser?'blackwood.cloudBaseline.'+cloudUser.id:null}
 function bw42StoreBaseline(x){bw42Baseline=bw42Content(x);bw777PersistBaseline(bw42Baseline);bw42LocalDirty=false}
 function save(){
@@ -1597,12 +1613,13 @@ function save(){
 }
 function initCloudClient(){if(!cloudConfig?.url||!cloudConfig?.key||!window.supabase?.createClient){cloudClient=null;return false}try{cloudClient=window.supabase.createClient(cloudConfig.url,cloudConfig.key);cloudClient.auth.onAuthStateChange((event,session)=>{if(event!=='INITIAL_SESSION')setTimeout(()=>handleCloudSession(session),0)});cloudClient.auth.getSession().then(({data,error})=>{if(error)setCloudStatus('Could not restore sign-in: '+error.message);else handleCloudSession(data.session)});return true}catch(e){cloudClient=null;setCloudStatus('Cloud setup failed: '+e.message);return false}}
 async function handleCloudSession(session){
- const serial=++cloudCheckSerial;cloudUser=session?.user||null;cloudReady=false;cloudConflict=false;
+ const serial=++cloudCheckSerial;const previousUser=cloudUser?.id||null;cloudUser=session?.user||null;cloudReady=false;cloudConflict=false;if(previousUser!==cloudUser?.id)bw719RemoteVersion=null;
  if(!cloudUser){setCloudStatus('Signed out. Local library remains available.');renderCloudControls();return}
  setCloudStatus('Checking latest cloud library…');renderCloudControls();
  try{
   const {data,error}=await cloudClient.from('movie_tracker_data').select('payload,updated_at').eq('user_id',cloudUser.id).maybeSingle();
   if(serial!==cloudCheckSerial)return;if(error)throw error;
+  bw719RemoteVersion=data?.updated_at||null;bw719LastCheck=Date.now();
   const local=bw42Content(state),remote=data?bw42Content(data.payload):null;
   const previous=(await bw777Get('baseline:'+cloudUser.id).catch(()=>null))||localStorage.getItem(bw42BaselineKey());bw42Baseline=previous||null;const remoteIncludesLocal=!!data&&['movies','viewings','watchlist'].every(k=>(state[k]||[]).every(x=>(data.payload?.[k]||[]).some(y=>y.id===x.id)));
   if(!data){cloudReady=true;const ok=await syncCloudState(true);if(!ok){cloudReady=false;setCloudStatus('Could not create cloud library. Retry from Settings.')}else setCloudStatus('Cloud library created.');}
@@ -1617,21 +1634,53 @@ function normalizeState(x){return{movies:Array.isArray(x?.movies)?x.movies:[],vi
 async function syncCloudState(force=false){
  if(!cloudClient||!cloudUser||(!cloudReady&&!force)||cloudConflict)return false;
  let ok=false;
- cloudSyncChain=cloudSyncChain.then(async()=>{
+ // Serialize saves and continue safely after a previous failed network call.
+ cloudSyncChain=cloudSyncChain.catch(()=>{}).then(async()=>{
+  const userId=cloudUser.id;
   const snapshot=normalizeState(state),snapshotContent=bw42Content(snapshot);
-  const {data,error:readError}=await cloudClient.from('movie_tracker_data').select('payload,updated_at').eq('user_id',cloudUser.id).maybeSingle();
-  if(readError)throw readError;
-  const remote=data?bw42Content(data.payload):null;
-  if(!force&&bw42Baseline!==null&&remote!==null&&remote!==bw42Baseline){cloudConflict=true;cloudReady=false;setCloudStatus('Cloud changed on another device. Resolve the conflict in Settings before saving.');renderCloudControls();return}
-  const {error}=await cloudClient.from('movie_tracker_data').upsert({user_id:cloudUser.id,payload:snapshot,updated_at:new Date().toISOString()},{onConflict:'user_id'});
-  if(error)throw error;
+  // Several parts of the app call sync explicitly after a no-op. Do not
+  // write the entire library or advance its updated_at in that case.
+  if(!force&&bw42Baseline!==null&&snapshotContent===bw42Baseline){ok=true;return;}
+  if(!force&&!bw719RemoteVersion){
+   bw719Conflict('Cloud version is unknown. Refresh or choose the correct copy in Settings before saving.');
+   return;
+  }
+  const record={payload:snapshot,updated_at:bw719NextVersion()};
+  let response;
+  if(force){
+   // Intentional overwrite ONLY after a confirmed user action or new account.
+   response=await cloudClient.from('movie_tracker_data')
+    .upsert({user_id:userId,...record},{onConflict:'user_id'})
+    .select('updated_at').single();
+  }else{
+   // Atomic compare-and-swap. If another device has already saved, this
+   // updates zero rows, protecting both devices against silent overwrites.
+   response=await cloudClient.from('movie_tracker_data')
+    .update(record).eq('user_id',userId)
+    .eq('updated_at',bw719RemoteVersion)
+    .select('updated_at').maybeSingle();
+  }
+  if(response.error)throw response.error;
+  if(!response.data){
+   bw719Conflict('Cloud changed on another device. Your local edits are still saved. Choose the correct copy in Settings.');
+   return;
+  }
+  bw719RemoteVersion=response.data.updated_at;
+  bw719LastCheck=Date.now();
   bw42StoreBaseline(snapshot);
-  if(bw42Content(state)!==snapshotContent){bw42LocalDirty=true;clearTimeout(cloudSyncTimer);cloudSyncTimer=setTimeout(()=>syncCloudState(),900)}
-  ok=true;const el=$('saveStatus');if(el)el.textContent='Saved to cloud';setCloudStatus('Cloud synced.');
- }).catch(e=>{setCloudStatus('Cloud sync failed: '+e.message);const el=$('saveStatus');if(el)el.textContent='Cloud sync failed · local data retained';});
+  if(bw42Content(state)!==snapshotContent){
+   bw42LocalDirty=true;clearTimeout(cloudSyncTimer);
+   cloudSyncTimer=setTimeout(()=>syncCloudState(),900);
+  }
+  ok=true;const el=$('saveStatus');if(el)el.textContent='Saved to cloud';
+  setCloudStatus('Cloud synced.');
+ }).catch(e=>{
+  setCloudStatus('Cloud sync failed: '+e.message);
+  const el=$('saveStatus');if(el)el.textContent='Cloud sync failed · local data retained';
+ });
  await cloudSyncChain;return ok;
 }
-async function useCloudCopy(){if(!cloudClient||!cloudUser)return;try{const {data,error}=await cloudClient.from('movie_tracker_data').select('payload').eq('user_id',cloudUser.id).single();if(error)throw error;state=normalizeState(data.payload);bw777PersistState(state);bw777LastSavedContent=bw42Content(state);cloudConflict=false;cloudReady=true;bw42StoreBaseline(state);render();setCloudStatus('Cloud copy loaded on this device.');renderCloudControls();toast('Cloud library loaded')}catch(e){toast('Could not load cloud data: '+e.message)}}
+async function useCloudCopy(){if(!cloudClient||!cloudUser)return;try{const {data,error}=await cloudClient.from('movie_tracker_data').select('payload,updated_at').eq('user_id',cloudUser.id).single();if(error)throw error;bw719RemoteVersion=data.updated_at;bw719LastCheck=Date.now();state=normalizeState(data.payload);bw777PersistState(state);bw777LastSavedContent=bw42Content(state);cloudConflict=false;cloudReady=true;bw42StoreBaseline(state);render();setCloudStatus('Cloud copy loaded on this device.');renderCloudControls();toast('Cloud library loaded')}catch(e){toast('Could not load cloud data: '+e.message)}}
 async function uploadLocalCopy(){if(!cloudClient||!cloudUser)return;if(!confirm('Overwrite the cloud library with this device? Export a JSON backup first. This can discard changes from another device.'))return;cloudConflict=false;cloudReady=true;const ok=await syncCloudState(true);renderCloudControls();toast(ok?'Local library uploaded to cloud':'Cloud upload failed; local data retained')}
 function renderCloudControls(){const status=$('cloudStatusText');if(status)status.textContent=cloudStatusMessage||(cloudConflict?'Both this device and cloud have data. Choose which copy to keep.':cloudUser?(cloudReady?'Signed in as '+cloudUser.email:'Signed in as '+cloudUser.email+' · checking cloud…'):cloudConfig?'Cloud configured, not signed in.':'Enter your Supabase project URL and publishable/anon key.');const pill=$('cloudStatusPill');if(pill){pill.textContent=cloudConflict?'Action required':cloudUser?(cloudReady?'Connected':'Connecting'):(cloudConfig?'Not signed in':'Not configured');pill.className='pill '+(cloudUser&&cloudReady?'good':'warn')}['cloudEmail','cloudPassword','cloudUrl','cloudKey','cloudSetup','cloudSignIn','cloudSignUp'].forEach(id=>{const e=$(id);if(e&&cloudUser&&['cloudEmail','cloudPassword','cloudSignIn','cloudSignUp'].includes(id))e.disabled=true;else if(e)e.disabled=false});const signout=$('cloudSignOut');if(signout){signout.classList.toggle('hide',!cloudUser);signout.style.display=cloudUser?'inline-flex':'none';signout.textContent=cloudUser?'Sign out ('+(cloudUser.email||'account')+')':'Sign out';}const resolve=$('cloudResolveButtons');if(resolve)resolve.classList.toggle('hide',!cloudConflict);const auth=$('cloudAuthButtons');if(auth)auth.classList.toggle('hide',!!cloudUser)}
 async function saveCloudConfig(){const url=$('cloudUrl').value.trim().replace(/\/$/,'');const key=$('cloudKey').value.trim();if(!/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(url)){toast('Enter the project URL from Supabase.');return}if(!key||key.length<20){toast('Enter the publishable/anon key from Supabase.');return}cloudConfig={url,key};localStorage.setItem(CLOUD_CONFIG_KEY,JSON.stringify(cloudConfig));cloudClient=null;cloudUser=null;cloudReady=false;if(!initCloudClient()){toast('Could not initialize Supabase.');return}setCloudStatus('Supabase configured. Checking sign-in…');renderCloudControls();toast('Cloud settings saved on this device')}
@@ -2028,17 +2077,47 @@ const bw42OldSeason=v36Season;
 const bw42OldSettings=renderSettings;renderSettings=function(){bw42OldSettings();const p=v36Prefs();const e=document.createElement('section');e.className='setting-item';e.innerHTML='<h3>Seasonal border style</h3><p>Decorative Christmas lights and Horrorfest pumpkins or blood drops.</p><select id="bw42Decor"><option value="decorative">Decorative</option><option value="classic">Classic border</option><option value="off">No decorations</option></select><p class="footer-note">These settings sync through the movie library.</p>';$('main').querySelector('.settings-grid')?.prepend(e);$('bw42Decor').value=state.uiSettings?.bw42Decor||'decorative';$('bw42Decor').onchange=ev=>{state.uiSettings.bw42Decor=ev.target.value;save()}};
 const bw42SeasonDecor=v36DecorateLog;v36DecorateLog=function(){bw42SeasonDecor();const style=state.uiSettings?.bw42Decor||'decorative';document.querySelectorAll('.movie-row.v36-horror,.movie-row.v36-christmas').forEach(row=>{row.classList.toggle('bw42-festive',style==='decorative');row.classList.toggle('bw42-no-season',style==='off')})};
 // Recheck cloud when a different device may have updated it. Never discard local unsynced changes.
-async function bw42PullCloud(){if(!cloudUser||!cloudReady||cloudConflict||bw42Checking||document.hidden)return;bw42Checking=true;try{
- await cloudSyncChain;
- const {data,error}=await cloudClient.from('movie_tracker_data').select('payload').eq('user_id',cloudUser.id).maybeSingle();if(error)throw error;if(!data)return;
- const remote=bw42Content(data.payload),local=bw42Content(state);
- if(remote===local){bw42StoreBaseline(state);return}
- if(bw42LocalDirty||bw42Baseline!==local){cloudConflict=true;cloudReady=false;setCloudStatus('Both devices changed the library. Review the conflict in Settings.');renderCloudControls();return}
- state=normalizeState(data.payload);bw777PersistState(state);bw777LastSavedContent=bw42Content(state);bw42StoreBaseline(state);render();setCloudStatus('Updated from cloud automatically.');
- }catch(e){setCloudStatus('Cloud refresh failed: '+e.message)}finally{bw42Checking=false}}
-document.addEventListener('visibilitychange',()=>{if(!document.hidden)bw42PullCloud()});
-window.addEventListener('focus',()=>bw42PullCloud());
-setInterval(()=>{if(!document.hidden)bw42PullCloud()},60000);
+async function bw42PullCloud(force=false){
+ if(!cloudUser||!cloudReady||cloudConflict||bw42Checking||document.hidden)return;
+ if(!force&&Date.now()-bw719LastCheck<bw719ReturnThrottleMs)return;
+ bw42Checking=true;
+ try{
+  await cloudSyncChain;
+  if(!cloudUser||!cloudReady||cloudConflict)return;
+  // Tiny version-only request. Do not download the large movie JSON unchanged.
+  const {data:meta,error:metaError}=await cloudClient.from('movie_tracker_data')
+   .select('updated_at').eq('user_id',cloudUser.id).maybeSingle();
+  bw719LastCheck=Date.now();
+  if(metaError)throw metaError;
+  if(!meta){bw719Conflict('Your cloud library record is missing. Local data is retained; review Settings.');return;}
+  if(meta.updated_at===bw719RemoteVersion)return;
+  const local=bw42Content(state);
+  // If this device has pending edits, do not overwrite them by fetching cloud.
+  if(bw42LocalDirty||(bw42Baseline!==null&&bw42Baseline!==local)){
+   bw719Conflict('Both devices may have changed the library. Review the conflict in Settings.');return;
+  }
+  // A genuine version change is the only reason to fetch the full payload.
+  const {data,error}=await cloudClient.from('movie_tracker_data')
+   .select('payload,updated_at').eq('user_id',cloudUser.id).maybeSingle();
+  if(error)throw error;if(!data)return;
+  const remote=bw42Content(data.payload);
+  if(bw42LocalDirty||bw42Content(state)!==local){
+   bw719Conflict('This device changed while cloud data was loading. Review the cloud conflict in Settings.');return;
+  }
+  if(remote!==local){
+   state=normalizeState(data.payload);
+   bw777PersistState(state);bw777LastSavedContent=bw42Content(state);
+   render();setCloudStatus('Updated from cloud automatically.');
+  }
+  bw719RemoteVersion=data.updated_at;
+  bw42StoreBaseline(state);
+ }catch(e){setCloudStatus('Cloud refresh failed: '+e.message)}finally{bw42Checking=false}
+}
+// One quiet 5-minute version check while visible. Returning to the app checks
+// sooner, but focus + pageshow + visibilitychange are coalesced by throttling.
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)void bw42PullCloud()});
+window.addEventListener('focus',()=>{void bw42PullCloud()});
+setInterval(()=>{if(!document.hidden)void bw42PullCloud()},bw719CheckIntervalMs);
 /* Version 5.0 is displayed directly in the permanent header. */
 
 // Initial render is deferred until the final version's render functions are installed.
@@ -2299,12 +2378,13 @@ function bw54Commit(){if(bw54Running)return;if(cloudConflict||bw42LocalDirty||cl
 async function bw54Lookup(){if(bw54Running||!bw54Rows.length)return;if(!tmdbKey){alert('Set your TMDB Read Access Token under Settings → Movie metadata first. Do not put it in GitHub.');return}bw54Running=true;let done=0,fail=0;const keys=[...new Set(bw54Rows.map(bw54MovieKey))].filter(k=>!bw54Matches.get(k)?.id);try{for(const k of keys){if(!bw54Running)break;const r=bw54Rows.find(x=>bw54MovieKey(x)===k),title=r['Clean Title']||r['Original Title'],year=Number(r['Release Year'])||0;try{const u='https://api.themoviedb.org/3/search/movie?query='+encodeURIComponent(title)+'&include_adult=false&language=en-US&page=1';const response=await fetch(u,{headers:{Authorization:'Bearer '+tmdbKey,Accept:'application/json'}});if(response.status===429){await new Promise(resolve=>setTimeout(resolve,2500));fail++;continue}if(!response.ok)throw Error('HTTP '+response.status);const data=await response.json(),results=(data.results||[]).slice(0,20);const exact=results.filter(m=>bw54Norm(m.title)===bw54Norm(title)||bw54Norm(m.original_title)===bw54Norm(title));const candidates=exact.filter(m=>year&&Number((m.release_date||'').slice(0,4))===year);const ids=[...new Set(candidates.map(m=>m.id))];if(ids.length===1){const m=candidates[0];bw54Matches.set(k,{id:m.id,title:m.title,year,confidence:95,note:'Exact normalized title and exact release year; unique among first 20 results. Review remakes/alternate releases.'})}else bw54Matches.set(k,{id:'',title:results[0]?.title||'',year:results[0]?.release_date?.slice(0,4)||'',confidence:0,note:!year?'Release year missing':ids.length>1?'Multiple exact title/year candidates':'No unique exact title and year match'});}catch(e){fail++;bw54Matches.set(k,{id:'',note:'Lookup failed: '+e.message})}done++;if(done%10===0){bw54Status(`Looked up ${done}/${keys.length} unique movies; ${fail} request errors. You can stop and export partial results.`);await new Promise(resolve=>setTimeout(resolve,100))}}}finally{bw54Running=false;bw54Draw()}}
 function bw54Panel(){const grid=$('main')?.querySelector('.settings-grid');if(!grid)return;const sec=document.createElement('section');sec.className='setting-item';sec.style.gridColumn='1/-1';sec.innerHTML=`<h3>V5.5 · Historical import &amp; TMDB matcher</h3><p>Upload the supplied <strong>blackwood-historical-review-v5.5.csv</strong> (or an exported review CSV). Search TMDB for exact title/year matches, download a review CSV, then merge approved viewings. <strong>Your existing library is never replaced.</strong></p><input id="bw54File" type="file" accept=".csv,text/csv"><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px"><button class="btn" id="bw54Lookup">Find high-confidence TMDB IDs</button><button class="btn" id="bw54Stop">Stop lookups</button><button class="btn" id="bw54Download">Download review CSV</button><button class="btn" id="bw54Sync">Sync Now</button></div><p id="bw54Status" class="footer-note">Select the CSV to start. No changes have been made.</p><div id="bw54Preview"></div>`;grid.prepend(sec);$('bw54File').onchange=async e=>{const file=e.target.files[0];if(!file)return;bw54Rows=bw54CSV(await file.text());bw54Matches=new Map();for(const r of bw54Rows)if(/^\d+$/.test(r['TMDB ID']||''))bw54Matches.set(bw54MovieKey(r),{id:r['TMDB ID'],confidence:100,note:'Existing ID supplied in CSV — verify manually'});bw54Draw()};$('bw54Lookup').onclick=bw54Lookup;$('bw54Stop').onclick=()=>{bw54Running=false};$('bw54Download').onclick=bw54ExportReview;$('bw54Sync').onclick=()=>bw54PullCloud(true);}
 // Refresh cloud on every app return and provide an explicit manual refresh.
-async function bw54PullCloud(manual=false){if(!cloudUser||!cloudReady){if(manual)alert('Sign in to Supabase first, then try Sync Now.');return}if(manual&&bw42LocalDirty){alert('Local changes are still syncing. Wait until they finish before pulling cloud changes.');return}await bw42PullCloud();if(manual)toast(cloudConflict?'Cloud conflict: review Settings':'Cloud refresh checked')}
+async function bw54PullCloud(manual=false){if(!cloudUser||!cloudReady){if(manual)alert('Sign in to Supabase first, then try Sync Now.');return}if(manual&&bw42LocalDirty){alert('Local changes are still syncing. Wait until they finish before pulling cloud changes.');return}await bw42PullCloud(manual);if(manual)toast(cloudConflict?'Cloud conflict: review Settings':'Cloud refresh checked')}
 const bw54OldSettings=renderSettings;renderSettings=function(){bw54OldSettings();bw54Panel();bw54Version()};
 const bw54OldRender=render;render=function(){bw54OldRender();bw54Version()};
 window.addEventListener('pageshow',()=>{bw54Version();bw54PullCloud()});
 window.addEventListener('online',()=>bw54PullCloud());
-setInterval(()=>{if(!document.hidden)bw54PullCloud()},30000);
+// V7.10.9: Removed duplicate 30-second FULL JSON polling.
+// bw42PullCloud performs a throttled metadata-only check every five minutes.
 // Cast cards retain a consistent image slot across narrow mobile layouts and themes.
  const bw54OldCastHtml=bw53CastHtml;bw53CastHtml=function(cast){return cast.map(p=>{const name=typeof p==='string'?p:p.name,role=typeof p==='string'?'':p.character||'',pic=typeof p==='string'?null:p.profile_path,id=typeof p==='string'?'':p.id||'',safePic=pic&&/^\/[a-zA-Z0-9_./-]+$/.test(pic)?'https://image.tmdb.org/t/p/w185'+pic:'';return '<button type="button" class="bw53-person bw90-detail-person" data-bw90-detail-person data-bw90-kind="actor" data-bw90-name="'+esc(name)+'" data-bw90-id="'+esc(id)+'" data-bw90-profile="'+esc(pic||'')+'" aria-label="View '+esc(name)+' profile"><span class="bw54-face">'+(safePic?'<img loading="lazy" src="'+safePic+'" alt="Portrait of '+esc(name)+'">':'<span>Portrait unavailable</span>')+'</span><strong>'+esc(name)+'</strong>'+(role?'<small>'+esc(role)+'</small>':'')+'</button>'}).join('')};
 
@@ -2417,17 +2497,28 @@ async function bw7816SyncFrames(){
   const {data:items,error}=await cloudClient.storage.from(bw7816FrameBucket).list(cloudUser.id,{limit:1000});
   if(error)throw error;
   const names=await bw7817CloudNames();
-  const cloudFrames=[];
+  const cached=await bw789AllFrames().catch(()=>[]);
+  const present=new Map([...cached,...bw789CustomFrames].map(f=>[f.id,f]));
+  const stampKey='blackwood.frameVersions.'+cloudUser.id;
+  let stamps={};try{stamps=JSON.parse(localStorage.getItem(stampKey)||'{}')||{}}catch{}
+  const nextStamps={},cloudFrames=[];
   for(const item of items||[]){
    if(!item.name.endsWith('.webp'))continue;
-   const id=item.name.slice(0,-5);
-   const {data:downloadBlob,error:downloadError}=await cloudClient.storage.from(bw7816FrameBucket).download(prefix+item.name);
-   if(downloadError)throw downloadError;
-   const data=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=()=>reject(reader.error);reader.readAsDataURL(downloadBlob)});
-   const local=bw789CustomFrames.find(f=>f.id===id);
-   const frame={id,name:names[id]||local?.name||id.split('__').slice(1).join('__')||'Custom frame',data};
-   cloudFrames.push(frame);await bw789StoreFrame(frame);
+   const id=item.name.slice(0,-5),local=present.get(id);
+   const stamp=String(item.updated_at||item.metadata?.eTag||item.metadata?.lastModified||'');
+   const name=names[id]||local?.name||id.split('__').slice(1).join('__')||'Custom frame';
+   if(local&&stamp&&stamps[id]===stamp){
+    const frame={...local,name};cloudFrames.push(frame);
+    if(local.name!==name)await bw789StoreFrame(frame);
+   }else{
+    const {data:downloadBlob,error:downloadError}=await cloudClient.storage.from(bw7816FrameBucket).download(prefix+item.name);
+    if(downloadError)throw downloadError;
+    const data=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=()=>reject(reader.error);reader.readAsDataURL(downloadBlob)});
+    const frame={id,name,data};cloudFrames.push(frame);await bw789StoreFrame(frame);
+   }
+   if(stamp)nextStamps[id]=stamp;
   }
+  localStorage.setItem(stampKey,JSON.stringify(nextStamps));
   bw7816CloudFrameIds=new Set(cloudFrames.map(f=>f.id));
   bw789CustomFrames=[...cloudFrames,...bw789CustomFrames.filter(f=>!bw7816CloudFrameIds.has(f.id))];
   bw7817RefreshPicker();
@@ -4205,7 +4296,7 @@ function bw710BrowserWarning(url){
  return '';
 }
 function bw710Url(path,query={}){const u=new URL(bw710Base()+'/'+String(path).replace(/^\//,''));Object.entries(query).forEach(([k,v])=>{if(v!==undefined&&v!==null)u.searchParams.set(k,String(v))});return u.toString()}
-function bw710Auth(){return `Emby Client="Blackwood Movie Log", Device="Web Browser", DeviceId="${bw710DeviceId}", Version="7.10.8"${bw710Session?.token?`, Token="${bw710Session.token}"`:''}`}
+function bw710Auth(){return `Emby Client="Blackwood Movie Log", Device="Web Browser", DeviceId="${bw710DeviceId}", Version="7.10.9"${bw710Session?.token?`, Token="${bw710Session.token}"`:''}`}
 async function bw710Fetch(path,opts={}){if(!bw710Base())throw Error('Configure an Emby server address first.');const url=bw710Url(path,opts.query||{});const headers={'X-Emby-Authorization':bw710Auth(),...(bw710Session?.token?{'X-Emby-Token':bw710Session.token}:{}),...(opts.body?{'Content-Type':'application/json'}:{}),...(opts.headers||{})};let r;try{r=await fetch(url,{method:opts.method||'GET',headers,body:opts.body?JSON.stringify(opts.body):undefined,mode:'cors',cache:'no-store'})}catch(e){throw Error('Cannot reach Emby from this browser. Check the selected address, browser mixed-content rules, remote access and CORS settings. '+e.message)}if(r.status===401){if(bw710Session){bw710Session=null;sessionStorage.removeItem(bw710SessionKey);localStorage.removeItem(bw710SessionKey)}throw Error('Emby session expired. Sign in again.')}if(!r.ok)throw Error('Emby returned HTTP '+r.status+'.');return r.status===204?{}:r.json()}
 function bw710Image(item){if(!item?.ImageTags?.Primary||!bw710Session)return '';return bw710Url('Items/'+encodeURIComponent(item.Id)+'/Images/Primary',{maxWidth:240,quality:80,tag:item.ImageTags.Primary,api_key:bw710Session.token})}
 function bw710Match(m,item){if(!m||!item)return false;const tmdb=String(m.tmdbId||'');const provider=String(item.ProviderIds?.Tmdb||item.ProviderIds?.TMDb||'');if(tmdb&&provider)return tmdb===provider;const n=s=>String(s||'').toLowerCase().normalize('NFKD').replace(/[^a-z0-9]/g,'');return n(m.title)===n(item.Name)&&Number(m.year)===Number(item.ProductionYear)}
@@ -4588,7 +4679,7 @@ bw710Draw=function(){
  $('bw717RepairArtwork').onclick=bw717RepairOldMovies;
 };
 
-/* Blackwood Movie Log V7.10.8 — safe, authenticated Emby event inbox.
+/* Blackwood Movie Log V7.10.9 — safe, authenticated Emby event inbox.
    Webhooks enter a separate Supabase table; never allow webhooks to modify the
    monolithic movie_tracker_data payload directly. */
 const bw718StatusKey='blackwood.emby.sync.v718';
@@ -4773,7 +4864,7 @@ function bw718Draw(){
 const bw718PreviousNav=navItems;
 navItems=function(){const items=bw718PreviousNav();const index=items.findIndex(x=>x[0]==='emby710');items.splice(index<0?items.length:index+1,0,['emby-sync718','↻','Emby Sync']);return items};
 const bw718PreviousRender=render;
-render=function(){if(page==='emby-sync718')bw718Draw();else bw718PreviousRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.10.8'};
+render=function(){if(page==='emby-sync718')bw718Draw();else bw718PreviousRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.10.9'};
 const bw718PreviousEmbyDraw=bw710Draw;
 bw710Draw=function(){bw718PreviousEmbyDraw();if(!bw710Session)return;const tools=$('bw717RepairArtwork')?.parentElement||document.querySelector('.bw716-explorer');if(!tools||$('bw718GoToSync'))return;const b=document.createElement('button');b.type='button';b.className='btn small';b.id='bw718GoToSync';b.textContent='↻ Emby Sync';b.onclick=()=>go('emby-sync718');tools.appendChild(b);const count=document.createElement('small');count.id='bw718InlineCount';count.className='bw718-inline';count.textContent=bw718Summary();tools.appendChild(count)};
 // Confirming a movie inside Blackwood Theater should update Emby's watched
