@@ -1,0 +1,2 @@
+[functions.blackwood-emby-webhook]
+verify_jwt = false

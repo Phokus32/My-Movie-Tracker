@@ -1458,7 +1458,7 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 @media(prefers-reduced-motion:reduce){#bw710Overlay .bw7105-chrome,#bw710Overlay .bw7105-center,#bw710Overlay .bw7105-settings{transition:none}}
 
 
-/* Blackwood Theater V7.10.6 polish */
+/* Blackwood Theater V7.10.7 polish */
 .bw7105-eyebrow{display:flex!important;align-items:center;gap:10px!important;letter-spacing:0!important}
 .bw716-mark{font-family:Georgia,'Times New Roman',serif;font-size:clamp(14px,2.6vw,22px);letter-spacing:.16em;font-weight:900;color:#f5db9b;text-shadow:0 2px 16px #e8ba643c;white-space:nowrap}
 .bw716-mark i{font-style:normal;color:#fff8e7;font-weight:400;border-bottom:1px solid #b98b40;padding-bottom:2px;letter-spacing:.24em}
@@ -1497,6 +1497,15 @@ body.bw51-mobile-compact #movieList .bw731-card .bw731-badges .bw43-watchtype{di
 @media(max-width:680px){.bw716-controls{padding:12px}.bw716-controls-left,.bw716-controls-right{width:100%;justify-content:space-between}.bw716-explorer-brand{width:100%;margin-bottom:2px}.bw716-film-list.bw716-grid{gap:10px}.bw716-film-content{padding:9px}.bw716-list .bw716-movie{grid-template-columns:95px minmax(0,1fr)}.bw716-list .bw716-film-content{padding:8px 10px}.bw716-list .bw716-card-actions .btn{font-size:10px}.bw716-size input{width:75px}.bw7105-eyebrow{gap:5px!important}.bw716-mark{letter-spacing:.08em}.bw716-mark i{letter-spacing:.1em}}
 /* Completion and match confirmation dialogs must appear over the fullscreen player. */
 #modalBackdrop.open{z-index:1000020!important}
+
+/* V7.10.7 - compact catalog artwork repair controls */
+.bw717-tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:4px 0 14px}
+.bw717-status{font-size:12px;color:var(--muted,#a4a4b2);line-height:1.5;max-width:600px}
+@media(max-width:540px){.bw717-tools{align-items:stretch;flex-direction:column}.bw717-tools button{width:100%}}
+
+
+/* V7.10.8 — understated synchronization controls */
+.bw718-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px;margin:18px 0}.bw718-cards>.panel{margin:0;min-width:0}.bw718-cards h3,.bw718-inbox strong{margin:0 0 9px}.bw718-big{font:700 36px/1.1 system-ui;margin:10px 0;color:#d3b47b}.bw718-health{font-weight:700}.bw718-okay{color:#67c9a3}.bw718-warning{color:#ebaa85}.bw718-inbox{display:grid;gap:9px}.bw718-inbox article{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:13px;border-radius:12px;background:rgba(255,255,255,.045)}.bw718-inbox article small{display:block;margin-top:4px;opacity:.75}.bw718-autocheck{display:flex;gap:10px;align-items:center;margin-top:15px}.bw718-autocheck input{width:auto}.bw718-inline{color:#cdb789;margin-left:8px}.bw718-inbox article button{flex-shrink:0}@media(max-width:590px){.bw718-inbox article{flex-direction:column;align-items:flex-start}.bw718-inbox article button{width:100%}}
 
 </style></head>
 <body><div class="app">
@@ -2790,7 +2799,7 @@ const bw779EmbeddedArtwork={'horrorfest':'data:image/webp;base64,UklGRqiDAABXRUJ
 function bw778Art(id,title){const names={horrorfest60:'horrorfest',christmasfest60:'christmas-fest',stats5:'statistics-center',review5:'year-in-review',compare7:'year-vs-year',reports7:'report-studio',timeline75:'movie-history-timeline',health5:'data-health',awards5:'movie-awards',topten:'my-top-10'};const file=names[id];return file?`<img class="bw778-art" src="${bw779EmbeddedArtwork[file]}" alt="${title}" loading="lazy" decoding="async">`:'';}
 function bw73Holiday(){$('main').innerHTML=pageHead('SEASONAL CINEMA','Holiday Fest','Two traditions. Every movie remembered.')+'<div class="bw73-hub bw73-holiday bw778-gallery"><button class="bw73-tile" id="bw73Horror" aria-label="Open Horrorfest">'+bw778Art('horrorfest60','Horrorfest')+'</button><button class="bw73-tile" id="bw73Christmas" aria-label="Open Christmas Fest">'+bw778Art('christmasfest60','Christmas Fest')+'</button></div>';$('bw73Horror').onclick=()=>go('horrorfest60');$('bw73Christmas').onclick=()=>go('christmasfest60')}
 function bw73Insights(){$('main').innerHTML=pageHead('YOUR MOVIE STORY','Statistics & Reports','Explore your viewing history and share what matters.')+'<div class="bw73-hub bw778-gallery">'+[['stats5','Statistics Center'],['review5','Year in Review'],['compare7','Year vs. Year'],['reports7','Report Studio']].map(([id,title])=>'<button class="bw73-tile" data-bw73-page="'+id+'" aria-label="Open '+title+'">'+bw778Art(id,title)+'</button>').join('')+'</div>';document.querySelectorAll('[data-bw73-page]').forEach(b=>b.onclick=()=>go(b.dataset.bw73Page))}
-const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.10.6';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
+const bw73PriorRender=render;render=function(){if(page==='holiday73'||page==='insights73'){bw5ApplyTheme();renderNav();(page==='holiday73'?bw73Holiday:bw73Insights)()}else bw73PriorRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.10.7';if(['stats5','review5','compare7','reports7'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Statistics & Reports';b.onclick=()=>go('insights73');$('main')?.prepend(b)}if(['horrorfest60','christmasfest60'].includes(page)&&!$('bw73Back')){const b=document.createElement('button');b.className='btn bw73-back';b.id='bw73Back';b.textContent='← Holiday Fest';b.onclick=()=>go('holiday73');$('main')?.prepend(b)}};
 // Always reset modal's internal scroll position, not the underlying page.
 const bw73OpenModal=openModal;openModal=function(...args){bw73OpenModal(...args);requestAnimationFrame(()=>{for(const el of [$('modalBody'),document.querySelector('.modal'),document.querySelector('.modal-backdrop.open')])if(el)el.scrollTop=0})};
 // Decorate only the actual filtered rows, after every list redraw.
@@ -4196,13 +4205,13 @@ function bw710BrowserWarning(url){
  return '';
 }
 function bw710Url(path,query={}){const u=new URL(bw710Base()+'/'+String(path).replace(/^\//,''));Object.entries(query).forEach(([k,v])=>{if(v!==undefined&&v!==null)u.searchParams.set(k,String(v))});return u.toString()}
-function bw710Auth(){return `Emby Client="Blackwood Movie Log", Device="Web Browser", DeviceId="${bw710DeviceId}", Version="7.10.6"${bw710Session?.token?`, Token="${bw710Session.token}"`:''}`}
+function bw710Auth(){return `Emby Client="Blackwood Movie Log", Device="Web Browser", DeviceId="${bw710DeviceId}", Version="7.10.8"${bw710Session?.token?`, Token="${bw710Session.token}"`:''}`}
 async function bw710Fetch(path,opts={}){if(!bw710Base())throw Error('Configure an Emby server address first.');const url=bw710Url(path,opts.query||{});const headers={'X-Emby-Authorization':bw710Auth(),...(bw710Session?.token?{'X-Emby-Token':bw710Session.token}:{}),...(opts.body?{'Content-Type':'application/json'}:{}),...(opts.headers||{})};let r;try{r=await fetch(url,{method:opts.method||'GET',headers,body:opts.body?JSON.stringify(opts.body):undefined,mode:'cors',cache:'no-store'})}catch(e){throw Error('Cannot reach Emby from this browser. Check the selected address, browser mixed-content rules, remote access and CORS settings. '+e.message)}if(r.status===401){if(bw710Session){bw710Session=null;sessionStorage.removeItem(bw710SessionKey);localStorage.removeItem(bw710SessionKey)}throw Error('Emby session expired. Sign in again.')}if(!r.ok)throw Error('Emby returned HTTP '+r.status+'.');return r.status===204?{}:r.json()}
 function bw710Image(item){if(!item?.ImageTags?.Primary||!bw710Session)return '';return bw710Url('Items/'+encodeURIComponent(item.Id)+'/Images/Primary',{maxWidth:240,quality:80,tag:item.ImageTags.Primary,api_key:bw710Session.token})}
 function bw710Match(m,item){if(!m||!item)return false;const tmdb=String(m.tmdbId||'');const provider=String(item.ProviderIds?.Tmdb||item.ProviderIds?.TMDb||'');if(tmdb&&provider)return tmdb===provider;const n=s=>String(s||'').toLowerCase().normalize('NFKD').replace(/[^a-z0-9]/g,'');return n(m.title)===n(item.Name)&&Number(m.year)===Number(item.ProductionYear)}
 function bw710Found(m){return bw710Items.find(i=>bw710Match(m,i))}
 const bw710OldNav=navItems;navItems=function(){const a=bw710OldNav();const at=a.findIndex(x=>x[0]==='settings');a.splice(at<0?a.length:at,0,['emby710','▶','Emby Library']);return a};
-const bw710OldRender=render;render=function(){if(page==='emby710'){renderNav();bw710Draw()}else bw710OldRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.10.6'};
+const bw710OldRender=render;render=function(){if(page==='emby710'){renderNav();bw710Draw()}else bw710OldRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.10.7'};
 const bw710OldRenderDetail=renderDetail;renderDetail=function(){bw710OldRenderDetail();bw710InjectDetail()};
 function bw710InjectDetail(){const m=movie(activeMovie),group=$('main')?.querySelector('.detail-buttons');if(!m||!group||group.querySelector('#bw710MovieWatch'))return;const b=document.createElement('button');b.className='btn';b.id='bw710MovieWatch';b.textContent='▶ Watch on Emby';b.onclick=async()=>{bw710DetailReturn=m.id;if(!bw710Session){go('emby710');toast('Connect to Emby to watch this movie');return}let found=bw710Found(m);if(!found){try{const res=await bw710Fetch('Users/'+encodeURIComponent(bw710Session.userId)+'/Items',{query:{IncludeItemTypes:'Movie',Recursive:true,SearchTerm:m.title,Fields:'ProviderIds',Limit:50}});found=(res.Items||[]).find(i=>bw710Match(m,i))}catch(e){toast(e.message);return}}if(found){bw710Items=[found,...bw710Items.filter(i=>i.Id!==found.Id)];bw710OpenPlayer(found)}else toast('This movie was not found in your Emby library.')};group.appendChild(b)}
 function bw710Poster(item){const im=bw710Image(item);return im?`<img src="${esc(im)}" loading="lazy" alt="Poster" referrerpolicy="no-referrer">`:'<span class="bw710-no-poster">NO POSTER</span>'}
@@ -4359,7 +4368,7 @@ const bw7103Items=bw710RenderItems;bw710RenderItems=function(){const original=bw
 };
 const bw7103Disconnect=bw710Disconnect;bw710Disconnect=async function(){bw7103Catalog=[];bw7103CatalogLoaded=false;bw7103CatalogPromise=null;return bw7103Disconnect()};
 
-/* Blackwood Movie Log V7.10.6 — verified provider matching, cinema sessions, and redesigned library. */
+/* Blackwood Movie Log V7.10.7 — verified provider matching, cinema sessions, and redesigned library. */
 const bw716StoreKey='blackwood.emby.explorer.v716';
 const bw716ProgressKey='blackwood.emby.resume.v716';
 const bw716LinksKey='blackwood.emby.links.v716';
@@ -4454,6 +4463,353 @@ bw710Draw=function(){bw716OldDraw();if(!bw710Session)return;
 };
 // Prevent an old page load from re-injecting stale results after the complete catalog loads.
 const bw716Disconnect=bw710Disconnect;bw710Disconnect=async function(){bw716ActiveViewing=null;bw716ActiveMovie=null;return bw716Disconnect()};
+
+/* Blackwood Movie Log V7.10.7 — automatic Emby → TMDB artwork and metadata enrichment.
+   Only fills missing fields; does not modify viewings, ratings, notes, tags, or saved Emby links. */
+const bw717MetadataJobs=new Map();
+const bw717AutoAttempted=new Set();
+function bw717NeedsMetadata(m){
+ if(!m)return false;
+ const blank=x=>x===undefined||x===null||x===''||(Array.isArray(x)&&!x.length);
+ return blank(m.posterPath)||blank(m.tmdbId)||blank(m.genres)||blank(m.director)||blank(m.cast)||blank(m.tmdbRating);
+}
+function bw717EmbyEntries(){
+ return state.movies.filter(m=>(m.embyId||bw716Links[m.id]||/^Emby/i.test(m.metadataProvider||''))&&bw717NeedsMetadata(m));
+}
+async function bw717FindTmdbId(m,item){
+ const provider=bw716ItemIds(item||{});
+ const tmdb=bw716Tmdb(m.tmdbId||provider.tmdb);
+ if(tmdb)return tmdb;
+ const imdb=bw716Imdb(m.imdbId||provider.imdb||state.externalRatings?.[m.id]?.imdbId);
+ if(imdb){
+  const found=await bw90Api('find/'+encodeURIComponent(imdb)+'?external_source=imdb_id');
+  const matches=found.movie_results||[];
+  if(matches.length===1)return String(matches[0].id);
+  // If multiple results ever appear, avoid selecting one without checking dates.
+  const exact=matches.filter(r=>Number(String(r.release_date||'').slice(0,4))===Number(m.year||item?.ProductionYear));
+  if(exact.length===1)return String(exact[0].id);
+  return null;
+ }
+ const title=String(m.title||item?.Name||'').trim(),year=Number(m.year||item?.ProductionYear)||0;
+ if(!title||!year)return null;
+ const result=await bw90Api('search/movie?query='+encodeURIComponent(title)+'&language=en-US&include_adult=false&page=1');
+ const normalized=bw716Norm(title);
+ const exactTitle=(result.results||[]).filter(r=>bw716Norm(r.title)===normalized||bw716Norm(r.original_title)===normalized);
+ const exactYear=exactTitle.filter(r=>Number(String(r.release_date||'').slice(0,4))===year);
+ if(exactYear.length===1)return String(exactYear[0].id);
+ // Permit one-year variation only when there is one unambiguous title match.
+ if(exactYear.length===0){const close=exactTitle.filter(r=>Math.abs(Number(String(r.release_date||'').slice(0,4))-year)===1);if(close.length===1)return String(close[0].id)}
+ return null;
+}
+async function bw717EnrichMovie(id,item=null){
+ if(!tmdbKey)return {status:'no-key'};
+ if(bw717MetadataJobs.has(id))return bw717MetadataJobs.get(id);
+ const promise=(async()=>{
+  const m=movie(id);
+  if(!m)return {status:'removed'};
+  if(!bw717NeedsMetadata(m))return {status:'already-complete'};
+  const tmdbId=await bw717FindTmdbId(m,item);
+  if(!tmdbId)return {status:'unmatched'};
+  const d=await bw90Api('movie/'+encodeURIComponent(tmdbId)+'?language=en-US&append_to_response=credits,external_ids');
+  if(!d?.id||String(d.id)!==String(tmdbId))return {status:'unmatched'};
+  // State may be refreshed from Supabase while we fetch; locate it again by stable app ID.
+  const target=movie(id);
+  if(!target)return {status:'removed'};
+  if(target.tmdbId&&String(target.tmdbId)!==String(d.id))return {status:'conflict'};
+  const original=JSON.stringify(target);
+  bw42ApplyWatchMetadata(target,d);  // Existing app helper: fill missing fields only.
+  const imdb=bw716Imdb(d.imdb_id||d.external_ids?.imdb_id||'');
+  if(imdb&&!target.imdbId)target.imdbId=imdb;
+  if(!target.year&&d.release_date)target.year=Number(d.release_date.slice(0,4))||null;
+  if(target.isHorror===undefined)target.isHorror=(d.genres||[]).some(g=>g.name==='Horror');
+  if(!target.metadataProvider||target.metadataProvider==='Emby')target.metadataProvider='TMDB';
+  if(JSON.stringify(target)!==original){
+   target.embyMetadataEnrichedAt=new Date().toISOString();
+   save();
+   return {status:'updated',poster:!!target.posterPath,title:target.title};
+  }
+  return {status:'unchanged',poster:!!target.posterPath};
+ })().catch(error=>{console.warn('[Blackwood Theater] Metadata lookup for movie '+id+' failed:',error);return {status:'error',message:error.message}}).finally(()=>bw717MetadataJobs.delete(id));
+ bw717MetadataJobs.set(id,promise);
+ return promise;
+}
+// A new Emby movie already gets added to Movie Log when playback begins.
+// Schedule metadata retrieval separately to avoid blocking the video player.
+const bw717CreateMovieOriginal=bw716CreateMovie;
+bw716CreateMovie=function(item){
+ const m=bw717CreateMovieOriginal(item);
+ if(bw717NeedsMetadata(m)&&!bw717AutoAttempted.has(m.id)){
+  bw717AutoAttempted.add(m.id);
+  if(tmdbKey)void bw717EnrichMovie(m.id,item).then(r=>{
+   if(r.status==='updated'&&r.poster)toast('Movie poster and metadata added automatically');
+  });
+  else console.info('Blackwood Emby metadata enrichment skipped: TMDB token not configured.');
+ }
+ return m;
+};
+// Repair previously created, incomplete Emby records without creating another viewing.
+let bw717RepairRunning=false;
+async function bw717RepairOldMovies(){
+ const status=$('bw717ArtworkStatus'),button=$('bw717RepairArtwork');
+ if(bw717RepairRunning)return;
+ if(!tmdbKey){if(status)status.textContent='Add your TMDB Read Access Token in Settings to repair artwork.';toast('Enter your TMDB token in Settings first.');return}
+ bw717RepairRunning=true;
+ if(button)button.disabled=true;
+ const backlog=bw717EmbyEntries();
+ // One batch per click to avoid flooding TMDB or holding the interface for too long.
+ const batch=backlog.slice(0,20);
+ let repaired=0,ambiguous=0,failed=0;
+ try{
+  for(let i=0;i<batch.length;i++){
+   const m=batch[i];
+   if(status)status.textContent=`Checking metadata ${i+1} of ${batch.length}: ${m.title}`;
+   const r=await bw717EnrichMovie(m.id);
+   if(r.status==='updated')repaired++;
+   if(r.status==='unmatched'||r.status==='conflict')ambiguous++;
+   if(r.status==='error'||r.status==='no-key')failed++;
+  }
+  if(status)status.textContent=`Checked ${batch.length}. Updated ${repaired}. No confident match ${ambiguous}. Errors ${failed}.`+(backlog.length>batch.length?' You can run another batch.':'');
+  if(repaired){toast('Updated '+repaired+' Emby movie records');if(page==='emby710')bw710RenderItems()}
+ }finally{
+  bw717RepairRunning=false;
+  if(button){button.disabled=false;button.textContent='↻ Repair missing Emby artwork ('+bw717EmbyEntries().length+')'}
+ }
+}
+const bw717DrawEmbyOriginal=bw710Draw;
+bw710Draw=function(){
+ bw717DrawEmbyOriginal();
+ if(!bw710Session)return;
+ const panel=$('bw716IndexNotice')||document.querySelector('.bw716-explorer');
+ if(!panel||$('bw717RepairArtwork'))return;
+ const tools=document.createElement('div');
+ tools.className='bw717-tools';
+ tools.innerHTML=`<button type="button" class="btn small" id="bw717RepairArtwork">↻ Repair missing Emby artwork (${bw717EmbyEntries().length})</button><span class="bw717-status" id="bw717ArtworkStatus">New Emby viewings fetch TMDB artwork automatically. Repair fills older entries.</span>`;
+ panel.after(tools);
+ $('bw717RepairArtwork').onclick=bw717RepairOldMovies;
+};
+
+/* Blackwood Movie Log V7.10.8 — safe, authenticated Emby event inbox.
+   Webhooks enter a separate Supabase table; never allow webhooks to modify the
+   monolithic movie_tracker_data payload directly. */
+const bw718StatusKey='blackwood.emby.sync.v718';
+const bw718Prefs=(()=>{try{return {auto:true,...JSON.parse(localStorage.getItem(bw718StatusKey)||'{}')}}catch{return {auto:true}}})();
+let bw718Events=[],bw718LastCheck=0,bw718LastError='',bw718Busy=false,bw718Imported=0,bw718LastImported='',bw718Poller=null,bw718WatchlistStats=null,bw718WatchlistBusy=false;
+const bw718DateText=s=>s?new Date(s).toLocaleString(): 'Never';
+function bw718CanSync(){return !!(bw710Session&&cloudClient&&cloudUser&&cloudReady&&!cloudConflict)}
+function bw718Summary(){
+ const pending=bw718Events.filter(e=>e.status==='pending').length, newCount=bw718Events.filter(e=>e.status==='new').length;
+ return `${pending} awaiting your review · ${newCount} queued for import`;
+}
+function bw718UpdateBadge(){
+ const badge=$('bw718InlineCount');if(badge)badge.textContent=bw718Summary();
+ const nav=document.querySelector('[data-nav="emby-sync718"]');if(nav)nav.title=bw718Summary();
+}
+async function bw718ListEvents(){
+ if(!bw718CanSync())return [];
+ const {data,error}=await cloudClient.from('emby_sync_events').select('id,user_id,emby_item_id,emby_user_id,emby_server_id,event_type,occurred_at,received_at,position_ticks,played_to_completion,item_title,item_year,tmdb_id,imdb_id,status').eq('user_id',cloudUser.id).in('status',['new','pending']).order('received_at',{ascending:true}).limit(100);
+ if(error)throw error;
+ return data||[];
+}
+async function bw718SetEventStatus(id,status){
+ const {error}=await cloudClient.from('emby_sync_events').update({status}).eq('id',id).eq('user_id',cloudUser.id);
+ if(error)throw error;
+}
+async function bw718GetEmbyItem(ev){
+ // Fetch the full user-scoped Emby record so that movie identity and resume
+ // position are confirmed against the real library, not a webhook title alone.
+ const item=await bw710Fetch('Users/'+encodeURIComponent(bw710Session.userId)+'/Items/'+encodeURIComponent(ev.emby_item_id));
+ if(!item||item.Type!=='Movie'||String(item.Id)!==String(ev.emby_item_id))throw Error('Movie item unavailable in your Emby account');
+ const ids=bw716ItemIds(item);
+ if(ev.imdb_id&&ids.imdb&&ev.imdb_id.toLowerCase()!==ids.imdb)throw Error('IMDb identity changed; review this movie manually');
+ if(ev.tmdb_id&&ids.tmdb&&String(ev.tmdb_id)!==ids.tmdb)throw Error('TMDB identity changed; review this movie manually');
+ return item;
+}
+function bw718LatestViewing(movieId){
+ return state.viewings.filter(v=>v.movieId===movieId&&v.status==='inprogress').sort((a,b)=>String(b.createdAt||b.startDate).localeCompare(String(a.createdAt||a.startDate)))[0]||null;
+}
+function bw718EnsureViewing(item,ev){
+ const m=bw716CreateMovie(item);
+ let v=bw718LatestViewing(m.id);
+ if(!v){
+  // Delayed duplicate completion notifications must not open a finished log
+  // again. This is deliberately conservative: the user can create another
+  // viewing manually when they begin a genuine rewatch.
+  const alreadyFinished=state.viewings.some(x=>x.movieId===m.id&&x.status==='completed'&&ev.event_type==='playback.stop'&&ev.played_to_completion&&Math.abs(new Date(x.updatedAt||x.finishDate).getTime()-new Date(ev.occurred_at).getTime())<3*3600000);
+  if(alreadyFinished)return {m,v:null,alreadyFinished:true};
+  v={id:uid(),movieId:m.id,startDate:String(ev.occurred_at||new Date().toISOString()).slice(0,10),finishDate:'',status:'inprogress',rating:null,rewatch:state.viewings.some(x=>x.movieId===m.id&&x.status==='completed'),watchedWithWife:'no',notes:'',source:'emby-webhook',createdAt:ev.occurred_at||new Date().toISOString(),updatedAt:new Date().toISOString()};
+  state.viewings.push(v);
+ }
+ if(Number(ev.position_ticks)>0){
+  const seconds=Number(ev.position_ticks)/1e7;
+  const key=bw716ResumeKey(item),old=bw716Progress[key];
+  // Only replace a checkpoint if the event is newer than the locally
+  // recorded checkpoint; seeking backwards is a valid user action.
+  const at=Date.parse(ev.occurred_at)||Date.now();
+  if(!old||at>=Number(old.at||0)){
+   bw716Progress[key]={seconds,at};
+   localStorage.setItem(bw716ProgressKey,JSON.stringify(bw716Progress));
+  }
+ }
+ return {m,v,alreadyFinished:false};
+}
+async function bw718ImportOne(ev){
+ const item=await bw718GetEmbyItem(ev);
+ const {m,v,alreadyFinished}=bw718EnsureViewing(item,ev);
+ if(alreadyFinished){await bw718SetEventStatus(ev.id,'done');return}
+ if(!v)throw Error('No active viewing to associate');
+ const isCompleted=ev.event_type==='playback.stop'&&ev.played_to_completion===true;
+ if(isCompleted){
+  // Preserve the event for an explicit completion review; never mark a movie
+  // complete or assign a rating automatically from the webhook.
+  v.embyPendingEventId=ev.id;
+  v.embySuggestedFinishDate=String(ev.occurred_at||new Date().toISOString()).slice(0,10);
+ }
+ v.updatedAt=new Date().toISOString();save();
+ // Ack only AFTER the user's movie log is safely synced to cloud storage.
+ // On failure, the event remains retryable. Re-import uses the same ongoing
+ // viewing so retries cannot multiply records.
+ if(!(await syncCloudState()))throw Error('Movie Log cloud sync not finished. Event left queued to retry.');
+ await bw718SetEventStatus(ev.id,isCompleted?'pending':'done');
+ bw718Imported++;bw718LastImported=new Date().toISOString();
+ if(isCompleted)toast('Emby finished '+m.title+' · completion details waiting in Emby Sync');
+}
+async function bw718ReconcileFinished(events){
+ // A viewing completed via Blackwood's own player might still have an
+ // unacknowledged Emby webhook. Never ask the user to rate that film twice.
+ for(const e of events.filter(x=>x.status==='pending')){
+  const m=state.movies.find(x=>String(x.embyId||bw716Links[x.id]||'')===String(e.emby_item_id));
+  if(!m)continue;
+  const hasRecentFinish=state.viewings.some(v=>v.movieId===m.id&&v.status==='completed'&&
+   Math.abs((Date.parse(v.updatedAt||v.finishDate)||0)-(Date.parse(e.occurred_at)||0))<3*3600000);
+  if(hasRecentFinish){try{await bw718SetEventStatus(e.id,'done')}catch(err){console.warn('Webhook completion reconcile:',err)}}
+ }
+}
+async function bw718RefreshWatchlist(){
+ if(!bw710Session||bw718WatchlistBusy)return;
+ bw718WatchlistBusy=true;
+ try{
+  const catalog=await bw7103EnsureCatalog();
+  let matched=0,unavailable=0,ambiguous=0,updated=0;
+  for(const w of state.watchlist){
+   const m=movie(w.movieId);if(!m)continue;
+   const hits=bw716BestMatches({...m,movieId:m.id},catalog);
+   if(hits[0]?.score>=740&&(!hits[1]||hits[0].score>hits[1].score)){
+    matched++;
+    if(String(m.embyId||bw716Links[m.id]||'')!==String(hits[0].item.Id)){
+     bw716SavedLink(m,hits[0].item);updated++;
+    }
+   }else if(hits.length)ambiguous++;
+   else unavailable++;
+  }
+  bw718WatchlistStats={matched,unavailable,ambiguous,total:state.watchlist.length,updated};
+  if(updated&&cloudReady)await syncCloudState();
+  toast('Watchlist availability: '+matched+' found on Emby, '+unavailable+' unavailable, '+ambiguous+' uncertain.');
+ }catch(e){bw718LastError='Watchlist indexing: '+e.message;toast(bw718LastError)}
+ finally{bw718WatchlistBusy=false;if(page==='emby-sync718')bw718Draw()}
+}
+async function bw718SyncNow(showToast=false){
+ if(bw718Busy)return;
+ if(!bw718CanSync()){
+  bw718LastError=!bw710Session?'Connect to Emby first.':!cloudUser?'Sign in to Supabase from Settings.':cloudConflict?'Resolve the Cloud Conflict in Settings.':'Cloud sync is not ready.';
+  bw718UpdateBadge();if(showToast)toast(bw718LastError);return;
+ }
+ bw718Busy=true;bw718LastError='';let imported=0;
+ try{
+  const incoming=await bw718ListEvents();
+  for(const ev of incoming.filter(x=>x.status==='new').slice(0,20)){
+   if(ev.emby_user_id!==String(bw710Session.userId)){bw718LastError='An event was for a different Emby user and was not imported.';continue}
+   try{await bw718ImportOne(ev);imported++}catch(e){bw718LastError='Some events could not be imported: '+e.message;console.warn('Emby event import:',ev.id,e)}
+  }
+  await bw718ReconcileFinished(await bw718ListEvents());
+  bw718Events=await bw718ListEvents();bw718LastCheck=Date.now();
+  if(showToast)toast(`Emby sync: ${imported} imported, ${bw718Events.filter(e=>e.status==='pending').length} to review.`);
+ }catch(e){bw718LastError=e.message||String(e);if(showToast)toast('Emby sync: '+bw718LastError)}
+ finally{bw718Busy=false;bw718UpdateBadge();if(page==='emby-sync718')bw718Draw();}
+}
+async function bw718Review(evId){
+ if(!bw718CanSync())return toast('Connect to Emby and Supabase first.');
+ const ev=bw718Events.find(x=>x.id===evId);if(!ev)return toast('Refresh your Emby events and try again.');
+ let item,m,v;
+ try{item=await bw718GetEmbyItem(ev);m=bw716CreateMovie(item);v=bw718LatestViewing(m.id)}catch(e){return toast('Movie lookup failed: '+e.message)}
+ if(!v)return toast('No in-progress viewing was found. Use Sync Now to restore the entry.');
+ const previous=state.viewings.some(x=>x.movieId===m.id&&x.id!==v.id&&x.status==='completed');
+ const defaultFinish=ev.occurred_at?.slice(0,10)||bw716Today();
+ openModal('Confirm Emby viewing',`<div class="bw716-complete"><p class="bw716-modalhint">${esc(m.title)} was marked watched by Emby. Confirm your viewing details before adding it to your completed Movie Log.</p><div class="formgrid"><div class="field"><label>Started on</label><input type="date" id="bw718Start" value="${esc(v.startDate||defaultFinish)}"></div><div class="field"><label>Finished on</label><input type="date" id="bw718End" value="${esc(defaultFinish)}"></div><div class="field"><label>Was this your first time?</label><select id="bw718First"><option value="first" ${!previous?'selected':''}>Yes, first time</option><option value="rewatch" ${previous?'selected':''}>No, rewatch</option></select></div><div class="field"><label>Watched with Beth?</label><select id="bw718Beth"><option value="no">No, watched alone</option><option value="yes">Yes, with Beth</option></select></div><div class="field wide"><label>My rating (optional, 1.0–10.0)</label><input id="bw718Rating" type="number" min="1" max="10" step="0.1" placeholder="Rate later"></div><div class="field wide"><label>My thoughts (optional)</label><textarea id="bw718Notes" rows="3">${esc(v.notes||'')}</textarea></div></div></div>`,`<button type="button" class="btn" id="bw718Later">Review later</button><button type="button" class="btn primary" id="bw718Confirm">✓ Complete viewing</button>`);
+ $('bw718Later').onclick=closeModal;
+ $('bw718Confirm').onclick=async()=>{
+  const s=$('bw718Start').value,f=$('bw718End').value,r=$('bw718Rating').value;
+  if(!s||!f||f<s)return toast('Check start and finish dates.');
+  if(r!==''&&(!Number.isFinite(+r)||+r<1||+r>10||Math.round(+r*10)!==+r*10))return toast('Rating must be 1.0–10.0 in 0.1 increments.');
+  const prior={...v};
+  Object.assign(v,{startDate:s,finishDate:f,status:'completed',rewatch:$('bw718First').value==='rewatch',watchedWithWife:$('bw718Beth').value,rating:r===''?null:+r,notes:$('bw718Notes').value.trim(),updatedAt:new Date().toISOString()});delete v.embyPendingEventId;delete v.embySuggestedFinishDate;
+  const originalWatchlist=state.watchlist;
+  state.watchlist=state.watchlist.filter(w=>w.movieId!==m.id);
+  save();
+  if(!(await syncCloudState())){
+   Object.assign(v,prior);state.watchlist=originalWatchlist;save();toast('Cloud sync failed. Viewing was not acknowledged and can be retried.');return;
+  }
+  try{await bw718SetEventStatus(ev.id,'done');closeModal();toast('Emby viewing completed in Movie Log');await bw718SyncNow();bw716AfterMovieSuggestions(m).catch(()=>{});}
+  catch(e){toast('Saved to Movie Log, but webhook acknowledgement failed: '+e.message)}
+ };
+}
+function bw718Draw(){
+ const main=$('main');if(!main)return;
+ renderNav();
+ const ready=bw718CanSync();
+ const events=bw718Events.filter(e=>e.status==='pending');
+ main.innerHTML=`${pageHead('EMBY INTEGRATION','Synchronization Center','Import viewing activity from Emby devices without overwriting your personal ratings.',`<button type="button" class="btn primary" id="bw718Refresh">↻ Sync Now</button>`)}
+ <div class="bw718-cards"><section class="panel"><h3>Connection health</h3><p class="bw718-health ${ready?'bw718-okay':'bw718-warning'}">${ready?'● Emby + Supabase connected':'● Setup or connection required'}</p><p>${esc(ready?'Ready to import viewing events':bw718LastError||'Connect Emby and sign into Supabase before synchronizing.')}</p><small>Last check: ${esc(bw718DateText(bw718LastCheck))}</small></section>
+ <section class="panel"><h3>Activity inbox</h3><div class="bw718-big">${events.length}</div><p>Completed movies awaiting your answers</p><small>${esc(bw718Summary())}</small></section>
+ <section class="panel"><h3>Activity imports</h3><div class="bw718-big">${bw718Imported}</div><p>Events imported during this session</p><small>Last imported: ${esc(bw718DateText(bw718LastImported))}</small></section></div>
+ ${bw718LastError?`<div class="panel bw718-warning">${esc(bw718LastError)}</div>`:''}
+ <section class="panel"><h3>Movies awaiting completion</h3>${events.length?`<div class="bw718-inbox">${events.map(e=>`<article><div><strong>${esc(e.item_title||'Unknown movie')}</strong><small>Emby completed · ${esc(bw718DateText(e.occurred_at))}</small></div><button class="btn primary small" data-bw718-review="${esc(e.id)}">Review viewing</button></article>`).join('')}</div>`:'<p class="muted">No finished movies waiting for review. Play a movie through Emby on your TV, then use Sync Now.</p>'}</section>
+ <section class="panel"><h3>Watchlist availability</h3><p>Match your Movie Log watchlist against your complete Emby catalog by IMDb ID, TMDB ID or an exact title/year match. Uncertain matches are not linked automatically.</p><button class="btn" id="bw718IndexWatchlist" ${bw718WatchlistBusy?'disabled':''}>${bw718WatchlistBusy?'Indexing…':'↻ Check watchlist availability'}</button>${bw718WatchlistStats?`<p><b>${bw718WatchlistStats.matched}</b> available · <b>${bw718WatchlistStats.unavailable}</b> unavailable · <b>${bw718WatchlistStats.ambiguous}</b> need confirmation</p>`:''}</section>
+ <section class="panel"><h3>One-time webhook setup</h3><p>Emby Premiere can notify your Supabase event receiver when a movie starts or stops. The SQL migration and Edge Function are included in this release ZIP. They must be deployed separately.</p><p><b>Your Supabase owner user ID:</b> <code>${esc(cloudUser?.id||'Sign in to see')}</code></p><p><b>Your Emby user ID:</b> <code>${esc(bw710Session?.userId||'Connect Emby to see')}</code></p><p class="muted">Do not paste a service-role key or webhook secret into this app. Configure secrets on the Supabase server. Enable movie playback start/stop events for your Emby profile.</p><label class="bw718-autocheck"><input type="checkbox" id="bw718Auto" ${bw718Prefs.auto?'checked':''}> Check for new activity automatically while this app is open</label></section>`;
+ $('bw718Refresh').onclick=()=>bw718SyncNow(true);
+ $('bw718IndexWatchlist').onclick=bw718RefreshWatchlist;
+ $('bw718Auto').onchange=e=>{bw718Prefs.auto=e.target.checked;localStorage.setItem(bw718StatusKey,JSON.stringify(bw718Prefs))};
+ main.querySelectorAll('[data-bw718-review]').forEach(b=>b.onclick=()=>bw718Review(b.dataset.bw718Review));
+}
+const bw718PreviousNav=navItems;
+navItems=function(){const items=bw718PreviousNav();const index=items.findIndex(x=>x[0]==='emby710');items.splice(index<0?items.length:index+1,0,['emby-sync718','↻','Emby Sync']);return items};
+const bw718PreviousRender=render;
+render=function(){if(page==='emby-sync718')bw718Draw();else bw718PreviousRender();const v=document.querySelector('.bw-version');if(v)v.textContent='Version 7.10.8'};
+const bw718PreviousEmbyDraw=bw710Draw;
+bw710Draw=function(){bw718PreviousEmbyDraw();if(!bw710Session)return;const tools=$('bw717RepairArtwork')?.parentElement||document.querySelector('.bw716-explorer');if(!tools||$('bw718GoToSync'))return;const b=document.createElement('button');b.type='button';b.className='btn small';b.id='bw718GoToSync';b.textContent='↻ Emby Sync';b.onclick=()=>go('emby-sync718');tools.appendChild(b);const count=document.createElement('small');count.id='bw718InlineCount';count.className='bw718-inline';count.textContent=bw718Summary();tools.appendChild(count)};
+// Confirming a movie inside Blackwood Theater should update Emby's watched
+// flag too. Failed requests do not undo the user's personal viewing record.
+const bw718OriginalCompletion=bw716Completion;
+bw716Completion=function(){
+ bw718OriginalCompletion();
+ const finish=$('bw716Complete');
+ if(!finish||!bw710Session)return;
+ const original=finish.onclick;
+ finish.onclick=async()=>{
+  const itemId=bw710PlayingItem?.Id;
+  await original();
+  if(itemId&&bw716ActiveViewing?.status==='completed'){
+   try{await bw710Fetch('Users/'+encodeURIComponent(bw710Session.userId)+'/PlayedItems/'+encodeURIComponent(itemId),{method:'POST'})}
+   catch(e){console.warn('Could not mark Emby watched:',e);toast('Movie Log saved, but Emby watched status could not be updated.')}
+  }
+ };
+};
+// Never force stale local resume checkpoints over authoritative Emby positions.
+const bw718PreviousOpen=bw710OpenPlayer;
+bw710OpenPlayer=async function(item){
+ if(item&&bw710Session){
+  try{const current=await bw710Fetch('Users/'+encodeURIComponent(bw710Session.userId)+'/Items/'+encodeURIComponent(item.Id));
+   if(current?.Id===item.Id){item={...item,...current};const key=bw716ResumeKey(item),remote=Number(current.UserData?.PlaybackPositionTicks||0)/1e7;if(remote>0)bw716Progress[key]={seconds:remote,at:Date.now()};}
+  }catch(e){console.warn('Could not refresh Emby resume position:',e)}
+ }
+ await bw718PreviousOpen(item);
+};
+// The primary login and cloud bootstrap are asynchronous. Poll only when the
+// app is ready, no more often than once every two minutes.
+bw718Poller=setInterval(()=>{if(bw718Prefs.auto&&bw718CanSync()&&!bw718Busy)void bw718SyncNow(false)},120000);
+const bw718OldCloudSession=handleCloudSession;
+handleCloudSession=async function(session){await bw718OldCloudSession(session);if(bw718Prefs.auto&&bw718CanSync())void bw718SyncNow(false)};
+const bw718OldConnect=bw710Connect;
+bw710Connect=async function(){await bw718OldConnect();if(bw718Prefs.auto&&bw718CanSync())void bw718SyncNow(false)};
 
 (async()=>{
  await bw777Bootstrap();
